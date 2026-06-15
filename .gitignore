@@ -1,0 +1,11 @@
+# Python virtual environment (local only; recreate with requirements.txt)
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS noise
+.DS_Store
