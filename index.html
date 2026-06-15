@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adhi Katili — Climate &amp; Sustainability</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="portfolio.css">
+<link rel="icon" href="assets/logo-mark.svg">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/components.js"></script>
+<script type="text/babel" src="js/sections.js" data-presets="react"></script>
+
+<script type="text/babel" data-presets="react">
+  const { PNav, PHero, PStatBand, PWork, PServices, PAbout, PContact, PFooter, PProjectDialog } = window;
+  const Icon = window.Icon;
+
+  function App() {
+    const [project, setProject] = React.useState(null);
+    const [toastMsg, setToastMsg] = React.useState(null);
+    const timer = React.useRef(null);
+
+    function toast(msg) {
+      setToastMsg(msg);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => setToastMsg(null), 3200);
+    }
+
+    function scrollToContact() {
+      const el = document.getElementById("contact");
+      if (el) window.scrollTo({ top: el.offsetTop - 40, behavior: "smooth" });
+    }
+
+    return (
+      <div className="site">
+        <PNav onContact={scrollToContact} />
+        <PHero onContact={scrollToContact} />
+        <PStatBand />
+        <PWork onOpen={setProject} />
+        <PServices />
+        <PAbout />
+        <PContact toast={toast} />
+        <PFooter />
+        <PProjectDialog project={project} onClose={() => setProject(null)} />
+        <div className={"toast" + (toastMsg ? " toast--show" : "")}>
+          {toastMsg && <Icon name="check" size={18} />}{toastMsg}
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

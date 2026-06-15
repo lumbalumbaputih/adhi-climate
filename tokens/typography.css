@@ -1,0 +1,57 @@
+:root {
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-sans:    "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  1.875rem;
+  --text-3xl:  2.25rem;
+  --text-4xl:  3rem;
+  --text-5xl:  3.75rem;
+  --text-6xl:  4.5rem;
+
+  --leading-none:    1;
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  --tracking-tighter: -0.03em;
+  --tracking-tight:   -0.015em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-eyebrow: 0.14em;
+
+  --type-display-font:    var(--font-display);
+  --type-display-weight:  var(--weight-bold);
+  --type-display-leading: var(--leading-tight);
+  --type-display-tracking:var(--tracking-tighter);
+
+  --type-heading-font:    var(--font-display);
+  --type-heading-weight:  var(--weight-semibold);
+  --type-heading-leading: var(--leading-snug);
+  --type-heading-tracking:var(--tracking-tight);
+
+  --type-body-font:    var(--font-sans);
+  --type-body-weight:  var(--weight-regular);
+  --type-body-leading: var(--leading-relaxed);
+  --type-body-tracking:var(--tracking-normal);
+
+  --type-eyebrow-font:    var(--font-mono);
+  --type-eyebrow-weight:  var(--weight-medium);
+  --type-eyebrow-tracking:var(--tracking-eyebrow);
+
+  --type-data-font:   var(--font-mono);
+  --type-data-weight: var(--weight-medium);
+}
