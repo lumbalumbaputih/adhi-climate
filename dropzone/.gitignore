@@ -1,0 +1,6 @@
+# Staging area for manually downloaded source data.
+# Ignore everything dropped here (it gets moved to cyclone-risk/data/raw/);
+# keep only the instructions and this file.
+*
+!.gitignore
+!DROP_FILES_HERE.md
