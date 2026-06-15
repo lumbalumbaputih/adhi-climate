@@ -1,0 +1,13 @@
+# Western Australia Cyclone Climate Risk Analysis
+# Python 3.11+. Install with:  pip install -r requirements.txt
+pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+seaborn>=0.13
+xarray>=2024.0
+netCDF4>=1.6
+pymannkendall>=1.4
+requests>=2.31
+jupyter>=1.0
+nbconvert>=7.0
