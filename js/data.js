@@ -146,9 +146,9 @@
       },
     ],
     services: [
-      { icon: "wind", title: "Physical climate risk", text: "Spotting the real trends in cyclones, rainfall, and heat, and what they mean for the things you own and run." },
-      { icon: "bar-chart", title: "Climate data analysis", text: "Working with official weather and climate data to find the real signal, clearly and honestly, not just the noise." },
-      { icon: "file-text", title: "AASB S2 readiness", text: "Checking your climate disclosures against Australia's new reporting rules, area by area, and showing where the gaps are." },
+      { icon: "wind", title: "Physical climate risk", text: "Finding the real trends in cyclones, rainfall, and heat, and what they mean for the assets and communities exposed to them." },
+      { icon: "bar-chart", title: "Climate data analysis", text: "Working with official weather and climate data to pull out the real signal, clearly and honestly, not just the noise." },
+      { icon: "file-text", title: "AASB S2 readiness", text: "Reading climate disclosures against Australia's new reporting rules, area by area, and pinpointing the gaps." },
     ],
   };
 })();

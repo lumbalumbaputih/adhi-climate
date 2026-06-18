@@ -43,7 +43,7 @@
             <h1 className="hero__title">I turn climate <span className="accent">data</span> into decisions business and government can act on.</h1>
             <p className="hero__lead">{P.profile.intro}</p>
             <div className="hero__actions">
-              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Start a project</Button>
+              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
               <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See selected work</Button>
             </div>
             <div className="hero__meta">
@@ -141,8 +141,8 @@
       <section className="section section--tight" id="services">
         <div className="wrap">
           <div className="section-head">
-            <Eyebrow tone="leaf" tick>Services</Eyebrow>
-            <h2>How I can help.</h2>
+            <Eyebrow tone="leaf" tick>Skills</Eyebrow>
+            <h2>What I can bring to a team.</h2>
           </div>
           <div className="services__grid">
             {P.services.map((s, i) => (
@@ -190,29 +190,15 @@
               <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
               <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
             </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  /* --------------------------------------------------------------- Contact */
-  function PContact() {
-    return (
-      <section className="section" id="contact">
-        <div className="wrap">
-          <div className="contact">
-            <div className="contact__grid">
-              <div>
-                <Eyebrow className="contact__eyebrow" tick>Get in touch</Eyebrow>
-                <h2>Looking for a sustainability intern, or have a WA climate question?</h2>
-                <p>I'm a Master's student seeking an internship in sustainability, and I'm always happy to talk about physical climate risk, climate data, or AASB S2 disclosure. The quickest way to reach me is email.</p>
-                <div className="hero__meta" style={{ borderTopColor: "rgba(255,255,255,0.12)" }}>
-                  <span className="hero__meta-item" style={{ color: "var(--blue-100)" }}><Icon name="mail" size={16} />{P.profile.email}</span>
-                </div>
-              </div>
-              <div className="contact__cta">
+            <div className="about__contact" id="contact">
+              <Eyebrow tone="leaf" tick>Get in touch</Eyebrow>
+              <p style={{ margin: "var(--space-2) 0 var(--space-5)" }}>
+                I'm looking for an internship in sustainability. If you're hiring, or you just want to talk
+                about WA climate, I'd love to hear from you.
+              </p>
+              <div className="about__contact-actions">
                 <Button variant="leaf" size="lg" as="a" href={"mailto:" + P.profile.email} iconLeft={<Icon name="mail" size={18} />}>Email me</Button>
+                <Button variant="secondary" size="lg" as="a" href={P.profile.linkedin} target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="linkedin" size={18} />}>LinkedIn</Button>
               </div>
             </div>
           </div>
@@ -356,5 +342,5 @@
     );
   }
 
-  Object.assign(window, { PNav, PHero, PStatBand, PWork, PServices, PAbout, PContact, PFooter, PProjectDialog });
+  Object.assign(window, { PNav, PHero, PStatBand, PWork, PServices, PAbout, PFooter, PProjectDialog });
 })();
