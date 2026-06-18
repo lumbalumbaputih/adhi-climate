@@ -20,19 +20,10 @@
 <script type="text/babel" src="js/sections.js" data-presets="react"></script>
 
 <script type="text/babel" data-presets="react">
-  const { PNav, PHero, PStatBand, PWork, PServices, PAbout, PContact, PFooter, PProjectDialog } = window;
-  const Icon = window.Icon;
+  const { PNav, PHero, PStatBand, PWork, PServices, PAbout, PFooter, PProjectDialog } = window;
 
   function App() {
     const [project, setProject] = React.useState(null);
-    const [toastMsg, setToastMsg] = React.useState(null);
-    const timer = React.useRef(null);
-
-    function toast(msg) {
-      setToastMsg(msg);
-      clearTimeout(timer.current);
-      timer.current = setTimeout(() => setToastMsg(null), 3200);
-    }
 
     function scrollToContact() {
       const el = document.getElementById("contact");
@@ -47,12 +38,8 @@
         <PWork onOpen={setProject} />
         <PServices />
         <PAbout />
-        <PContact toast={toast} />
         <PFooter />
         <PProjectDialog project={project} onClose={() => setProject(null)} />
-        <div className={"toast" + (toastMsg ? " toast--show" : "")}>
-          {toastMsg && <Icon name="check" size={18} />}{toastMsg}
-        </div>
       </div>
     );
   }
