@@ -1,4 +1,4 @@
-/* Portfolio sections — Nav, Hero, StatBand, Work, Services, About, Contact, Footer, ProjectDialog */
+/* Portfolio sections: Nav, Hero, StatBand, Work, Services, About, Contact, Footer, ProjectDialog */
 (function () {
   const { Button, IconButton, Eyebrow, Stat, Card, Badge, Tag, ProgressBar, Input } = window.AdhiClimateDesignSystem_bcac21;
   const Icon = window.Icon;
@@ -51,7 +51,7 @@
           </div>
 
           <div className="hero__panel" aria-hidden="true">
-            <div className="hero__panel-label">WA cyclone peak intensity · 1985–2024</div>
+            <div className="hero__panel-label">WA cyclone-region ocean temperature · 1985–2024</div>
             <div className="hero__chart">
               {bars.map((h, i) => (
                 <div key={i} className="hero__bar" style={{ height: h + "%" }} />
@@ -59,7 +59,7 @@
             </div>
             <div className="hero__panel-stat">
               <span><span className="big">40</span> <span className="unit">yrs analysed</span></span>
-              <span className="delta">▴ intensifying</span>
+              <span className="delta">▴ +0.5 °C warming</span>
             </div>
           </div>
         </div>
@@ -102,13 +102,14 @@
             <h3 className="pcard__title">{p.title}</h3>
           </div>
           <p className="pcard__summary">{p.summary}</p>
+          {p.meta && <div className="pcard__meta">{p.meta}</div>}
           <div className="pcard__foot">
             <span className="pcard__result">
               <span className="v">{p.result.value}</span>
               <span className="u">{p.result.unit}</span>
               <span className="l">{p.result.label}</span>
             </span>
-            <span className="pcard__open">Open <Icon name="arrow-up-right" size={15} /></span>
+            <span className="pcard__open">Read case study <Icon name="arrow-up-right" size={15} /></span>
           </div>
         </div>
       </Card>
@@ -124,7 +125,7 @@
           <div className="section-head">
             <Eyebrow tick>Selected work</Eyebrow>
             <h2>Projects with measured outcomes.</h2>
-            <p>A sample of climate and sustainability engagements — each grounded in a baseline, a method, and a number you can check.</p>
+            <p>A sample of climate and sustainability engagements, each grounded in a baseline, a method, and a number you can check.</p>
           </div>
           <div className="work__filters">
             {P.filters.map((f) => (
@@ -179,13 +180,13 @@
             </h2>
             <p>{P.profile.intro}</p>
             <p style={{ marginTop: "var(--space-4)" }}>
-              The work usually starts with a question no one has quantified for WA yet — then primary data, a
+              The work usually starts with a question no one has quantified for WA yet, then primary data, a
               transparent method, and a result a board or regulator can defend. I care as much about getting the
               attribution right as I do about the headline number, and about whether a finding survives contact with
               an AASB S2 disclosure as I do about the trend behind it.
             </p>
             <div style={{ marginTop: "var(--space-8)" }}>
-              <ProgressBar label="AASB S2 readiness — WA ASX majors (median, illustrative)" value={48} variant="accent" />
+              <ProgressBar label="AASB S2 disclosure readiness: median of 3 WA majors scored" value={84} variant="accent" />
             </div>
             <div className="about__tags">
               <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
@@ -201,7 +202,7 @@
   function PContact({ toast }) {
     function submit(e) {
       e.preventDefault();
-      toast("Message sent — I'll be in touch soon.");
+      toast("Message sent. I'll be in touch soon.");
       e.target.reset();
     }
     return (
@@ -251,38 +252,111 @@
   }
 
   /* ---------------------------------------------------------- ProjectDialog */
+  function PScoreboard({ data }) {
+    return (
+      <table className="pscore">
+        <thead>
+          <tr>{data.headers.map((h) => <th key={h}>{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {data.rows.map((row) => (
+            <tr key={row[0]}>{row.map((cell, i) => <td key={i}>{cell}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+
   function PProjectDialog({ project, onClose }) {
     React.useEffect(() => {
       function onKey(e) { if (e.key === "Escape") onClose(); }
       document.addEventListener("keydown", onKey);
-      return () => document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.removeEventListener("keydown", onKey);
+        document.body.style.overflow = "";
+      };
     }, [onClose]);
     if (!project) return null;
     const p = project;
     return (
-      <div role="dialog" aria-modal="true" onClick={onClose}
-        style={{ position: "fixed", inset: 0, zIndex: 70, background: "rgba(14,34,74,0.45)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
-        <div onClick={(e) => e.stopPropagation()}
-          style={{ width: "min(620px, 100%)", maxHeight: "88vh", overflow: "auto", background: "var(--surface-card)", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-xl)", borderTop: "3px solid var(--leaf)" }}>
-          <div style={{ padding: "var(--space-8)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "var(--space-5)" }}>
-              <div className="pcard__icon" style={{ width: 52, height: 52 }}><Icon name={p.icon} size={26} /></div>
-              <IconButton aria-label="Close" onClick={onClose}><Icon name="x" size={20} /></IconButton>
-            </div>
-            <div style={{ display: "flex", gap: "8px", marginBottom: "12px", alignItems: "center" }}>
-              <Badge variant="leaf" dot>{p.status}</Badge>
-              <Badge variant="neutral">{p.year}</Badge>
-            </div>
-            <h3 style={{ fontSize: "var(--text-3xl)", letterSpacing: "var(--tracking-tight)", marginBottom: "var(--space-4)" }}>{p.title}</h3>
-            <p style={{ fontSize: "var(--text-md)", color: "var(--text-body)", lineHeight: "var(--leading-relaxed)", marginBottom: "var(--space-6)" }}>{p.body}</p>
-            <Card variant="inset" padding="md" style={{ marginBottom: "var(--space-6)" }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "8px", fontFamily: "var(--font-mono)" }}>
-                <span style={{ fontSize: "var(--text-4xl)", fontWeight: 600, color: "var(--text-strong)" }}>{p.result.value}</span>
-                <span style={{ fontSize: "var(--text-md)", color: "var(--text-muted)" }}>{p.result.unit}</span>
-                <span style={{ fontSize: "var(--text-sm)", color: "var(--text-faint)", marginLeft: "8px" }}>{p.result.label}</span>
+      <div className="pdialog__overlay" role="dialog" aria-modal="true" aria-label={p.title} onClick={onClose}>
+        <div className="pdialog" onClick={(e) => e.stopPropagation()}>
+          <div className="pdialog__bar">
+            <div className="pdialog__bar-id">
+              <div className="pcard__icon"><Icon name={p.icon} size={20} /></div>
+              <div className="pdialog__badges">
+                <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
+                <Badge variant="neutral">{p.year}</Badge>
               </div>
-            </Card>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+            </div>
+            <IconButton aria-label="Close" onClick={onClose}><Icon name="x" size={20} /></IconButton>
+          </div>
+
+          <div className="pdialog__body">
+            <h3 className="pdialog__title">{p.title}</h3>
+            {p.headline && <p className="pdialog__hook">{p.headline}</p>}
+            <p className="pdialog__lead">{p.body}</p>
+
+            {p.findings && p.findings.length > 0 && (
+              <React.Fragment>
+                <div className="pdialog__h">Key findings</div>
+                <div className="pdialog__findings">
+                  {p.findings.map((f, i) => (
+                    <div className="pfind" key={i}>
+                      <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
+                      <div className="pfind__label">{f.label}</div>
+                      <div className="pfind__text">{f.text}</div>
+                    </div>
+                  ))}
+                </div>
+              </React.Fragment>
+            )}
+
+            {p.scoreboard && (
+              <React.Fragment>
+                <div className="pdialog__h">Disclosure scores (0 to 4)</div>
+                <PScoreboard data={p.scoreboard} />
+              </React.Fragment>
+            )}
+
+            {p.charts && p.charts.length > 0 && (
+              <React.Fragment>
+                <div className="pdialog__h">The charts</div>
+                <div className="pdialog__charts">
+                  {p.charts.map((c, i) => (
+                    <a className="pchart" key={i} href={c.src} target="_blank" rel="noopener noreferrer">
+                      <img src={c.src} alt={c.caption} loading="lazy" />
+                      <span className="pchart__cap">{c.caption} <Icon name="arrow-up-right" size={14} /></span>
+                    </a>
+                  ))}
+                </div>
+              </React.Fragment>
+            )}
+
+            {p.meaning && (
+              <React.Fragment>
+                <div className="pdialog__h">Why it matters</div>
+                <p className="pdialog__lead" style={{ marginBottom: 0 }}>{p.meaning}</p>
+              </React.Fragment>
+            )}
+
+            {p.resources && p.resources.length > 0 && (
+              <React.Fragment>
+                <div className="pdialog__h">Explore the work</div>
+                <div className="pdialog__links">
+                  {p.resources.map((r, i) => (
+                    <a className="plink" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
+                      <span className="plink__icon"><Icon name={r.icon} size={17} /></span>
+                      <span className="plink__label">{r.label}</span>
+                      <span className="plink__out"><Icon name="external-link" size={14} /></span>
+                    </a>
+                  ))}
+                </div>
+              </React.Fragment>
+            )}
+
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "var(--space-7)" }}>
               {p.tags.map((t) => <Tag key={t}>{t}</Tag>)}
             </div>
           </div>
