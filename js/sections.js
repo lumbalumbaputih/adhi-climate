@@ -171,14 +171,17 @@
           <div className="about__body">
             <Eyebrow tick>About</Eyebrow>
             <h2 style={{ fontSize: "var(--text-4xl)", letterSpacing: "var(--tracking-tighter)", margin: "12px 0 20px" }}>
-              Careful with the data, clear about what it means.
+              Hi, I'm Adhi.
             </h2>
-            <p>{P.profile.intro}</p>
+            <p>
+              I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second
+              year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere
+              I can turn this kind of climate-data work into real impact for a team.
+            </p>
             <p style={{ marginTop: "var(--space-4)" }}>
-              The work usually starts with a question no one has put numbers to for WA yet. From there it is
-              real data, a clear method, and an answer a board or regulator can rely on. I care as much about
-              getting the cause right as I do about the headline number, and about whether a finding holds up
-              when it has to go into an official climate report, not just whether the trend looks good on a chart.
+              This portfolio is where I put that into practice: real Western Australian climate data, honest
+              analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
+              now have to meet. I care as much about getting the cause right as I do about the headline number.
             </p>
             <div style={{ marginTop: "var(--space-8)" }}>
               <ProgressBar label="AASB S2 disclosure readiness: median of 3 WA majors scored" value={84} variant="accent" />
@@ -194,12 +197,7 @@
   }
 
   /* --------------------------------------------------------------- Contact */
-  function PContact({ toast }) {
-    function submit(e) {
-      e.preventDefault();
-      toast("Message sent. I'll be in touch soon.");
-      e.target.reset();
-    }
+  function PContact() {
     return (
       <section className="section" id="contact">
         <div className="wrap">
@@ -207,18 +205,15 @@
             <div className="contact__grid">
               <div>
                 <Eyebrow className="contact__eyebrow" tick>Get in touch</Eyebrow>
-                <h2>Have a WA climate question worth measuring?</h2>
-                <p>Tell me about the decision you're trying to make. I take on a small number of projects in physical climate risk, climate data analysis, and AASB S2 disclosure each quarter.</p>
+                <h2>Looking for a sustainability intern, or have a WA climate question?</h2>
+                <p>I'm a Master's student seeking an internship in sustainability, and I'm always happy to talk about physical climate risk, climate data, or AASB S2 disclosure. The quickest way to reach me is email.</p>
                 <div className="hero__meta" style={{ borderTopColor: "rgba(255,255,255,0.12)" }}>
                   <span className="hero__meta-item" style={{ color: "var(--blue-100)" }}><Icon name="mail" size={16} />{P.profile.email}</span>
                 </div>
               </div>
-              <form className="contact__form" onSubmit={submit}>
-                <Input label="Name" placeholder="Your name" required />
-                <Input label="Email" type="email" placeholder="you@org.org" required />
-                <Input label="What can I help with?" multiline placeholder="A short note about your project…" />
-                <Button variant="leaf" size="lg" type="submit" fullWidth iconRight={<Icon name="arrow-right" size={18} />}>Send message</Button>
-              </form>
+              <div className="contact__cta">
+                <Button variant="leaf" size="lg" as="a" href={"mailto:" + P.profile.email} iconLeft={<Icon name="mail" size={18} />}>Email me</Button>
+              </div>
             </div>
           </div>
         </div>
@@ -237,7 +232,7 @@
           </div>
           <div className="footer__meta">© 2026 · Climate &amp; Sustainability · Built with the Adhi design system</div>
           <div className="footer__social">
-            <IconButton variant="outline" aria-label="LinkedIn"><Icon name="linkedin" size={18} /></IconButton>
+            <IconButton as="a" variant="outline" aria-label="LinkedIn" href={P.profile.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={18} /></IconButton>
             <IconButton as="a" variant="outline" aria-label="GitHub" href={P.repo} target="_blank" rel="noopener noreferrer"><Icon name="github" size={18} /></IconButton>
             <IconButton as="a" variant="outline" aria-label="Email" href={"mailto:" + P.profile.email}><Icon name="mail" size={18} /></IconButton>
           </div>
