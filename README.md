@@ -10,7 +10,7 @@ plain-English write-up, honest statistics, and publication-quality charts.
 | Project | Risk type | Status |
 |---------|-----------|--------|
 | [**cyclone-risk**](cyclone-risk/) — Tropical Cyclone Trends Affecting WA (1985–2024) | Acute physical risk | Complete |
-| sw-wa-rainfall-decline — South West WA Rainfall Step-change (1950–2024) | Chronic physical risk | Planned |
+| [**rainfall-decline**](rainfall-decline/) — South West WA Rainfall Decline (1950–2024) | Chronic physical risk | Complete |
 | aasb-s2-readiness — Disclosure Gap Analysis, WA's Biggest Emitters | Disclosure review | Planned |
 
 **Author:** Adhi Muhammad Faris Katili · Master of Environment and Climate

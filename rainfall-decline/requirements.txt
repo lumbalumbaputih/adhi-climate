@@ -1,0 +1,10 @@
+# SW WA rainfall-decline analysis — minimal, reproducible stack.
+# Statistics (OLS, Pearson, Mann-Kendall, Sen's slope, Pettitt change-point)
+# are implemented in stats_utils.py and validated in test_stats.py, so
+# scipy is NOT required.
+numpy>=1.24
+pandas>=2.0
+matplotlib>=3.7
+
+# To run the notebook:
+jupyterlab>=4.0

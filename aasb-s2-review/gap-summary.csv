@@ -1,0 +1,32 @@
+subreq_id,pillar,subreq_desc,BHP,Woodside,Rio_Tinto,mean_score,n_companies_<=2
+G1,Governance,Named oversight body with responsibilities in ToR/charters,4,4,4,4.0,0
+G2,Governance,Oversight body skills/competencies to govern climate,2,3,3,2.67,1
+G3,Governance,How and how often the body is informed,3,4,3,3.33,0
+G4,Governance,Body considers climate in strategy/decisions/trade-offs,3,4,4,3.67,0
+G5,Governance,Oversight of targets + link to remuneration,3,4,4,3.67,0
+G6,Governance,Management role and integration with functions,3,4,4,3.67,0
+S1,Strategy,Specific climate risks/opportunities identified (physical vs transition),3,4,4,3.67,0
+S2,Strategy,Time horizons defined and linked to planning,3,3,3,3.0,0
+S3,Strategy,Business model/value chain effects and concentration,3,3,4,3.33,0
+S4,Strategy,Strategy/decision-making + transition plan with assumptions and progress,4,3,4,3.67,0
+S5,Strategy,Financial effects quantified + reflected in financial planning,2,3,3,2.67,1
+S6,Strategy,Climate resilience via scenario analysis (1.5C + high-warming),3,3,4,3.33,0
+R1,Risk Management,Processes to identify and assess climate risks (inputs/scenarios),3,4,4,3.67,0
+R2,Risk Management,Nature/likelihood/magnitude assessment,3,3,4,3.33,0
+R3,Risk Management,Prioritisation relative to other risks,3,3,3,3.0,0
+R4,Risk Management,Monitoring and changes from prior period,3,3,3,3.0,0
+R5,Risk Management,Processes for climate opportunities,3,3,3,3.0,0
+R6,Risk Management,Integration into overall ERM,3,4,4,3.67,0
+M1,Metrics & Targets,Absolute gross Scope 1 emissions,4,4,4,4.0,0
+M2,Metrics & Targets,Absolute gross Scope 2 (location + market based),3,3,4,3.33,0
+M3,Metrics & Targets,Absolute gross Scope 3 with categories,4,3,4,3.67,0
+M4,Metrics & Targets,Assets/activities vulnerable to transition risk (amount/%),2,2,4,2.67,2
+M5,Metrics & Targets,Assets/activities vulnerable to physical risk (amount/%),2,2,4,2.67,2
+M6,Metrics & Targets,Assets/activities aligned with climate opportunities (amount/%),2,2,4,2.67,2
+M7,Metrics & Targets,Capital deployment toward climate,3,3,4,3.33,0
+M8,Metrics & Targets,Internal carbon price (applied + price level),2,4,4,3.33,1
+M9,Metrics & Targets,Climate factored into executive remuneration (% linked),2,4,4,3.33,1
+M10,Metrics & Targets,Industry-based (SASB) metrics,3,3,3,3.0,0
+M11,Metrics & Targets,Targets with baseline/period/interim milestones,3,3,4,3.33,0
+M12,Metrics & Targets,GHG target detail (scopes/gross-net/offsets/sectoral/Paris),3,3,4,3.33,0
+M13,Metrics & Targets,Performance vs target + third-party assurance,3,4,4,3.67,0
