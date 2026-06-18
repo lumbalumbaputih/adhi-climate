@@ -4,12 +4,14 @@
 **/data/raw/
 *.nc
 
-# Python
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
+# Python virtual environment (local only; recreate with requirements.txt)
 .venv/
 venv/
 
-# OS
+# Python caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS noise
 .DS_Store

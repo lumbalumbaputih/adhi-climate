@@ -1,0 +1,8 @@
+# Raw downloaded source data (large; reproduce with fetch_data.py)
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
