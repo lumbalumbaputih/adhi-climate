@@ -3,23 +3,25 @@ CV / APPLICATION BLURBS: WA Cyclone Climate Risk Analysis
 
 --- One-line (LinkedIn headline / CV project title) ---
 Physical Climate Risk: Tropical Cyclone Trends Affecting Western Australia
-(1985 to 2024): a reproducible data analysis framed for AASB S2 physical-risk
-assessment. [github.com/<user>/adhi-climate]
+(1985 to 2024): a reproducible data analysis written for AASB S2 physical-risk
+assessment (Australia's mandatory climate-disclosure standard).
+[github.com/<user>/adhi-climate]
 
 
 --- Three-sentence CV blurb (drop-in) ---
-I analysed 40 years of IBTrACS best-track and NOAA ERSSTv5 sea-surface-temperature
-data in Python (758 South Indian Ocean systems, 194 affecting Western Australia)
-to test whether the intensity of WA-affecting tropical cyclones changed between
-1985 and 2024, and whether it tracks ocean warming, framed as an AASB S2
+I analysed 40 years of IBTrACS best-track data (the official storm-path records
+that weather agencies keep) and NOAA ERSSTv5 sea-surface-temperature data in
+Python (758 South Indian Ocean systems, 194 affecting Western Australia) to test
+whether the strength of WA-affecting tropical cyclones changed between 1985 and
+2024, and whether it rises and falls with ocean warming, framed as an AASB S2
 physical-risk assessment. I found that although the seas off WA warmed about
-0.5 degrees C over the period, WA-affecting cyclone intensity did not increase (a
-weak, mostly non-significant decline) and showed no positive correlation with
-local sea-surface temperature, indicating that physical-risk assessment must rely
-on forward-looking climate projections rather than extrapolation of the recent
-observed record. I delivered a fully reproducible analysis, with the statistical
-routines (Mann-Kendall, Sen's slope, OLS regression) implemented from first
-principles and validated against textbook values, plus six publication-quality
+0.5 degrees C over the period, the strength of WA-affecting cyclones did not
+increase (it showed a weak, mostly non-significant decline) and had no positive
+link with local sea-surface temperature, which means physical-risk assessment has
+to rely on forward-looking climate projections rather than simply extending the
+recent observed record. I delivered a fully reproducible analysis, with the
+statistical routines (Mann-Kendall, Sen's slope, OLS regression) written from
+scratch and validated against textbook values, plus six publication-quality
 charts, published on GitHub.
 
 
@@ -28,7 +30,7 @@ charts, published on GitHub.
 warmed. Over 1985 to 2024 the regional sea surface warmed about half a degree, but
 the WA-affecting cyclones did not intensify. If anything they weakened slightly,
 and there was no positive link to sea-surface temperature. The honest takeaway for
-climate risk is that you cannot just extrapolate 'warmer equals stronger' from the
+climate risk is that you cannot just project 'warmer equals stronger' from the
 local record; you need forward-looking projections, which is exactly the judgement
 AASB S2 physical-risk disclosure asks companies to make."
 
@@ -37,7 +39,7 @@ AASB S2 physical-risk disclosure asks companies to make."
 * Python data analysis (pandas, numpy, xarray, matplotlib) on multi-source,
   multi-gigabyte climate datasets (IBTrACS, NOAA ERSSTv5 NetCDF).
 * Statistical trend detection: OLS regression, Mann-Kendall, Sen's slope and
-  Pearson correlation, implemented and unit-tested from first principles.
+  Pearson correlation, written and unit-tested from scratch.
 * Domain framing: AASB S2 physical climate-risk disclosure (Australia's
   mandatory climate reporting standard, phased in from 2025).
 * Reproducible, documented, version-controlled analysis (GitHub).
