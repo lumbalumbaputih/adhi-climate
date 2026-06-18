@@ -32,7 +32,9 @@
 
   /* ------------------------------------------------------------------ Hero */
   function PHero({ onContact }) {
-    const bars = [40, 48, 44, 56, 52, 64, 78];
+    // Real period-mean sea-surface-temperature anomaly, 1985-2024, from
+    // cyclone-risk/data/sst_intensity.csv (lowest period maps to 40%, highest to 82%).
+    const bars = [45, 40, 51, 56, 71, 81, 82];
     return (
       <section className="hero" id="top">
         <div className="wrap hero__grid">
@@ -51,7 +53,7 @@
           </div>
 
           <div className="hero__panel" aria-hidden="true">
-            <div className="hero__panel-label">WA cyclone-region ocean temperature · 1985–2024</div>
+            <div className="hero__panel-label">WA cyclone-region ocean temperature · <span style={{ whiteSpace: "nowrap" }}>1985–2024</span></div>
             <div className="hero__chart">
               {bars.map((h, i) => (
                 <div key={i} className="hero__bar" style={{ height: h + "%" }} />
