@@ -1,5 +1,5 @@
 """
-test_stats.py — unit tests for stats_utils, validated against known values.
+test_stats.py: unit tests for stats_utils, validated against known values.
 
 Run:  python3 test_stats.py        (exits non-zero on any failure)
 

@@ -1,5 +1,5 @@
 """
-analysis.py — step-change, trend, and driver analysis of the SW WA cool-season
+analysis.py: step-change, trend, and driver analysis of the SW WA cool-season
 rainfall series. Pure numpy/pandas + the hand-rolled, unit-tested stats_utils.
 
 Outputs (data/):

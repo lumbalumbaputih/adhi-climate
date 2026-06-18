@@ -21,7 +21,6 @@
       { label: "Emitters scored", value: "3", caption: "WA ASX majors" },
       { label: "AASB S2 pillars", value: "4", caption: "governance to metrics" },
     ],
-    filters: ["All", "Physical risk", "Climate data", "Disclosure & AASB S2", "Data viz"],
     projects: [
       {
         id: "wa-cyclones",

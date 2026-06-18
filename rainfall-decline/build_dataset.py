@@ -1,5 +1,5 @@
 """
-build_dataset.py — turn raw GHCN-Daily + climate-index downloads into the clean
+build_dataset.py: turn raw GHCN-Daily + climate-index downloads into the clean
 CSVs the analysis uses.
 
 Data provenance
