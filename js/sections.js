@@ -117,23 +117,16 @@
   }
 
   function PWork({ onOpen }) {
-    const [active, setActive] = React.useState("All");
-    const list = active === "All" ? P.projects : P.projects.filter((p) => p.category.includes(active));
     return (
       <section className="section" id="work">
         <div className="wrap">
           <div className="section-head">
             <Eyebrow tick>Selected work</Eyebrow>
             <h2>Projects with measured outcomes.</h2>
-            <p>A sample of climate and sustainability engagements, each grounded in a baseline, a method, and a number you can check.</p>
-          </div>
-          <div className="work__filters">
-            {P.filters.map((f) => (
-              <Tag key={f} onClick={() => setActive(f)} selected={active === f}>{f}</Tag>
-            ))}
+            <p>Three climate and sustainability projects, each grounded in a baseline, a method, and a number you can check.</p>
           </div>
           <div className="work__grid">
-            {list.map((p) => <ProjectCard key={p.id} p={p} onOpen={onOpen} />)}
+            {P.projects.map((p) => <ProjectCard key={p.id} p={p} onOpen={onOpen} />)}
           </div>
         </div>
       </section>
@@ -269,6 +262,7 @@
 
   function PProjectDialog({ project, onClose }) {
     React.useEffect(() => {
+      if (!project) return;
       function onKey(e) { if (e.key === "Escape") onClose(); }
       document.addEventListener("keydown", onKey);
       document.body.style.overflow = "hidden";
@@ -276,7 +270,7 @@
         document.removeEventListener("keydown", onKey);
         document.body.style.overflow = "";
       };
-    }, [onClose]);
+    }, [project, onClose]);
     if (!project) return null;
     const p = project;
     return (

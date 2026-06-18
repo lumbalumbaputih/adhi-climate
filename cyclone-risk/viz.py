@@ -1,5 +1,5 @@
 """
-viz.py — shared chart styling for the cyclone-risk analysis.
+viz.py: shared chart styling for the cyclone-risk analysis.
 Uses the Adhi "Hidup" palette so the figures are consistent across the
 portfolio. Publication settings: 300 dpi, labelled axes, light grid.
 """

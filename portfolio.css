@@ -159,6 +159,6 @@
 .footer__social { display: flex; gap: var(--space-2); }
 
 /* ---------- Toast ---------- */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%); background: var(--text-strong); color: #fff; padding: 12px 20px; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: var(--weight-medium); box-shadow: var(--shadow-xl); display: flex; align-items: center; gap: 8px; z-index: 80; transition: transform var(--duration-base) var(--ease-out); }
-.toast--show { transform: translateX(-50%) translateY(0); }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(160%); background: var(--text-strong); color: #fff; padding: 12px 20px; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: var(--weight-medium); box-shadow: var(--shadow-xl); display: flex; align-items: center; gap: 8px; z-index: 80; opacity: 0; visibility: hidden; pointer-events: none; transition: transform var(--duration-base) var(--ease-out), opacity var(--duration-base) var(--ease-out), visibility var(--duration-base) var(--ease-out); }
+.toast--show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
 .toast svg { color: var(--green-400); }

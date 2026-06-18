@@ -1,4 +1,4 @@
-# Interview Brief — WA Cyclone Climate Risk Analysis
+# Interview Brief: WA Cyclone Climate Risk Analysis
 
 Everything you need to speak to this project for about five minutes without
 notes. Read it a few times, say it out loud once, and you will own it. The whole

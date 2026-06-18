@@ -1,5 +1,5 @@
 """
-stats_utils.py — self-contained statistics for the cyclone-risk analysis.
+stats_utils.py: self-contained statistics for the cyclone-risk analysis.
 
 Why this exists: the analysis deliberately depends only on numpy/pandas/
 matplotlib/netCDF4 so it reproduces on any machine without a heavy scientific

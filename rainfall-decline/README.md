@@ -36,9 +36,9 @@ against a **1950–1974 baseline** (the pre-step-change reference).
 | Source | What it provides | Used for |
 |--------|------------------|----------|
 | **GHCN-Daily** (NOAA NCEI) | Daily station rainfall; the Australian (`ASN*`) records are the **Bureau of Meteorology's observations** redistributed by NOAA in a script-friendly format | Seven SW WA station series, 1950–2024 |
-| **NOAA PSL — DMI** | Dipole Mode Index | Indian Ocean Dipole (IOD) driver |
+| **NOAA PSL: DMI** | Dipole Mode Index | Indian Ocean Dipole (IOD) driver |
 | **Marshall (2003) SAM index** (BAS) | Station-based Southern Annular Mode index, 1957– | SAM driver |
-| **NOAA PSL — Niño 3.4 anomaly** | ERSST-based ENSO index | ENSO driver |
+| **NOAA PSL: Niño 3.4 anomaly** | ERSST-based ENSO index | ENSO driver |
 
 **Why GHCN-Daily rather than the BoM website?** It is the same underlying station
 data, but downloadable by script, so the entire pipeline reproduces without manual
@@ -60,7 +60,7 @@ rainfall gradient:
 | Wagin | Southern wheatbelt | 344 mm |
 
 > **Note on the Perth catchment.** The Perth Darling-scarp dam catchments
-> (Mundaring, Jarrahdale) — the most-cited part of the SW WA water story — had
+> (Mundaring, Jarrahdale), the most-cited part of the SW WA water story, had
 > gappy *daily* records in GHCN-Daily and were excluded to avoid biasing the
 > series. The high-rainfall SW-corner stations capture the same forced signal.
 
@@ -75,14 +75,13 @@ rainfall gradient:
    inland ones.
 3. **Step-change**: the **Pettitt** non-parametric change-point test.
 4. **Trend**: **Mann-Kendall** significance + **Sen's slope** (robust) + **OLS**
-   with a 95% confidence band — on the full record, the May–July sub-season, and
+   with a 95% confidence band, on the full record, the May–July sub-season, and
    each station.
 5. **Drivers**: Pearson correlation of the cool-season rainfall anomaly against the
    cool-season IOD, SAM and ENSO indices, reported **raw and detrended** (detrended
    isolates year-to-year covariation from the shared long-term trend).
 
-All statistics — OLS, Pearson, Mann-Kendall, Sen's slope and the Pettitt test —
-are implemented from first principles in [`stats_utils.py`](stats_utils.py) and
+All statistics, OLS, Pearson, Mann-Kendall, Sen's slope and the Pettitt test, are implemented from first principles in [`stats_utils.py`](stats_utils.py) and
 validated against known values in [`test_stats.py`](test_stats.py) (22 checks).
 **scipy is not required.**
 
@@ -93,10 +92,10 @@ validated against known values in [`test_stats.py`](test_stats.py) (22 checks).
 | Apr–Oct trend, 1950–2024 | **−2.9%/decade** (≈ −20 mm/decade) | **Yes** (OLS p=0.0005; MK p=0.001, τ=−0.25) |
 | May–July trend, 1950–2024 | **−4.4%/decade** | **Yes** (MK p=0.0001) |
 | Step-change (Pettitt) | **~2000** | **Yes** (p=0.006) |
-| Pre/post the break | 571 mm (1950–99) → 475 mm (2000–24) = **−17%** | — |
-| 1950–1974 vs 2000–2024 | 587 mm → 475 mm = **−19%** | — |
+| Pre/post the break | 571 mm (1950–99) → 475 mm (2000–24) = **−17%** | n/a |
+| 1950–1974 vs 2000–2024 | 587 mm → 475 mm = **−19%** | n/a |
 | Trend *after* 2000 | flat (stepped to a drier normal) | No (MK p=0.66) |
-| Stations declining | **7 of 7** (6 significant) | — |
+| Stations declining | **7 of 7** (6 significant) | n/a |
 | IOD (DMI) correlation | r = −0.41 raw / −0.26 detrended | raw p=0.0003; detrended p=0.027 |
 | ENSO (Niño 3.4) correlation | r = −0.41 raw / −0.35 detrended | raw p=0.0003; detrended p=0.002 |
 | SAM (Marshall) correlation | r = −0.31 raw / −0.20 detrended | raw p=0.010; detrended p=0.11 (n.s.) |
@@ -112,26 +111,26 @@ validated against known values in [`test_stats.py`](test_stats.py) (22 checks).
 The Bureau of Meteorology and CSIRO *State of the Climate* report a **~16%
 April–October** and **~20% May–July** decline for SW WA since 1970 (against a
 1900–1969 baseline), and state that a decline of this magnitude is "highly
-unlikely … due to natural variability alone." This analysis — different stations,
-a different baseline period, and an independent code path — lands in the same
+unlikely … due to natural variability alone." This analysis, different stations,
+a different baseline period, and an independent code path, lands in the same
 place: ~19% drier (1950–74 vs 2000–24), with May–July falling fastest. The
 agreement is the credibility check.
 
-## What this means — AASB S2 chronic physical risk
+## What this means: AASB S2 chronic physical risk
 
 - **Chronic, not acute.** A permanent downward shift in the baseline is precisely
   the slow-onset, persistent hazard AASB S2 asks entities to identify and
   disclose. Because it is a *step-change*, the pre-2000 climate is no longer a
-  valid planning baseline — the recent 25 years are the new normal.
+  valid planning baseline, the recent 25 years are the new normal.
 - **Exposed parties:** Perth's water supply (dam inflows have fallen far more than
-  rainfall — a modest rainfall drop is amplified into a large runoff loss); the
+  rainfall, a modest rainfall drop is amplified into a large runoff loss); the
   wheatbelt grain economy and its lenders; and property and crop insurers
   repricing the southwest.
 - **The judgement it forces:** assess this risk on the post-step-change baseline
   and forward-looking projections, not a long historical average that no longer
   describes the climate.
 
-## Attribution — what causes the decline (referenced, not invented)
+## Attribution: what causes the decline (referenced, not invented)
 
 The **decline is robust**; the **cause** is still being refined, and this analysis
 does not attempt formal detection-attribution. The published picture:
@@ -140,7 +139,7 @@ does not attempt formal detection-attribution. The published picture:
   and a **poleward shift of the winter westerlies / storm tracks** (a more-positive
   Southern Annular Mode), which deliver **fewer rain-bearing cold fronts** to the
   southwest.
-- These circulation changes are substantially **anthropogenic** — greenhouse gases
+- These circulation changes are substantially **anthropogenic**, greenhouse gases
   plus stratospheric ozone depletion. High-resolution models reproduce the decline
   only with that forcing included.
 - **Apportionment varies by study and method**: one modelling estimate finds ~43%
@@ -160,7 +159,7 @@ here is consistent with the literature but does not establish causation.
 
 ## Limitations
 
-- Seven stations, not a gridded regional product — robust and spatially coherent,
+- Seven stations, not a gridded regional product, robust and spatially coherent,
   but not a substitute for BoM's gridded analysis.
 - The Perth Darling-scarp catchment is not directly represented (gappy daily data).
 - The Pettitt test reports a single dominant change point (~2000); the smaller
@@ -207,10 +206,10 @@ rainfall-decline/
 
 ## Sources
 
-- CSIRO & Bureau of Meteorology, *State of the Climate 2024* — https://www.csiro.au/en/research/environmental-impacts/climate-change/state-of-the-climate/report-at-a-glance
-- BoM, *Recent rainfall, drought and southern Australia's long-term rainfall decline* — https://www.bom.gov.au/climate/updates/articles/a010-southern-rainfall-decline.shtml
-- Delworth & Zeng (2014), *Regional rainfall decline in Australia attributed to anthropogenic greenhouse gases and ozone levels*, Nature Geoscience — https://www.nature.com/articles/ngeo2201
-- Hawke et al. (2025), *A Review of Drivers of Cool Season Rainfall in Southwest Western Australia*, WIREs Climate Change — https://wires.onlinelibrary.wiley.com/doi/10.1002/wcc.70028
+- CSIRO & Bureau of Meteorology, *State of the Climate 2024*: https://www.csiro.au/en/research/environmental-impacts/climate-change/state-of-the-climate/report-at-a-glance
+- BoM, *Recent rainfall, drought and southern Australia's long-term rainfall decline*: https://www.bom.gov.au/climate/updates/articles/a010-southern-rainfall-decline.shtml
+- Delworth & Zeng (2014), *Regional rainfall decline in Australia attributed to anthropogenic greenhouse gases and ozone levels*, Nature Geoscience: https://www.nature.com/articles/ngeo2201
+- Hawke et al. (2025), *A Review of Drivers of Cool Season Rainfall in Southwest Western Australia*, WIREs Climate Change: https://wires.onlinelibrary.wiley.com/doi/10.1002/wcc.70028
 - Data: GHCN-Daily (NOAA NCEI); NOAA PSL climate indices; Marshall (2003) SAM index (BAS).
 
 ---

@@ -1,5 +1,5 @@
 """
-stats_utils.py — self-contained statistics for the adhi-climate analyses (cyclone-risk, rainfall-decline).
+stats_utils.py: self-contained statistics for the adhi-climate analyses (cyclone-risk, rainfall-decline).
 
 Why this exists: the analysis deliberately depends only on numpy/pandas/
 matplotlib/netCDF4 so it reproduces on any machine without a heavy scientific

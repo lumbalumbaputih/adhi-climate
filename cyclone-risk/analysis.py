@@ -1,5 +1,5 @@
 """
-analysis.py — the four analysis steps as importable functions used by
+analysis.py: the four analysis steps as importable functions used by
 cyclone_analysis.ipynb. Each makes its chart(s) and returns the numbers.
 
 Runs from raw data (data/raw/) when present, otherwise from the committed
@@ -93,7 +93,7 @@ def explore(storms):
     for i, d in enumerate(DECADES):
         ax.annotate(f"Cat 3+: {summary.pct_Cat3plus.iloc[i]:.0f}%", (i+1, 8),
                     ha="center", fontsize=8.5, color=viz.MUTED)
-    ax.set_ylabel("Peak intensity — BOM 10-min sustained wind (knots)")
+    ax.set_ylabel("Peak intensity, BOM 10-min sustained wind (knots)")
     ax.set_xlabel("Decade")
     ax.set_title("WA-affecting cyclone peak intensity by decade (1985–2024)")
     ax.legend(loc="upper right"); ax.set_ylim(0, ax.get_ylim()[1])

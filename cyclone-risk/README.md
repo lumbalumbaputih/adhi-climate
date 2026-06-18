@@ -236,19 +236,13 @@ transparent: every number can be traced to code you can read.
 
 ### References and context
 
-Grouped by confidence. Verify the medium-tagged items before quoting them
-publicly.
-
-**[HIGH]** IBTrACS v04r01, Knapp et al., NOAA NCEI. NOAA ERSSTv5, Huang et al.
-AASB S2 *Climate-related Disclosures* (Australian Accounting Standards Board,
-2024; phased commencement from 1 January 2025). IPCC AR6 WG1 (2021), Chapter 11,
-on observed and projected tropical-cyclone trends. Bureau of Meteorology and
-CSIRO, *State of the Climate* (2024).
-
-**[MEDIUM]** Literature on the observed decline in Australian-region
-tropical-cyclone frequency (for example work by Kuleshov and colleagues), and on
-rapid-intensification trends globally (for example Bhatia and colleagues). Real
-research areas, but confirm the specific citation and year before use.
+- **IBTrACS v04r01** (International Best Track Archive for Climate Stewardship), Knapp et al., NOAA NCEI. The global best-track cyclone dataset.
+- **NOAA ERSSTv5** (Extended Reconstructed Sea Surface Temperature), Huang et al. (2017). The sea-surface temperature record.
+- **AASB S2** *Climate-related Disclosures* (Australian Accounting Standards Board, 2024; phased commencement from 1 January 2025).
+- **IPCC AR6 WG1** (2021), Chapter 11, *Weather and Climate Extreme Events in a Changing Climate*. Observed and projected tropical-cyclone trends.
+- **Bureau of Meteorology and CSIRO**, *State of the Climate* (2024).
+- **Kuleshov et al.**, *Trends in tropical cyclones in the South Indian Ocean and the South Pacific Ocean* (Journal of Geophysical Research, 2010). The observed decline in Australian-region tropical-cyclone frequency.
+- **Bhatia et al.**, *Recent increases in tropical cyclone intensification rates* (Nature Communications 10:635, 2019). Rapid-intensification trends.
 
 *Analysis by Adhi Muhammad Faris Katili. Data: IBTrACS (NOAA NCEI), BOM, NOAA
 ERSSTv5. Part of the [adhi-climate](../) portfolio.*

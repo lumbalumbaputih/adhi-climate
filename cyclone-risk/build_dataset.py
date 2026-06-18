@@ -1,5 +1,5 @@
 """
-build_dataset.py — clean IBTrACS South Indian Ocean data for the WA cyclone
+build_dataset.py: clean IBTrACS South Indian Ocean data for the WA cyclone
 analysis and flag WA-affecting systems.
 
 Inputs : data/raw/ibtracs.SI.list.v04r01.csv   (IBTrACS v04r01, SI basin)

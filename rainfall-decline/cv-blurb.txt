@@ -1,4 +1,4 @@
-CV / APPLICATION BLURBS — SW WA Rainfall Decline Analysis
+CV / APPLICATION BLURBS: SW WA Rainfall Decline Analysis
 ==========================================================
 
 --- One-line (LinkedIn headline / CV project title) ---
@@ -41,7 +41,7 @@ not a run of bad years."
   climate data: 75 years of daily station rainfall plus IOD, SAM and ENSO indices.
 * Time-series methods: anomaly construction, the Pettitt change-point test,
   Mann-Kendall trend testing, Sen's slope and Pearson correlation (raw and
-  detrended) — all implemented and unit-tested from first principles.
+  detrended), all implemented and unit-tested from first principles.
 * Honest scientific framing: separating a robust observed signal from contested
   attribution, and reporting interannual vs trend correlation distinctly.
 * Domain framing: AASB S2 chronic physical climate-risk disclosure for WA water,

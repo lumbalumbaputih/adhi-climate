@@ -1,4 +1,4 @@
-# SW WA rainfall-decline analysis — minimal, reproducible stack.
+# SW WA rainfall-decline analysis: minimal, reproducible stack.
 # Statistics (OLS, Pearson, Mann-Kendall, Sen's slope, Pettitt change-point)
 # are implemented in stats_utils.py and validated in test_stats.py, so
 # scipy is NOT required.

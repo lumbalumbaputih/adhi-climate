@@ -1,5 +1,5 @@
 """
-viz.py — publication-quality charts for the SW WA rainfall-decline analysis.
+viz.py: publication-quality charts for the SW WA rainfall-decline analysis.
 
 Self-contained: reads the CSVs in data/ and writes PNGs to charts/ at 300 dpi.
 Uses the Adhi "Hidup" palette so figures match the cyclone-risk project.
@@ -142,9 +142,9 @@ def chart_trend(reg):
 # --- 4. driver correlation ----------------------------------------------------
 def chart_drivers(reg, drivers):
     m = reg.merge(drivers, on="year", how="left")
-    specs = [("dmi_AprOct", "IOD — Dipole Mode Index", SEA),
-             ("sam_AprOct", "SAM — Marshall index", FOREST),
-             ("nino34_AprOct", "ENSO — Niño 3.4 anomaly (°C)", MAWAR)]
+    specs = [("dmi_AprOct", "IOD, Dipole Mode Index", SEA),
+             ("sam_AprOct", "SAM, Marshall index", FOREST),
+             ("nino34_AprOct", "ENSO, Niño 3.4 anomaly (°C)", MAWAR)]
     fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.6))
     for ax, (col, title, c) in zip(axes, specs):
         sub = m[["regional_anom_pct", col]].dropna()
@@ -161,7 +161,7 @@ def chart_drivers(reg, drivers):
                     xycoords="axes fraction", fontsize=9.5, color=INK,
                     va="bottom")
     axes[0].set_ylabel("Apr–Oct rainfall anomaly (%)")
-    fig.suptitle("Rainfall vs climate drivers (illustrative association — not causal attribution)",
+    fig.suptitle("Rainfall vs climate drivers (illustrative association, not causal attribution)",
                  fontsize=13, weight="bold")
     axes[2].annotate(CREDIT, xy=(1.0, -0.22), xycoords="axes fraction",
                      ha="right", va="top", fontsize=8, color=MUTED)

@@ -1,5 +1,5 @@
 """
-test_stats.py — validate stats_utils against known textbook values.
+test_stats.py: validate stats_utils against known textbook values.
 Run: python3 test_stats.py
 These checks are what make the from-scratch statistics trustworthy as a
 substitute for scipy.stats.
