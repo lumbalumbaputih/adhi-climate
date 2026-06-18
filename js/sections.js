@@ -43,7 +43,7 @@
             <h1 className="hero__title">I turn climate <span className="accent">data</span> into decisions business and government can act on.</h1>
             <p className="hero__lead">{P.profile.intro}</p>
             <div className="hero__actions">
-              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Start a project</Button>
+              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
               <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See selected work</Button>
             </div>
             <div className="hero__meta">
@@ -141,8 +141,8 @@
       <section className="section section--tight" id="services">
         <div className="wrap">
           <div className="section-head">
-            <Eyebrow tone="leaf" tick>Services</Eyebrow>
-            <h2>How I can help.</h2>
+            <Eyebrow tone="leaf" tick>Skills</Eyebrow>
+            <h2>What I can bring to a team.</h2>
           </div>
           <div className="services__grid">
             {P.services.map((s, i) => (
