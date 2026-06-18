@@ -169,14 +169,14 @@
           <div className="about__body">
             <Eyebrow tick>About</Eyebrow>
             <h2 style={{ fontSize: "var(--text-4xl)", letterSpacing: "var(--tracking-tighter)", margin: "12px 0 20px" }}>
-              Rigorous about data, practical about disclosure.
+              Careful with the data, clear about what it means.
             </h2>
             <p>{P.profile.intro}</p>
             <p style={{ marginTop: "var(--space-4)" }}>
-              The work usually starts with a question no one has quantified for WA yet, then primary data, a
-              transparent method, and a result a board or regulator can defend. I care as much about getting the
-              attribution right as I do about the headline number, and about whether a finding survives contact with
-              an AASB S2 disclosure as I do about the trend behind it.
+              The work usually starts with a question no one has put numbers to for WA yet. From there it is
+              real data, a clear method, and an answer a board or regulator can rely on. I care as much about
+              getting the cause right as I do about the headline number, and about whether a finding holds up
+              when it has to go into an official climate report, not just whether the trend looks good on a chart.
             </p>
             <div style={{ marginTop: "var(--space-8)" }}>
               <ProgressBar label="AASB S2 disclosure readiness: median of 3 WA majors scored" value={84} variant="accent" />

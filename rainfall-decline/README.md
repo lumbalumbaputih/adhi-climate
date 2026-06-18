@@ -1,35 +1,41 @@
 # Chronic Physical Climate Risk: South West WA Rainfall Decline (1950–2024)
 
-A data analysis framed for **AASB S2 physical-risk assessment**, Australia's
-mandatory climate-disclosure standard.
+A data analysis written for **AASB S2 physical-risk assessment** (AASB S2 is
+Australia's mandatory climate-disclosure standard, the rulebook that says companies
+must report their climate risks).
 
-> **In one paragraph.** South West Western Australia's cool-season (April–October)
-> rainfall has fallen by a statistically significant **~2.9% per decade since
-> 1950** (Mann-Kendall p = 0.001). The decline is not a gentle slope but a **step
-> down around the year 2000** (Pettitt change-point p = 0.006): the regional total
-> drops from about 571 mm (1950–1999) to about 475 mm (2000–2024), leaving the
-> last 25 years roughly **19% drier** than the 1950–1974 baseline. The May–July
-> early-winter peak is falling faster still (~4.4%/decade), and the signal is
-> consistent across **all seven stations** analysed. The decline is well
-> established and matches CSIRO/Bureau of Meteorology figures; what carries
-> scientific nuance is the *cause*, which is attributed largely to a strengthening
-> subtropical pressure ridge and poleward-shifting winter storm tracks under
-> greenhouse-gas and ozone forcing. For a water utility, grain lender or insurer
-> this is textbook **chronic** physical risk: a permanent shift in the baseline,
-> not a run of bad years.
+> **In one paragraph.** Winter rainfall in South West Western Australia has been
+> falling. Across the cool season (April–October, the cooler months of the year)
+> the drop is about **2.9% per decade since 1950**, and that drop is real, not just
+> chance (Mann-Kendall p = 0.001; Mann-Kendall is a standard test for whether a
+> trend is genuine). It did not fall as a gentle slope. It dropped as a **step down
+> around the year 2000** (a sudden, lasting drop to a lower level), confirmed by the
+> Pettitt change-point test (a standard check for the point where a series shifts to
+> a new level), with p = 0.006. The regional total fell from about 571 mm in
+> 1950–1999 to about 475 mm in 2000–2024, which leaves the last 25 years roughly
+> **19% drier** than the 1950–1974 baseline (the early reference period). The early
+> winter peak (May–July) is falling even faster, about **4.4%/decade**, and the same
+> pattern shows up at **all seven weather stations** studied. The decline itself is
+> well established and matches the figures from CSIRO and the Bureau of Meteorology.
+> What still carries some scientific debate is the *cause*, which is put down mainly
+> to a strengthening band of high pressure over the subtropics and winter storm
+> tracks shifting toward the South Pole, driven by greenhouse gases and ozone loss.
+> For a water utility, a grain lender or an insurer this is a textbook case of
+> **chronic** physical risk: a permanent move to a drier normal, not just a run of
+> bad years.
 
 ---
 
 ## Research question
 
-Has cool-season rainfall in South West WA declined significantly since the
-mid-century, how large and how persistent is the shift, and how does it relate to
-the major climate drivers?
+Has cool-season rainfall in South West WA fallen significantly since the middle of
+the last century? How big is the change, how lasting is it, and how does it relate
+to the main climate drivers?
 
 The **cool season** is April–October, the Bureau of Meteorology's standard wet
-season for the southwest. **May–July** is examined separately as the early-winter
-sub-season where the decline is known to be sharpest. Anomalies are measured
-against a **1950–1974 baseline** (the pre-step-change reference).
+season for the southwest. **May–July** is looked at on its own as the early-winter
+stretch where the decline is known to be sharpest. Rainfall is measured against a
+**1950–1974 baseline** (the reference period before the step-change happened).
 
 ## Data
 
@@ -40,14 +46,14 @@ against a **1950–1974 baseline** (the pre-step-change reference).
 | **Marshall (2003) SAM index** (BAS) | Station-based Southern Annular Mode index, 1957– | SAM driver |
 | **NOAA PSL: Niño 3.4 anomaly** | ERSST-based ENSO index | ENSO driver |
 
-**Why GHCN-Daily rather than the BoM website?** It is the same underlying station
-data, but downloadable by script, so the entire pipeline reproduces without manual
-web navigation. Results are validated against BoM/CSIRO's published figures (see
-*Validation*).
+**Why use GHCN-Daily instead of the BoM website?** It is the same underlying station
+data, but you can download it with a script. That means the whole analysis can be
+re-run from start to finish without anyone clicking through web pages by hand.
+The results are checked against BoM and CSIRO's published figures (see *Validation*).
 
-**The seven stations** were chosen for genuine full daily coverage across
-1950–2024 (≥22 of 25 baseline years and ≥22 recent years) and to span the
-rainfall gradient:
+**The seven stations** were picked because they have genuine, near-complete daily
+records across 1950–2024 (at least 22 of the 25 baseline years and at least 22
+recent years), and because together they cover the full range from wet to dry:
 
 | Station | Setting | 1950–74 Apr–Oct baseline |
 |---|---|---|
@@ -60,30 +66,38 @@ rainfall gradient:
 | Wagin | Southern wheatbelt | 344 mm |
 
 > **Note on the Perth catchment.** The Perth Darling-scarp dam catchments
-> (Mundaring, Jarrahdale), the most-cited part of the SW WA water story, had
-> gappy *daily* records in GHCN-Daily and were excluded to avoid biasing the
-> series. The high-rainfall SW-corner stations capture the same forced signal.
+> (Mundaring, Jarrahdale) are the most-talked-about part of the SW WA water story,
+> but their *daily* records in GHCN-Daily had too many gaps, so they were left out
+> to avoid skewing the series. The high-rainfall stations in the SW corner pick up
+> the same underlying signal.
 
 ## Method
 
-1. **Clean** each station's daily rainfall, dropping days that fail NOAA's quality
-   flags. A month is used only if it has ≤3 missing/failed days; a cool season is
-   used only if all seven months are complete.
-2. **Anomalies** are computed per station against its *own* 1950–1974 mean, in mm
-   and %. The **regional series** is the mean of the per-station % anomalies
-   (requiring ≥5 of 7 stations in a year), so wet coastal sites don't swamp dry
-   inland ones.
-3. **Step-change**: the **Pettitt** non-parametric change-point test.
-4. **Trend**: **Mann-Kendall** significance + **Sen's slope** (robust) + **OLS**
-   with a 95% confidence band, on the full record, the May–July sub-season, and
-   each station.
-5. **Drivers**: Pearson correlation of the cool-season rainfall anomaly against the
-   cool-season IOD, SAM and ENSO indices, reported **raw and detrended** (detrended
-   isolates year-to-year covariation from the shared long-term trend).
+1. **Clean** each station's daily rainfall, dropping any day that fails NOAA's
+   quality checks. A month is kept only if it has 3 or fewer missing or failed days,
+   and a cool season is kept only if all seven of its months are complete.
+2. **Anomalies** (how far each year sits above or below normal) are worked out for
+   each station against its *own* 1950–1974 average, in both mm and %. The
+   **regional series** is the average of the per-station % anomalies (a year counts
+   only if at least 5 of the 7 stations have data), so the wet coastal sites do not
+   drown out the dry inland ones.
+3. **Step-change**: the **Pettitt** test, a non-parametric change-point test (it
+   finds where a series jumps to a new level without assuming any particular shape).
+4. **Trend**: the **Mann-Kendall** test for whether a trend is real, plus **Sen's
+   slope** (a robust way to size the trend that is not thrown off by odd years),
+   plus **OLS** (ordinary least squares, the standard straight-line fit) with a 95%
+   confidence band. These are run on the full record, on the May–July sub-season,
+   and on each station.
+5. **Drivers**: Pearson correlation (a standard measure of how closely two things
+   move together) of the cool-season rainfall anomaly against the cool-season IOD,
+   SAM and ENSO indices, reported both **raw and detrended**. Detrended means the
+   shared long-term trend is taken out first, so what is left is the year-to-year
+   wobble.
 
-All statistics, OLS, Pearson, Mann-Kendall, Sen's slope and the Pettitt test, are implemented from first principles in [`stats_utils.py`](stats_utils.py) and
-validated against known values in [`test_stats.py`](test_stats.py) (22 checks).
-**scipy is not required.**
+All the statistics, OLS, Pearson, Mann-Kendall, Sen's slope and the Pettitt test,
+are coded from scratch in [`stats_utils.py`](stats_utils.py) and checked against
+known values in [`test_stats.py`](test_stats.py) (22 checks). **scipy is not
+required.**
 
 ## Key findings
 
@@ -108,64 +122,66 @@ validated against known values in [`test_stats.py`](test_stats.py) (22 checks).
 
 ## Validation
 
-The Bureau of Meteorology and CSIRO *State of the Climate* report a **~16%
-April–October** and **~20% May–July** decline for SW WA since 1970 (against a
-1900–1969 baseline), and state that a decline of this magnitude is "highly
-unlikely … due to natural variability alone." This analysis, different stations,
-a different baseline period, and an independent code path, lands in the same
-place: ~19% drier (1950–74 vs 2000–24), with May–July falling fastest. The
+The Bureau of Meteorology and CSIRO's *State of the Climate* report a **~16%
+April–October** and **~20% May–July** decline for SW WA since 1970 (measured against
+a 1900–1969 baseline), and they say a decline this large is "highly unlikely … due
+to natural variability alone." This analysis uses different stations, a different
+baseline period, and a completely separate set of code, yet it lands in the same
+place: about 19% drier (1950–74 vs 2000–24), with May–July falling the fastest. That
 agreement is the credibility check.
 
 ## What this means: AASB S2 chronic physical risk
 
-- **Chronic, not acute.** A permanent downward shift in the baseline is precisely
-  the slow-onset, persistent hazard AASB S2 asks entities to identify and
-  disclose. Because it is a *step-change*, the pre-2000 climate is no longer a
-  valid planning baseline, the recent 25 years are the new normal.
-- **Exposed parties:** Perth's water supply (dam inflows have fallen far more than
-  rainfall, a modest rainfall drop is amplified into a large runoff loss); the
-  wheatbelt grain economy and its lenders; and property and crop insurers
-  repricing the southwest.
-- **The judgement it forces:** assess this risk on the post-step-change baseline
-  and forward-looking projections, not a long historical average that no longer
-  describes the climate.
+- **Chronic, not acute.** A permanent downward shift in the baseline is exactly the
+  kind of slow, persistent hazard AASB S2 asks companies to spot and report. Because
+  it is a *step-change* (a sudden move to a new level), the pre-2000 climate is no
+  longer a fair planning baseline. The recent 25 years are the new normal.
+- **Who is exposed:** Perth's water supply (dam inflows have fallen much more than
+  rainfall, because a modest drop in rain turns into a large loss of runoff); the
+  wheatbelt grain economy and the banks that lend to it; and property and crop
+  insurers having to reprice the southwest.
+- **The decision it forces:** judge this risk against the post-step-change baseline
+  and forward-looking projections, not against a long historical average that no
+  longer describes today's climate.
 
 ## Attribution: what causes the decline (referenced, not invented)
 
-The **decline is robust**; the **cause** is still being refined, and this analysis
-does not attempt formal detection-attribution. The published picture:
+The **decline is solid**; the **cause** is still being pinned down, and this analysis
+does not try to do formal cause-and-effect attribution. Here is the published
+picture:
 
-- The proximate mechanism is a **strengthening subtropical high-pressure ridge**
-  and a **poleward shift of the winter westerlies / storm tracks** (a more-positive
-  Southern Annular Mode), which deliver **fewer rain-bearing cold fronts** to the
-  southwest.
-- These circulation changes are substantially **anthropogenic**, greenhouse gases
-  plus stratospheric ozone depletion. High-resolution models reproduce the decline
-  only with that forcing included.
-- **Apportionment varies by study and method**: one modelling estimate finds ~43%
-  of the multi-decadal decline is externally forced; other work attributes up to
-  two-thirds of the post-1975 decline to the intensifying ridge; climate change is
-  commonly implicated in a 20–30% rainfall reduction. The decline is certain; the
-  precise split is not.
-- The **Indian Ocean Dipole** (more frequent positive events) and **ENSO** add
-  year-to-year variability.
+- The most immediate cause is a **strengthening band of high pressure over the
+  subtropics** and a **shift of the winter westerly winds and storm tracks toward
+  the South Pole** (which goes with a more-positive Southern Annular Mode). Together
+  these bring **fewer rain-bearing cold fronts** to the southwest.
+- These changes in air circulation are largely **human-caused**: greenhouse gases
+  plus the thinning of the ozone layer in the stratosphere. Detailed models only
+  reproduce the decline when that human influence is included.
+- **The exact split varies by study and method**: one modelling estimate finds about
+  43% of the multi-decade decline is driven by outside forcing; other work pins up to
+  two-thirds of the post-1975 decline on the strengthening high-pressure ridge;
+  climate change is commonly linked to a 20–30% drop in rainfall. The decline is
+  certain; the precise breakdown is not.
+- The **Indian Ocean Dipole** (more frequent positive events) and **ENSO** add the
+  year-to-year ups and downs.
 
-**This project's own correlation is illustrative, not causal.** IOD, ENSO and SAM
-are all negatively associated with cool-season rainfall (r ≈ −0.3 to −0.4), but
-once the shared long-term trend is removed the year-to-year correlations are
-modest. In plain terms: the climate modes explain the year-to-year *wiggles*,
-while the forced circulation change explains the downward *staircase*. Correlation
-here is consistent with the literature but does not establish causation.
+**This project's own correlation is illustrative, not proof of cause.** IOD, ENSO and
+SAM are all negatively linked with cool-season rainfall (r ≈ −0.3 to −0.4), but once
+the shared long-term trend is removed, the year-to-year links are modest. In plain
+terms: the climate modes explain the year-to-year *wiggles*, while the forced change
+in air circulation explains the downward *staircase*. The correlation here fits the
+published literature but does not prove cause.
 
 ## Limitations
 
-- Seven stations, not a gridded regional product, robust and spatially coherent,
-  but not a substitute for BoM's gridded analysis.
-- The Perth Darling-scarp catchment is not directly represented (gappy daily data).
-- The Pettitt test reports a single dominant change point (~2000); the smaller
-  mid-1970s step documented in the literature is visible in the series but not
-  separately tested here.
-- Driver correlation is association, not formal attribution.
+- Seven stations, not a full gridded regional product. The result is solid and
+  spatially consistent, but it is not a substitute for BoM's gridded analysis.
+- The Perth Darling-scarp catchment is not directly included (its daily data was too
+  gappy).
+- The Pettitt test reports a single main change point (~2000). The smaller mid-1970s
+  step that the literature describes is visible in the series but is not tested
+  separately here.
+- The driver correlation shows association, not formal attribution.
 
 ## Reproduce
 
@@ -185,11 +201,12 @@ python3 analysis.py
 python3 viz.py
 ```
 
-Raw downloads live in `data/raw/` and are **git-ignored** (re-downloadable from the
-sources above): the GHCN-Daily station files `ASN000095xx/0101xx.dly`, the GHCN
-metadata `ghcnd-stations.txt` and `ghcnd-inventory.txt`, and the three index files
-`dmi.had.long.data`, `marshall.sam.txt`, `nina34.anom.data`. The cleaned CSVs in
-`data/` are committed, so the analysis and charts reproduce without re-downloading.
+Raw downloads live in `data/raw/` and are **git-ignored** (you can re-download them
+from the sources listed above): the GHCN-Daily station files `ASN000095xx/0101xx.dly`,
+the GHCN metadata `ghcnd-stations.txt` and `ghcnd-inventory.txt`, and the three index
+files `dmi.had.long.data`, `marshall.sam.txt`, `nina34.anom.data`. The cleaned CSVs in
+`data/` are committed, so the analysis and charts can be reproduced without
+re-downloading anything.
 
 ## Repo structure
 

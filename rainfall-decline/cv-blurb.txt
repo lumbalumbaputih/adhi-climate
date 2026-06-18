@@ -3,47 +3,49 @@ CV / APPLICATION BLURBS: SW WA Rainfall Decline Analysis
 
 --- One-line (LinkedIn headline / CV project title) ---
 Chronic Physical Climate Risk: South West WA Rainfall Decline (1950 to 2024):
-a reproducible data analysis framed for AASB S2 physical-risk assessment.
+a reproducible data analysis written for AASB S2 physical-risk assessment.
 [github.com/<user>/adhi-climate]
 
 
 --- Three-sentence CV blurb (drop-in) ---
 I analysed 75 years of daily rainfall from seven long-record South West Western
 Australian stations (GHCN-Daily / Bureau of Meteorology observations) in Python,
-alongside the Indian Ocean Dipole, Southern Annular Mode and ENSO indices, to
-quantify the region's cool-season rainfall decline as an AASB S2 chronic
-physical-risk assessment. I found a statistically significant long-term decline
-of about 2.9% per decade in April to October rainfall (Mann-Kendall p=0.001),
-a step down around the year 2000 (Pettitt p=0.006) that left 2000 to 2024 about
-19% drier than the 1950 to 1974 baseline, and a faster decline of roughly 4.4%
-per decade in the May to July early-winter peak, consistent across all seven
-stations and with published CSIRO and Bureau of Meteorology figures. I delivered
-a fully reproducible analysis with all statistical routines (Mann-Kendall,
-Sen's slope, OLS regression, Pearson correlation and the Pettitt change-point
-test) implemented from first principles and unit-tested, plus five
+along with the Indian Ocean Dipole, Southern Annular Mode and ENSO indices, to
+measure the region's cool-season rainfall decline as an AASB S2 chronic
+physical-risk assessment. I found a real, not-just-chance long-term decline of
+about 2.9% per decade in April to October rainfall (Mann-Kendall p=0.001; a
+standard test for whether a trend is genuine), a step down around the year 2000
+(a sudden, lasting drop, confirmed by the Pettitt change-point test, p=0.006) that
+left 2000 to 2024 about 19% drier than the 1950 to 1974 baseline, and a faster
+decline of roughly 4.4% per decade in the May to July early-winter peak, all
+consistent across the seven stations and with published CSIRO and Bureau of
+Meteorology figures. I delivered a fully reproducible analysis with every
+statistical routine (Mann-Kendall, Sen's slope, OLS regression, Pearson correlation
+and the Pettitt change-point test) coded from scratch and unit-tested, plus five
 publication-quality charts, published on GitHub.
 
 
 --- Interview headline (say this in about 15 seconds) ---
 "I measured how much South West WA's winter rainfall has fallen. Over 1950 to
-2024 the April-to-October total declined about 3% a decade, with a clear step
-down around 2000 that leaves the last 25 years roughly a fifth drier than the
+2024 the April-to-October total fell about 3% a decade, with a clear step down
+around 2000 that leaves the last 25 years roughly a fifth drier than the
 mid-century baseline. Every one of the seven stations shows it. The decline
 itself isn't controversial; what carries nuance is the cause, which the science
-attributes largely to a strengthening high-pressure ridge and shifting storm
-tracks under greenhouse and ozone forcing. For a water utility or a farm lender
-that's textbook AASB S2 chronic physical risk: a permanent shift in the baseline,
-not a run of bad years."
+puts down largely to a strengthening high-pressure ridge and shifting storm
+tracks driven by greenhouse gases and ozone loss. For a water utility or a farm
+lender that's a textbook case of AASB S2 chronic physical risk: a permanent shift
+in the baseline, not a run of bad years."
 
 
 --- Skills demonstrated (for the bullet list) ---
-* Python data analysis (pandas, numpy, matplotlib) on multi-source observational
-  climate data: 75 years of daily station rainfall plus IOD, SAM and ENSO indices.
-* Time-series methods: anomaly construction, the Pettitt change-point test,
+* Python data analysis (pandas, numpy, matplotlib) on climate data from several
+  sources: 75 years of daily station rainfall plus IOD, SAM and ENSO indices.
+* Time-series methods: building anomalies, the Pettitt change-point test,
   Mann-Kendall trend testing, Sen's slope and Pearson correlation (raw and
-  detrended), all implemented and unit-tested from first principles.
-* Honest scientific framing: separating a robust observed signal from contested
-  attribution, and reporting interannual vs trend correlation distinctly.
+  detrended), all coded from scratch and unit-tested.
+* Honest scientific framing: telling a solid observed signal apart from the
+  still-debated cause, and reporting year-to-year correlation separately from the
+  long-term trend.
 * Domain framing: AASB S2 chronic physical climate-risk disclosure for WA water,
   agriculture and insurance exposures.
 * Reproducible, documented, version-controlled analysis (GitHub).
