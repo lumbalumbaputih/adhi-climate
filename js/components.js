@@ -71,9 +71,10 @@
 .adhi-iconbtn--outline:hover:not([disabled]) { border-color: var(--border-strong); background: var(--bg-subtle); }
   `);
 
-  function IconButton({ children, variant = "ghost", size = "md", className = "", ...rest }) {
+  function IconButton({ children, variant = "ghost", size = "md", as = "button", className = "", ...rest }) {
     const cls = ["adhi-iconbtn", `adhi-iconbtn--${variant}`, `adhi-iconbtn--${size}`, className].filter(Boolean).join(" ");
-    return R.createElement("button", { type: "button", className: cls, ...rest }, children);
+    const extra = as === "button" ? { type: "button" } : {};
+    return R.createElement(as, { className: cls, ...extra, ...rest }, children);
   }
 
   /* -------------------------------------------------------------------- Stat */

@@ -238,8 +238,8 @@
           <div className="footer__meta">© 2026 · Climate &amp; Sustainability · Built with the Adhi design system</div>
           <div className="footer__social">
             <IconButton variant="outline" aria-label="LinkedIn"><Icon name="linkedin" size={18} /></IconButton>
-            <IconButton variant="outline" aria-label="GitHub"><Icon name="github" size={18} /></IconButton>
-            <IconButton variant="outline" aria-label="Email"><Icon name="mail" size={18} /></IconButton>
+            <IconButton as="a" variant="outline" aria-label="GitHub" href={P.repo} target="_blank" rel="noopener noreferrer"><Icon name="github" size={18} /></IconButton>
+            <IconButton as="a" variant="outline" aria-label="Email" href={"mailto:" + P.profile.email}><Icon name="mail" size={18} /></IconButton>
           </div>
         </div>
       </footer>
