@@ -108,7 +108,7 @@
 .pscore td:nth-last-child(2) { font-weight: var(--weight-semibold); color: var(--text-strong); }
 .pscore tr:last-child td { border-bottom: none; }
 
-.pdialog__links { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.pdialog__links { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .plink { display: flex; align-items: center; gap: var(--space-3); padding: 11px 14px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-card); color: var(--text-strong); text-decoration: none; font-size: var(--text-sm); font-weight: var(--weight-medium); transition: border-color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
 .plink:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-text); text-decoration: none; }
 .plink__icon { color: var(--accent-text); display: flex; }

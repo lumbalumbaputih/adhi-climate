@@ -11,7 +11,7 @@
       role: "Climate & Sustainability",
       tagline: "I turn Western Australia's climate data into decisions business and government can act on.",
       intro:
-        "I analyse Western Australia's physical climate risk, from intensifying cyclones to a drying south-west, and assess how the state's biggest emitters disclose that risk under AASB S2. The work pairs primary climate datasets with the disclosure standards now landing on every WA boardroom.",
+        "I dig into the real climate risks facing Western Australia, like what is actually happening to its cyclones and its drying south-west, and I check how the state's biggest companies report those risks under Australia's new climate rules (AASB S2). The goal is simple: turn raw climate data into clear answers that business and government can act on.",
       location: "Western Australia · remote-friendly",
       email: "hello@adhikatili.earth",
     },
@@ -31,28 +31,28 @@
         icon: "wind",
         meta: "6 charts · reproducible notebook · 6 open datasets",
         summary:
-          "Forty years of South Indian Ocean track data, tested for trends in peak intensity and rapid intensification off the WA coast.",
-        result: { value: "40", unit: "yrs", label: "of track data" },
+          "Forty years of cyclone records, checked against one simple question: as the ocean warmed, did the storms hitting WA actually get stronger?",
+        result: { value: "40", unit: "yrs", label: "of storm records" },
         headline:
           "The ocean off Western Australia warmed about half a degree in 40 years. The cyclones did not get stronger.",
         body:
-          "I combined IBTrACS and BOM best-track records for the South Indian Ocean to test whether tropical cyclones approaching Western Australia are intensifying: peak wind speed, minimum central pressure, and rapid-intensification frequency. The result runs against the intuitive 'warmer oceans, stronger storms' headline, and that is the point. Framed as AASB S2 physical risk against the 2025-26 season and Severe Tropical Cyclone Narelle's roughly $500M damage bill.",
+          "Most people assume that as the ocean warms, storms get stronger. I put that to the test for Western Australia using 40 years of official cyclone records from international and Australian weather agencies, looking at how strong the storms got and how often they strengthened very fast. The answer was the opposite of what you would expect, and that is exactly why it is worth knowing. It matters because WA's biggest companies now have to report their climate risks under new Australian rules (AASB S2), and those reports need to be built on what the data really shows, not on gut feel.",
         findings: [
-          { value: "+0.5", unit: "°C", label: "Ocean warming, 1980s to today", text: "The cyclone development region warmed 0.16 °C per decade (p < 0.0001). A robust, statistically significant trend." },
-          { value: "−3.6", unit: "kt/decade", label: "Peak wind trend", text: "Mean peak wind drifted down, not up. Basin-wide the decline is statistically significant (Mann-Kendall p = 0.048)." },
-          { value: "−0.22", unit: "r", label: "SST vs intensity", text: "Warmer seasons were not associated with stronger storms. The thermal signal is decoupled from observed intensity." },
-          { value: "~5", unit: "/season", label: "Storms within 500 km", text: "Frequency is stable to slightly declining, from 5.1 per season (1985-2004) to 4.6 (2005-2024)." },
+          { value: "+0.5", unit: "°C", label: "The ocean is warming", text: "The sea where these cyclones form has warmed by about half a degree since the 1980s. This part is rock solid in the data." },
+          { value: "−3.6", unit: "kt/decade", label: "But the storms are not", text: "Despite the warmer ocean, the storms' top wind speeds have edged down, not up, over the 40 years." },
+          { value: "−0.22", unit: "link", label: "Warmer seas, stronger storms?", text: "No. Warmer years did not bring stronger storms here. The connection people assume simply is not in WA's record." },
+          { value: "~5", unit: "/year", label: "Storms near the coast", text: "About five cyclones come within 500 km of the WA coast in a typical year, a number that has held steady or dipped slightly." },
         ],
         charts: [
-          { src: "cyclone-risk/charts/01_annual_count.png", caption: "Annual cyclone counts: stable to slightly declining" },
-          { src: "cyclone-risk/charts/02_intensity_by_decade.png", caption: "Peak intensity by decade: drifting down, not up" },
-          { src: "cyclone-risk/charts/03_trend_wind_speed.png", caption: "Mean peak wind trend with significance test" },
-          { src: "cyclone-risk/charts/04_trend_pressure.png", caption: "Minimum central pressure: weakening (rising)" },
-          { src: "cyclone-risk/charts/05_rapid_intensification.png", caption: "Rapid intensification: apparently rising, read with caution" },
-          { src: "cyclone-risk/charts/06_sst_correlation.png", caption: "Sea-surface temperature vs cyclone intensity: decoupled" },
+          { src: "cyclone-risk/charts/01_annual_count.png", caption: "How many cyclones each year: steady, with a slight dip" },
+          { src: "cyclone-risk/charts/02_intensity_by_decade.png", caption: "How strong the storms got, decade by decade: edging down, not up" },
+          { src: "cyclone-risk/charts/03_trend_wind_speed.png", caption: "Average top wind speed over time: a gentle downward trend" },
+          { src: "cyclone-risk/charts/04_trend_pressure.png", caption: "A second way of measuring strength agrees: storms got slightly weaker" },
+          { src: "cyclone-risk/charts/05_rapid_intensification.png", caption: "Storms strengthening very fast: it looks like it is rising, but read with care" },
+          { src: "cyclone-risk/charts/06_sst_correlation.png", caption: "Warmer oceans did not mean stronger storms" },
         ],
         meaning:
-          "You cannot read WA's future cyclone hazard straight off the recent local record. Warming oceans did not translate into stronger observed storms here, so an honest AASB S2 physical-risk assessment has to lean on forward-looking projections, not extrapolation of the past. Cyclone Narelle is the reminder that risk lives in the tail of the distribution, not the average.",
+          "The lesson is simple but important: you cannot judge WA's future cyclone danger just by looking at the recent past. The ocean has warmed, yet the storms here have not gotten stronger, so honest climate-risk reporting has to lean on future projections rather than assume the past will repeat. And a quiet long-term trend does not mean we are safe. Severe Tropical Cyclone Narelle in 2026 caused around $500 million in damage, a reminder that the real danger lives in the rare, extreme storm, not the average one.",
         resources: [
           { label: "Read the full analysis", href: ghBlob("cyclone-risk/README.md"), icon: "file-text" },
           { label: "Open the notebook", href: ghBlob("cyclone-risk/cyclone_analysis.ipynb"), icon: "bar-chart" },
@@ -60,7 +60,7 @@
           { label: "All charts", href: ghTree("cyclone-risk/charts"), icon: "scan" },
           { label: "View on GitHub", href: ghTree("cyclone-risk"), icon: "github" },
         ],
-        tags: ["IBTrACS + BOM", "Rapid intensification", "AASB S2 physical risk"],
+        tags: ["Official cyclone records", "Warmer seas, not stronger storms", "Climate-risk reporting (AASB S2)"],
       },
       {
         id: "sw-wa-rainfall",
@@ -71,27 +71,27 @@
         icon: "droplet",
         meta: "5 charts · reproducible pipeline · 6 open datasets",
         summary:
-          "Mapping one of the world's clearest regional drying signals: the step-change in south-west WA cool-season rainfall.",
-        result: { value: "−19", unit: "%", label: "drier since the 1950s" },
+          "One of the clearest examples anywhere of a region drying out: the south-west corner of WA, where winter rain dropped sharply and never recovered.",
+        result: { value: "−19", unit: "%", label: "drier than the 1950s" },
         headline:
-          "South West WA's cool-season rainfall did not gently slope down. It stepped down around the year 2000 and never came back.",
+          "South West WA's winter rain did not slowly tail off. It dropped suddenly around the year 2000 and never came back.",
         body:
-          "Using 74 years of BOM station records (redistributed through GHCN-Daily so the whole pipeline reproduces by script), I quantified the south-west WA cool-season rainfall decline and framed it as chronic physical climate risk for water security, agriculture, urban supply, and bushfire. The attribution is handled carefully, weighing ENSO, the Indian Ocean Dipole, and the Southern Annular Mode against anthropogenic forcing, rather than overclaiming.",
+          "Using 74 years of rainfall records from Bureau of Meteorology weather stations, I measured how much the cooler-months rain (April to October) in south-west WA has fallen, and what that means for the people who depend on it: water suppliers, farmers, and insurers. I was careful about the cause too, weighing natural climate cycles against human-caused climate change rather than overclaiming either way.",
         findings: [
-          { value: "−2.9%", unit: "/decade", label: "Cool-season trend since 1950", text: "Statistically significant (Mann-Kendall p = 0.001), roughly 20 mm lost every decade." },
-          { value: "~2000", unit: "", label: "Step-change (Pettitt)", text: "A break point, not a slope: 571 mm before, 475 mm after (p = 0.006)." },
-          { value: "−19%", unit: "", label: "Drier than the 1950-74 baseline", text: "The last 25 years are about a fifth drier. The May-July early-winter peak fell faster still (−4.4%/decade)." },
-          { value: "7 / 7", unit: "", label: "Stations declining", text: "Every station analysed shows the signal, and six of seven are individually significant." },
+          { value: "−2.9%", unit: "/decade", label: "Winter rain is falling", text: "The cooler-months rain has dropped about 3% every decade since 1950, roughly 20 mm less rain each decade. This is a real trend, not chance." },
+          { value: "~2000", unit: "", label: "When it changed", text: "The fall was not gradual. Rainfall dropped suddenly around the year 2000 and then settled at a new, lower level (from about 571 mm a year to 475 mm)." },
+          { value: "−19%", unit: "", label: "Drier than the 1950s", text: "The last 25 years have been about a fifth drier than the 1950s, and early winter (May to July) has dried out even faster." },
+          { value: "7 / 7", unit: "", label: "Every station agrees", text: "All seven weather stations show the same drying, so this is a genuine regional change, not a quirk of one location." },
         ],
         charts: [
-          { src: "rainfall-decline/charts/01_timeseries_anomaly.png", caption: "Cool-season rainfall anomaly against the 1950-74 baseline" },
-          { src: "rainfall-decline/charts/02_stepchange.png", caption: "Pettitt step-change: a drop around 2000, not a gentle slope" },
-          { src: "rainfall-decline/charts/03_trend_mannkendall.png", caption: "Mann-Kendall trend with a 95% confidence band" },
-          { src: "rainfall-decline/charts/04_driver_correlation.png", caption: "IOD, ENSO and SAM correlations, raw and detrended" },
-          { src: "rainfall-decline/charts/05_station_decade.png", caption: "Station by decade: the signal is everywhere" },
+          { src: "rainfall-decline/charts/01_timeseries_anomaly.png", caption: "Winter rainfall each year compared with the 1950s: mostly drier" },
+          { src: "rainfall-decline/charts/02_stepchange.png", caption: "Rainfall dropped suddenly around 2000, then stayed low" },
+          { src: "rainfall-decline/charts/03_trend_mannkendall.png", caption: "The long-term downward trend, with its margin of certainty" },
+          { src: "rainfall-decline/charts/04_driver_correlation.png", caption: "How natural climate cycles relate to the rain: part of the story, not all of it" },
+          { src: "rainfall-decline/charts/05_station_decade.png", caption: "Every weather station, decade by decade: drying across the board" },
         ],
         meaning:
-          "This is textbook chronic physical risk: a permanent shift in the baseline, not a run of bad years. Because it is a step-change, the pre-2000 climate is no longer a valid planning baseline for Perth's water supply, the wheatbelt grain economy and its lenders, or insurers repricing the southwest. The decline is certain; the precise split between natural variability and anthropogenic forcing is where the analysis stays careful.",
+          "This is not just a run of dry years, it is a permanent shift to a drier normal that began around 2000 and has not reversed. That changes the game for anyone who plans around water: Perth's drinking-water supply, wheatbelt farmers and the banks that lend to them, and insurers pricing risk in the south-west. They can no longer plan using the old, wetter climate. As for the cause, human-caused climate change is a big part of it, alongside natural ups and downs, and the analysis is careful not to overstate exactly how much is each.",
         resources: [
           { label: "Read the full analysis", href: ghBlob("rainfall-decline/README.md"), icon: "file-text" },
           { label: "Open the notebook", href: ghBlob("rainfall-decline/rainfall_analysis.ipynb"), icon: "bar-chart" },
@@ -99,7 +99,7 @@
           { label: "All charts", href: ghTree("rainfall-decline/charts"), icon: "scan" },
           { label: "View on GitHub", href: ghTree("rainfall-decline"), icon: "github" },
         ],
-        tags: ["BOM station data", "Step-change", "Contested attribution"],
+        tags: ["BOM weather stations", "A sudden drop around 2000", "Cause handled carefully"],
       },
       {
         id: "aasb-s2-readiness",
@@ -110,17 +110,17 @@
         icon: "file-text",
         meta: "3 scorecards · 93 evidence-backed cells · scoring matrix",
         summary:
-          "Scoring how three of WA's largest ASX emitters disclose climate risk across the four AASB S2 pillars.",
-        result: { value: "3", unit: "firms", label: "scored, 93 cells" },
+          "Grading three of WA's biggest companies on how clearly and completely they report their climate risks under Australia's new disclosure rules.",
+        result: { value: "3", unit: "firms", label: "graded, 93 checks" },
         headline:
-          "Strong climate disclosure is not the same as low climate risk. Reading the actual reports, line by line, is the only way to tell them apart.",
+          "Reporting climate risk well is not the same as having low climate risk. The only way to tell them apart is to read the actual reports, line by line.",
         body:
-          "I read the real sustainability and annual reports of three WA-headquartered ASX majors, BHP, Rio Tinto, and Woodside, and scored each across the four AASB S2 pillars (governance, strategy, risk management, and metrics & targets) on 31 sub-requirements. Every non-zero score carries a citation to the report's own section or page, and scoring was deliberately conservative. The output is a clear picture of common disclosure gaps, exactly the work ESG consultants are being paid for right now.",
+          "Australia has brought in new rules (called AASB S2) that make big companies report their climate risks in a consistent way. I read the actual reports of three of WA's largest listed companies, BHP, Rio Tinto, and Woodside, and graded each one against what the rules ask for, across four areas: how the board oversees climate, company strategy, how risks are managed, and the numbers and targets they publish. Every score is backed by a specific page in the company's own report. This is exactly the kind of work ESG and sustainability consultants are hired to do.",
         findings: [
-          { value: "3", unit: "firms", label: "BHP · Rio Tinto · Woodside", text: "Scored across 31 AASB S2 sub-requirements, 93 evidence-backed cells in total." },
-          { value: "3.69", unit: "/4", label: "Rio Tinto leads", text: "The only firm answering the cross-industry metrics in quantified form. Woodside scores 3.35, BHP 2.94." },
-          { value: "575.7", unit: "Mt", label: "Rio Tinto Scope 3", text: "Against roughly 31.5 Mt operational. Scope 3 targets are the weakest link even at the top." },
-          { value: "4", unit: "pillars", label: "Governance to metrics", text: "The clearest common gaps: asset-exposure metrics and quantified climate-related financial effects." },
+          { value: "3", unit: "firms", label: "BHP · Rio Tinto · Woodside", text: "Three companies, graded on 31 specific requirements, with 93 pieces of evidence pulled straight from their reports." },
+          { value: "3.69", unit: "/4", label: "Rio Tinto scored highest", text: "It was the only one to back its climate claims with hard numbers. Woodside scored 3.35 and BHP 2.94 out of 4." },
+          { value: "575.7", unit: "Mt", label: "The emissions almost no one targets", text: "Most of these firms' emissions come from customers using their products (Rio Tinto's are 575.7 Mt, versus about 31.5 from its own operations), yet that is where their targets are weakest." },
+          { value: "4", unit: "areas", label: "The same gaps everywhere", text: "Across all three, the biggest gaps were the same: which assets are actually at risk, and putting a dollar figure on the financial impact." },
         ],
         scoreboard: {
           headers: ["Company", "Gov", "Strategy", "Risk", "Metrics", "Overall", "Band"],
@@ -131,7 +131,7 @@
           ],
         },
         meaning:
-          "The mandatory regime lifts completeness, but not evenly: depth comes from a company choosing to do the harder quantification, not from the calendar. Woodside is the clearest case that good disclosure and high exposure can sit in the same company, and the review keeps the two apart. That separation, disclosed readiness versus actual readiness, is the core analytical skill the project demonstrates.",
+          "The big takeaway: clear reporting and low risk are not the same thing. Woodside is the perfect example. Its reporting is strong, yet its growth plans carry exactly the kind of climate risk these rules are meant to bring into the open. Being able to hold those two ideas apart, how well a company reports versus how exposed it actually is, is the core skill this project shows. The new rules raise the bar, but the real depth comes from companies choosing to do the harder work of putting numbers on it.",
         resources: [
           { label: "Read the full review", href: ghBlob("aasb-s2-review/README.md"), icon: "file-text" },
           { label: "Scoring matrix (93 cells)", href: ghBlob("aasb-s2-review/scoring-matrix.csv"), icon: "layers" },
@@ -141,13 +141,13 @@
           { label: "BHP scorecard", href: ghBlob("aasb-s2-review/bhp-scorecard.md"), icon: "file-text" },
           { label: "View on GitHub", href: ghTree("aasb-s2-review"), icon: "github" },
         ],
-        tags: ["BHP · Rio Tinto · Woodside", "31 sub-requirements", "Four S2 pillars"],
+        tags: ["BHP · Rio Tinto · Woodside", "31 requirements graded", "Four reporting areas"],
       },
     ],
     services: [
-      { icon: "wind", title: "Physical climate risk", text: "Cyclone, rainfall, and heat trend analysis framed for AASB S2 physical risk." },
-      { icon: "bar-chart", title: "Climate data analysis", text: "IBTrACS, BOM, and reanalysis data, with trend detection and rapid-intensification signals." },
-      { icon: "file-text", title: "AASB S2 readiness", text: "Scoring disclosures across governance, strategy, risk management, and metrics & targets." },
+      { icon: "wind", title: "Physical climate risk", text: "Spotting the real trends in cyclones, rainfall, and heat, and what they mean for the things you own and run." },
+      { icon: "bar-chart", title: "Climate data analysis", text: "Working with official weather and climate data to find the real signal, clearly and honestly, not just the noise." },
+      { icon: "file-text", title: "AASB S2 readiness", text: "Checking your climate disclosures against Australia's new reporting rules, area by area, and showing where the gaps are." },
     ],
   };
 })();

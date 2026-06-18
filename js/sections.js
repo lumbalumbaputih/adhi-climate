@@ -350,7 +350,7 @@
               </React.Fragment>
             )}
 
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "var(--space-7)" }}>
+            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginTop: "var(--space-8)" }}>
               {p.tags.map((t) => <Tag key={t}>{t}</Tag>)}
             </div>
           </div>
