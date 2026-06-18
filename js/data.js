@@ -13,7 +13,8 @@
       intro:
         "I dig into the real climate risks facing Western Australia, like what is actually happening to its cyclones and its drying south-west, and I check how the state's biggest companies report those risks under Australia's new climate rules (AASB S2). The goal is simple: turn raw climate data into clear answers that business and government can act on.",
       location: "Western Australia · remote-friendly",
-      email: "hello@adhikatili.earth",
+      email: "adhiazure@gmail.com",
+      linkedin: "https://www.linkedin.com/in/adhi-m/",
     },
     stats: [
       { label: "Cyclone record", value: "40", unit: "yrs", caption: "1985–2024 tracks" },
