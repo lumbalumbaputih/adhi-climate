@@ -9,9 +9,13 @@ plain-English write-up, honest statistics, and publication-quality charts.
 
 | Project | Risk type | Status |
 |---------|-----------|--------|
-| [**cyclone-risk**](cyclone-risk/) — Tropical Cyclone Trends Affecting WA (1985–2024) | Acute physical risk | Complete |
-| [**rainfall-decline**](rainfall-decline/) — South West WA Rainfall Decline (1950–2024) | Chronic physical risk | Complete |
-| aasb-s2-readiness — Disclosure Gap Analysis, WA's Biggest Emitters | Disclosure review | Planned |
+| [**cyclone-risk**](cyclone-risk/): Tropical Cyclone Trends Affecting WA (1985–2024) | Acute physical risk | Complete |
+| [**rainfall-decline**](rainfall-decline/): South West WA Rainfall Decline (1950–2024) | Chronic physical risk | Complete |
+| [**aasb-s2-review**](aasb-s2-review/): Disclosure Gap Analysis, WA's Biggest Emitters (BHP, Rio Tinto, Woodside) | Disclosure review | Complete |
+
+The portfolio site (`index.html`) ties these together: each project card opens a
+case study with the headline findings, the charts, and direct links to the
+write-up, notebook, and open data behind every number.
 
 **Author:** Adhi Muhammad Faris Katili · Master of Environment and Climate
 Emergency, Curtin University.
