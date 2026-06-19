@@ -32,9 +32,18 @@
 
   /* ------------------------------------------------------------------ Hero */
   function PHero({ onContact }) {
-    // Real period-mean sea-surface-temperature anomaly, 1985-2024, from
-    // cyclone-risk/data/sst_intensity.csv (lowest period maps to 40%, highest to 82%).
-    const bars = [45, 40, 51, 56, 71, 81, 82];
+    // Real period-mean Nov-Apr sea-surface-temperature anomaly (vs the 1991-2020
+    // average), 1985-2024, from cyclone-risk/data/sst_intensity.csv. Height maps
+    // the lowest period to 40% and the highest to 82%.
+    const bars = [
+      { y: "1985–1990", v: "−0.20", h: 45 },
+      { y: "1991–1995", v: "−0.26", h: 40 },
+      { y: "1996–2001", v: "−0.13", h: 51 },
+      { y: "2002–2007", v: "−0.07", h: 56 },
+      { y: "2008–2013", v: "+0.12", h: 71 },
+      { y: "2014–2018", v: "+0.25", h: 81 },
+      { y: "2019–2024", v: "+0.26", h: 82 },
+    ];
     return (
       <section className="hero" id="top">
         <div className="wrap hero__grid">
@@ -52,16 +61,20 @@
             </div>
           </div>
 
-          <div className="hero__panel" aria-hidden="true">
+          <div className="hero__panel">
             <div className="hero__panel-label">WA cyclone-region ocean temperature · <span style={{ whiteSpace: "nowrap" }}>1985–2024</span></div>
-            <div className="hero__chart">
-              {bars.map((h, i) => (
-                <div key={i} className="hero__bar" style={{ height: h + "%" }} />
+            <div className="hero__chart" role="img" aria-label="WA cyclone-region ocean temperature, 1985 to 2024: five-year averages rise from −0.20 °C to +0.26 °C versus the 1991–2020 average, about 0.5 °C of warming.">
+              {bars.map((b, i) => (
+                <div key={i} className="hero__bar-wrap">
+                  <div className="hero__bar" style={{ height: b.h + "%" }}>
+                    <span className="hero__bar-tip" aria-hidden="true">{b.y}<b>{b.v} °C</b><em>vs 1991–2020 avg</em></span>
+                  </div>
+                </div>
               ))}
             </div>
             <div className="hero__panel-stat">
               <span><span className="big">40</span> <span className="unit">yrs analysed</span></span>
-              <span className="delta">▴ +0.5 °C warming</span>
+              <span className="delta">▴ +0.5 °C since the 1980s</span>
             </div>
           </div>
         </div>
@@ -123,9 +136,9 @@
       <section className="section" id="work">
         <div className="wrap">
           <div className="section-head">
-            <Eyebrow tick>Selected work</Eyebrow>
-            <h2>Projects with measured outcomes.</h2>
-            <p>Three climate and sustainability projects, each grounded in a baseline, a method, and a number you can check.</p>
+            <Eyebrow tick>Personal projects</Eyebrow>
+            <h2>Built out of curiosity.</h2>
+            <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question no one had quantified yet, and I carried it from raw data through to a number you can check. No client, no brief, just curiosity and a respect for what the data actually says.</p>
           </div>
           <div className="work__grid">
             {P.projects.map((p) => <ProjectCard key={p.id} p={p} onOpen={onOpen} />)}
