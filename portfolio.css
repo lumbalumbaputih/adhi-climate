@@ -131,16 +131,17 @@
 .svc p { font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-relaxed); }
 
 /* ---------- About ---------- */
-.about__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-16); align-items: start; }
-.about__media { aspect-ratio: 4/5; border-radius: var(--radius-2xl); background: linear-gradient(150deg, var(--blue-600), var(--blue-950)); position: relative; overflow: hidden; box-shadow: var(--shadow-lg); display: flex; align-items: flex-end; padding: var(--space-6); }
-.about__media .mono { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--blue-200); letter-spacing: 0.08em; }
-.about__media::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(16,185,129,0.4), transparent 55%); }
+.about__grid { display: grid; grid-template-columns: 1.25fr 0.85fr; gap: var(--space-12); align-items: start; }
 .about__body p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); }
 .about__tags { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-6); }
-.about__contact { margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--border-subtle); }
-.about__contact p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); max-width: 48ch; }
-.about__contact-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
-@media (max-width: 900px) { .about__grid { grid-template-columns: 1fr; gap: var(--space-10); } .about__media { aspect-ratio: 16/10; } }
+.about__contact { background: var(--surface-inset); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); align-self: start; }
+.about__contact-title { font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: var(--tracking-tight); color: var(--text-strong); line-height: 1.2; }
+.about__contact p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); }
+.about__contact-actions { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-2); }
+.about__contact-email { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted); text-decoration: none; }
+.about__contact-email:hover { color: var(--accent-text); }
+.about__contact-email svg { color: var(--accent-text); }
+@media (max-width: 900px) { .about__grid { grid-template-columns: 1fr; gap: var(--space-10); } }
 
 /* ---------- Footer ---------- */
 .footer { padding: var(--space-12) 0; border-top: 1px solid var(--border-subtle); }

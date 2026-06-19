@@ -165,9 +165,6 @@
     return (
       <section className="section" id="about">
         <div className="wrap about__grid">
-          <div className="about__media">
-            <span className="mono">// WA physical risk · disclosure · 1950–2024</span>
-          </div>
           <div className="about__body">
             <Eyebrow tick>About</Eyebrow>
             <h2 style={{ fontSize: "var(--text-4xl)", letterSpacing: "var(--tracking-tighter)", margin: "12px 0 20px" }}>
@@ -189,25 +186,21 @@
               analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
               now have to meet. I care as much about getting the cause right as I do about the headline number.
             </p>
-            <div style={{ marginTop: "var(--space-8)" }}>
-              <ProgressBar label="AASB S2 disclosure readiness: median of 3 WA majors scored" value={84} variant="accent" />
-            </div>
             <div className="about__tags">
               <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
               <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
             </div>
-            <div className="about__contact" id="contact">
-              <Eyebrow tone="leaf" tick>Get in touch</Eyebrow>
-              <p style={{ margin: "var(--space-2) 0 var(--space-5)" }}>
-                I'm looking for an internship in sustainability. If you're hiring, or you just want to talk
-                about WA climate, I'd love to hear from you.
-              </p>
-              <div className="about__contact-actions">
-                <Button variant="leaf" size="lg" as="a" href={"mailto:" + P.profile.email} iconLeft={<Icon name="mail" size={18} />}>Email me</Button>
-                <Button variant="secondary" size="lg" as="a" href={P.profile.linkedin} target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="linkedin" size={18} />}>LinkedIn</Button>
-              </div>
-            </div>
           </div>
+          <aside className="about__contact" id="contact">
+            <Eyebrow tone="leaf" tick>Get in touch</Eyebrow>
+            <h3 className="about__contact-title">Open to sustainability internships.</h3>
+            <p>If you're hiring, or you just want to talk about WA climate, I'd love to hear from you.</p>
+            <div className="about__contact-actions">
+              <Button variant="leaf" size="lg" fullWidth as="a" href={"mailto:" + P.profile.email} iconLeft={<Icon name="mail" size={18} />}>Email me</Button>
+              <Button variant="secondary" size="lg" fullWidth as="a" href={P.profile.linkedin} target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="linkedin" size={18} />}>LinkedIn</Button>
+            </div>
+            <a className="about__contact-email" href={"mailto:" + P.profile.email}><Icon name="mail" size={15} />{P.profile.email}</a>
+          </aside>
         </div>
       </section>
     );
