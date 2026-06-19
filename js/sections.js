@@ -179,7 +179,13 @@
               I can turn this kind of climate-data work into real impact for a team.
             </p>
             <p style={{ marginTop: "var(--space-4)" }}>
-              This portfolio is where I put that into practice: real Western Australian climate data, honest
+              I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent
+              two years as a business analyst in regional Western Australia, and worked as a hatchery technician
+              while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy,
+              real-world data and turning it into something a team can act on.
+            </p>
+            <p style={{ marginTop: "var(--space-4)" }}>
+              This portfolio is where I bring that together: real Western Australian climate data, honest
               analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
               now have to meet. I care as much about getting the cause right as I do about the headline number.
             </p>
