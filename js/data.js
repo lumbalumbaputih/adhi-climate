@@ -61,6 +61,17 @@
           { label: "All charts", href: ghTree("cyclone-risk/charts"), icon: "scan" },
           { label: "View on GitHub", href: ghTree("cyclone-risk"), icon: "github" },
         ],
+        feature: 5,
+        dataset: {
+          caption: "WA-affecting cyclones by decade (IBTrACS + BOM)",
+          columns: ["Decade", "WA storms", "Mean peak wind (kt)", "Mean min pressure (hPa)", "Reached Cat 3+"],
+          rows: [
+            ["1985–94", "47", "76", "959", "17%"],
+            ["1995–04", "55", "78", "956", "38%"],
+            ["2005–14", "50", "69", "964", "28%"],
+            ["2015–24", "42", "63", "973", "19%"],
+          ],
+        },
         tags: ["Official cyclone records", "Warmer seas, not stronger storms", "Climate-risk reporting (AASB S2)"],
       },
       {
@@ -100,6 +111,20 @@
           { label: "All charts", href: ghTree("rainfall-decline/charts"), icon: "scan" },
           { label: "View on GitHub", href: ghTree("rainfall-decline"), icon: "github" },
         ],
+        feature: 1,
+        dataset: {
+          caption: "Cool-season rainfall by station, 1950–74 baseline (BOM via GHCN-Daily)",
+          columns: ["Station", "Setting", "Apr–Oct baseline (mm)"],
+          rows: [
+            ["Cape Leeuwin", "Far SW tip, coastal", "897"],
+            ["Albany", "South coast", "762"],
+            ["Deeside", "SW forest", "698"],
+            ["Westbourne", "SW forest (Manjimup)", "567"],
+            ["Narrogin", "Central wheatbelt", "409"],
+            ["Northam", "Avon valley wheatbelt", "381"],
+            ["Wagin", "Southern wheatbelt", "344"],
+          ],
+        },
         tags: ["BOM weather stations", "A sudden drop around 2000", "Cause handled carefully"],
       },
       {

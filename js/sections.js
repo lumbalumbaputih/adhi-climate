@@ -1,8 +1,80 @@
-/* Portfolio sections: Nav, Hero, StatBand, Work, Services, About, Contact, Footer, ProjectDialog */
+/* Portfolio sections: Nav, Hero, StatBand, Stories (interactive), About, Footer */
 (function () {
-  const { Button, IconButton, Eyebrow, Stat, Card, Badge, Tag, ProgressBar, Input } = window.AdhiClimateDesignSystem_bcac21;
+  const { Button, IconButton, Eyebrow, Stat, Badge, Tag } = window.AdhiClimateDesignSystem_bcac21;
   const Icon = window.Icon;
   const P = window.PORTFOLIO;
+
+  /* ----------------------------------------------------- scroll-reveal wrap */
+  function Reveal({ children, as = "div", className = "", delay = 0, ...rest }) {
+    const ref = React.useRef(null);
+    const [shown, setShown] = React.useState(false);
+    React.useEffect(() => {
+      const el = ref.current;
+      if (!el) return;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || typeof IntersectionObserver === "undefined") { setShown(true); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { setShown(true); io.disconnect(); } });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      io.observe(el);
+      return () => io.disconnect();
+    }, []);
+    const Tag = as;
+    return (
+      <Tag ref={ref}
+        className={["reveal", shown ? "reveal--in" : "", className].filter(Boolean).join(" ")}
+        style={delay ? { transitionDelay: delay + "ms" } : undefined}
+        {...rest}>
+        {children}
+      </Tag>
+    );
+  }
+
+  /* ------------------------------------------------- interactive data table */
+  function PDataTable({ data, caption }) {
+    const columns = data.columns || data.headers || [];
+    const [sort, setSort] = React.useState({ col: null, dir: 1 });
+    const toNum = (s) => {
+      const n = parseFloat(String(s).replace(/[−–]/g, "-").replace(/[^0-9.\-]/g, ""));
+      return isNaN(n) ? null : n;
+    };
+    const rows = React.useMemo(() => {
+      if (sort.col === null) return data.rows;
+      const i = sort.col;
+      return data.rows.slice().sort((a, b) => {
+        const na = toNum(a[i]), nb = toNum(b[i]);
+        if (na !== null && nb !== null) return (na - nb) * sort.dir;
+        return String(a[i]).localeCompare(String(b[i])) * sort.dir;
+      });
+    }, [data, sort]);
+    const toggle = (i) => setSort((s) => (s.col === i ? { col: i, dir: -s.dir } : { col: i, dir: 1 }));
+    return (
+      <figure className="dtable">
+        <div className="dtable__scroll">
+          <table className="dtable__table">
+            <thead>
+              <tr>
+                {columns.map((c, i) => (
+                  <th key={i}
+                    className={"dtable__th" + (sort.col === i ? " dtable__th--active" : "")}
+                    aria-sort={sort.col === i ? (sort.dir > 0 ? "ascending" : "descending") : "none"}
+                    onClick={() => toggle(i)}>
+                    {c}<span className="dtable__arrow">{sort.col === i ? (sort.dir > 0 ? "▲" : "▼") : "↕"}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, ri) => (
+                <tr key={ri}>{r.map((cell, ci) => <td key={ci}>{cell}</td>)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {caption && <figcaption className="dtable__cap">{caption} · tap a column to sort</figcaption>}
+      </figure>
+    );
+  }
 
   /* -------------------------------------------------------------------- Nav */
   function PNav({ onContact }) {
@@ -17,12 +89,11 @@
             </span>
           </a>
           <nav className="nav__links">
-            <a className="nav__link" href="#work">Work</a>
-            <a className="nav__link" href="#services">Services</a>
+            <a className="nav__link" href="#work">Projects</a>
             <a className="nav__link" href="#about">About</a>
           </nav>
           <div className="nav__actions">
-            <Button variant="secondary" size="sm" as="a" href="https://github.com/lumbalumbaputih/adhi-climate" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
+            <Button variant="secondary" size="sm" as="a" href={P.repo} iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
             <Button variant="primary" size="sm" onClick={onContact} iconRight={<Icon name="arrow-right" size={16} />}>Get in touch</Button>
           </div>
         </div>
@@ -49,11 +120,11 @@
         <div className="wrap hero__grid">
           <div>
             <div className="hero__eyebrow"><Eyebrow tick>Climate &amp; Sustainability · WA</Eyebrow></div>
-            <h1 className="hero__title">I turn climate <span className="accent">data</span> into decisions business and government can act on.</h1>
+            <h1 className="hero__title">I got curious about Western Australia's <span className="accent">climate</span>, so I started digging.</h1>
             <p className="hero__lead">{P.profile.intro}</p>
             <div className="hero__actions">
               <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
-              <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See selected work</Button>
+              <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See the projects</Button>
             </div>
             <div className="hero__meta">
               <span className="hero__meta-item"><Icon name="map-pin" size={16} />{P.profile.location}</span>
@@ -88,88 +159,103 @@
       <section className="statband">
         <div className="wrap statband__grid">
           {P.stats.map((s, i) => (
-            <div className="statband__cell" key={i}>
+            <Reveal className="statband__cell" key={i} delay={i * 80}>
               <Stat label={s.label} value={s.value} unit={s.unit} delta={s.delta} trend={s.trend || "neutral"} caption={s.caption} size="md" />
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
     );
   }
 
-  /* ------------------------------------------------------------------ Work */
+  /* ---------------------------------------------------------------- Stories */
   function statusVariant(s) {
-    if (["Live", "Adopted", "Delivered", "Published"].includes(s)) return "leaf";
+    if (["Live", "Adopted", "Delivered", "Published", "Complete"].includes(s)) return "leaf";
     if (["In progress", "Reported"].includes(s)) return "accent";
     return "neutral";
   }
 
-  function ProjectCard({ p, onOpen }) {
+  function PStory({ p, index }) {
+    const [open, setOpen] = React.useState(false);
+    const rev = index % 2 === 1;
+    const chart = p.charts ? p.charts[p.feature || 0] : null;
     return (
-      <Card padding="lg" interactive onClick={() => onOpen(p)}>
-        <div className="pcard">
-          <div className="pcard__top">
-            <div className="pcard__icon"><Icon name={p.icon} size={22} /></div>
-            <span className="pcard__year">{p.year}</span>
-          </div>
-          <div>
-            <div style={{ marginBottom: "10px" }}><Badge variant={statusVariant(p.status)} dot>{p.status}</Badge></div>
-            <h3 className="pcard__title">{p.title}</h3>
-          </div>
-          <p className="pcard__summary">{p.summary}</p>
-          {p.meta && <div className="pcard__meta">{p.meta}</div>}
-          <div className="pcard__foot">
-            <span className="pcard__result">
-              <span className="v">{p.result.value}</span>
-              <span className="u">{p.result.unit}</span>
-              <span className="l">{p.result.label}</span>
-            </span>
-            <span className="pcard__open">Read case study <Icon name="arrow-up-right" size={15} /></span>
-          </div>
-        </div>
-      </Card>
-    );
-  }
+      <section className="story" id={p.id}>
+        <div className={"wrap story__grid" + (rev ? " story__grid--rev" : "")}>
+          <Reveal className="story__media">
+            {p.scoreboard
+              ? <PDataTable data={p.scoreboard} caption="Disclosure scores, 0 to 4" />
+              : (chart && (
+                  <a className="story__chart" href={chart.src} target="_blank" rel="noopener noreferrer">
+                    <img src={chart.src} alt={chart.caption} loading="lazy" />
+                    <span className="story__chart-cap">{chart.caption} <Icon name="arrow-up-right" size={14} /></span>
+                  </a>
+                ))}
+          </Reveal>
 
-  function PWork({ onOpen }) {
-    return (
-      <section className="section" id="work">
-        <div className="wrap">
-          <div className="section-head">
-            <Eyebrow tick>Personal projects</Eyebrow>
-            <h2>Built out of curiosity.</h2>
-            <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question no one had quantified yet, and I carried it from raw data through to a number you can check. No client, no brief, just curiosity and a respect for what the data actually says.</p>
-          </div>
-          <div className="work__grid">
-            {P.projects.map((p) => <ProjectCard key={p.id} p={p} onOpen={onOpen} />)}
-          </div>
-        </div>
-      </section>
-    );
-  }
+          <Reveal className="story__body" delay={120}>
+            <div className="story__tagrow">
+              <Eyebrow tick>Project {index + 1} · {p.year}</Eyebrow>
+              <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
+            </div>
+            <h2 className="story__title">{p.title}</h2>
+            <p className="story__hook">{p.headline}</p>
+            <p className="story__lead">{p.body}</p>
 
-  /* -------------------------------------------------------------- Services */
-  function PServices() {
-    return (
-      <section className="section section--tight" id="services">
-        <div className="wrap">
-          <div className="section-head">
-            <Eyebrow tone="leaf" tick>Skills</Eyebrow>
-            <h2>What I can bring to a team.</h2>
-          </div>
-          <div className="services__grid">
-            {P.services.map((s, i) => (
-              <Card padding="lg" key={i}>
-                <div className="svc">
-                  <div className="svc__icon"><Icon name={s.icon} size={24} /></div>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
+            <div className="story__findings">
+              {p.findings.map((f, i) => (
+                <div className="pfind" key={i}>
+                  <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
+                  <div className="pfind__label">{f.label}</div>
+                  <div className="pfind__text">{f.text}</div>
                 </div>
-              </Card>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            <p className="story__meaning"><span className="story__meaning-tag">Why it matters</span>{p.meaning}</p>
+
+            {p.dataset && (
+              <div className="story__data-wrap">
+                <button type="button" className="story__data-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+                  <Icon name="layers" size={16} />
+                  {open ? "Hide the data" : "Explore the raw data"}
+                  <Icon name="chevron-right" size={15} className={"story__data-chev" + (open ? " story__data-chev--open" : "")} />
+                </button>
+                {open && (
+                  <div className="story__data">
+                    <PDataTable data={p.dataset} caption={p.dataset.caption} />
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="story__links">
+              {p.resources.map((r, i) => (
+                <a className="story__link" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
+                  <Icon name={r.icon} size={15} />{r.label}
+                </a>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
+    );
+  }
+
+  function PStories() {
+    return (
+      <div id="work">
+        <section className="section section--tight">
+          <div className="wrap">
+            <Reveal className="section-head">
+              <Eyebrow tick>Personal projects</Eyebrow>
+              <h2>Built out of curiosity.</h2>
+              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question no one had quantified yet, and I carried it from raw data to a number you can check. No client, no brief, just curiosity and a respect for what the data actually says.</p>
+            </Reveal>
+          </div>
+        </section>
+        {P.projects.map((p, i) => <PStory key={p.id} p={p} index={i} />)}
+      </div>
     );
   }
 
@@ -178,7 +264,7 @@
     return (
       <section className="section" id="about">
         <div className="wrap about__grid">
-          <div className="about__body">
+          <Reveal className="about__body">
             <Eyebrow tick>About</Eyebrow>
             <h2 style={{ fontSize: "var(--text-4xl)", letterSpacing: "var(--tracking-tighter)", margin: "12px 0 20px" }}>
               Hi, I'm Adhi.
@@ -203,8 +289,8 @@
               <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
               <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
             </div>
-          </div>
-          <aside className="about__contact" id="contact">
+          </Reveal>
+          <Reveal as="aside" id="contact" className="about__contact" delay={120}>
             <Eyebrow tone="leaf" tick>Get in touch</Eyebrow>
             <h3 className="about__contact-title">Open to sustainability internships.</h3>
             <p>If you're hiring, or you just want to talk about WA climate, I'd love to hear from you.</p>
@@ -213,7 +299,7 @@
               <Button variant="secondary" size="lg" fullWidth as="a" href={P.profile.linkedin} target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="linkedin" size={18} />}>LinkedIn</Button>
             </div>
             <a className="about__contact-email" href={"mailto:" + P.profile.email}><Icon name="mail" size={15} />{P.profile.email}</a>
-          </aside>
+          </Reveal>
         </div>
       </section>
     );
@@ -239,120 +325,5 @@
     );
   }
 
-  /* ---------------------------------------------------------- ProjectDialog */
-  function PScoreboard({ data }) {
-    return (
-      <table className="pscore">
-        <thead>
-          <tr>{data.headers.map((h) => <th key={h}>{h}</th>)}</tr>
-        </thead>
-        <tbody>
-          {data.rows.map((row) => (
-            <tr key={row[0]}>{row.map((cell, i) => <td key={i}>{cell}</td>)}</tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
-
-  function PProjectDialog({ project, onClose }) {
-    React.useEffect(() => {
-      if (!project) return;
-      function onKey(e) { if (e.key === "Escape") onClose(); }
-      document.addEventListener("keydown", onKey);
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.removeEventListener("keydown", onKey);
-        document.body.style.overflow = "";
-      };
-    }, [project, onClose]);
-    if (!project) return null;
-    const p = project;
-    return (
-      <div className="pdialog__overlay" role="dialog" aria-modal="true" aria-label={p.title} onClick={onClose}>
-        <div className="pdialog" onClick={(e) => e.stopPropagation()}>
-          <div className="pdialog__bar">
-            <div className="pdialog__bar-id">
-              <div className="pcard__icon"><Icon name={p.icon} size={20} /></div>
-              <div className="pdialog__badges">
-                <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
-                <Badge variant="neutral">{p.year}</Badge>
-              </div>
-            </div>
-            <IconButton aria-label="Close" onClick={onClose}><Icon name="x" size={20} /></IconButton>
-          </div>
-
-          <div className="pdialog__body">
-            <h3 className="pdialog__title">{p.title}</h3>
-            {p.headline && <p className="pdialog__hook">{p.headline}</p>}
-            <p className="pdialog__lead">{p.body}</p>
-
-            {p.findings && p.findings.length > 0 && (
-              <React.Fragment>
-                <div className="pdialog__h">Key findings</div>
-                <div className="pdialog__findings">
-                  {p.findings.map((f, i) => (
-                    <div className="pfind" key={i}>
-                      <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
-                      <div className="pfind__label">{f.label}</div>
-                      <div className="pfind__text">{f.text}</div>
-                    </div>
-                  ))}
-                </div>
-              </React.Fragment>
-            )}
-
-            {p.scoreboard && (
-              <React.Fragment>
-                <div className="pdialog__h">Disclosure scores (0 to 4)</div>
-                <PScoreboard data={p.scoreboard} />
-              </React.Fragment>
-            )}
-
-            {p.charts && p.charts.length > 0 && (
-              <React.Fragment>
-                <div className="pdialog__h">The charts</div>
-                <div className="pdialog__charts">
-                  {p.charts.map((c, i) => (
-                    <a className="pchart" key={i} href={c.src} target="_blank" rel="noopener noreferrer">
-                      <img src={c.src} alt={c.caption} loading="lazy" />
-                      <span className="pchart__cap">{c.caption} <Icon name="arrow-up-right" size={14} /></span>
-                    </a>
-                  ))}
-                </div>
-              </React.Fragment>
-            )}
-
-            {p.meaning && (
-              <React.Fragment>
-                <div className="pdialog__h">Why it matters</div>
-                <p className="pdialog__lead" style={{ marginBottom: 0 }}>{p.meaning}</p>
-              </React.Fragment>
-            )}
-
-            {p.resources && p.resources.length > 0 && (
-              <React.Fragment>
-                <div className="pdialog__h">Explore the work</div>
-                <div className="pdialog__links">
-                  {p.resources.map((r, i) => (
-                    <a className="plink" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
-                      <span className="plink__icon"><Icon name={r.icon} size={17} /></span>
-                      <span className="plink__label">{r.label}</span>
-                      <span className="plink__out"><Icon name="external-link" size={14} /></span>
-                    </a>
-                  ))}
-                </div>
-              </React.Fragment>
-            )}
-
-            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginTop: "var(--space-8)" }}>
-              {p.tags.map((t) => <Tag key={t}>{t}</Tag>)}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  Object.assign(window, { PNav, PHero, PStatBand, PWork, PServices, PAbout, PFooter, PProjectDialog });
+  Object.assign(window, { PNav, PHero, PStatBand, PStories, PAbout, PFooter });
 })();
