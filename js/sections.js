@@ -250,7 +250,7 @@
             <Reveal className="section-head">
               <Eyebrow tick>Personal projects</Eyebrow>
               <h2>Built out of curiosity.</h2>
-              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question no one had quantified yet, and I carried it from raw data to a number you can check. No client, no brief, just curiosity and a respect for what the data actually says.</p>
+              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just curiosity and a respect for what the data actually says.</p>
             </Reveal>
           </div>
         </section>
