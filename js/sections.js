@@ -175,68 +175,102 @@
     return "neutral";
   }
 
+  function PChart({ vizKey, spec }) {
+    const AC = window.AdhiCharts || {};
+    const CD = (window.CHARTDATA || {})[vizKey] || {};
+    let data = CD[spec.key];
+    if (!data) return null;
+    if (spec.sub) data = Object.assign({}, data[spec.sub], { ylabel: data.ylabel });
+    if (spec.keys) data = Object.assign({}, data, { keys: spec.keys });
+    const Comp = { line: AC.LineChart, bar: AC.BarChart, scatter: AC.ScatterChart, heat: AC.HeatTable }[spec.type];
+    return Comp ? React.createElement(Comp, { data, label: spec.title }) : null;
+  }
+
   function PStory({ p, index }) {
-    const [open, setOpen] = React.useState(false);
+    const [openData, setOpenData] = React.useState(false);
+    const [openCharts, setOpenCharts] = React.useState(false);
     const rev = index % 2 === 1;
-    const chart = p.charts ? p.charts[p.feature || 0] : null;
+    const hasViz = p.viz && p.viz.length > 0 && window.AdhiCharts && window.CHARTDATA;
     return (
       <section className="story" id={p.id}>
-        <div className={"wrap story__grid" + (rev ? " story__grid--rev" : "")}>
-          <Reveal className="story__media">
-            {p.scoreboard
-              ? <PDataTable data={p.scoreboard} caption="Disclosure scores, 0 to 4" />
-              : (chart && (
-                  <a className="story__chart" href={chart.src} target="_blank" rel="noopener noreferrer">
-                    <img src={chart.src} alt={chart.caption} loading="lazy" />
-                    <span className="story__chart-cap">{chart.caption} <Icon name="arrow-up-right" size={14} /></span>
+        <div className="wrap">
+          <div className={"story__grid" + (rev ? " story__grid--rev" : "")}>
+            <Reveal className="story__media">
+              {p.scoreboard
+                ? <div className="story__board"><PDataTable data={p.scoreboard} caption="Disclosure scores, 0 to 4" /></div>
+                : hasViz
+                  ? <div className="story__feature">
+                      <div className="story__chart-title">{p.viz[0].title}</div>
+                      <PChart vizKey={p.vizKey} spec={p.viz[0]} />
+                    </div>
+                  : null}
+            </Reveal>
+
+            <Reveal className="story__body" delay={120}>
+              <div className="story__tagrow">
+                <Eyebrow tick>Project {index + 1} · {p.year}</Eyebrow>
+                <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
+              </div>
+              <h2 className="story__title">{p.title}</h2>
+              <p className="story__hook">{p.headline}</p>
+              <p className="story__lead">{p.body}</p>
+
+              <div className="story__findings">
+                {p.findings.map((f, i) => (
+                  <div className="pfind" key={i}>
+                    <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
+                    <div className="pfind__label">{f.label}</div>
+                    <div className="pfind__text">{f.text}</div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="story__meaning"><span className="story__meaning-tag">Why it matters</span>{p.meaning}</p>
+
+              {((hasViz && p.viz.length > 1) || p.dataset) && (
+                <div className="story__toggles">
+                  {hasViz && p.viz.length > 1 && (
+                    <button type="button" className="story__data-toggle" aria-expanded={openCharts} onClick={() => setOpenCharts((o) => !o)}>
+                      <Icon name="bar-chart" size={16} />
+                      {openCharts ? "Hide charts" : "See all " + p.viz.length + " charts"}
+                      <Icon name="chevron-right" size={15} className={"story__data-chev" + (openCharts ? " story__data-chev--open" : "")} />
+                    </button>
+                  )}
+                  {p.dataset && (
+                    <button type="button" className="story__data-toggle" aria-expanded={openData} onClick={() => setOpenData((o) => !o)}>
+                      <Icon name="layers" size={16} />
+                      {openData ? "Hide the data" : "Explore the raw data"}
+                      <Icon name="chevron-right" size={15} className={"story__data-chev" + (openData ? " story__data-chev--open" : "")} />
+                    </button>
+                  )}
+                </div>
+              )}
+
+              <div className="story__links">
+                {p.resources.map((r, i) => (
+                  <a className="story__link" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
+                    <Icon name={r.icon} size={15} />{r.label}
                   </a>
                 ))}
-          </Reveal>
+              </div>
+            </Reveal>
+          </div>
 
-          <Reveal className="story__body" delay={120}>
-            <div className="story__tagrow">
-              <Eyebrow tick>Project {index + 1} · {p.year}</Eyebrow>
-              <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
-            </div>
-            <h2 className="story__title">{p.title}</h2>
-            <p className="story__hook">{p.headline}</p>
-            <p className="story__lead">{p.body}</p>
-
-            <div className="story__findings">
-              {p.findings.map((f, i) => (
-                <div className="pfind" key={i}>
-                  <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
-                  <div className="pfind__label">{f.label}</div>
-                  <div className="pfind__text">{f.text}</div>
+          {openCharts && hasViz && (
+            <div className="story__charts">
+              {p.viz.slice(1).map((spec, i) => (
+                <div className="story__chart-card" key={i}>
+                  <div className="story__chart-title">{spec.title}</div>
+                  <PChart vizKey={p.vizKey} spec={spec} />
                 </div>
               ))}
             </div>
-
-            <p className="story__meaning"><span className="story__meaning-tag">Why it matters</span>{p.meaning}</p>
-
-            {p.dataset && (
-              <div className="story__data-wrap">
-                <button type="button" className="story__data-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-                  <Icon name="layers" size={16} />
-                  {open ? "Hide the data" : "Explore the raw data"}
-                  <Icon name="chevron-right" size={15} className={"story__data-chev" + (open ? " story__data-chev--open" : "")} />
-                </button>
-                {open && (
-                  <div className="story__data">
-                    <PDataTable data={p.dataset} caption={p.dataset.caption} />
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="story__links">
-              {p.resources.map((r, i) => (
-                <a className="story__link" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
-                  <Icon name={r.icon} size={15} />{r.label}
-                </a>
-              ))}
+          )}
+          {openData && p.dataset && (
+            <div className="story__data">
+              <PDataTable data={p.dataset} caption={p.dataset.caption} />
             </div>
-          </Reveal>
+          )}
         </div>
       </section>
     );
@@ -250,7 +284,7 @@
             <Reveal className="section-head">
               <Eyebrow tick>Personal projects</Eyebrow>
               <h2>Built out of curiosity.</h2>
-              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question no one had quantified yet, and I carried it from raw data to a number you can check. No client, no brief, just curiosity and a respect for what the data actually says.</p>
+              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just curiosity and a respect for what the data actually says.</p>
             </Reveal>
           </div>
         </section>

@@ -72,6 +72,15 @@
             ["2015–24", "42", "63", "973", "19%"],
           ],
         },
+        vizKey: "cyclone",
+        viz: [
+          { type: "scatter", key: "sst_scatter", title: "Warmer seas vs storm strength" },
+          { type: "bar", key: "intensity_decade", title: "Peak intensity by decade" },
+          { type: "line", key: "trend_wind", title: "Mean peak wind, season by season" },
+          { type: "line", key: "trend_pressure", title: "Mean central pressure, season by season" },
+          { type: "bar", key: "ri_decade", title: "Rapid intensification by decade", keys: [{ k: "wa", label: "Near WA", color: "var(--accent)" }, { k: "si", label: "Whole basin", color: "var(--leaf)" }] },
+          { type: "line", key: "annual_count", title: "Cyclones within 500 km each year" },
+        ],
         tags: ["Official cyclone records", "Warmer seas, not stronger storms", "Climate-risk reporting (AASB S2)"],
       },
       {
@@ -125,6 +134,16 @@
             ["Wagin", "Southern wheatbelt", "344"],
           ],
         },
+        vizKey: "rainfall",
+        viz: [
+          { type: "line", key: "stepchange", title: "The step-change around 2000" },
+          { type: "line", key: "anomaly", title: "Cool-season rainfall, year by year" },
+          { type: "line", key: "trend", title: "The long-term trend, with its 95% band" },
+          { type: "scatter", key: "drivers", sub: "IOD", title: "Rainfall vs the Indian Ocean Dipole" },
+          { type: "scatter", key: "drivers", sub: "SAM", title: "Rainfall vs the Southern Annular Mode" },
+          { type: "scatter", key: "drivers", sub: "ENSO", title: "Rainfall vs ENSO (Niño 3.4)" },
+          { type: "heat", key: "station_decade", title: "Every station, decade by decade" },
+        ],
         tags: ["BOM weather stations", "A sudden drop around 2000", "Cause handled carefully"],
       },
       {
