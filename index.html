@@ -20,11 +20,9 @@
 <script type="text/babel" src="js/sections.js" data-presets="react"></script>
 
 <script type="text/babel" data-presets="react">
-  const { PNav, PHero, PStatBand, PWork, PServices, PAbout, PFooter, PProjectDialog } = window;
+  const { PNav, PHero, PStatBand, PStories, PAbout, PFooter } = window;
 
   function App() {
-    const [project, setProject] = React.useState(null);
-
     function scrollToContact() {
       const el = document.getElementById("contact");
       if (el) window.scrollTo({ top: el.offsetTop - 40, behavior: "smooth" });
@@ -35,11 +33,9 @@
         <PNav onContact={scrollToContact} />
         <PHero onContact={scrollToContact} />
         <PStatBand />
-        <PWork onOpen={setProject} />
-        <PServices />
+        <PStories />
         <PAbout />
         <PFooter />
-        <PProjectDialog project={project} onClose={() => setProject(null)} />
       </div>
     );
   }
