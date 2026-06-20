@@ -144,50 +144,19 @@
 
   /* ------------------------------------------------------------------ Hero */
   function PHero({ onContact }) {
-    // Real period-mean Nov-Apr sea-surface-temperature anomaly (vs the 1991-2020
-    // average), 1985-2024, from cyclone-risk/data/sst_intensity.csv. Height maps
-    // the lowest period to 40% and the highest to 82%.
-    const bars = [
-      { y: "1985–1990", v: "−0.20", h: 45 },
-      { y: "1991–1995", v: "−0.26", h: 40 },
-      { y: "1996–2001", v: "−0.13", h: 51 },
-      { y: "2002–2007", v: "−0.07", h: 56 },
-      { y: "2008–2013", v: "+0.12", h: 71 },
-      { y: "2014–2018", v: "+0.25", h: 81 },
-      { y: "2019–2024", v: "+0.26", h: 82 },
-    ];
     return (
-      <section className="hero" id="top">
-        <div className="wrap hero__grid">
-          <div>
-            <div className="hero__eyebrow"><Eyebrow tick>Climate &amp; Sustainability · WA</Eyebrow></div>
-            <h1 className="hero__title">I got curious about Western Australia's <span className="accent">climate</span>, so I started digging.</h1>
-            <p className="hero__lead">{P.profile.intro}</p>
-            <div className="hero__actions">
-              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
-              <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See the projects</Button>
-            </div>
-            <div className="hero__meta">
-              <span className="hero__meta-item"><Icon name="map-pin" size={16} />{P.profile.location}</span>
-              <span className="hero__meta-item"><Icon name="leaf" size={16} />Physical risk · Climate data · AASB S2</span>
-            </div>
+      <section className="hero hero--center" id="top">
+        <div className="wrap hero__inner">
+          <div className="hero__eyebrow"><Eyebrow tick>Climate &amp; Sustainability · WA</Eyebrow></div>
+          <h1 className="hero__title">I got curious about Western Australia's <span className="accent">climate</span>, so I started digging.</h1>
+          <p className="hero__lead">{P.profile.intro}</p>
+          <div className="hero__actions">
+            <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
+            <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See the projects</Button>
           </div>
-
-          <div className="hero__panel">
-            <div className="hero__panel-label">WA cyclone-region ocean temperature · <span style={{ whiteSpace: "nowrap" }}>1985–2024</span></div>
-            <div className="hero__chart" role="img" aria-label="WA cyclone-region ocean temperature, 1985 to 2024: five-year averages rise from −0.20 °C to +0.26 °C versus the 1991–2020 average, about 0.5 °C of warming.">
-              {bars.map((b, i) => (
-                <div key={i} className="hero__bar-wrap">
-                  <div className="hero__bar" style={{ height: b.h + "%", animationDelay: (i * 70) + "ms" }}>
-                    <span className="hero__bar-tip" aria-hidden="true">{b.y}<b>{b.v} °C</b><em>vs 1991–2020 avg</em></span>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="hero__panel-stat">
-              <span><span className="big">40</span> <span className="unit">yrs analysed</span></span>
-              <span className="delta">▴ +0.5 °C since the 1980s</span>
-            </div>
+          <div className="hero__meta">
+            <span className="hero__meta-item"><Icon name="map-pin" size={16} />{P.profile.location}</span>
+            <span className="hero__meta-item"><Icon name="leaf" size={16} />Physical risk · Climate data · AASB S2</span>
           </div>
         </div>
       </section>
@@ -472,27 +441,26 @@
   }
 
   /* ----------------------------------------------------------------- About */
-  function PAbout() {
+  /* Personal intro — moved up top, right under the hero, as the "who I am". */
+  function PIntro() {
     return (
-      <section className="section" id="about">
-        <div className="wrap about__grid">
-          <Reveal className="about__body">
+      <section className="section section--tight intro" id="about">
+        <div className="wrap">
+          <Reveal className="intro__body">
             <Eyebrow tick>About</Eyebrow>
-            <h2 style={{ fontSize: "var(--text-4xl)", letterSpacing: "var(--tracking-tighter)", margin: "12px 0 20px" }}>
-              Hi, I'm Adhi.
-            </h2>
-            <p>
+            <h2 className="intro__title">Hi, I'm Adhi.</h2>
+            <p className="intro__lead">
               I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second
               year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere
               I can turn this kind of climate-data work into real impact for a team.
             </p>
-            <p style={{ marginTop: "var(--space-4)" }}>
+            <p>
               I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent
               two years as a business analyst in regional Western Australia, and worked as a hatchery technician
               while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy,
               real-world data and turning it into something a team can act on.
             </p>
-            <p style={{ marginTop: "var(--space-4)" }}>
+            <p>
               This portfolio is where I bring that together: real Western Australian climate data, honest
               analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
               now have to meet. I care as much about getting the cause right as I do about the headline number.
@@ -502,7 +470,17 @@
               <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
             </div>
           </Reveal>
-          <Reveal as="aside" id="contact" className="about__contact" delay={120}>
+        </div>
+      </section>
+    );
+  }
+
+  /* Get-in-touch card — kept at the bottom as the closing call to action. */
+  function PContact() {
+    return (
+      <section className="section contactband">
+        <div className="wrap">
+          <Reveal as="aside" id="contact" className="about__contact about__contact--center">
             <Eyebrow tone="leaf" tick>Get in touch</Eyebrow>
             <h3 className="about__contact-title">Open to sustainability internships.</h3>
             <p>If you're hiring, or you just want to talk about WA climate, I'd love to hear from you.</p>
@@ -538,5 +516,5 @@
     );
   }
 
-  Object.assign(window, { PNav, PHero, PStatBand, PStories, PAbout, PFooter });
+  Object.assign(window, { PNav, PHero, PIntro, PStatBand, PStories, PContact, PFooter });
 })();
