@@ -73,6 +73,7 @@
           ],
         },
         vizKey: "cyclone",
+        hasMap: true,
         viz: [
           { type: "scatter", key: "sst_scatter", title: "Warmer seas vs storm strength" },
           { type: "bar", key: "intensity_decade", title: "Peak intensity by decade" },

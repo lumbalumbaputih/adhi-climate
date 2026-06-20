@@ -207,3 +207,24 @@ html { scroll-behavior: smooth; }
 .heat__sw { display: inline-block; width: 14px; height: 14px; border-radius: var(--radius-xs); vertical-align: middle; }
 .heat__sw--dry { background: rgba(255,92,57,0.7); }
 .heat__sw--wet { background: rgba(31,169,199,0.7); }
+
+/* ---------- Cyclone track map ---------- */
+.story__map { margin-top: var(--space-10); background: var(--bg-inverse); border-radius: var(--radius-xl); padding: var(--space-6) var(--space-6) var(--space-5); box-shadow: var(--shadow-lg); }
+.story__map .story__chart-title { color: var(--blue-300); }
+.story__map-note { font-size: var(--text-sm); color: var(--blue-100); line-height: var(--leading-relaxed); margin-top: var(--space-3); max-width: 70ch; }
+.map__svg { max-height: 620px; }
+.map__grat { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+.map__grat-label { font-family: var(--font-mono); font-size: 9px; fill: rgba(255,255,255,0.35); }
+.map__coast { fill: none; stroke: rgba(255,255,255,0.55); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.map__track { fill: none; opacity: 0.55; stroke-linejoin: round; stroke-linecap: round; transition: opacity var(--duration-fast) var(--ease-standard); cursor: pointer; }
+.map__track.is-hi { opacity: 1; }
+.map__track.is-dim { opacity: 0.12; }
+.map__city { fill: #fff; stroke: var(--bg-inverse); stroke-width: 1; }
+.map__city-label { font-family: var(--font-mono); font-size: 10px; fill: rgba(255,255,255,0.8); }
+.map__info-bg { fill: rgba(255,255,255,0.96); }
+.map__info-h { font-family: var(--font-display); font-size: 14px; font-weight: 600; fill: var(--text-strong); }
+.map__info-t { font-family: var(--font-mono); font-size: 12px; fill: var(--text-muted); }
+.map__count { font-family: var(--font-mono); font-size: 11px; fill: rgba(255,255,255,0.5); }
+.map__legend { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); }
+.map__legend-l { color: var(--blue-200); white-space: nowrap; }
+.map__ramp { flex: 1; max-width: 260px; height: 8px; border-radius: 999px; background: linear-gradient(90deg, #6b7a8f, #1fa9c7, #1f9d55, #ffc234, #ff5c39, #b5179e); }
