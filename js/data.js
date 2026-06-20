@@ -138,6 +138,8 @@
           ],
         },
         vizKey: "rainfall",
+        rainMap: true,
+        rainScrolly: true,
         viz: [
           { type: "line", key: "stepchange", title: "The step-change around 2000" },
           { type: "line", key: "anomaly", title: "Cool-season rainfall, year by year" },
@@ -176,6 +178,15 @@
             ["Rio Tinto", "3.7", "3.7", "3.5", "3.9", "3.69", "Advanced"],
             ["Woodside", "3.8", "3.2", "3.3", "3.1", "3.35", "Advanced"],
             ["BHP", "3.0", "3.0", "3.0", "2.8", "2.94", "Developing"],
+          ],
+        },
+        radar: {
+          axes: ["Governance", "Strategy", "Risk", "Metrics"],
+          max: 4,
+          series: [
+            { name: "Rio Tinto", color: "#2563EB", values: [3.7, 3.7, 3.5, 3.9], overall: "3.69", band: "Advanced" },
+            { name: "Woodside", color: "#10B981", values: [3.8, 3.2, 3.3, 3.1], overall: "3.35", band: "Advanced" },
+            { name: "BHP", color: "#FF5C39", values: [3.0, 3.0, 3.0, 2.8], overall: "2.94", band: "Developing" },
           ],
         },
         meaning:

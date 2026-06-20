@@ -472,13 +472,21 @@
       className: "scrolly__note"
     }, "no link · r = −0.22"));
   }
-  function PScrolly() {
-    const D = window.SCROLLYDATA;
+
+  /* Reusable scrollytelling shell: a sticky graphic on the left whose
+     `stage` advances as the reader scrolls the step cards on the right.
+     Pass a render-prop `children(stage)` to draw the graphic for each stage. */
+  function Scrolly({
+    title,
+    legend,
+    steps,
+    children
+  }) {
     const [stage, setStage] = React.useState(1);
-    const steps = React.useRef([]);
+    const stepRefs = React.useRef([]);
     React.useEffect(() => {
       if (typeof IntersectionObserver === "undefined") {
-        setStage(3);
+        setStage(steps.length - 1);
         return;
       }
       const io = new IntersectionObserver(entries => {
@@ -489,43 +497,184 @@
         rootMargin: "-45% 0px -45% 0px",
         threshold: 0
       });
-      steps.current.forEach(el => el && io.observe(el));
+      stepRefs.current.forEach(el => el && io.observe(el));
       return () => io.disconnect();
-    }, []);
-    if (!D) return null;
+    }, [steps.length]);
     return /*#__PURE__*/React.createElement("div", {
       className: "scrolly"
     }, /*#__PURE__*/React.createElement("div", {
       className: "scrolly__graphic"
     }, /*#__PURE__*/React.createElement("div", {
       className: "story__chart-title"
-    }, "Ocean temperature vs storm strength, 1985–2024"), /*#__PURE__*/React.createElement(ScrollyChart, {
-      D: D,
-      stage: stage
-    }), /*#__PURE__*/React.createElement("div", {
+    }, title), children(stage), /*#__PURE__*/React.createElement("div", {
       className: "scrolly__legend"
-    }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    }, legend.map((l, i) => /*#__PURE__*/React.createElement("span", {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
       className: "scrolly__sw",
       style: {
-        background: "var(--accent)"
+        background: l.c
       }
-    }), "Ocean temperature"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
-      className: "scrolly__sw",
-      style: {
-        background: "#FF5C39"
-      }
-    }), "Cyclone peak wind"))), /*#__PURE__*/React.createElement("div", {
+    }), l.t)))), /*#__PURE__*/React.createElement("div", {
       className: "scrolly__steps"
-    }, SCROLLY_STEPS.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    }, steps.map((s, i) => /*#__PURE__*/React.createElement("div", {
       className: "scrolly__step",
       key: i,
       "data-step": i,
-      ref: el => steps.current[i] = el
+      ref: el => stepRefs.current[i] = el
     }, /*#__PURE__*/React.createElement("div", {
       className: "scrolly__card" + (stage === i ? " is-active" : "")
     }, /*#__PURE__*/React.createElement("div", {
       className: "scrolly__eyebrow"
     }, s.eyebrow), /*#__PURE__*/React.createElement("p", null, s.text))))));
+  }
+  function PScrolly() {
+    const D = window.SCROLLYDATA;
+    if (!D) return null;
+    return /*#__PURE__*/React.createElement(Scrolly, {
+      title: "Ocean temperature vs storm strength, 1985–2024",
+      legend: [{
+        c: "var(--accent)",
+        t: "Ocean temperature"
+      }, {
+        c: "#FF5C39",
+        t: "Cyclone peak wind"
+      }],
+      steps: SCROLLY_STEPS
+    }, stage => /*#__PURE__*/React.createElement(ScrollyChart, {
+      D: D,
+      stage: stage
+    }));
+  }
+
+  /* ----- Rainfall step-change: the sudden ~2000 drop, revealed by scroll --- */
+  const RAIN_SCROLLY_STEPS = [{
+    eyebrow: "The question",
+    text: "Seventy-four years of cool-season (April–October) rain across south-west WA, measured against the 1950s. Did it drift down slowly, or change all at once?"
+  }, {
+    eyebrow: "Noisy, year to year",
+    text: "Rain always bounces around — wet years, dry years. For five decades it wobbled near the old normal with no clear direction."
+  }, {
+    eyebrow: "Then it broke",
+    text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down — and the wet years never climbed back over it."
+  }, {
+    eyebrow: "A drier normal",
+    text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now."
+  }];
+  function RainScrollyChart({
+    D,
+    stage
+  }) {
+    const W = 560,
+      H = 340,
+      M = {
+        l: 48,
+        r: 18,
+        t: 18,
+        b: 32
+      };
+    const IW = W - M.l - M.r,
+      IH = H - M.t - M.b;
+    const x0 = 1950,
+      x1 = 2024;
+    const xs = y => M.l + (y - x0) / (x1 - x0) * IW;
+    const yv = D.points.map(p => p[1]).concat([D.pre.y, D.post.y]);
+    const ylo = Math.min.apply(null, yv) - 6,
+      yhi = Math.max.apply(null, yv) + 6;
+    const ys = v => M.t + IH - (v - ylo) / (yhi - ylo) * IH;
+    const ln = arr => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]).toFixed(1) + " " + ys(p[1]).toFixed(1)).join(" ");
+    const gy = [-30, -15, 0, 15, 30].filter(v => v > ylo && v < yhi);
+    return /*#__PURE__*/React.createElement("svg", {
+      viewBox: `0 0 ${W} ${H}`,
+      className: "chart__svg scrolly__svg",
+      role: "img",
+      "aria-label": "South-west WA cool-season rainfall fell to a new, lower level around the year 2000."
+    }, gy.map(v => /*#__PURE__*/React.createElement("g", {
+      key: "g" + v
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: M.l,
+      x2: M.l + IW,
+      y1: ys(v),
+      y2: ys(v),
+      className: v === 0 ? "chart__axis" : "chart__grid"
+    }), /*#__PURE__*/React.createElement("text", {
+      x: M.l - 8,
+      y: ys(v) + 3,
+      textAnchor: "end",
+      className: "chart__tick"
+    }, (v > 0 ? "+" : "") + v + "%"))), [1950, 1975, 2000, 2024].map(yr => /*#__PURE__*/React.createElement("text", {
+      key: "x" + yr,
+      x: xs(yr),
+      y: H - M.b + 18,
+      textAnchor: "middle",
+      className: "chart__tick"
+    }, yr)), /*#__PURE__*/React.createElement("path", {
+      className: "scrolly__line",
+      style: {
+        stroke: "var(--accent)",
+        opacity: stage < 1 ? 0.12 : stage >= 2 ? 0.4 : 1
+      },
+      d: ln(D.points)
+    }), stage >= 2 && /*#__PURE__*/React.createElement("line", {
+      className: "chart__guide",
+      style: {
+        stroke: "#FF5C39",
+        strokeDasharray: "4 4"
+      },
+      x1: xs(2000),
+      x2: xs(2000),
+      y1: M.t,
+      y2: M.t + IH
+    }), stage >= 2 && /*#__PURE__*/React.createElement("line", {
+      className: "chart__trend",
+      style: {
+        stroke: "#5b6b7d"
+      },
+      x1: xs(D.pre.x0),
+      y1: ys(D.pre.y),
+      x2: xs(D.pre.x1),
+      y2: ys(D.pre.y)
+    }), stage >= 2 && /*#__PURE__*/React.createElement("line", {
+      className: "chart__trend",
+      style: {
+        stroke: "#FF5C39"
+      },
+      x1: xs(D.post.x0),
+      y1: ys(D.post.y),
+      x2: xs(D.post.x1),
+      y2: ys(D.post.y)
+    }), stage >= 2 && /*#__PURE__*/React.createElement("text", {
+      x: xs(1972),
+      y: ys(D.pre.y) - 9,
+      textAnchor: "middle",
+      className: "scrolly__note",
+      style: {
+        fill: "#5b6b7d"
+      }
+    }, "old normal"), stage >= 3 && /*#__PURE__*/React.createElement("text", {
+      x: xs(2012),
+      y: ys(D.post.y) + 19,
+      textAnchor: "middle",
+      className: "scrolly__note"
+    }, "−" + D.drop + "% · new normal"));
+  }
+  function PRainScrolly() {
+    const D = window.RAINSCROLLYDATA;
+    if (!D) return null;
+    return /*#__PURE__*/React.createElement(Scrolly, {
+      title: "South-west WA cool-season rainfall, 1950–2024",
+      legend: [{
+        c: "var(--accent)",
+        t: "Annual rain vs 1950s"
+      }, {
+        c: "#FF5C39",
+        t: "Average for the era"
+      }],
+      steps: RAIN_SCROLLY_STEPS
+    }, stage => /*#__PURE__*/React.createElement(RainScrollyChart, {
+      D: D,
+      stage: stage
+    }));
   }
 
   /* A horizontal, scroll-snapping rail of "deep-dive" cards (charts + data
@@ -690,7 +839,17 @@
       delay: 120
     }, /*#__PURE__*/React.createElement("span", {
       className: "story__meaning-tag"
-    }, "Why it matters"), p.meaning), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
+    }, "Why it matters"), p.meaning), p.radar && window.AdhiCharts && window.AdhiCharts.RadarChart && /*#__PURE__*/React.createElement(Reveal, {
+      className: "story__radar",
+      delay: 120
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "story__chart-title"
+    }, "How the three compare, pillar by pillar"), React.createElement(window.AdhiCharts.RadarChart, {
+      data: p.radar,
+      label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars — governance, strategy, risk management, and metrics and targets — each scored out of 4."
+    }), /*#__PURE__*/React.createElement("p", {
+      className: "story__radar-note"
+    }, "Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure — but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.")), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
       className: "story__deep",
       delay: 120
     }, /*#__PURE__*/React.createElement(DeepRail, {
@@ -722,7 +881,18 @@
       className: "story__map-note"
     }, "Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm, or use the sliders to filter by season and storm strength. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.")), p.scrolly && window.SCROLLYDATA && /*#__PURE__*/React.createElement("div", {
       className: "story__scrolly"
-    }, /*#__PURE__*/React.createElement(PScrolly, null)), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(PScrolly, null)), p.rainMap && window.RAINMAPDATA && window.AdhiCharts && window.AdhiCharts.RainMapChart && /*#__PURE__*/React.createElement(Reveal, {
+      className: "story__map"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "story__chart-title"
+    }, "Where the drying hit, decade by decade"), React.createElement(window.AdhiCharts.RainMapChart, {
+      data: window.RAINMAPDATA,
+      label: "Map of seven south-west WA weather stations, each coloured by how far that decade's cool-season rainfall sat below or above its 1950s baseline."
+    }), /*#__PURE__*/React.createElement("p", {
+      className: "story__map-note"
+    }, "Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000 — the wheatbelt stations hardest of all.")), p.rainScrolly && window.RAINSCROLLYDATA && /*#__PURE__*/React.createElement("div", {
+      className: "story__scrolly"
+    }, /*#__PURE__*/React.createElement(PRainScrolly, null)), /*#__PURE__*/React.createElement("div", {
       className: "story__links"
     }, p.resources.map((r, i) => /*#__PURE__*/React.createElement("a", {
       className: "story__link",
