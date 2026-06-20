@@ -186,6 +186,87 @@
     return Comp ? React.createElement(Comp, { data, label: spec.title }) : null;
   }
 
+  const SCROLLY_STEPS = [
+    { eyebrow: "The setup", text: "Forty years of cyclones near Western Australia. As the climate warms, two things are worth watching together: how warm the ocean was, and how strong the storms got." },
+    { eyebrow: "The ocean warmed", text: "The sea where these cyclones form rose by about 0.5 °C since the 1980s. The trend is unmistakable, and statistically rock solid." },
+    { eyebrow: "The storms did not", text: "If warmer water meant stronger storms, peak winds should climb too. They didn't. Mean peak wind actually edged downward over the same years." },
+    { eyebrow: "So they came apart", text: "Warmer years were not stronger-storm years (correlation r = −0.22). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read straight off the recent record." },
+  ];
+
+  function ScrollyChart({ D, stage }) {
+    const W = 560, H = 340, M = { l: 46, r: 46, t: 16, b: 32 };
+    const IW = W - M.l - M.r, IH = H - M.t - M.b;
+    const x0 = 1985, x1 = 2024;
+    const xs = (y) => M.l + (y - x0) / (x1 - x0) * IW;
+    const wv = D.wind.map((p) => p[1]).concat([D.windTrend[1], D.windTrend[3]]);
+    const sv = D.sst.map((p) => p[1]).concat([D.sstTrend[1], D.sstTrend[3]]);
+    const wlo = Math.min.apply(null, wv) - 4, whi = Math.max.apply(null, wv) + 4;
+    const slo = Math.min.apply(null, sv) - 0.08, shi = Math.max.apply(null, sv) + 0.08;
+    const ysW = (v) => M.t + IH - (v - wlo) / (whi - wlo) * IH;
+    const ysS = (v) => M.t + IH - (v - slo) / (shi - slo) * IH;
+    const ln = (arr, f) => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]).toFixed(1) + " " + f(p[1]).toFixed(1)).join(" ");
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} className="chart__svg scrolly__svg" role="img" aria-label="Ocean temperature rose between 1985 and 2024 while cyclone peak winds did not.">
+        {[0, 1, 2].map((i) => { const v = wlo + (whi - wlo) * i / 2; return (
+          <g key={"w" + i}>
+            <line x1={M.l} x2={M.l + IW} y1={ysW(v)} y2={ysW(v)} className="chart__grid" />
+            <text x={M.l - 8} y={ysW(v) + 3} textAnchor="end" className="chart__tick">{Math.round(v)}</text>
+          </g>); })}
+        {[0, 1, 2].map((i) => { const v = slo + (shi - slo) * i / 2; return (
+          <text key={"s" + i} x={M.l + IW + 8} y={ysS(v) + 3} textAnchor="start" className="chart__tick" style={{ fill: "var(--accent)" }}>{(v > 0 ? "+" : "") + v.toFixed(1)}</text>); })}
+        <text x={xs(1985)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">1985</text>
+        <text x={xs(2005)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">2005</text>
+        <text x={xs(2024)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">2024</text>
+        <g className="scrolly__series" style={{ opacity: stage >= 1 ? 1 : 0.12 }}>
+          <line className="chart__trend" style={{ stroke: "var(--accent)" }} x1={xs(D.sstTrend[0])} y1={ysS(D.sstTrend[1])} x2={xs(D.sstTrend[2])} y2={ysS(D.sstTrend[3])} />
+          <path className="scrolly__line" style={{ stroke: "var(--accent)" }} d={ln(D.sst, ysS)} />
+        </g>
+        <g className="scrolly__series" style={{ opacity: stage >= 2 ? 1 : 0 }}>
+          <line className="chart__trend" style={{ stroke: "#FF5C39" }} x1={xs(D.windTrend[0])} y1={ysW(D.windTrend[1])} x2={xs(D.windTrend[2])} y2={ysW(D.windTrend[3])} />
+          <path className="scrolly__line" style={{ stroke: "#FF5C39" }} d={ln(D.wind, ysW)} />
+        </g>
+        {stage >= 3 && <text x={M.l + IW - 4} y={M.t + 15} textAnchor="end" className="scrolly__note">no link · r = −0.22</text>}
+      </svg>
+    );
+  }
+
+  function PScrolly() {
+    const D = window.SCROLLYDATA;
+    const [stage, setStage] = React.useState(1);
+    const steps = React.useRef([]);
+    React.useEffect(() => {
+      if (typeof IntersectionObserver === "undefined") { setStage(3); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) setStage(Number(e.target.dataset.step)); });
+      }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+      steps.current.forEach((el) => el && io.observe(el));
+      return () => io.disconnect();
+    }, []);
+    if (!D) return null;
+    return (
+      <div className="scrolly">
+        <div className="scrolly__graphic">
+          <div className="story__chart-title">Ocean temperature vs storm strength, 1985–2024</div>
+          <ScrollyChart D={D} stage={stage} />
+          <div className="scrolly__legend">
+            <span><span className="scrolly__sw" style={{ background: "var(--accent)" }} />Ocean temperature</span>
+            <span><span className="scrolly__sw" style={{ background: "#FF5C39" }} />Cyclone peak wind</span>
+          </div>
+        </div>
+        <div className="scrolly__steps">
+          {SCROLLY_STEPS.map((s, i) => (
+            <div className="scrolly__step" key={i} data-step={i} ref={(el) => (steps.current[i] = el)}>
+              <div className={"scrolly__card" + (stage === i ? " is-active" : "")}>
+                <div className="scrolly__eyebrow">{s.eyebrow}</div>
+                <p>{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   function PStory({ p, index }) {
     const [openData, setOpenData] = React.useState(false);
     const [openCharts, setOpenCharts] = React.useState(false);
@@ -262,6 +343,12 @@
               {React.createElement(window.AdhiCharts.MapChart, { data: window.MAPDATA, label: "Tracks of the 193 cyclones that came within 500 km of WA, 1985 to 2024, coloured by peak wind." })}
               <p className="story__map-note">Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.</p>
             </Reveal>
+          )}
+
+          {p.scrolly && window.SCROLLYDATA && (
+            <div className="story__scrolly">
+              <PScrolly />
+            </div>
           )}
 
           {openCharts && hasViz && (
