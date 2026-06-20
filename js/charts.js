@@ -278,5 +278,163 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart };
+  /* ---------------------------------------------------------- RainMapChart */
+  /* A map of south-west WA: each weather station is a dot whose colour and
+     size show how far that decade's cool-season rain sat below (red) or
+     above (blue) the 1950s baseline. Drag the decade slider to watch the
+     drying deepen and spread — the rainfall analogue of the storm-track map. */
+  function rainColor(v, maxAbs) {
+    if (v == null) return "#9aa7b8";
+    const t = Math.max(-1, Math.min(1, v / maxAbs));
+    const grey = [150, 167, 184];
+    const mix = (a, b, k) => Math.round(a + (b - a) * k);
+    const tgt = t < 0 ? [255, 92, 57] : [31, 169, 199];   // drier = warm, wetter = blue
+    const k = 0.3 + 0.7 * Math.abs(t);
+    return `rgb(${mix(grey[0], tgt[0], k)},${mix(grey[1], tgt[1], k)},${mix(grey[2], tgt[2], k)})`;
+  }
+  function RainMapChart({ data, label }) {
+    const [hi, setHi] = useState(null);
+    const [di, setDi] = useState(data.decades.length - 1);   // default = latest decade
+    const win = data.win, VW = 620, VH = 500, m = 16;
+    const cosMid = Math.cos((win.lat0 + win.lat1) / 2 * Math.PI / 180);
+    const lonMid = (win.lon0 + win.lon1) / 2, latMid = (win.lat0 + win.lat1) / 2;
+    const sc = Math.min((VW - 2 * m) / ((win.lon1 - win.lon0) * cosMid), (VH - 2 * m) / (win.lat1 - win.lat0));
+    const px = (lo) => VW / 2 + (lo - lonMid) * cosMid * sc;
+    const py = (la) => VH / 2 - (la - latMid) * sc;
+    const path = (pts) => pts.map((p, i) => (i ? "L" : "M") + px(p[0]).toFixed(1) + " " + py(p[1]).toFixed(1)).join(" ");
+    const lonLines = [114, 116, 118, 120, 122], latLines = [-30, -32, -34];
+    const allVals = data.stations.reduce((a, s) => a.concat(s.dec.filter((v) => v != null)), []);
+    const maxAbs = Math.max.apply(null, allVals.map(Math.abs));
+    const radius = (v) => 6 + Math.abs(v || 0) / maxAbs * 9;
+    const decVals = data.stations.map((s) => s.dec[di]).filter((v) => v != null);
+    const regionMean = decVals.length ? decVals.reduce((a, b) => a + b, 0) / decVals.length : null;
+    const hv = hi != null ? data.stations[hi] : null;
+
+    return React.createElement("div", { className: "chart" },
+      React.createElement("div", { className: "map__controls" },
+        React.createElement("div", { className: "map__ctrl" },
+          React.createElement("div", { className: "map__ctrl-top" },
+            React.createElement("label", { className: "map__ctrl-l", htmlFor: "rain-decade" }, "Decade"),
+            React.createElement("span", { className: "map__ctrl-v" }, data.decades[di])
+          ),
+          React.createElement("input", {
+            id: "rain-decade", type: "range", className: "map__slider",
+            min: 0, max: data.decades.length - 1, step: 1, value: di,
+            "aria-label": "Choose a decade to map", onChange: (e) => setDi(+e.target.value),
+          })
+        ),
+        di !== data.decades.length - 1 && React.createElement("button", {
+          type: "button", className: "map__reset", onClick: () => setDi(data.decades.length - 1),
+        }, "Latest")
+      ),
+      React.createElement("svg", { viewBox: `0 0 ${VW} ${VH}`, className: "chart__svg map__svg", role: "img", "aria-label": label },
+        lonLines.map((lo) => React.createElement("line", { key: "lo" + lo, x1: px(lo), x2: px(lo), y1: py(win.lat1), y2: py(win.lat0), className: "map__grat" })),
+        latLines.map((la) => React.createElement("line", { key: "la" + la, x1: px(win.lon0), x2: px(win.lon1), y1: py(la), y2: py(la), className: "map__grat" })),
+        latLines.map((la) => React.createElement("text", { key: "lat" + la, x: px(win.lon1) - 4, y: py(la) - 3, textAnchor: "end", className: "map__grat-label" }, Math.abs(la) + "°S")),
+        React.createElement("path", { d: path(data.coast), className: "map__coast" }),
+        data.cities.map((c, i) => React.createElement("g", { key: "c" + i },
+          React.createElement("circle", { cx: px(c.lo), cy: py(c.la), r: 2.5, className: "map__city" }),
+          React.createElement("text", { x: px(c.lo) + 6, y: py(c.la) + 3.5, className: "map__city-label" }, c.n)
+        )),
+        data.stations.map((s, i) => {
+          const v = s.dec[di];
+          const cls = "rainmap__pt" + (hi === i ? " is-hi" : hi != null ? " is-dim" : "");
+          return React.createElement("g", { key: "s" + i, style: { cursor: "pointer" },
+            onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null) },
+            React.createElement("circle", { cx: px(s.lo), cy: py(s.la), r: radius(v), className: cls, style: { fill: rainColor(v, maxAbs) } }),
+            React.createElement("text", {
+              x: px(s.lo) + (s.dx != null ? s.dx : 9), y: py(s.la) + (s.dy != null ? s.dy : 3.5),
+              textAnchor: s.anchor || "start", className: "rainmap__label",
+            }, s.n)
+          );
+        }),
+        hv && React.createElement("g", { style: { pointerEvents: "none" } },
+          React.createElement("rect", { x: m, y: m, width: 236, height: 64, rx: 8, className: "map__info-bg" }),
+          React.createElement("text", { x: m + 13, y: m + 21, className: "map__info-h" }, hv.n),
+          React.createElement("text", { x: m + 13, y: m + 39, className: "map__info-t" }, hv.setting),
+          React.createElement("text", { x: m + 13, y: m + 56, className: "map__info-t", style: { fill: "#181e26", fontWeight: 600 } },
+            data.decades[di] + ": " + (hv.dec[di] > 0 ? "+" : "") + hv.dec[di] + "% vs 1950s")
+        ),
+        regionMean != null && React.createElement("text", { x: VW - m, y: VH - m, textAnchor: "end", className: "map__count" },
+          "Region average " + (regionMean > 0 ? "+" : "") + regionMean.toFixed(1) + "% vs 1950s")
+      ),
+      React.createElement("div", { className: "map__legend" },
+        React.createElement("span", { className: "map__legend-l" }, "Drier"),
+        React.createElement("span", { className: "map__ramp map__ramp--rain" }),
+        React.createElement("span", { className: "map__legend-l" }, "Wetter — vs the 1950s")
+      )
+    );
+  }
+
+  /* ------------------------------------------------------------- RadarChart */
+  /* A spider chart comparing each company across the four AASB S2 pillars.
+     Toggle a company on/off in the legend; hover a vertex for its score. */
+  function rgba(hex, a) { const c = hx(hex); return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
+  function RadarChart({ data, label }) {
+    const [hidden, setHidden] = useState({});
+    const [hov, setHov] = useState(null);   // { si, ai }  (ai null = whole series)
+    const axes = data.axes, n = axes.length, max = data.max || 4;
+    const VW = 460, VH = 420, cx = VW / 2, cy = VH / 2 + 8, R = 150;
+    const ang = (i) => -Math.PI / 2 + i * 2 * Math.PI / n;
+    const pt = (i, val) => [cx + R * (val / max) * Math.cos(ang(i)), cy + R * (val / max) * Math.sin(ang(i))];
+    const ringPts = (rv) => axes.map((_, i) => { const p = pt(i, rv); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
+    const rings = [1, 2, 3, 4].filter((r) => r <= max);
+    const visible = data.series.filter((s) => !hidden[s.name]);
+    const hovSeries = hov ? data.series[hov.si] : null;
+
+    return React.createElement("div", { className: "radar" },
+      React.createElement("svg", { viewBox: `0 0 ${VW} ${VH}`, className: "chart__svg radar__svg", role: "img", "aria-label": label },
+        rings.map((rv) => React.createElement("polygon", { key: "ring" + rv, className: "radar__ring", points: ringPts(rv) })),
+        rings.map((rv) => { const p = pt(0, rv); return React.createElement("text", { key: "rl" + rv, x: p[0] + 5, y: p[1] + 3, className: "radar__ringlabel" }, rv); }),
+        axes.map((ax, i) => {
+          const p = pt(i, max), lp = pt(i, max + 0.4);
+          const anchor = Math.abs(lp[0] - cx) < 8 ? "middle" : lp[0] > cx ? "start" : "end";
+          return React.createElement("g", { key: "ax" + i },
+            React.createElement("line", { x1: cx, y1: cy, x2: p[0], y2: p[1], className: "radar__spoke" }),
+            React.createElement("text", { x: lp[0], y: lp[1] + 3, textAnchor: anchor, className: "radar__axis-label" }, ax)
+          );
+        }),
+        visible.map((s) => {
+          const si = data.series.indexOf(s);
+          const emph = hov ? (hov.si === si ? 1 : 0.32) : 1;
+          const fillA = hov && hov.si === si ? 0.26 : 0.13;
+          return React.createElement("polygon", {
+            key: "p" + s.name, points: s.values.map((v, i) => { const p = pt(i, v); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "),
+            className: "radar__poly", style: { stroke: s.color, fill: rgba(s.color, fillA), opacity: emph },
+          });
+        }),
+        visible.map((s) => { const si = data.series.indexOf(s); return s.values.map((v, i) => {
+          const p = pt(i, v);
+          return React.createElement("circle", {
+            key: "d" + s.name + i, cx: p[0], cy: p[1], r: hov && hov.si === si && hov.ai === i ? 6 : 3.6,
+            className: "radar__dot", style: { fill: s.color },
+            onMouseEnter: () => setHov({ si, ai: i }), onMouseLeave: () => setHov(null),
+          });
+        }); }),
+        hovSeries && hov.ai != null && (function () {
+          const v = hovSeries.values[hov.ai], p = pt(hov.ai, v);
+          const txt = hovSeries.name + " · " + axes[hov.ai] + " " + v.toFixed(1);
+          const w = txt.length * 6.2 + 18; let tx = p[0] - w / 2; tx = Math.max(6, Math.min(tx, VW - w - 6));
+          let ty = p[1] - 30; if (ty < 4) ty = p[1] + 12;
+          return React.createElement("g", { style: { pointerEvents: "none" } },
+            React.createElement("rect", { x: tx, y: ty, width: w, height: 22, rx: 6, className: "radar__tip-bg" }),
+            React.createElement("text", { x: tx + w / 2, y: ty + 15, textAnchor: "middle", className: "radar__tip-t" }, txt));
+        })()
+      ),
+      React.createElement("div", { className: "radar__legend" },
+        data.series.map((s) => React.createElement("button", {
+          key: s.name, type: "button", className: "radar__toggle" + (hidden[s.name] ? " is-off" : ""),
+          "aria-pressed": !hidden[s.name],
+          onClick: () => setHidden((h) => Object.assign({}, h, { [s.name]: !h[s.name] })),
+          onMouseEnter: () => setHov({ si: data.series.indexOf(s), ai: null }), onMouseLeave: () => setHov(null),
+        },
+          React.createElement("span", { className: "radar__sw", style: { background: s.color } }),
+          React.createElement("span", { className: "radar__toggle-name" }, s.name),
+          React.createElement("span", { className: "radar__toggle-score" }, s.overall + " · " + s.band)
+        ))
+      )
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart };
 })();

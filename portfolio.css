@@ -264,6 +264,35 @@ html { scroll-behavior: smooth; }
 }
 @media (prefers-reduced-motion: reduce) { .scrolly__series { transition: none; } }
 
+/* ---------- Rainfall station map (reuses .story__map + .map__* on dark) ---------- */
+.map__ramp--rain { background: linear-gradient(90deg, #ff5c39, #9aa7b8, #1fa9c7); }
+.rainmap__pt { stroke: rgba(255,255,255,0.85); stroke-width: 1.5; transition: opacity var(--duration-fast) var(--ease-standard), stroke-width var(--duration-fast) var(--ease-standard); }
+.rainmap__pt.is-hi { stroke-width: 2.5; }
+.rainmap__pt.is-dim { opacity: 0.4; }
+.rainmap__label { font-family: var(--font-mono); font-size: 10px; fill: rgba(255,255,255,0.82); pointer-events: none; }
+
+/* ---------- AASB S2 radar (light card) ---------- */
+.story__radar { margin-top: var(--space-10); background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-lg); }
+.radar { text-align: center; }
+.radar__svg { width: 100%; max-width: 480px; height: auto; display: block; margin: var(--space-2) auto 0; }
+.radar__ring { fill: none; stroke: var(--border-subtle); }
+.radar__spoke { stroke: var(--border-subtle); }
+.radar__axis-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; fill: var(--text-muted); }
+.radar__ringlabel { font-family: var(--font-mono); font-size: 9px; fill: var(--text-faint); }
+.radar__poly { stroke-width: 2.2; stroke-linejoin: round; transition: opacity var(--duration-fast) var(--ease-standard); }
+.radar__dot { stroke: var(--surface-card); stroke-width: 1.6; cursor: pointer; }
+.radar__tip-bg { fill: #181e26; }
+.radar__tip-t { font-family: var(--font-mono); font-size: 11px; fill: #fff; }
+.radar__legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-5); }
+.radar__toggle { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--border-subtle); border-radius: 999px; background: var(--bg-subtle); cursor: pointer; transition: border-color var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard); }
+.radar__toggle:hover { border-color: var(--border-default); }
+.radar__toggle.is-off { opacity: 0.5; background: transparent; }
+.radar__sw { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+.radar__toggle.is-off .radar__sw { background: var(--text-faint) !important; }
+.radar__toggle-name { font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--text-strong); }
+.radar__toggle-score { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
+.radar__note { font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-relaxed); margin-top: var(--space-4); max-width: 70ch; text-align: left; }
+
 /* ---------- Availability line ---------- */
 .about__contact-avail { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--leaf-text); margin-top: 2px; }
 .about__contact-avail svg { color: var(--leaf); }

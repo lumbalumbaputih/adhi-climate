@@ -270,32 +270,34 @@
     );
   }
 
-  function PScrolly() {
-    const D = window.SCROLLYDATA;
+  /* Reusable scrollytelling shell: a sticky graphic on the left whose
+     `stage` advances as the reader scrolls the step cards on the right.
+     Pass a render-prop `children(stage)` to draw the graphic for each stage. */
+  function Scrolly({ title, legend, steps, children }) {
     const [stage, setStage] = React.useState(1);
-    const steps = React.useRef([]);
+    const stepRefs = React.useRef([]);
     React.useEffect(() => {
-      if (typeof IntersectionObserver === "undefined") { setStage(3); return; }
+      if (typeof IntersectionObserver === "undefined") { setStage(steps.length - 1); return; }
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => { if (e.isIntersecting) setStage(Number(e.target.dataset.step)); });
       }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
-      steps.current.forEach((el) => el && io.observe(el));
+      stepRefs.current.forEach((el) => el && io.observe(el));
       return () => io.disconnect();
-    }, []);
-    if (!D) return null;
+    }, [steps.length]);
     return (
       <div className="scrolly">
         <div className="scrolly__graphic">
-          <div className="story__chart-title">Ocean temperature vs storm strength, 1985–2024</div>
-          <ScrollyChart D={D} stage={stage} />
+          <div className="story__chart-title">{title}</div>
+          {children(stage)}
           <div className="scrolly__legend">
-            <span><span className="scrolly__sw" style={{ background: "var(--accent)" }} />Ocean temperature</span>
-            <span><span className="scrolly__sw" style={{ background: "#FF5C39" }} />Cyclone peak wind</span>
+            {legend.map((l, i) => (
+              <span key={i}><span className="scrolly__sw" style={{ background: l.c }} />{l.t}</span>
+            ))}
           </div>
         </div>
         <div className="scrolly__steps">
-          {SCROLLY_STEPS.map((s, i) => (
-            <div className="scrolly__step" key={i} data-step={i} ref={(el) => (steps.current[i] = el)}>
+          {steps.map((s, i) => (
+            <div className="scrolly__step" key={i} data-step={i} ref={(el) => (stepRefs.current[i] = el)}>
               <div className={"scrolly__card" + (stage === i ? " is-active" : "")}>
                 <div className="scrolly__eyebrow">{s.eyebrow}</div>
                 <p>{s.text}</p>
@@ -304,6 +306,71 @@
           ))}
         </div>
       </div>
+    );
+  }
+
+  function PScrolly() {
+    const D = window.SCROLLYDATA;
+    if (!D) return null;
+    return (
+      <Scrolly
+        title="Ocean temperature vs storm strength, 1985–2024"
+        legend={[{ c: "var(--accent)", t: "Ocean temperature" }, { c: "#FF5C39", t: "Cyclone peak wind" }]}
+        steps={SCROLLY_STEPS}>
+        {(stage) => <ScrollyChart D={D} stage={stage} />}
+      </Scrolly>
+    );
+  }
+
+  /* ----- Rainfall step-change: the sudden ~2000 drop, revealed by scroll --- */
+  const RAIN_SCROLLY_STEPS = [
+    { eyebrow: "The question", text: "Seventy-four years of cool-season (April–October) rain across south-west WA, measured against the 1950s. Did it drift down slowly, or change all at once?" },
+    { eyebrow: "Noisy, year to year", text: "Rain always bounces around — wet years, dry years. For five decades it wobbled near the old normal with no clear direction." },
+    { eyebrow: "Then it broke", text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down — and the wet years never climbed back over it." },
+    { eyebrow: "A drier normal", text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now." },
+  ];
+
+  function RainScrollyChart({ D, stage }) {
+    const W = 560, H = 340, M = { l: 48, r: 18, t: 18, b: 32 };
+    const IW = W - M.l - M.r, IH = H - M.t - M.b;
+    const x0 = 1950, x1 = 2024;
+    const xs = (y) => M.l + (y - x0) / (x1 - x0) * IW;
+    const yv = D.points.map((p) => p[1]).concat([D.pre.y, D.post.y]);
+    const ylo = Math.min.apply(null, yv) - 6, yhi = Math.max.apply(null, yv) + 6;
+    const ys = (v) => M.t + IH - (v - ylo) / (yhi - ylo) * IH;
+    const ln = (arr) => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]).toFixed(1) + " " + ys(p[1]).toFixed(1)).join(" ");
+    const gy = [-30, -15, 0, 15, 30].filter((v) => v > ylo && v < yhi);
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} className="chart__svg scrolly__svg" role="img" aria-label="South-west WA cool-season rainfall fell to a new, lower level around the year 2000.">
+        {gy.map((v) => (
+          <g key={"g" + v}>
+            <line x1={M.l} x2={M.l + IW} y1={ys(v)} y2={ys(v)} className={v === 0 ? "chart__axis" : "chart__grid"} />
+            <text x={M.l - 8} y={ys(v) + 3} textAnchor="end" className="chart__tick">{(v > 0 ? "+" : "") + v + "%"}</text>
+          </g>
+        ))}
+        {[1950, 1975, 2000, 2024].map((yr) => (
+          <text key={"x" + yr} x={xs(yr)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">{yr}</text>
+        ))}
+        <path className="scrolly__line" style={{ stroke: "var(--accent)", opacity: stage < 1 ? 0.12 : stage >= 2 ? 0.4 : 1 }} d={ln(D.points)} />
+        {stage >= 2 && <line className="chart__guide" style={{ stroke: "#FF5C39", strokeDasharray: "4 4" }} x1={xs(2000)} x2={xs(2000)} y1={M.t} y2={M.t + IH} />}
+        {stage >= 2 && <line className="chart__trend" style={{ stroke: "#5b6b7d" }} x1={xs(D.pre.x0)} y1={ys(D.pre.y)} x2={xs(D.pre.x1)} y2={ys(D.pre.y)} />}
+        {stage >= 2 && <line className="chart__trend" style={{ stroke: "#FF5C39" }} x1={xs(D.post.x0)} y1={ys(D.post.y)} x2={xs(D.post.x1)} y2={ys(D.post.y)} />}
+        {stage >= 2 && <text x={xs(1972)} y={ys(D.pre.y) - 9} textAnchor="middle" className="scrolly__note" style={{ fill: "#5b6b7d" }}>old normal</text>}
+        {stage >= 3 && <text x={xs(2012)} y={ys(D.post.y) + 19} textAnchor="middle" className="scrolly__note">{"−" + D.drop + "% · new normal"}</text>}
+      </svg>
+    );
+  }
+
+  function PRainScrolly() {
+    const D = window.RAINSCROLLYDATA;
+    if (!D) return null;
+    return (
+      <Scrolly
+        title="South-west WA cool-season rainfall, 1950–2024"
+        legend={[{ c: "var(--accent)", t: "Annual rain vs 1950s" }, { c: "#FF5C39", t: "Average for the era" }]}
+        steps={RAIN_SCROLLY_STEPS}>
+        {(stage) => <RainScrollyChart D={D} stage={stage} />}
+      </Scrolly>
     );
   }
 
@@ -405,6 +472,14 @@
             <span className="story__meaning-tag">Why it matters</span>{p.meaning}
           </Reveal>
 
+          {p.radar && window.AdhiCharts && window.AdhiCharts.RadarChart && (
+            <Reveal className="story__radar" delay={120}>
+              <div className="story__chart-title">How the three compare, pillar by pillar</div>
+              {React.createElement(window.AdhiCharts.RadarChart, { data: p.radar, label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars — governance, strategy, risk management, and metrics and targets — each scored out of 4." })}
+              <p className="story__radar-note">Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure — but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.</p>
+            </Reveal>
+          )}
+
           {cards.length > 1 && (
             <Reveal className="story__deep" delay={120}>
               <DeepRail cards={cards} vizKey={p.vizKey} />
@@ -434,6 +509,20 @@
           {p.scrolly && window.SCROLLYDATA && (
             <div className="story__scrolly">
               <PScrolly />
+            </div>
+          )}
+
+          {p.rainMap && window.RAINMAPDATA && window.AdhiCharts && window.AdhiCharts.RainMapChart && (
+            <Reveal className="story__map">
+              <div className="story__chart-title">Where the drying hit, decade by decade</div>
+              {React.createElement(window.AdhiCharts.RainMapChart, { data: window.RAINMAPDATA, label: "Map of seven south-west WA weather stations, each coloured by how far that decade's cool-season rainfall sat below or above its 1950s baseline." })}
+              <p className="story__map-note">Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000 — the wheatbelt stations hardest of all.</p>
+            </Reveal>
+          )}
+
+          {p.rainScrolly && window.RAINSCROLLYDATA && (
+            <div className="story__scrolly">
+              <PRainScrolly />
             </div>
           )}
 
