@@ -312,75 +312,121 @@
     );
   }
 
+  /* A horizontal, scroll-snapping rail of "deep-dive" cards (charts + data
+     tables). This is the "scroll sideways to learn more" surface: the key
+     reading (title, findings, why-it-matters) stays vertical and skimmable,
+     while the heavier evidence lives in cards you swipe through. */
+  function DeepRail({ cards, vizKey }) {
+    const trackRef = React.useRef(null);
+    const [atStart, setAtStart] = React.useState(true);
+    const [atEnd, setAtEnd] = React.useState(false);
+
+    const sync = React.useCallback(() => {
+      const el = trackRef.current; if (!el) return;
+      setAtStart(el.scrollLeft <= 2);
+      setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+    }, []);
+
+    React.useEffect(() => {
+      sync();
+      const el = trackRef.current; if (!el) return;
+      el.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync);
+      return () => { el.removeEventListener("scroll", sync); window.removeEventListener("resize", sync); };
+    }, [sync]);
+
+    function nudge(dir) {
+      const el = trackRef.current; if (!el) return;
+      const item = el.querySelector(".rail__item");
+      const gap = 20;
+      const step = item ? item.getBoundingClientRect().width + gap : el.clientWidth * 0.85;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollBy({ left: dir * step, behavior: reduce ? "auto" : "smooth" });
+    }
+
+    return (
+      <div className="rail">
+        <div className="rail__head">
+          <div className="rail__hint"><Icon name="arrow-right" size={14} />Swipe through {cards.length} views</div>
+          <div className="rail__nav">
+            <IconButton variant="outline" size="sm" aria-label="Previous" disabled={atStart} onClick={() => nudge(-1)}>
+              <Icon name="arrow-right" size={16} style={{ transform: "rotate(180deg)" }} />
+            </IconButton>
+            <IconButton variant="outline" size="sm" aria-label="Next" disabled={atEnd} onClick={() => nudge(1)}>
+              <Icon name="arrow-right" size={16} />
+            </IconButton>
+          </div>
+        </div>
+        <div className="rail__track" ref={trackRef}>
+          {cards.map((c, i) => (
+            <div className={"rail__item" + (c.wide ? " rail__item--wide" : "")} key={i}>
+              <div className="railcard">
+                <div className="story__chart-title">{c.title}</div>
+                {c.kind === "chart"
+                  ? <PChart vizKey={vizKey} spec={c.spec} />
+                  : <PDataTable data={c.data} caption={c.caption} />}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   function PStory({ p, index }) {
-    const [openData, setOpenData] = React.useState(false);
-    const [openCharts, setOpenCharts] = React.useState(false);
-    const rev = index % 2 === 1;
     const hasViz = p.viz && p.viz.length > 0 && window.AdhiCharts && window.CHARTDATA;
+
+    // Collect everything heavy into one ordered list of rail cards: charts
+    // first, then any scoreboard / raw-data table.
+    const cards = [];
+    if (hasViz) p.viz.forEach((spec) => cards.push({ kind: "chart", title: spec.title, spec }));
+    if (p.scoreboard) cards.push({ kind: "table", title: "Disclosure scores, 0 to 4", data: p.scoreboard, caption: "Disclosure scores, 0 to 4", wide: true });
+    if (p.dataset) cards.push({ kind: "table", title: p.dataset.caption, data: p.dataset, caption: p.dataset.caption, wide: true });
+
     return (
       <section className="story" id={p.id}>
         <div className="wrap">
-          <div className={"story__grid" + (rev ? " story__grid--rev" : "")}>
-            <Reveal className="story__media">
-              {p.scoreboard
-                ? <div className="story__board"><PDataTable data={p.scoreboard} caption="Disclosure scores, 0 to 4" /></div>
-                : hasViz
-                  ? <div className="story__feature">
-                      <div className="story__chart-title">{p.viz[0].title}</div>
-                      <PChart vizKey={p.vizKey} spec={p.viz[0]} />
-                    </div>
-                  : null}
+          <Reveal className="story__head">
+            <div className="story__tagrow">
+              <Eyebrow tick>Project {index + 1} · {p.year}</Eyebrow>
+              <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
+            </div>
+            <h2 className="story__title">{p.title}</h2>
+            <p className="story__hook">{p.headline}</p>
+            <p className="story__lead">{p.body}</p>
+          </Reveal>
+
+          <Reveal className="story__findings" delay={80}>
+            {p.findings.map((f, i) => (
+              <div className="pfind" key={i}>
+                <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
+                <div className="pfind__label">{f.label}</div>
+                <div className="pfind__text">{f.text}</div>
+              </div>
+            ))}
+          </Reveal>
+
+          <Reveal as="p" className="story__meaning" delay={120}>
+            <span className="story__meaning-tag">Why it matters</span>{p.meaning}
+          </Reveal>
+
+          {cards.length > 1 && (
+            <Reveal className="story__deep" delay={120}>
+              <DeepRail cards={cards} vizKey={p.vizKey} />
             </Reveal>
-
-            <Reveal className="story__body" delay={120}>
-              <div className="story__tagrow">
-                <Eyebrow tick>Project {index + 1} · {p.year}</Eyebrow>
-                <Badge variant={statusVariant(p.status)} dot>{p.status}</Badge>
-              </div>
-              <h2 className="story__title">{p.title}</h2>
-              <p className="story__hook">{p.headline}</p>
-              <p className="story__lead">{p.body}</p>
-
-              <div className="story__findings">
-                {p.findings.map((f, i) => (
-                  <div className="pfind" key={i}>
-                    <div className="pfind__v"><span className="v">{f.value}</span>{f.unit && <span className="u">{f.unit}</span>}</div>
-                    <div className="pfind__label">{f.label}</div>
-                    <div className="pfind__text">{f.text}</div>
-                  </div>
-                ))}
-              </div>
-
-              <p className="story__meaning"><span className="story__meaning-tag">Why it matters</span>{p.meaning}</p>
-
-              {((hasViz && p.viz.length > 1) || p.dataset) && (
-                <div className="story__toggles">
-                  {hasViz && p.viz.length > 1 && (
-                    <button type="button" className="story__data-toggle" aria-expanded={openCharts} onClick={() => setOpenCharts((o) => !o)}>
-                      <Icon name="bar-chart" size={16} />
-                      {openCharts ? "Hide charts" : "See all " + p.viz.length + " charts"}
-                      <Icon name="chevron-right" size={15} className={"story__data-chev" + (openCharts ? " story__data-chev--open" : "")} />
-                    </button>
-                  )}
-                  {p.dataset && (
-                    <button type="button" className="story__data-toggle" aria-expanded={openData} onClick={() => setOpenData((o) => !o)}>
-                      <Icon name="layers" size={16} />
-                      {openData ? "Hide the data" : "Explore the raw data"}
-                      <Icon name="chevron-right" size={15} className={"story__data-chev" + (openData ? " story__data-chev--open" : "")} />
-                    </button>
-                  )}
+          )}
+          {cards.length === 1 && (
+            <Reveal className="story__deep story__deep--solo" delay={120}>
+              <div className="rail__item rail__item--wide">
+                <div className="railcard">
+                  <div className="story__chart-title">{cards[0].title}</div>
+                  {cards[0].kind === "chart"
+                    ? <PChart vizKey={p.vizKey} spec={cards[0].spec} />
+                    : <PDataTable data={cards[0].data} caption={cards[0].caption} />}
                 </div>
-              )}
-
-              <div className="story__links">
-                {p.resources.map((r, i) => (
-                  <a className="story__link" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
-                    <Icon name={r.icon} size={15} />{r.label}
-                  </a>
-                ))}
               </div>
             </Reveal>
-          </div>
+          )}
 
           {p.hasMap && window.MAPDATA && window.AdhiCharts && window.AdhiCharts.MapChart && (
             <Reveal className="story__map">
@@ -396,21 +442,13 @@
             </div>
           )}
 
-          {openCharts && hasViz && (
-            <div className="story__charts">
-              {p.viz.slice(1).map((spec, i) => (
-                <div className="story__chart-card" key={i}>
-                  <div className="story__chart-title">{spec.title}</div>
-                  <PChart vizKey={p.vizKey} spec={spec} />
-                </div>
-              ))}
-            </div>
-          )}
-          {openData && p.dataset && (
-            <div className="story__data">
-              <PDataTable data={p.dataset} caption={p.dataset.caption} />
-            </div>
-          )}
+          <div className="story__links">
+            {p.resources.map((r, i) => (
+              <a className="story__link" key={i} href={r.href} target="_blank" rel="noopener noreferrer">
+                <Icon name={r.icon} size={15} />{r.label}
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     );

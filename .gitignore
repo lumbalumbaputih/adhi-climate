@@ -15,3 +15,7 @@ __pycache__/
 
 # OS noise
 .DS_Store
+
+# Node build tooling for the portfolio (local only)
+node_modules/
+package-lock.json
