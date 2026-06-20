@@ -15,6 +15,7 @@
       location: "Western Australia · remote-friendly",
       email: "adhiazure@gmail.com",
       linkedin: "https://www.linkedin.com/in/adhi-m/",
+      availability: "Available for internships · Perth, WA or remote",
     },
     stats: [
       { label: "Cyclone record", value: "40", unit: "yrs", caption: "1985–2024 tracks" },
