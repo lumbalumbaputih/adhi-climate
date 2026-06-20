@@ -37,7 +37,7 @@
 .hero__panel::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.45), transparent 70%); }
 .hero__panel-label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--blue-300); margin-bottom: var(--space-5); position: relative; }
 .hero__chart { display: flex; align-items: flex-end; gap: 10px; height: 132px; margin-bottom: var(--space-6); position: relative; }
-.hero__bar-wrap { flex: 1; display: flex; align-items: flex-end; position: relative; }
+.hero__bar-wrap { flex: 1; height: 100%; display: flex; align-items: flex-end; position: relative; }
 .hero__bar { width: 100%; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: linear-gradient(180deg, var(--blue-400), var(--blue-600)); transition: height var(--duration-slow) var(--ease-out), filter var(--duration-fast) var(--ease-standard); cursor: default; }
 .hero__bar-wrap:last-child .hero__bar { background: linear-gradient(180deg, var(--green-400), var(--green-600)); }
 .hero__bar-wrap:hover .hero__bar { filter: brightness(1.12); }
