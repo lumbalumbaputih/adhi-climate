@@ -427,7 +427,7 @@
             <Reveal className="story__map">
               <div className="story__chart-title">Where these storms tracked, season by season</div>
               {React.createElement(window.AdhiCharts.MapChart, { data: window.MAPDATA, label: "Tracks of the 193 cyclones that came within 500 km of WA, 1985 to 2024, coloured by peak wind." })}
-              <p className="story__map-note">Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.</p>
+              <p className="story__map-note">Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm, or use the sliders to filter by season and storm strength. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.</p>
             </Reveal>
           )}
 

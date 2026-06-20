@@ -198,6 +198,8 @@
   }
   function MapChart({ data, label }) {
     const [hi, setHi] = useState(null);
+    const [year, setYear] = useState(0);   // 0 = all seasons
+    const [minW, setMinW] = useState(0);   // minimum peak wind (kt); 0 = any
     const win = data.win, VW = 600, VH = 660, m = 16;
     const cosMid = Math.cos((win.lat0 + win.lat1) / 2 * Math.PI / 180);
     const lonMid = (win.lon0 + win.lon1) / 2, latMid = (win.lat0 + win.lat1) / 2;
@@ -206,18 +208,57 @@
     const py = (la) => VH / 2 - (la - latMid) * sc;
     const path = (pts) => pts.map((p, i) => (i ? "L" : "M") + px(p[0]).toFixed(1) + " " + py(p[1]).toFixed(1)).join(" ");
     const lonLines = [110, 115, 120, 125, 130], latLines = [-10, -15, -20, -25, -30, -35];
-    const hv = hi != null ? data.tracks[hi] : null;
+
+    const ys = data.tracks.map((t) => t.y);
+    const minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    const total = data.tracks.length;
+    const matches = (t) => (year === 0 || t.y === year) && (t.w || 0) >= minW;
+    const nVis = data.tracks.reduce((a, t) => a + (matches(t) ? 1 : 0), 0);
+    const filtered = year !== 0 || minW !== 0;
+    const hv = (hi != null && matches(data.tracks[hi])) ? data.tracks[hi] : null;
+    const countTxt = nVis === 0 ? "no storms match these filters"
+      : !filtered ? total + " storms within 500 km · " + minY + "–" + maxY
+      : nVis + " of " + total + " storms shown";
+
+    const slider = (id, lbl, valTxt, attrs) => React.createElement("div", { className: "map__ctrl" },
+      React.createElement("div", { className: "map__ctrl-top" },
+        React.createElement("label", { className: "map__ctrl-l", htmlFor: id }, lbl),
+        React.createElement("span", { className: "map__ctrl-v" }, valTxt)
+      ),
+      React.createElement("input", Object.assign({ id, type: "range", className: "map__slider" }, attrs))
+    );
+
     return React.createElement("div", { className: "chart" },
+      React.createElement("div", { className: "map__controls" },
+        slider("map-year", "Season", year === 0 ? "All seasons" : String(year), {
+          min: minY - 1, max: maxY, step: 1, value: year === 0 ? minY - 1 : year,
+          "aria-label": "Filter storms by season",
+          onChange: (e) => { const v = +e.target.value; setYear(v < minY ? 0 : v); },
+        }),
+        slider("map-wind", "Min peak wind", minW === 0 ? "Any strength" : "≥ " + minW + " kt", {
+          min: 0, max: 130, step: 5, value: minW,
+          "aria-label": "Filter storms by minimum peak wind",
+          onChange: (e) => setMinW(+e.target.value),
+        }),
+        filtered && React.createElement("button", {
+          type: "button", className: "map__reset",
+          onClick: () => { setYear(0); setMinW(0); },
+        }, "Reset")
+      ),
       React.createElement("svg", { viewBox: `0 0 ${VW} ${VH}`, className: "chart__svg map__svg", role: "img", "aria-label": label },
         lonLines.map((lo) => React.createElement("line", { key: "lo" + lo, x1: px(lo), x2: px(lo), y1: py(win.lat1), y2: py(win.lat0), className: "map__grat" })),
         latLines.map((la) => React.createElement("line", { key: "la" + la, x1: px(win.lon0), x2: px(win.lon1), y1: py(la), y2: py(la), className: "map__grat" })),
         latLines.map((la) => React.createElement("text", { key: "lat" + la, x: px(win.lon0) + 3, y: py(la) - 3, className: "map__grat-label" }, Math.abs(la) + "°S")),
         React.createElement("path", { d: path(data.coast), className: "map__coast" }),
-        data.tracks.map((t, i) => React.createElement("path", {
-          key: i, d: path(t.p), fill: "none", stroke: windColor(t.w), strokeWidth: hi === i ? 3 : 1.4,
-          className: "map__track" + (hi === i ? " is-hi" : (hi != null ? " is-dim" : "")),
-          onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null),
-        })),
+        data.tracks.map((t, i) => {
+          const vis = matches(t);
+          const cls = "map__track" + (!vis ? " is-hidden" : hi === i ? " is-hi" : hi != null ? " is-dim" : "");
+          return React.createElement("path", {
+            key: i, d: path(t.p), fill: "none", stroke: windColor(t.w), strokeWidth: hi === i ? 3 : 1.4,
+            className: cls,
+            onMouseEnter: vis ? () => setHi(i) : undefined, onMouseLeave: vis ? () => setHi(null) : undefined,
+          });
+        }),
         data.cities.map((c, i) => React.createElement("g", { key: "c" + i },
           React.createElement("circle", { cx: px(c.lo), cy: py(c.la), r: 3, className: "map__city" }),
           React.createElement("text", { x: px(c.lo) + 6, y: py(c.la) + 3.5, className: "map__city-label" }, c.n)
@@ -227,7 +268,7 @@
           React.createElement("text", { x: m + 13, y: m + 21, className: "map__info-h" }, hv.n + " · " + hv.y),
           React.createElement("text", { x: m + 13, y: m + 38, className: "map__info-t" }, "peak " + hv.w + " kt")
         ),
-        React.createElement("text", { x: VW - m, y: VH - m, textAnchor: "end", className: "map__count" }, data.tracks.length + " storms within 500 km · 1985–2024")
+        React.createElement("text", { x: VW - m, y: VH - m, textAnchor: "end", className: "map__count" }, countTxt)
       ),
       React.createElement("div", { className: "map__legend" },
         React.createElement("span", { className: "map__legend-l" }, "Peak wind"),
