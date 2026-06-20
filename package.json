@@ -1,0 +1,13 @@
+{
+  "name": "adhi-climate-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the Adhi Katili climate portfolio (compiles js/*.jsx to plain React.createElement js/*.js).",
+  "scripts": {
+    "build": "node tools/build.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/preset-react": "^8.0.1"
+  }
+}
