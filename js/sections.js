@@ -220,10 +220,12 @@
     onContact
   }) {
     return /*#__PURE__*/React.createElement("section", {
-      className: "hero hero--center",
+      className: "hero",
       id: "top"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "wrap hero__inner"
+      className: "wrap"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "hero__inner"
     }, /*#__PURE__*/React.createElement("div", {
       className: "hero__eyebrow"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
@@ -265,7 +267,17 @@
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "leaf",
       size: 16
-    }), "Physical risk · Climate data · AASB S2"))));
+    }), "Physical risk · Climate data · AASB S2"))), /*#__PURE__*/React.createElement(Reveal, {
+      id: "about",
+      className: "hero__about",
+      delay: 120
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "hero__about-title"
+    }, "Hi, I'm Adhi."), /*#__PURE__*/React.createElement("p", {
+      className: "hero__about-lead"
+    }, "I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere I can turn this kind of climate-data work into real impact for a team."), /*#__PURE__*/React.createElement("p", null, "I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent two years as a business analyst in regional Western Australia, and worked as a hatchery technician while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy, real-world data and turning it into something a team can act on."), /*#__PURE__*/React.createElement("p", null, "This portfolio is where I bring that together: real Western Australian climate data, honest analysis, and findings written so anyone can follow them, framed for the disclosure rules companies now have to meet. I care as much about getting the cause right as I do about the headline number."), /*#__PURE__*/React.createElement("div", {
+      className: "about__tags"
+    }, /*#__PURE__*/React.createElement(Tag, null, "Physical climate risk"), /*#__PURE__*/React.createElement(Tag, null, "AASB S2"), /*#__PURE__*/React.createElement(Tag, null, "IBTrACS / BOM"), /*#__PURE__*/React.createElement(Tag, null, "Trend detection"), /*#__PURE__*/React.createElement(Tag, null, "Disclosure scoring")))));
   }
 
   /* ------------------------------------------------------------- StatBand */
@@ -731,35 +743,14 @@
     }, /*#__PURE__*/React.createElement("div", {
       className: "wrap"
     }, /*#__PURE__*/React.createElement(Reveal, {
-      className: "section-head"
+      className: "section-head section-head--slim"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tick: true
-    }, "Personal projects"), /*#__PURE__*/React.createElement("h2", null, "Built out of curiosity."), /*#__PURE__*/React.createElement("p", null, "Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just curiosity and a respect for what the data actually says.")))), P.projects.map((p, i) => /*#__PURE__*/React.createElement(PStory, {
+    }, "Personal projects"), /*#__PURE__*/React.createElement("p", null, "Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just a respect for what the data actually says.")))), P.projects.map((p, i) => /*#__PURE__*/React.createElement(PStory, {
       key: p.id,
       p: p,
       index: i
     })));
-  }
-
-  /* ----------------------------------------------------------------- About */
-  /* Personal intro — moved up top, right under the hero, as the "who I am". */
-  function PIntro() {
-    return /*#__PURE__*/React.createElement("section", {
-      className: "section section--tight intro",
-      id: "about"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "wrap"
-    }, /*#__PURE__*/React.createElement(Reveal, {
-      className: "intro__body"
-    }, /*#__PURE__*/React.createElement(Eyebrow, {
-      tick: true
-    }, "About"), /*#__PURE__*/React.createElement("h2", {
-      className: "intro__title"
-    }, "Hi, I'm Adhi."), /*#__PURE__*/React.createElement("p", {
-      className: "intro__lead"
-    }, "I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere I can turn this kind of climate-data work into real impact for a team."), /*#__PURE__*/React.createElement("p", null, "I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent two years as a business analyst in regional Western Australia, and worked as a hatchery technician while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy, real-world data and turning it into something a team can act on."), /*#__PURE__*/React.createElement("p", null, "This portfolio is where I bring that together: real Western Australian climate data, honest analysis, and findings written so anyone can follow them, framed for the disclosure rules companies now have to meet. I care as much about getting the cause right as I do about the headline number."), /*#__PURE__*/React.createElement("div", {
-      className: "about__tags"
-    }, /*#__PURE__*/React.createElement(Tag, null, "Physical climate risk"), /*#__PURE__*/React.createElement(Tag, null, "AASB S2"), /*#__PURE__*/React.createElement(Tag, null, "IBTrACS / BOM"), /*#__PURE__*/React.createElement(Tag, null, "Trend detection"), /*#__PURE__*/React.createElement(Tag, null, "Disclosure scoring")))));
   }
 
   /* Get-in-touch card — kept at the bottom as the closing call to action. */
@@ -863,7 +854,6 @@
   Object.assign(window, {
     PNav,
     PHero,
-    PIntro,
     PStatBand,
     PStories,
     PContact,
