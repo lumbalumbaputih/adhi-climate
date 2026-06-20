@@ -219,44 +219,12 @@
   function PHero({
     onContact
   }) {
-    // Real period-mean Nov-Apr sea-surface-temperature anomaly (vs the 1991-2020
-    // average), 1985-2024, from cyclone-risk/data/sst_intensity.csv. Height maps
-    // the lowest period to 40% and the highest to 82%.
-    const bars = [{
-      y: "1985–1990",
-      v: "−0.20",
-      h: 45
-    }, {
-      y: "1991–1995",
-      v: "−0.26",
-      h: 40
-    }, {
-      y: "1996–2001",
-      v: "−0.13",
-      h: 51
-    }, {
-      y: "2002–2007",
-      v: "−0.07",
-      h: 56
-    }, {
-      y: "2008–2013",
-      v: "+0.12",
-      h: 71
-    }, {
-      y: "2014–2018",
-      v: "+0.25",
-      h: 81
-    }, {
-      y: "2019–2024",
-      v: "+0.26",
-      h: 82
-    }];
     return /*#__PURE__*/React.createElement("section", {
-      className: "hero",
+      className: "hero hero--center",
       id: "top"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "wrap hero__grid"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "wrap hero__inner"
+    }, /*#__PURE__*/React.createElement("div", {
       className: "hero__eyebrow"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tick: true
@@ -297,39 +265,7 @@
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "leaf",
       size: 16
-    }), "Physical risk · Climate data · AASB S2"))), /*#__PURE__*/React.createElement("div", {
-      className: "hero__panel"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "hero__panel-label"
-    }, "WA cyclone-region ocean temperature · ", /*#__PURE__*/React.createElement("span", {
-      style: {
-        whiteSpace: "nowrap"
-      }
-    }, "1985–2024")), /*#__PURE__*/React.createElement("div", {
-      className: "hero__chart",
-      role: "img",
-      "aria-label": "WA cyclone-region ocean temperature, 1985 to 2024: five-year averages rise from −0.20 °C to +0.26 °C versus the 1991–2020 average, about 0.5 °C of warming."
-    }, bars.map((b, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "hero__bar-wrap"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "hero__bar",
-      style: {
-        height: b.h + "%",
-        animationDelay: i * 70 + "ms"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "hero__bar-tip",
-      "aria-hidden": "true"
-    }, b.y, /*#__PURE__*/React.createElement("b", null, b.v, " °C"), /*#__PURE__*/React.createElement("em", null, "vs 1991–2020 avg")))))), /*#__PURE__*/React.createElement("div", {
-      className: "hero__panel-stat"
-    }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
-      className: "big"
-    }, "40"), " ", /*#__PURE__*/React.createElement("span", {
-      className: "unit"
-    }, "yrs analysed")), /*#__PURE__*/React.createElement("span", {
-      className: "delta"
-    }, "▴ +0.5 °C since the 1980s")))));
+    }), "Physical risk · Climate data · AASB S2"))));
   }
 
   /* ------------------------------------------------------------- StatBand */
@@ -806,37 +742,36 @@
   }
 
   /* ----------------------------------------------------------------- About */
-  function PAbout() {
+  /* Personal intro — moved up top, right under the hero, as the "who I am". */
+  function PIntro() {
     return /*#__PURE__*/React.createElement("section", {
-      className: "section",
+      className: "section section--tight intro",
       id: "about"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "wrap about__grid"
+      className: "wrap"
     }, /*#__PURE__*/React.createElement(Reveal, {
-      className: "about__body"
+      className: "intro__body"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tick: true
     }, "About"), /*#__PURE__*/React.createElement("h2", {
-      style: {
-        fontSize: "var(--text-4xl)",
-        letterSpacing: "var(--tracking-tighter)",
-        margin: "12px 0 20px"
-      }
-    }, "Hi, I'm Adhi."), /*#__PURE__*/React.createElement("p", null, "I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere I can turn this kind of climate-data work into real impact for a team."), /*#__PURE__*/React.createElement("p", {
-      style: {
-        marginTop: "var(--space-4)"
-      }
-    }, "I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent two years as a business analyst in regional Western Australia, and worked as a hatchery technician while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy, real-world data and turning it into something a team can act on."), /*#__PURE__*/React.createElement("p", {
-      style: {
-        marginTop: "var(--space-4)"
-      }
-    }, "This portfolio is where I bring that together: real Western Australian climate data, honest analysis, and findings written so anyone can follow them, framed for the disclosure rules companies now have to meet. I care as much about getting the cause right as I do about the headline number."), /*#__PURE__*/React.createElement("div", {
+      className: "intro__title"
+    }, "Hi, I'm Adhi."), /*#__PURE__*/React.createElement("p", {
+      className: "intro__lead"
+    }, "I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere I can turn this kind of climate-data work into real impact for a team."), /*#__PURE__*/React.createElement("p", null, "I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent two years as a business analyst in regional Western Australia, and worked as a hatchery technician while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy, real-world data and turning it into something a team can act on."), /*#__PURE__*/React.createElement("p", null, "This portfolio is where I bring that together: real Western Australian climate data, honest analysis, and findings written so anyone can follow them, framed for the disclosure rules companies now have to meet. I care as much about getting the cause right as I do about the headline number."), /*#__PURE__*/React.createElement("div", {
       className: "about__tags"
-    }, /*#__PURE__*/React.createElement(Tag, null, "Physical climate risk"), /*#__PURE__*/React.createElement(Tag, null, "AASB S2"), /*#__PURE__*/React.createElement(Tag, null, "IBTrACS / BOM"), /*#__PURE__*/React.createElement(Tag, null, "Trend detection"), /*#__PURE__*/React.createElement(Tag, null, "Disclosure scoring"))), /*#__PURE__*/React.createElement(Reveal, {
+    }, /*#__PURE__*/React.createElement(Tag, null, "Physical climate risk"), /*#__PURE__*/React.createElement(Tag, null, "AASB S2"), /*#__PURE__*/React.createElement(Tag, null, "IBTrACS / BOM"), /*#__PURE__*/React.createElement(Tag, null, "Trend detection"), /*#__PURE__*/React.createElement(Tag, null, "Disclosure scoring")))));
+  }
+
+  /* Get-in-touch card — kept at the bottom as the closing call to action. */
+  function PContact() {
+    return /*#__PURE__*/React.createElement("section", {
+      className: "section contactband"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "wrap"
+    }, /*#__PURE__*/React.createElement(Reveal, {
       as: "aside",
       id: "contact",
-      className: "about__contact",
-      delay: 120
+      className: "about__contact about__contact--center"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tone: "leaf",
       tick: true
@@ -928,9 +863,10 @@
   Object.assign(window, {
     PNav,
     PHero,
+    PIntro,
     PStatBand,
     PStories,
-    PAbout,
+    PContact,
     PFooter
   });
 })();

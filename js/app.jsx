@@ -1,6 +1,6 @@
 /* App entry. Compiled to app.js (edit this .jsx, then recompile). */
 (function () {
-  const { PNav, PHero, PStatBand, PStories, PAbout, PFooter } = window;
+  const { PNav, PHero, PIntro, PStatBand, PStories, PContact, PFooter } = window;
 
   function App() {
     function scrollToContact() {
@@ -11,9 +11,10 @@
       <div className="site">
         <PNav onContact={scrollToContact} />
         <PHero onContact={scrollToContact} />
+        <PIntro />
         <PStatBand />
         <PStories />
-        <PAbout />
+        <PContact />
         <PFooter />
       </div>
     );
