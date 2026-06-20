@@ -6,6 +6,8 @@
 .section-head { display: flex; flex-direction: column; gap: var(--space-3); max-width: 60ch; margin-bottom: var(--space-12); }
 .section-head h2 { font-size: var(--text-4xl); letter-spacing: var(--tracking-tighter); }
 .section-head p { font-size: var(--text-md); color: var(--text-muted); line-height: var(--leading-relaxed); }
+.section-head--slim { gap: var(--space-4); margin-bottom: var(--space-10); }
+.section-head--slim p { font-size: var(--text-lg); color: var(--text-strong); max-width: 70ch; }
 
 /* ---------- Nav ---------- */
 .nav { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg-base) 86%, transparent); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--border-subtle); }
@@ -48,11 +50,11 @@
 .pfind__label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-muted); margin: 6px 0 6px; }
 .pfind__text { font-size: var(--text-sm); color: var(--text-body); line-height: var(--leading-relaxed); }
 
-/* ---------- Intro (personal bio, moved to the top) ---------- */
-.intro__body { max-width: 72ch; }
-.intro__title { font-size: var(--text-4xl); letter-spacing: var(--tracking-tighter); color: var(--text-strong); margin: var(--space-3) 0 var(--space-5); }
-.intro__body p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); margin-top: var(--space-4); }
-.intro__body .intro__lead { font-size: var(--text-lg); color: var(--text-strong); margin-top: 0; }
+/* ---------- Hero bio (merged into the opening, flows under the hook) ---------- */
+.hero__about { max-width: 72ch; margin: var(--space-20) auto 0; padding-top: var(--space-12); border-top: 1px solid var(--border-subtle); }
+.hero__about-title { font-size: var(--text-2xl); letter-spacing: var(--tracking-tight); color: var(--text-strong); margin-bottom: var(--space-4); }
+.hero__about p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); margin-top: var(--space-4); }
+.hero__about p.hero__about-lead { font-size: var(--text-lg); color: var(--text-strong); margin-top: 0; }
 
 /* ---------- Contact (closing get-in-touch card) ---------- */
 .about__contact--center { max-width: 520px; margin: 0 auto; }
@@ -76,7 +78,7 @@
 
 /* ---------- Smooth scrolling + anchor offset ---------- */
 html { scroll-behavior: smooth; }
-.hero, .section, .story, #work { scroll-margin-top: 84px; }
+.hero, .section, .story, #work, #about { scroll-margin-top: 84px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* ---------- Scroll reveal ---------- */

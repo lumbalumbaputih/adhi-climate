@@ -4,7 +4,6 @@
   const {
     PNav,
     PHero,
-    PIntro,
     PStatBand,
     PStories,
     PContact,
@@ -24,7 +23,7 @@
       onContact: scrollToContact
     }), /*#__PURE__*/React.createElement(PHero, {
       onContact: scrollToContact
-    }), /*#__PURE__*/React.createElement(PIntro, null), /*#__PURE__*/React.createElement(PStatBand, null), /*#__PURE__*/React.createElement(PStories, null), /*#__PURE__*/React.createElement(PContact, null), /*#__PURE__*/React.createElement(PFooter, null));
+    }), /*#__PURE__*/React.createElement(PStatBand, null), /*#__PURE__*/React.createElement(PStories, null), /*#__PURE__*/React.createElement(PContact, null), /*#__PURE__*/React.createElement(PFooter, null));
   }
   ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
 })();

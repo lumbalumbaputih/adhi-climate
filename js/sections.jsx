@@ -145,19 +145,45 @@
   /* ------------------------------------------------------------------ Hero */
   function PHero({ onContact }) {
     return (
-      <section className="hero hero--center" id="top">
-        <div className="wrap hero__inner">
-          <div className="hero__eyebrow"><Eyebrow tick>Climate &amp; Sustainability · WA</Eyebrow></div>
-          <h1 className="hero__title">I got curious about Western Australia's <span className="accent">climate</span>, so I started digging.</h1>
-          <p className="hero__lead">{P.profile.intro}</p>
-          <div className="hero__actions">
-            <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
-            <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See the projects</Button>
+      <section className="hero" id="top">
+        <div className="wrap">
+          <div className="hero__inner">
+            <div className="hero__eyebrow"><Eyebrow tick>Climate &amp; Sustainability · WA</Eyebrow></div>
+            <h1 className="hero__title">I got curious about Western Australia's <span className="accent">climate</span>, so I started digging.</h1>
+            <p className="hero__lead">{P.profile.intro}</p>
+            <div className="hero__actions">
+              <Button variant="primary" size="lg" onClick={onContact} iconRight={<Icon name="arrow-right" size={18} />}>Get in touch</Button>
+              <Button variant="ghost" size="lg" as="a" href="#work" iconRight={<Icon name="arrow-down-right" size={18} />}>See the projects</Button>
+            </div>
+            <div className="hero__meta">
+              <span className="hero__meta-item"><Icon name="map-pin" size={16} />{P.profile.location}</span>
+              <span className="hero__meta-item"><Icon name="leaf" size={16} />Physical risk · Climate data · AASB S2</span>
+            </div>
           </div>
-          <div className="hero__meta">
-            <span className="hero__meta-item"><Icon name="map-pin" size={16} />{P.profile.location}</span>
-            <span className="hero__meta-item"><Icon name="leaf" size={16} />Physical risk · Climate data · AASB S2</span>
-          </div>
+
+          <Reveal id="about" className="hero__about" delay={120}>
+            <h2 className="hero__about-title">Hi, I'm Adhi.</h2>
+            <p className="hero__about-lead">
+              I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second
+              year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere
+              I can turn this kind of climate-data work into real impact for a team.
+            </p>
+            <p>
+              I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent
+              two years as a business analyst in regional Western Australia, and worked as a hatchery technician
+              while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy,
+              real-world data and turning it into something a team can act on.
+            </p>
+            <p>
+              This portfolio is where I bring that together: real Western Australian climate data, honest
+              analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
+              now have to meet. I care as much about getting the cause right as I do about the headline number.
+            </p>
+            <div className="about__tags">
+              <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
+              <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
+            </div>
+          </Reveal>
         </div>
       </section>
     );
@@ -428,50 +454,14 @@
       <div id="work">
         <section className="section section--tight">
           <div className="wrap">
-            <Reveal className="section-head">
+            <Reveal className="section-head section-head--slim">
               <Eyebrow tick>Personal projects</Eyebrow>
-              <h2>Built out of curiosity.</h2>
-              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just curiosity and a respect for what the data actually says.</p>
+              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just a respect for what the data actually says.</p>
             </Reveal>
           </div>
         </section>
         {P.projects.map((p, i) => <PStory key={p.id} p={p} index={i} />)}
       </div>
-    );
-  }
-
-  /* ----------------------------------------------------------------- About */
-  /* Personal intro — moved up top, right under the hero, as the "who I am". */
-  function PIntro() {
-    return (
-      <section className="section section--tight intro" id="about">
-        <div className="wrap">
-          <Reveal className="intro__body">
-            <Eyebrow tick>About</Eyebrow>
-            <h2 className="intro__title">Hi, I'm Adhi.</h2>
-            <p className="intro__lead">
-              I'm studying a Master of Environment and Climate Emergency at Curtin University, now in my second
-              year with two semesters to go. Right now I'm looking for an internship in sustainability, somewhere
-              I can turn this kind of climate-data work into real impact for a team.
-            </p>
-            <p>
-              I've arrived here from a few directions. I trained as a naval architect and marine engineer, spent
-              two years as a business analyst in regional Western Australia, and worked as a hatchery technician
-              while completing a Diploma of Aquaculture. The common thread has always been the same: taking messy,
-              real-world data and turning it into something a team can act on.
-            </p>
-            <p>
-              This portfolio is where I bring that together: real Western Australian climate data, honest
-              analysis, and findings written so anyone can follow them, framed for the disclosure rules companies
-              now have to meet. I care as much about getting the cause right as I do about the headline number.
-            </p>
-            <div className="about__tags">
-              <Tag>Physical climate risk</Tag><Tag>AASB S2</Tag><Tag>IBTrACS / BOM</Tag>
-              <Tag>Trend detection</Tag><Tag>Disclosure scoring</Tag>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     );
   }
 
@@ -516,5 +506,5 @@
     );
   }
 
-  Object.assign(window, { PNav, PHero, PIntro, PStatBand, PStories, PContact, PFooter });
+  Object.assign(window, { PNav, PHero, PStatBand, PStories, PContact, PFooter });
 })();
