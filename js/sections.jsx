@@ -325,8 +325,8 @@
   /* ----- Rainfall step-change: the sudden ~2000 drop, revealed by scroll --- */
   const RAIN_SCROLLY_STEPS = [
     { eyebrow: "The question", text: "Seventy-four years of cool-season (April–October) rain across south-west WA, measured against the 1950s. Did it drift down slowly, or change all at once?" },
-    { eyebrow: "Noisy, year to year", text: "Rain always bounces around — wet years, dry years. For five decades it wobbled near the old normal with no clear direction." },
-    { eyebrow: "Then it broke", text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down — and the wet years never climbed back over it." },
+    { eyebrow: "Noisy, year to year", text: "Rain always bounces around: wet years, dry years. For five decades it wobbled near the old normal with no clear direction." },
+    { eyebrow: "Then it broke", text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down, and the wet years never climbed back over it." },
     { eyebrow: "A drier normal", text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now." },
   ];
 
@@ -475,8 +475,8 @@
           {p.radar && window.AdhiCharts && window.AdhiCharts.RadarChart && (
             <Reveal className="story__radar" delay={120}>
               <div className="story__chart-title">How the three compare, pillar by pillar</div>
-              {React.createElement(window.AdhiCharts.RadarChart, { data: p.radar, label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars — governance, strategy, risk management, and metrics and targets — each scored out of 4." })}
-              <p className="story__radar-note">Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure — but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.</p>
+              {React.createElement(window.AdhiCharts.RadarChart, { data: p.radar, label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars (governance, strategy, risk management, and metrics and targets), each scored out of 4." })}
+              <p className="story__radar-note">Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure, but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.</p>
             </Reveal>
           )}
 
@@ -516,7 +516,7 @@
             <Reveal className="story__map">
               <div className="story__chart-title">Where the drying hit, decade by decade</div>
               {React.createElement(window.AdhiCharts.RainMapChart, { data: window.RAINMAPDATA, label: "Map of seven south-west WA weather stations, each coloured by how far that decade's cool-season rainfall sat below or above its 1950s baseline." })}
-              <p className="story__map-note">Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000 — the wheatbelt stations hardest of all.</p>
+              <p className="story__map-note">Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000, with the wheatbelt stations hardest of all.</p>
             </Reveal>
           )}
 
@@ -554,7 +554,7 @@
     );
   }
 
-  /* Get-in-touch card — kept at the bottom as the closing call to action. */
+  /* Get-in-touch card, kept at the bottom as the closing call to action. */
   function PContact() {
     return (
       <section className="section contactband">

@@ -282,7 +282,7 @@
   /* A map of south-west WA: each weather station is a dot whose colour and
      size show how far that decade's cool-season rain sat below (red) or
      above (blue) the 1950s baseline. Drag the decade slider to watch the
-     drying deepen and spread — the rainfall analogue of the storm-track map. */
+     drying deepen and spread, the rainfall analogue of the storm-track map. */
   function rainColor(v, maxAbs) {
     if (v == null) return "#9aa7b8";
     const t = Math.max(-1, Math.min(1, v / maxAbs));
@@ -361,7 +361,7 @@
       React.createElement("div", { className: "map__legend" },
         React.createElement("span", { className: "map__legend-l" }, "Drier"),
         React.createElement("span", { className: "map__ramp map__ramp--rain" }),
-        React.createElement("span", { className: "map__legend-l" }, "Wetter — vs the 1950s")
+        React.createElement("span", { className: "map__legend-l" }, "Wetter vs the 1950s")
       )
     );
   }
