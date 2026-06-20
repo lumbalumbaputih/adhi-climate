@@ -182,5 +182,60 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable };
+  /* --------------------------------------------------------------- MapChart */
+  const WIND_STOPS = [[20, "#6b7a8f"], [50, "#1fa9c7"], [80, "#1f9d55"], [105, "#ffc234"], [125, "#ff5c39"], [150, "#b5179e"]];
+  function hx(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function windColor(w) {
+    if (!w) return "#9aa7b8";
+    for (let i = 0; i < WIND_STOPS.length - 1; i++) {
+      const [w0, c0] = WIND_STOPS[i], [w1, c1] = WIND_STOPS[i + 1];
+      if (w <= w1 || i === WIND_STOPS.length - 2) {
+        const t = Math.max(0, Math.min(1, (w - w0) / (w1 - w0))), a = hx(c0), b = hx(c1);
+        return `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)},${Math.round(a[1] + (b[1] - a[1]) * t)},${Math.round(a[2] + (b[2] - a[2]) * t)})`;
+      }
+    }
+    return WIND_STOPS[WIND_STOPS.length - 1][1];
+  }
+  function MapChart({ data, label }) {
+    const [hi, setHi] = useState(null);
+    const win = data.win, VW = 600, VH = 660, m = 16;
+    const cosMid = Math.cos((win.lat0 + win.lat1) / 2 * Math.PI / 180);
+    const lonMid = (win.lon0 + win.lon1) / 2, latMid = (win.lat0 + win.lat1) / 2;
+    const sc = Math.min((VW - 2 * m) / ((win.lon1 - win.lon0) * cosMid), (VH - 2 * m) / (win.lat1 - win.lat0));
+    const px = (lo) => VW / 2 + (lo - lonMid) * cosMid * sc;
+    const py = (la) => VH / 2 - (la - latMid) * sc;
+    const path = (pts) => pts.map((p, i) => (i ? "L" : "M") + px(p[0]).toFixed(1) + " " + py(p[1]).toFixed(1)).join(" ");
+    const lonLines = [110, 115, 120, 125, 130], latLines = [-10, -15, -20, -25, -30, -35];
+    const hv = hi != null ? data.tracks[hi] : null;
+    return React.createElement("div", { className: "chart" },
+      React.createElement("svg", { viewBox: `0 0 ${VW} ${VH}`, className: "chart__svg map__svg", role: "img", "aria-label": label },
+        lonLines.map((lo) => React.createElement("line", { key: "lo" + lo, x1: px(lo), x2: px(lo), y1: py(win.lat1), y2: py(win.lat0), className: "map__grat" })),
+        latLines.map((la) => React.createElement("line", { key: "la" + la, x1: px(win.lon0), x2: px(win.lon1), y1: py(la), y2: py(la), className: "map__grat" })),
+        latLines.map((la) => React.createElement("text", { key: "lat" + la, x: px(win.lon0) + 3, y: py(la) - 3, className: "map__grat-label" }, Math.abs(la) + "°S")),
+        React.createElement("path", { d: path(data.coast), className: "map__coast" }),
+        data.tracks.map((t, i) => React.createElement("path", {
+          key: i, d: path(t.p), fill: "none", stroke: windColor(t.w), strokeWidth: hi === i ? 3 : 1.4,
+          className: "map__track" + (hi === i ? " is-hi" : (hi != null ? " is-dim" : "")),
+          onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null),
+        })),
+        data.cities.map((c, i) => React.createElement("g", { key: "c" + i },
+          React.createElement("circle", { cx: px(c.lo), cy: py(c.la), r: 3, className: "map__city" }),
+          React.createElement("text", { x: px(c.lo) + 6, y: py(c.la) + 3.5, className: "map__city-label" }, c.n)
+        )),
+        hv && React.createElement("g", { style: { pointerEvents: "none" } },
+          React.createElement("rect", { x: m, y: m, width: 210, height: 48, rx: 8, className: "map__info-bg" }),
+          React.createElement("text", { x: m + 13, y: m + 21, className: "map__info-h" }, hv.n + " · " + hv.y),
+          React.createElement("text", { x: m + 13, y: m + 38, className: "map__info-t" }, "peak " + hv.w + " kt")
+        ),
+        React.createElement("text", { x: VW - m, y: VH - m, textAnchor: "end", className: "map__count" }, data.tracks.length + " storms within 500 km · 1985–2024")
+      ),
+      React.createElement("div", { className: "map__legend" },
+        React.createElement("span", { className: "map__legend-l" }, "Peak wind"),
+        React.createElement("span", { className: "map__ramp" }),
+        React.createElement("span", { className: "map__legend-l" }, "weaker → stronger (Cat 5)")
+      )
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart };
 })();
