@@ -720,7 +720,7 @@
       label: "Tracks of the 193 cyclones that came within 500 km of WA, 1985 to 2024, coloured by peak wind."
     }), /*#__PURE__*/React.createElement("p", {
       className: "story__map-note"
-    }, "Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.")), p.scrolly && window.SCROLLYDATA && /*#__PURE__*/React.createElement("div", {
+    }, "Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm, or use the sliders to filter by season and storm strength. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.")), p.scrolly && window.SCROLLYDATA && /*#__PURE__*/React.createElement("div", {
       className: "story__scrolly"
     }, /*#__PURE__*/React.createElement(PScrolly, null)), /*#__PURE__*/React.createElement("div", {
       className: "story__links"
