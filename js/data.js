@@ -15,6 +15,7 @@
       location: "Western Australia · remote-friendly",
       email: "adhiazure@gmail.com",
       linkedin: "https://www.linkedin.com/in/adhi-m/",
+      availability: "Available for internships · Perth, WA or remote",
     },
     stats: [
       { label: "Cyclone record", value: "40", unit: "yrs", caption: "1985–2024 tracks" },
@@ -74,6 +75,7 @@
         },
         vizKey: "cyclone",
         hasMap: true,
+        scrolly: true,
         viz: [
           { type: "scatter", key: "sst_scatter", title: "Warmer seas vs storm strength" },
           { type: "bar", key: "intensity_decade", title: "Peak intensity by decade" },
