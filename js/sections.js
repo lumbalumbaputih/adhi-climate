@@ -553,10 +553,10 @@
     text: "Seventy-four years of cool-season (April–October) rain across south-west WA, measured against the 1950s. Did it drift down slowly, or change all at once?"
   }, {
     eyebrow: "Noisy, year to year",
-    text: "Rain always bounces around — wet years, dry years. For five decades it wobbled near the old normal with no clear direction."
+    text: "Rain always bounces around: wet years, dry years. For five decades it wobbled near the old normal with no clear direction."
   }, {
     eyebrow: "Then it broke",
-    text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down — and the wet years never climbed back over it."
+    text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down, and the wet years never climbed back over it."
   }, {
     eyebrow: "A drier normal",
     text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now."
@@ -846,10 +846,20 @@
       className: "story__chart-title"
     }, "How the three compare, pillar by pillar"), React.createElement(window.AdhiCharts.RadarChart, {
       data: p.radar,
-      label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars — governance, strategy, risk management, and metrics and targets — each scored out of 4."
+      label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars (governance, strategy, risk management, and metrics and targets), each scored out of 4."
     }), /*#__PURE__*/React.createElement("p", {
       className: "story__radar-note"
-    }, "Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure — but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.")), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
+    }, "Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure, but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.")), p.matrix && window.AASBMATRIX && window.AdhiCharts && window.AdhiCharts.ScoreHeat && /*#__PURE__*/React.createElement(Reveal, {
+      className: "story__matrix",
+      delay: 120
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "story__chart-title"
+    }, "All 31 requirements, company by company"), React.createElement(window.AdhiCharts.ScoreHeat, {
+      data: window.AASBMATRIX,
+      label: "Heatmap of the 31 AASB S2 sub-requirements scored 0 to 4 for Rio Tinto, Woodside and BHP, grouped by pillar."
+    }), /*#__PURE__*/React.createElement("p", {
+      className: "story__matrix-note"
+    }, "Every one of the 31 requirements, scored 0 to 4 straight from each company's own report. Greener is more complete. The amber band across the asset-level metrics (M4 to M6) is the gap all three share: which assets are actually at risk, and a dollar figure on the financial impact. Hover or tap any cell for the requirement and the gap note.")), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
       className: "story__deep",
       delay: 120
     }, /*#__PURE__*/React.createElement(DeepRail, {
@@ -890,7 +900,7 @@
       label: "Map of seven south-west WA weather stations, each coloured by how far that decade's cool-season rainfall sat below or above its 1950s baseline."
     }), /*#__PURE__*/React.createElement("p", {
       className: "story__map-note"
-    }, "Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000 — the wheatbelt stations hardest of all.")), p.rainScrolly && window.RAINSCROLLYDATA && /*#__PURE__*/React.createElement("div", {
+    }, "Seven long-running weather stations across the south-west, coloured by how far each decade's cool-season rain sat below (red) or above (blue) its 1950s level. Drag the slider and watch the whole region turn red after 2000, with the wheatbelt stations hardest of all.")), p.rainScrolly && window.RAINSCROLLYDATA && /*#__PURE__*/React.createElement("div", {
       className: "story__scrolly"
     }, /*#__PURE__*/React.createElement(PRainScrolly, null)), /*#__PURE__*/React.createElement("div", {
       className: "story__links"
@@ -923,7 +933,7 @@
     })));
   }
 
-  /* Get-in-touch card — kept at the bottom as the closing call to action. */
+  /* Get-in-touch card, kept at the bottom as the closing call to action. */
   function PContact() {
     return /*#__PURE__*/React.createElement("section", {
       className: "section contactband"

@@ -282,7 +282,7 @@
   /* A map of south-west WA: each weather station is a dot whose colour and
      size show how far that decade's cool-season rain sat below (red) or
      above (blue) the 1950s baseline. Drag the decade slider to watch the
-     drying deepen and spread — the rainfall analogue of the storm-track map. */
+     drying deepen and spread, the rainfall analogue of the storm-track map. */
   function rainColor(v, maxAbs) {
     if (v == null) return "#9aa7b8";
     const t = Math.max(-1, Math.min(1, v / maxAbs));
@@ -361,7 +361,7 @@
       React.createElement("div", { className: "map__legend" },
         React.createElement("span", { className: "map__legend-l" }, "Drier"),
         React.createElement("span", { className: "map__ramp map__ramp--rain" }),
-        React.createElement("span", { className: "map__legend-l" }, "Wetter — vs the 1950s")
+        React.createElement("span", { className: "map__legend-l" }, "Wetter vs the 1950s")
       )
     );
   }
@@ -436,5 +436,73 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart };
+  /* ------------------------------------------------------------- ScoreHeat */
+  /* The 31 AASB S2 sub-requirements as a grouped heatmap: rows are the
+     requirements (grouped by pillar), columns are the three companies, each
+     cell shaded by its 0-4 score. Hover or tap a cell to load the full
+     requirement, score and gap note into the detail panel below. */
+  function scoreCell(s) {
+    if (s == null) return { bg: "var(--bg-muted)", fg: "var(--text-faint)" };
+    if (s >= 3.5) return { bg: "#1F9D55", fg: "#ffffff" };
+    if (s >= 2.5) return { bg: "#8FD0A8", fg: "#10331f" };
+    if (s >= 1.5) return { bg: "#F4B740", fg: "#3d2b00" };
+    return { bg: "#E5484D", fg: "#ffffff" };
+  }
+  function ScoreHeat({ data, label }) {
+    const [sel, setSel] = useState(null);   // { pi, ri, ci }
+    const companies = data.companies;
+    const cols = `minmax(150px,1.7fr) repeat(${companies.length}, minmax(54px,1fr))`;
+    const selCell = sel ? (() => {
+      const row = data.pillars[sel.pi].rows[sel.ri];
+      return { pillar: data.pillars[sel.pi].name, row, cell: row.cells[sel.ci], company: companies[sel.ci] };
+    })() : null;
+    return React.createElement("div", { className: "sheat", role: "group", "aria-label": label },
+      React.createElement("div", { className: "sheat__grid", style: { gridTemplateColumns: cols } },
+        React.createElement("div", { className: "sheat__corner" }, "31 requirements"),
+        companies.map((c) => React.createElement("div", { key: "h" + c, className: "sheat__colh" }, c)),
+        data.pillars.map((p, pi) => [
+          React.createElement("div", { key: "ph" + pi, className: "sheat__pillar", style: { gridColumn: `1 / span ${companies.length + 1}` } }, p.name),
+          p.rows.map((row, ri) => [
+            React.createElement("div", { key: "rh" + pi + "-" + ri, className: "sheat__rowh", title: row.desc },
+              React.createElement("span", { className: "sheat__rid" }, row.id),
+              React.createElement("span", { className: "sheat__rdesc" }, row.short)
+            ),
+            row.cells.map((cell, ci) => {
+              const col = scoreCell(cell.s);
+              const active = sel && sel.pi === pi && sel.ri === ri && sel.ci === ci;
+              return React.createElement("button", {
+                key: "c" + pi + "-" + ri + "-" + ci, type: "button",
+                className: "sheat__cell" + (active ? " is-active" : ""),
+                style: { background: col.bg, color: col.fg },
+                onMouseEnter: () => setSel({ pi, ri, ci }), onFocus: () => setSel({ pi, ri, ci }),
+                onClick: () => setSel({ pi, ri, ci }),
+                "aria-label": `${companies[ci]} ${row.id} ${row.short}: ${cell.s} out of 4`,
+              }, cell.s);
+            }),
+          ]),
+        ])
+      ),
+      React.createElement("div", { className: "sheat__detail" + (selCell ? " is-filled" : "") },
+        selCell ? React.createElement(React.Fragment, null,
+          React.createElement("div", { className: "sheat__detail-head" },
+            React.createElement("span", { className: "sheat__detail-co" }, selCell.company),
+            React.createElement("span", { className: "sheat__detail-id" }, selCell.row.id),
+            React.createElement("span", { className: "sheat__detail-score", style: { background: scoreCell(selCell.cell.s).bg, color: scoreCell(selCell.cell.s).fg } }, selCell.cell.s + " / 4")
+          ),
+          React.createElement("div", { className: "sheat__detail-req" }, selCell.row.desc),
+          React.createElement("p", { className: "sheat__detail-note" }, selCell.cell.n),
+          selCell.cell.e && React.createElement("div", { className: "sheat__detail-ev" }, "Evidence: " + selCell.cell.e)
+        ) : React.createElement("p", { className: "sheat__detail-hint" }, "Hover or tap any cell to see the requirement, the score, and the gap note pulled from that company's report.")
+      ),
+      React.createElement("div", { className: "sheat__legend" },
+        React.createElement("span", { className: "sheat__legend-l" }, "Score"),
+        [["0-1", "#E5484D"], ["2", "#F4B740"], ["3", "#8FD0A8"], ["4", "#1F9D55"]].map((k) =>
+          React.createElement("span", { key: k[0], className: "sheat__legend-k" },
+            React.createElement("span", { className: "sheat__legend-sw", style: { background: k[1] } }), k[0])),
+        React.createElement("span", { className: "sheat__legend-l" }, "weaker → more complete")
+      )
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, ScoreHeat };
 })();
