@@ -293,6 +293,37 @@ html { scroll-behavior: smooth; }
 .radar__toggle-score { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
 .radar__note { font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-relaxed); margin-top: var(--space-4); max-width: 70ch; text-align: left; }
 
+/* ---------- AASB S2 sub-indicator heatmap (light card) ---------- */
+.story__matrix { margin-top: var(--space-6); background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-lg); }
+.sheat__grid { display: grid; gap: 3px; align-items: stretch; }
+.sheat__corner { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); display: flex; align-items: flex-end; padding: 0 0 6px 2px; }
+.sheat__colh { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--text-strong); text-align: center; padding: 0 0 6px; align-self: end; }
+.sheat__pillar { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--accent-text); background: var(--accent-soft); border-radius: var(--radius-sm); padding: 6px 10px; margin-top: 6px; }
+.sheat__rowh { display: flex; align-items: center; gap: 8px; padding: 0 8px 0 2px; min-height: 30px; }
+.sheat__rid { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); flex: none; width: 28px; }
+.sheat__rdesc { font-size: var(--text-sm); color: var(--text-body); line-height: 1.2; }
+.sheat__cell { border: none; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--weight-semibold); cursor: pointer; min-height: 30px; display: flex; align-items: center; justify-content: center; transition: transform var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard); }
+.sheat__cell:hover, .sheat__cell:focus-visible { transform: scale(1.06); box-shadow: var(--shadow-md); outline: none; position: relative; z-index: 1; }
+.sheat__cell.is-active { box-shadow: 0 0 0 2px var(--surface-card), 0 0 0 4px var(--text-strong); position: relative; z-index: 1; }
+.sheat__detail { margin-top: var(--space-5); border: 1px solid var(--border-subtle); border-left: 3px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); background: var(--bg-subtle); min-height: 96px; }
+.sheat__detail.is-filled { border-left-color: var(--accent); }
+.sheat__detail-hint { font-size: var(--text-sm); color: var(--text-muted); margin: 0; }
+.sheat__detail-head { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-2); }
+.sheat__detail-co { font-weight: var(--weight-semibold); color: var(--text-strong); }
+.sheat__detail-id { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
+.sheat__detail-score { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-semibold); border-radius: 999px; padding: 2px 10px; }
+.sheat__detail-req { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--text-body); margin-bottom: var(--space-2); }
+.sheat__detail-note { font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-relaxed); margin: 0; }
+.sheat__detail-ev { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-faint); margin-top: var(--space-2); }
+.sheat__legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
+.sheat__legend-k { display: inline-flex; align-items: center; gap: 5px; }
+.sheat__legend-sw { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+@media (max-width: 640px) {
+  .sheat__rdesc { font-size: var(--text-xs); }
+  .sheat__rid { width: 22px; font-size: 10px; }
+  .sheat__cell { font-size: var(--text-xs); }
+}
+
 /* ---------- Availability line ---------- */
 .about__contact-avail { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--leaf-text); margin-top: 2px; }
 .about__contact-avail svg { color: var(--leaf); }

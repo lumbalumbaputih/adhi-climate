@@ -480,6 +480,14 @@
             </Reveal>
           )}
 
+          {p.matrix && window.AASBMATRIX && window.AdhiCharts && window.AdhiCharts.ScoreHeat && (
+            <Reveal className="story__matrix" delay={120}>
+              <div className="story__chart-title">All 31 requirements, company by company</div>
+              {React.createElement(window.AdhiCharts.ScoreHeat, { data: window.AASBMATRIX, label: "Heatmap of the 31 AASB S2 sub-requirements scored 0 to 4 for Rio Tinto, Woodside and BHP, grouped by pillar." })}
+              <p className="story__matrix-note">Every one of the 31 requirements, scored 0 to 4 straight from each company's own report. Greener is more complete. The amber band across the asset-level metrics (M4 to M6) is the gap all three share: which assets are actually at risk, and a dollar figure on the financial impact. Hover or tap any cell for the requirement and the gap note.</p>
+            </Reveal>
+          )}
+
           {cards.length > 1 && (
             <Reveal className="story__deep" delay={120}>
               <DeepRail cards={cards} vizKey={p.vizKey} />

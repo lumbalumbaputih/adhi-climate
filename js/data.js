@@ -172,14 +172,7 @@
           { value: "575.7", unit: "Mt", label: "The emissions almost no one targets", text: "Most of these firms' emissions come from customers using their products (Rio Tinto's are 575.7 Mt, versus about 31.5 from its own operations), yet that is where their targets are weakest." },
           { value: "4", unit: "areas", label: "The same gaps everywhere", text: "Across all three, the biggest gaps were the same: which assets are actually at risk, and putting a dollar figure on the financial impact." },
         ],
-        scoreboard: {
-          headers: ["Company", "Gov", "Strategy", "Risk", "Metrics", "Overall", "Band"],
-          rows: [
-            ["Rio Tinto", "3.7", "3.7", "3.5", "3.9", "3.69", "Advanced"],
-            ["Woodside", "3.8", "3.2", "3.3", "3.1", "3.35", "Advanced"],
-            ["BHP", "3.0", "3.0", "3.0", "2.8", "2.94", "Developing"],
-          ],
-        },
+        matrix: true,
         radar: {
           axes: ["Governance", "Strategy", "Risk", "Metrics"],
           max: 4,

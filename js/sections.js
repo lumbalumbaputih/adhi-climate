@@ -849,7 +849,17 @@
       label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars (governance, strategy, risk management, and metrics and targets), each scored out of 4."
     }), /*#__PURE__*/React.createElement("p", {
       className: "story__radar-note"
-    }, "Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure, but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.")), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
+    }, "Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure, but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.")), p.matrix && window.AASBMATRIX && window.AdhiCharts && window.AdhiCharts.ScoreHeat && /*#__PURE__*/React.createElement(Reveal, {
+      className: "story__matrix",
+      delay: 120
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "story__chart-title"
+    }, "All 31 requirements, company by company"), React.createElement(window.AdhiCharts.ScoreHeat, {
+      data: window.AASBMATRIX,
+      label: "Heatmap of the 31 AASB S2 sub-requirements scored 0 to 4 for Rio Tinto, Woodside and BHP, grouped by pillar."
+    }), /*#__PURE__*/React.createElement("p", {
+      className: "story__matrix-note"
+    }, "Every one of the 31 requirements, scored 0 to 4 straight from each company's own report. Greener is more complete. The amber band across the asset-level metrics (M4 to M6) is the gap all three share: which assets are actually at risk, and a dollar figure on the financial impact. Hover or tap any cell for the requirement and the gap note.")), cards.length > 1 && /*#__PURE__*/React.createElement(Reveal, {
       className: "story__deep",
       delay: 120
     }, /*#__PURE__*/React.createElement(DeepRail, {
