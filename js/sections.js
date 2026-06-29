@@ -199,7 +199,9 @@
       variant: "secondary",
       size: "sm",
       as: "a",
-      href: P.repo,
+      href: "assets/2026-06-24-Adhi Resume - ESG.pdf",
+      target: "_blank",
+      rel: "noopener noreferrer",
       iconLeft: /*#__PURE__*/React.createElement(Icon, {
         name: "file-text",
         size: 16
