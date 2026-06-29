@@ -134,7 +134,7 @@
           </nav>
           <div className="nav__actions">
             <PThemeToggle />
-            <Button variant="secondary" size="sm" as="a" href={P.repo} iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
+            <Button variant="secondary" size="sm" as="a" href="assets/2026-06-24-Adhi Resume - ESG.pdf" target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
             <Button variant="primary" size="sm" onClick={onContact} iconRight={<Icon name="arrow-right" size={16} />}>Get in touch</Button>
           </div>
         </div>
