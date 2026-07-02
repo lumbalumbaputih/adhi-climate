@@ -34,6 +34,39 @@ Then run, inside water-security/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
+PROJECT: swis-decarbonisation (WA main grid)        [DATA NEEDED]
+======================================================================
+
+1. AEMO WEM facility generation (SCADA), monthly CSVs     [REQUIRED]
+----------------------------------------------------------------------
+AEMO WEM data portal, https://data.wa.aemo.com.au
+
+Download the monthly "Facility SCADA" CSV files for the span you want
+analysed (the record starts in the mid-2000s; whole calendar years
+only, since incomplete years are excluded from trends). Drop them all
+here; the parser needs a date column, a facility column, and an
+energy (MWh) or power (MW) column.
+
+2. WEM facility register (fuel mapping)                   [REQUIRED]
+----------------------------------------------------------------------
+From the same portal (or AEMO's WEM facilities page). Any CSV with a
+facility-code column plus a fuel or technology column works. If no
+register with fuels is available, hand-build facility_fuel.csv with
+columns facility,fuel and a "# source:" first line saying where each
+assignment came from.
+
+3. NGA emission factors                                    [OPTIONAL]
+----------------------------------------------------------------------
+After the first build_dataset.py run, fill in
+swis-decarbonisation/data/emission_factors.csv from the current
+National Greenhouse Accounts factors workbook (cite it in the source
+column). Without it the mix analysis still runs; only the intensity
+series is skipped.
+
+Then run, inside swis-decarbonisation/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+======================================================================
 PROJECT: cyclone-risk (complete; files only needed to re-run
 the pipeline from scratch)
 ======================================================================
