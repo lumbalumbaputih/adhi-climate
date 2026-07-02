@@ -51,6 +51,22 @@ check_true("-99999 becomes NaN", m[(m.year == 1960) & (m.month == 3)]
 check_true("month decoding: first row is January",
            m.iloc[0].month == 1 and m.iloc[11].month == 12)
 
+# --- metric-file guard: local-datum heights must abort ---------------------------
+metric_lines = []
+for y in range(1950, 2000):
+    for mo in range(1, 13):
+        t = y + (mo - 0.5) / 12.0
+        metric_lines.append(f" {t:.4f}; {550 + (y - 1950)}; 0; 000")
+with tempfile.TemporaryDirectory() as td:
+    p = os.path.join(td, "111.metdata")
+    open(p, "w").write("\n".join(metric_lines))
+    try:
+        bd.parse_rlr_monthly(p)
+        aborted = False
+    except SystemExit as e:
+        aborted = "METRIC" in str(e)
+check_true("metric-datum file is refused with an explanation", aborted)
+
 # --- annual completeness --------------------------------------------------------
 annual = bd.to_annual(m)
 y1960 = annual[annual.year == 1960].iloc[0]

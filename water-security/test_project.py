@@ -78,6 +78,26 @@ with tempfile.TemporaryDirectory() as td:
     parsed = bd.parse_daily_flow(p)
 check_true("HRS parser returns a frame", parsed is not None)
 check_true("HRS parser finds the station id", parsed.station.iloc[0] == "616999")
+
+# real BoM HRS layout: river name and id share one metadata line
+hrs2 = "\n".join(
+    ['#,"Australian Bureau of Meteorology"',
+     '#,"Hydrologic Reference Stations"',
+     '#,"Murray River - Baden Powell (614006)"',
+     '#,"Catchment area:", 6772.9,"km^2"',
+     "Date,Flow (ML),Bureau QCode"]
+    + [f"{d.date()},{100.0 + (i % 5)},A"
+       for i, d in enumerate(pd.date_range("1980-01-01", "1995-12-31", freq="D"))]
+)
+with tempfile.TemporaryDirectory() as td:
+    p = os.path.join(td, "614006_daily_ts.csv")
+    with open(p, "w") as f:
+        f.write(hrs2)
+    parsed_hrs = bd.parse_daily_flow(p)
+check_true("real HRS layout: id from the river-name line",
+           parsed_hrs is not None and parsed_hrs.station.iloc[0] == "614006")
+check_true("real HRS layout: river name captured",
+           parsed_hrs.station_name.iloc[0] == "Murray River - Baden Powell")
 check("HRS parser row count", len(parsed),
       len(pd.date_range("1980-01-01", "1995-12-31", freq="D")))
 
@@ -112,19 +132,26 @@ check("annual file rows", len(parsed3), 2)
 rng = np.random.default_rng(42)
 years = np.arange(1975, 2025)
 rows = []
-for st, scale in (("A", 100.0), ("B", 10.0)):
+scales = {"A": 100.0, "B": 10.0, "C": 40.0, "D": 25.0, "E": 60.0, "F": 15.0}
+for st, scale in scales.items():
     for y in years:
-        level = 1.0 if y < 2000 else 0.5      # both stations halve after 2000
+        level = 1.0 if y < 2000 else 0.5      # all stations halve after 2000
         rows.append({"station": st, "station_name": st, "water_year": int(y),
                      "total_ML": scale * level * (1 + 0.05 * rng.standard_normal()),
                      "days_missing": 0, "complete": True})
-reg, stations, full_base = bd.build_regional(pd.DataFrame(rows))
+# one station also reports thin early years that must NOT enter the series
+early = [{"station": "A", "station_name": "A", "water_year": int(y),
+          "total_ML": 500.0, "days_missing": 0, "complete": True}
+         for y in range(1955, 1960)]
+reg, stations, full_base = bd.build_regional(pd.DataFrame(early + rows))
 pre = reg[reg.water_year < 2000].regional_anom_pct.mean()
 post = reg[reg.water_year >= 2000].regional_anom_pct.mean()
 check("regional pre-2000 anomaly ~ 0%", pre, 0.0, tol=3.0)
 check("regional post-2000 anomaly ~ -50%", post, -50.0, tol=3.0)
 check_true("big station does not dominate the % series",
            abs(post - (-50.0)) < 3.0)
+check_true("years with fewer than MIN_STATIONS stations are dropped",
+           int(reg.water_year.min()) == 1975)
 
 # --- elasticity estimators -----------------------------------------------------------
 P = np.linspace(400, 900, 40)

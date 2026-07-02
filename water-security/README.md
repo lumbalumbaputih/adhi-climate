@@ -7,13 +7,25 @@ companies must report their climate risks). It is the direct sequel to the
 quantified how much drier South West WA has become; this one quantifies what
 that dryness did to the water that actually reaches rivers and dams.
 
-> **Status: pipeline complete, awaiting the data drop.** Every number in this
-> README will be computed by `analysis.py` from the files described below.
-> Nothing here is pre-filled, because the suite rule is that no figure is
-> published before the code has produced it from source data. To finish the
-> project, drop the streamflow files described in
-> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md) and run the
-> three scripts in order.
+> **In one paragraph.** Across 12 Bureau of Meteorology Hydrologic Reference
+> Stations in the Darling Range and surrounding SW WA catchments, water-year
+> streamflow **stepped down around 2001** (Pettitt change-point test,
+> p = 0.007), the same break year the rainfall project found in the winter
+> rain. The size of the step is the story: against the 1975-1999 baseline,
+> flow since 2000 is down **41%**, and since 2010 down **48%**, while the
+> same comparison for rainfall is only about -12%. That is the dry-catchment
+> amplifier at work: parched soils and falling groundwater absorb more of
+> the rain before any of it runs off, so every 1% of winter rainfall lost
+> costs roughly **2.5 to 3.7% of streamflow** (rainfall-runoff elasticity:
+> non-parametric estimator 2.55; log-log regression 3.67, r-squared 0.68,
+> p < 1e-14). Since 2000 there is no further significant trend (Mann-Kendall
+> p = 0.71): the rivers have not kept sliding, they have **settled at the
+> new, far lower normal**. Water Corporation's own published series tells
+> the same story from the dam side: inflows averaging 418 GL/yr before 1975
+> fell to 167 GL/yr after, with 2021-2025 averaging roughly 85 GL/yr. For a
+> water utility this is the textbook chronic physical risk: the supply the
+> dams were designed around no longer exists, which is exactly why Perth now
+> leans on desalination and groundwater replenishment.
 
 ## Research question
 
@@ -52,6 +64,30 @@ BoM's reference set chosen specifically for trend detection: long records,
 good quality control, minimal extraction or regulation upstream. The Water
 Corporation series is kept as the utility-eye validation, not the evidence.
 
+**The stations analysed** (BoM HRS, August 2024 dataset version; 13 files
+supplied, 12 in the regional series):
+
+| Station | Gauge | Complete water years |
+|---|---|---|
+| 614006 | Murray River - Baden Powell | 1964-2022 |
+| 614044 | Yarragil Brook - Yarragil Formation | 1953-2022 |
+| 614196 | Williams River - Saddleback Rd Bridge | 1967-2022 |
+| 614224 | Hotham River - Marradong Rd Bridge | 1967-2022 |
+| 616002 | Darkin River - Pine Plantation | 1969-2022 |
+| 616006 | Brockman River - Tanamerah | 1981-2022 |
+| 616013 | Helena River - Ngangaguringuring | 1972-2016 |
+| 616019 | Brockman River - Yalliawirra | 1975-2022 |
+| 616041 | Wungong Brook - Vardi Rd | 1981-2022 |
+| 616178 | Jane Brook - National Park | 1963-2022 |
+| 616216 | Helena River - Poison Lease Gs | 1967-2022 |
+| 617003 | Gingin Brook - Bookine Bookine | 1973-2022 |
+
+Station 614037 (supplied but starting 1983) is excluded because it cannot
+cover 18 complete baseline years, and water years 1953-1966 are excluded
+because fewer than 5 stations report (a "regional" mean of one or two
+gauges is not regional). The published series is **1967-2022**, with 7-12
+stations per year and a full-network baseline of 45,063 ML.
+
 **Definitions.** Water year = 1 May to 30 April, labelled by the year of the
 May start, so each winter wet season lands in one bucket. Baseline =
 1975-1999 water years (between the two known rainfall steps; early enough to
@@ -82,30 +118,62 @@ labelling, completeness rules, the tolerant parser, both elasticity
 estimators) are tested with synthetic inputs in `test_project.py`; both test
 files run in CI on every push.
 
-## Validation plan
+## Results
 
-Before the results are published in this README they must pass three checks:
+All numbers below are produced by `analysis.py` from the clean CSVs in
+`data/`; the charts are in `charts/`.
 
-1. The regional streamflow step-change year should be consistent with the
-   rainfall project's change point (around 2000) rather than contradicting it.
-2. Elasticity should land in the range hydrology literature reports for SW WA
-   (well above 1; CSIRO and Water Corporation both describe streamflow
-   declining several times faster than rainfall). If it does not, the first
-   suspect is the station set, not the climate.
-3. The gauged story should be directionally consistent with Water
-   Corporation's published inflow series if that file is supplied.
+| Question | Result |
+|---|---|
+| Step change | Pettitt change point at water year **2001** (p = 0.0075), matching the rainfall project's 2000 break |
+| Size of the step | 1975-1999 mean 44,380 ML; 2000-2022 mean 26,044 ML (**-41.3%**); 2010-2022 mean 22,942 ML (**-48.3%**) |
+| Long-run trend | Sen's slope **-13.4% per decade** over 1967-2022 (Mann-Kendall p = 0.0034; prewhitened p identical) |
+| Trend since 2000 | None (Sen -4.9%/decade, MK p = 0.71): flow has stabilised at the lower level, not kept sliding |
+| Elasticity | **2.55** (Sankarasubramanian non-parametric) to **3.67** (log-log OLS, r-squared 0.68, p = 7.7e-15) % of flow per % of rainfall |
+| Amplification | Rainfall -12.3% vs streamflow -41.3% against the same 1975-1999 baseline: **3.3x** |
 
-## Limitations (write-up must keep these)
+## Validation (all three checks passed)
+
+1. **Consistency with the rainfall project.** The streamflow break lands at
+   2001; the rainfall project's Pettitt test found 2000. Same event, seen
+   from the river.
+2. **Elasticity in the literature range.** SW WA hydrology work (CSIRO,
+   Water Corporation, and the research literature) describes streamflow
+   declining two to three-plus times faster than rainfall; both estimators
+   (2.55 and 3.67) sit in or at the top of that band, and the log-log fit
+   explains two-thirds of the year-to-year variance.
+3. **Water Corporation cross-check.** The supplied export of Water
+   Corporation's streamflow chart (cumulative monthly GL, so the December
+   value is the annual total) shows dam inflows averaging **418 GL/yr for
+   1911-1974** falling to **166.7 GL/yr post-1975 (-60%)**, with 2021-2025
+   averaging about **85 GL/yr (-80% vs pre-1975)**. Their catchments and
+   baseline differ from ours (dam catchments vs reference gauges; pre-1975
+   vs 1975-1999 base), so the exact percentages should differ exactly the
+   way they do: measured from the wetter pre-1975 world, the decline is
+   deeper than our -41%.
+
+## Limitations
 
 - Gauged catchments are not the dam catchments; the analysis measures the
-  regional streamflow signal, not Perth's supply ledger.
+  regional streamflow signal, not Perth's supply ledger. The Water
+  Corporation cross-check covers the supply side.
 - Elasticity from observed covariation is descriptive, not a causal model;
-  land-use change and farm dams also reduce runoff and are not separated here.
-- The 1975-1999 baseline is already a post-first-step period, so the reported
-  post-2000 decline understates the change since the mid-century climate.
-- Streamflow is far more skewed than rainfall; the elasticity is estimated in
-  log space and the step change on the % anomaly series partly for that
+  land-use change and farm dams also reduce runoff and are not separated
+  here.
+- The 1975-1999 baseline is already a post-first-step period, so the
+  reported -41% understates the change since the mid-century climate; Water
+  Corporation's own pre-1975 comparison (-60%, and -80% for 2021-2025)
+  shows how much deeper the full fall is.
+- HRS series are gap-filled by the BoM using a rainfall-runoff model (their
+  documentation states this); this analysis uses the HRS values as published
+  and does not re-do that infilling.
+- Streamflow is far more skewed than rainfall; the elasticity is estimated
+  in log space and the step change on the % anomaly series partly for that
   reason.
+- The record before 1967 is discarded because fewer than 5 gauges report;
+  with the single long gauge (Yarragil Brook) the 1950s-60s would swing the
+  "regional" series by hundreds of percent on one small catchment's wet
+  years.
 
 ## Reproduce
 
