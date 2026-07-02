@@ -67,6 +67,27 @@ Then run, inside swis-decarbonisation/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
+PROJECT: extreme-heat (Perth + Pilbara)             [DATA NEEDED]
+======================================================================
+
+Option A (preferred): on any machine with open network access, run
+    cd extreme-heat && python3 build_dataset.py --fetch
+which downloads Perth Airport and Port Hedland from the NCEI API and
+validates the station names.
+
+Option B: download daily TMAX/TMIN yourself and drop the files here.
+Accepted formats (detected by content, any filename):
+  - GHCN daily-summaries CSV (STATION,NAME,DATE,TMAX[,TMIN]), from
+    https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations=ASN00009021&startDate=1950-01-01&endDate=2025-12-31&dataTypes=TMAX,TMIN&format=csv&includeStationName=true&units=metric
+    (repeat with stations=ASN00004032 for Port Hedland; verify the
+    returned NAME column says PERTH AIRPORT / PORT HEDLAND)
+  - BoM Climate Data Online daily max/min temperature CSVs
+    (bom.gov.au/climate/data, one file per element per station)
+
+Then run, inside extreme-heat/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+======================================================================
 PROJECT: cyclone-risk (complete; files only needed to re-run
 the pipeline from scratch)
 ======================================================================
