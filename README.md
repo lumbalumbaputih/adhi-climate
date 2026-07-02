@@ -16,6 +16,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**water-security**](water-security/): Perth Water Security, Streamflow After the Rainfall Step-Change | Chronic physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 | [**swis-decarbonisation**](swis-decarbonisation/): How Fast Is WA's Main Grid Decarbonising? | Transition analytics | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 | [**extreme-heat**](extreme-heat/): Extreme Heat in Perth and the Pilbara | Acute physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast | Acute physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 
 The portfolio site (`index.html`) ties these together: each project card opens a
 case study with the headline findings, the charts, and direct links to the

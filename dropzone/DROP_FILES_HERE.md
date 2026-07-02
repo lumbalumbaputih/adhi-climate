@@ -88,6 +88,28 @@ Then run, inside extreme-heat/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
+PROJECT: marine-heatwaves (Ningaloo coast)          [DATA NEEDED]
+======================================================================
+
+NOAA OISST v2.1 daily SST for the study box, as ERDDAP CSV   [REQUIRED]
+----------------------------------------------------------------------
+Any ERDDAP server carrying OISST v2.1 works (NOAA CoastWatch's
+coastwatch.pfeg.noaa.gov and NCEI's ERDDAP both do; search the server
+for "OISST" and use its Data Access Form to build the URL). Subset:
+
+  latitude  -23.5 to -21.5, longitude 112.5 to 114.5
+  time      1982-01-01 to the latest available
+  variable  sst, format .csv
+
+The parser expects the standard ERDDAP layout (header row, units row,
+then time,latitude,longitude,sst). If the server limits request size,
+split the download into several date ranges; drop all the files here
+(one study box per run).
+
+Then run, inside marine-heatwaves/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+======================================================================
 PROJECT: cyclone-risk (complete; files only needed to re-run
 the pipeline from scratch)
 ======================================================================
