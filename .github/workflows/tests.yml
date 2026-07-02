@@ -16,13 +16,23 @@ jobs:
       - name: Install the minimal stack
         run: pip install numpy pandas
       - name: stats_utils copies are byte-identical
-        run: diff cyclone-risk/stats_utils.py rainfall-decline/stats_utils.py
-      - name: cyclone-risk statistics tests
-        working-directory: cyclone-risk
-        run: python test_stats.py
-      - name: rainfall-decline statistics tests
-        working-directory: rainfall-decline
-        run: python test_stats.py
+        run: |
+          for f in */stats_utils.py; do
+            echo "diff rainfall-decline/stats_utils.py $f"
+            diff rainfall-decline/stats_utils.py "$f"
+          done
+      - name: statistics and pipeline tests (every project)
+        run: |
+          for d in */; do
+            if [ -f "${d}test_stats.py" ]; then
+              echo "=== ${d}test_stats.py ==="
+              (cd "$d" && python test_stats.py)
+            fi
+            if [ -f "${d}test_project.py" ]; then
+              echo "=== ${d}test_project.py ==="
+              (cd "$d" && python test_project.py)
+            fi
+          done
       - name: AASB S2 band-sensitivity check runs clean
         working-directory: aasb-s2-review
         run: python sensitivity.py

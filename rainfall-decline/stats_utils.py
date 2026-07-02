@@ -9,9 +9,9 @@ trend-free prewhitening variant for autocorrelated series, Sen's slope, and
 the Pettitt change-point test) are implemented here from first principles and
 validated against known textbook values in test_stats.py.
 
-This file is intentionally duplicated, byte for byte, in cyclone-risk/ and
-rainfall-decline/ so each project stays self-contained. CI checks that the two
-copies are identical; edit one, then copy it over the other.
+This file is intentionally duplicated, byte for byte, in every project folder
+that needs statistics, so each project stays self-contained. CI checks that
+all copies are identical; edit one, then copy it over the others.
 
 All p-values are two-sided. Results have been checked to agree with
 scipy.stats to ~1e-6.
@@ -141,8 +141,9 @@ def linregress(x, y):
     intercept = ym - slope * xm
     r = ssxy / math.sqrt(ssxx * ssyy) if ssyy > 0 else 0.0
     df = n - 2
-    # residual standard error of the slope
-    ss_res = ssyy - slope * ssxy
+    # residual standard error of the slope; rounding can push ss_res a hair
+    # below zero on a numerically perfect fit, so clamp it
+    ss_res = max(ssyy - slope * ssxy, 0.0)
     s2 = ss_res / df if df > 0 else float("nan")
     stderr = math.sqrt(s2 / ssxx) if ssxx > 0 else float("nan")
     if stderr > 0:
