@@ -47,6 +47,11 @@ def load():
     clean = pd.read_csv("data/rainfall_swwa_clean.csv")
     drivers = pd.read_csv("data/drivers.csv")
     step = pd.read_csv("data/stepchange_summary.csv").iloc[0]
+    # composition-adjusted mm series (see analysis.adjusted_mm): rescale the
+    # full-network baseline by the % anomaly series so years missing a wet
+    # station do not read spuriously dry
+    full_base = clean.groupby("station").baseline_mm.first().mean()
+    reg["regional_cool_mm_adj"] = full_base * (1.0 + reg.regional_anom_pct / 100.0)
     return reg, clean, drivers, step
 
 
@@ -75,27 +80,28 @@ def chart_timeseries(reg):
 def chart_stepchange(reg, step):
     fig, ax = plt.subplots(figsize=(10, 5.2))
     cp = int(step.pettitt_change_year)
-    ax.plot(reg.year, reg.regional_cool_mm, color=MUTED, lw=1.3,
-            marker="o", ms=3, label="Annual Apr–Oct total")
+    ax.plot(reg.year, reg.regional_cool_mm_adj, color=MUTED, lw=1.3,
+            marker="o", ms=3, label="Annual Apr–Oct total (composition-adjusted)")
     pre = reg[reg.year < cp]
     post = reg[reg.year >= cp]
-    ax.hlines(pre.regional_cool_mm.mean(), reg.year.min(), cp - 1,
+    ax.hlines(pre.regional_cool_mm_adj.mean(), reg.year.min(), cp - 1,
               color=INDIGO, lw=3, zorder=4,
-              label=f"{int(reg.year.min())}–{cp-1} mean = {pre.regional_cool_mm.mean():.0f} mm")
-    ax.hlines(post.regional_cool_mm.mean(), cp, reg.year.max(),
+              label=f"{int(reg.year.min())}–{cp-1} mean = {pre.regional_cool_mm_adj.mean():.0f} mm")
+    ax.hlines(post.regional_cool_mm_adj.mean(), cp, reg.year.max(),
               color=TOMATO, lw=3, zorder=4,
-              label=f"{cp}–{int(reg.year.max())} mean = {post.regional_cool_mm.mean():.0f} mm")
+              label=f"{cp}–{int(reg.year.max())} mean = {post.regional_cool_mm_adj.mean():.0f} mm")
     ax.axvline(cp - 0.5, color=INK, ls="--", lw=1.2)
     ax.axvspan(1972, 1977, color=MANGO, alpha=0.18, zorder=0)
     ax.annotate("1970s step", xy=(1974.5, ax.get_ylim()[1]), xytext=(0, -14),
                 textcoords="offset points", ha="center", color=MUTED, fontsize=9)
     ax.annotate(f"Pettitt change point ≈ {cp}\n(p = {step.pettitt_p:.3f})",
-                xy=(cp, post.regional_cool_mm.mean()), xytext=(cp + 2, post.regional_cool_mm.mean() + 60),
+                xy=(cp, post.regional_cool_mm_adj.mean()),
+                xytext=(cp + 2, post.regional_cool_mm_adj.mean() + 60),
                 color=INK, fontsize=10,
                 arrowprops=dict(arrowstyle="->", color=INK))
     pct = step.pre_to_post_pct_change
     ax.set_title(f"A step down, not a gentle slope: {pct:+.0f}% across the break")
-    ax.set_ylabel("Regional April–October rainfall (mm)")
+    ax.set_ylabel("Regional April–October rainfall (mm, composition-adjusted)")
     ax.set_xlabel("Year")
     ax.set_xlim(1949, 2025)
     ax.legend(loc="upper right")

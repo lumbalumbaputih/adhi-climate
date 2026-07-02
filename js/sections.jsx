@@ -229,8 +229,8 @@
   const SCROLLY_STEPS = [
     { eyebrow: "The setup", text: "Forty years of cyclones near Western Australia. As the climate warms, two things are worth watching together: how warm the ocean was, and how strong the storms got." },
     { eyebrow: "The ocean warmed", text: "The sea where these cyclones form rose by about 0.5 °C since the 1980s. The trend is unmistakable, and statistically rock solid." },
-    { eyebrow: "The storms did not", text: "If warmer water meant stronger storms, peak winds should climb too. They didn't. Mean peak wind actually edged downward over the same years." },
-    { eyebrow: "So they came apart", text: "Warmer years were not stronger-storm years (correlation r = −0.22). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read straight off the recent record." },
+    { eyebrow: "The storms: it depends", text: "If warmer water meant stronger storms, peak winds should climb too. On Australia's 10-minute wind record (shown here) they edged down; on the US record the same storms edged up. Neither trend is statistically solid." },
+    { eyebrow: "So they came apart", text: "Warmer years were not stronger-storm years: strip out the shared long-term trends and the year-to-year link is essentially zero (r = −0.08). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read off the recent record, in either direction." },
   ];
 
   function ScrollyChart({ D, stage }) {
@@ -246,7 +246,7 @@
     const ysS = (v) => M.t + IH - (v - slo) / (shi - slo) * IH;
     const ln = (arr, f) => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]).toFixed(1) + " " + f(p[1]).toFixed(1)).join(" ");
     return (
-      <svg viewBox={`0 0 ${W} ${H}`} className="chart__svg scrolly__svg" role="img" aria-label="Ocean temperature rose between 1985 and 2024 while cyclone peak winds did not.">
+      <svg viewBox={`0 0 ${W} ${H}`} className="chart__svg scrolly__svg" role="img" aria-label="Ocean temperature rose between 1985 and 2024 while the two cyclone wind records disagreed on the trend.">
         {[0, 1, 2].map((i) => { const v = wlo + (whi - wlo) * i / 2; return (
           <g key={"w" + i}>
             <line x1={M.l} x2={M.l + IW} y1={ysW(v)} y2={ysW(v)} className="chart__grid" />
@@ -265,7 +265,7 @@
           <line className="chart__trend" style={{ stroke: "#FF5C39" }} x1={xs(D.windTrend[0])} y1={ysW(D.windTrend[1])} x2={xs(D.windTrend[2])} y2={ysW(D.windTrend[3])} />
           <path className="scrolly__line" style={{ stroke: "#FF5C39" }} d={ln(D.wind, ysW)} />
         </g>
-        {stage >= 3 && <text x={M.l + IW - 4} y={M.t + 15} textAnchor="end" className="scrolly__note">no link · r = −0.22</text>}
+        {stage >= 3 && <text x={M.l + IW - 4} y={M.t + 15} textAnchor="end" className="scrolly__note">no link · detrended r = −0.08</text>}
       </svg>
     );
   }
@@ -327,7 +327,7 @@
     { eyebrow: "The question", text: "Seventy-four years of cool-season (April–October) rain across south-west WA, measured against the 1950s. Did it drift down slowly, or change all at once?" },
     { eyebrow: "Noisy, year to year", text: "Rain always bounces around: wet years, dry years. For five decades it wobbled near the old normal with no clear direction." },
     { eyebrow: "Then it broke", text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down, and the wet years never climbed back over it." },
-    { eyebrow: "A drier normal", text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now." },
+    { eyebrow: "A drier normal", text: "The last 25 years sit about 17% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now." },
   ];
 
   function RainScrollyChart({ D, stage }) {

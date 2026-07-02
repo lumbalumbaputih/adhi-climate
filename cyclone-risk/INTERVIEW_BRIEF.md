@@ -16,10 +16,12 @@ Australia's mandatory climate-disclosure standard.) I pulled 40 years of cyclone
 best-track data, which is the official storm-path records that weather agencies
 keep, plus NOAA sea-surface-temperature data. I cleaned it in Python and tested
 the trends myself. The seas off WA warmed about half a degree over that time, but
-the cyclones did not get stronger. If anything they weakened slightly, and there
-was no positive link between ocean temperature and storm strength. The lesson for
-risk disclosure is that you cannot just project the past forward; you have to use
-forward-looking projections."
+the storm record turned out to be genuinely ambiguous: the Australian wind record
+drifts down, the US wind record drifts up, for the very same storms, and neither
+is significant for WA. And there was no year-to-year link between ocean
+temperature and storm strength once the shared trends are removed. The lesson for
+risk disclosure is that you cannot just project the past forward, in either
+direction; you have to use forward-looking projections."
 
 ## The four findings, in order
 
@@ -27,10 +29,16 @@ forward-looking projections."
    of WA each year, drifting from roughly 5.1 to 4.6 a season. This matches the
    known long-term decline in the number of cyclones in the Australian region.
 
-2. **Intensity has not risen.** Average peak winds fell from about 76 to 63 knots
-   across the four decades, and pressure weakened. The decline is statistically
-   significant (a real trend, not chance) across the whole South Indian Ocean, but
-   only borderline for the WA-only group because the sample is small.
+2. **Intensity shows no established trend, and the sign depends on the wind
+   record.** On BOM 10-minute winds, average peaks fell from about 76 to 63 knots
+   and pressure weakened. On US 1-minute winds, the same storms drifted upward.
+   Neither WA trend is statistically significant. Basin-wide the two records are
+   both "significant" and point in opposite directions, which mostly reflects
+   their coverage and measurement artefacts (BOM covers only about 41% of basin
+   storms, a share that grows over time; US satellite estimation improved over
+   the period). Pressure, the cleanest measure, is borderline toward weaker for
+   WA and flat for the basin. The honest conclusion is that the record cannot
+   settle the direction.
 
 3. **Rapid intensification looks more common, but be careful.** The share of
    storms that jumped 30 knots in a day rose from about 21% to 40%. I say openly
@@ -73,12 +81,14 @@ a consultant would build.
 ## Questions you should expect, and answers
 
 **"Which wind measurement did you use and why?"**
-The BOM 10-minute sustained wind (the wind speed averaged over 10 minutes), because
-the subject is WA and that is the Australian convention. BOM is the Bureau of
-Meteorology, Australia's national weather agency. I cross-checked it against US
-1-minute winds, which run about 12% higher purely because of the shorter averaging
-period, and against central pressure (the air pressure at the storm's centre),
-which avoids the averaging issue entirely. All three agree on the direction.
+Both, deliberately. The BOM 10-minute sustained wind is the Australian convention
+(BOM is the Bureau of Meteorology, Australia's national weather agency), and the
+US agencies report a 1-minute wind that runs about 12% higher purely because of
+the shorter averaging period. When I ran the trends on both, they disagreed on
+the direction, so choosing one would have been choosing the story. I show the two
+side by side and use central pressure (the air pressure at the storm's centre),
+which avoids the averaging issue entirely, as the tie-breaker. That disagreement
+became the finding.
 
 **"How do you know your data cleaning is right?"**
 I validated it three ways. My BOM winds match the Bureau's own published database
@@ -94,23 +104,31 @@ estimate the size of that trend.) It keeps the work transparent and light on
 dependencies, and it shows I understand the maths rather than calling a black box.
 
 **"What is the single biggest limitation?"**
-Sample size for the WA-only trends. Five storms a year over 40 years is noisy, so
-the WA-specific results show a direction but are not definitive. I am explicit
-about that, and I lean on the larger basin-wide sample when I need statistical
-power.
+The measurement record itself. The two agency wind records disagree on the trend's
+direction, and each has its own artefact: BOM winds cover a changing subset of
+basin storms, and US winds carry the effect of improving satellite estimation.
+On top of that, five WA storms a year over 40 years is a noisy sample. So the
+WA-specific results are honestly reported as "no established trend," and I treat
+any basin-wide significance claim with suspicion rather than leaning on it.
 
 ## Numbers worth memorising
 
 - 758 South Indian Ocean storms, 194 WA-affecting, 1985 to 2024 (40 seasons).
 - Ocean warming: +0.16 degrees C per decade, about +0.5 C total, highly
   significant.
-- WA intensity: down about 3.6 knots per decade, not significant on its own.
-- Basin-wide intensity: down 3.7 knots per decade, significant (p ≈ 0.05).
-- SST-to-intensity correlation: r ≈ −0.2, not significant. No positive link.
+- WA intensity: BOM winds down about 3.6 kt per decade, US winds up about 3.9 kt
+  per decade, neither significant. Pressure weakening is borderline (p ≈ 0.04 to
+  0.10).
+- Basin-wide: BOM winds down 3.7 kt/decade on 41% coverage; US winds up 3.7
+  kt/decade on 90% coverage. Opposite signs, both nominally "significant," which
+  is exactly why neither should be trusted alone.
+- SST-to-intensity correlation: raw r ≈ −0.2 (not significant); detrended
+  r ≈ −0.08, essentially zero. No link either way.
 - Rapid intensification: roughly 21% to 40% of storms, with a data caveat.
 
 ## One sentence to close on
 
-"The headline is that warming did not show up as stronger WA cyclones in the
-record, and the professional lesson is that good physical-risk disclosure has to
-look forward, not just draw a straight line through the past."
+"The headline is that 40 years of observations cannot settle whether WA cyclones
+strengthened or weakened, because the answer flips with the measurement
+convention, and the professional lesson is that good physical-risk disclosure has
+to look forward, not just draw a straight line through the past."

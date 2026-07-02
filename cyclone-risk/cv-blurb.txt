@@ -15,23 +15,26 @@ Python (758 South Indian Ocean systems, 194 affecting Western Australia) to test
 whether the strength of WA-affecting tropical cyclones changed between 1985 and
 2024, and whether it rises and falls with ocean warming, framed as an AASB S2
 physical-risk assessment. I found that although the seas off WA warmed about
-0.5 degrees C over the period, the strength of WA-affecting cyclones did not
-increase (it showed a weak, mostly non-significant decline) and had no positive
-link with local sea-surface temperature, which means physical-risk assessment has
-to rely on forward-looking climate projections rather than simply extending the
-recent observed record. I delivered a fully reproducible analysis, with the
-statistical routines (Mann-Kendall, Sen's slope, OLS regression) written from
-scratch and validated against textbook values, plus six publication-quality
-charts, published on GitHub.
+0.5 degrees C over the period, the storm-intensity record cannot settle the
+direction of change: the Australian and US wind records disagree in sign for the
+same storms, neither WA trend is significant, and detrended sea-surface
+temperature shows no year-to-year link with storm strength, which means
+physical-risk assessment has to rely on forward-looking climate projections
+rather than simply extending the recent observed record in either direction. I
+delivered a fully reproducible analysis, with the statistical routines
+(Mann-Kendall with trend-free prewhitening, Sen's slope, OLS regression) written
+from scratch and validated against textbook values, plus seven
+publication-quality charts, published on GitHub.
 
 
 --- Interview headline (say this in about 15 seconds) ---
 "I asked whether tropical cyclones hitting WA have gotten stronger as the ocean
 warmed. Over 1985 to 2024 the regional sea surface warmed about half a degree, but
-the WA-affecting cyclones did not intensify. If anything they weakened slightly,
-and there was no positive link to sea-surface temperature. The honest takeaway for
-climate risk is that you cannot just project 'warmer equals stronger' from the
-local record; you need forward-looking projections, which is exactly the judgement
+the storm record could not settle the direction: the Australian wind record drifts
+down, the US record drifts up, for the same storms, and neither is significant.
+There was also no year-to-year link to sea-surface temperature. The honest takeaway
+for climate risk is that you cannot project the local record forward in either
+direction; you need forward-looking projections, which is exactly the judgement
 AASB S2 physical-risk disclosure asks companies to make."
 
 

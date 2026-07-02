@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the minimal stack
+        run: pip install numpy pandas
+      - name: stats_utils copies are byte-identical
+        run: diff cyclone-risk/stats_utils.py rainfall-decline/stats_utils.py
+      - name: cyclone-risk statistics tests
+        working-directory: cyclone-risk
+        run: python test_stats.py
+      - name: rainfall-decline statistics tests
+        working-directory: rainfall-decline
+        run: python test_stats.py
+      - name: AASB S2 band-sensitivity check runs clean
+        working-directory: aasb-s2-review
+        run: python sensitivity.py

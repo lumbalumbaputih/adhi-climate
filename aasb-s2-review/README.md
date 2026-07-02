@@ -8,6 +8,20 @@ Companies reviewed: BHP, Woodside Energy and Rio Tinto.
 
 Each company was scored against 31 AASB S2 sub-requirements (the detailed individual items the standard asks for). These 31 items are grouped under the four pillars (governance, strategy, risk management, and metrics and targets). Each item was scored on a 0 to 4 scale, using the company's own public reports. The reports were read in full from the original text, and every score above zero comes with a citation pointing to the report's own section or page. The scoring was kept deliberately cautious: where the evidence sat between two scores, the lower one was chosen and the reason was written down. All the supporting evidence sits in `scoring-matrix.csv`. There is a separate write-up for each company in the matching `*-scorecard.md` file, and the patterns that show up across all three companies are in `gap-summary.csv`.
 
+**What each score means.** So a reader can judge the judgements, here is the anchor for every level of the 0 to 4 scale:
+
+| Score | Anchor |
+|:-----:|--------|
+| 0 | Absent: not addressed in any material way in public disclosures |
+| 1 | Acknowledged: mentioned but qualitative only; no quantification, no process disclosed |
+| 2 | Partial: framework element present but incomplete (for example, scenario analysis started but limited in scope) |
+| 3 | Substantially compliant: meets most of the AASB S2 requirement for the item; minor gaps only |
+| 4 | Full: comprehensive disclosure; third-party verified or assured where applicable |
+
+**How the numbers roll up.** A pillar score is the plain average of that pillar's sub-requirement scores, and the overall score is the plain average of the **four pillar scores** (equal weight per pillar, not per item). The distinction matters because the pillars are different sizes: Metrics and Targets has 13 of the 31 items, so an average over items would tilt the overall score toward that one pillar. Weighting the pillars equally treats the standard's four questions as equally important. (For transparency: on an item-weighted basis Rio Tinto would score 3.74 rather than 3.69, Woodside 3.29 rather than 3.35, and BHP 2.90 rather than 2.94. No ranking or band changes either way.) Maturity bands: 0.0 to 1.0 Nascent, 1.1 to 2.0 Emerging, 2.1 to 3.0 Developing, 3.1 to 4.0 Advanced.
+
+**How sturdy are the bands?** 21 of the 93 scored cells are marked medium confidence (checked by cross-reference rather than a full line-by-line read; they are flagged in the matrix). `sensitivity.py` moves every one of those scores down one point, then up one point, and recomputes the bands. Rio Tinto and Woodside stay Advanced in both directions. BHP stays Developing in the downward case; only if **all twelve** of its medium-confidence items resolved a full point upward would it cross into Advanced (3.31), which is an extreme assumption rather than a likely one. So the headline bands are robust to the acknowledged uncertainty, with that one caveat stated.
+
 One important point runs through the whole review. This measures how well a company discloses, not how ready it actually is. A low score means the company has not published something AASB S2 expects to see. It does not prove the company lacks the underlying ability. In the same way, a high score means the disclosure is complete, not that the company faces low climate risk. Those two things are different, and keeping them apart is the core skill this project is built to show.
 
 ## Reporting status matters
@@ -40,8 +54,8 @@ For BHP: turn the cross-industry metrics from words into numbers before FY2026, 
 
 ## Limitations
 
-These scores reflect public disclosure only, and one reviewer's reading. A few of the governance and pay sub-requirements were checked by cross-reference rather than read line by line, and these are flagged in the matrix and scorecards so they can be verified. Page citations point to the reports' own section and page numbers. AASB S2 reproduces the content of IFRS S2 (the matching international standard), so the pillar structure here is faithful. Even so, the standard's own text should be checked for any edge case before these scores are treated as final.
+These scores reflect public disclosure only, and one reviewer's reading. A few of the governance and pay sub-requirements were checked by cross-reference rather than read line by line, and these are flagged in the matrix and scorecards so they can be verified; the Method section quantifies how much those flagged scores could move the result (run `python3 sensitivity.py` to reproduce it). Page citations point to the reports' own section and page numbers. AASB S2 reproduces the content of IFRS S2 (the matching international standard), so the pillar structure here is faithful. Even so, the standard's own text should be checked for any edge case before these scores are treated as final.
 
 ## Files
 
-`scoring-matrix.csv` (all 93 scored cells with evidence), `gap-summary.csv` (patterns across the companies), `bhp-scorecard.md`, `woodside-scorecard.md`, `rio-tinto-scorecard.md`, `data/source-library.csv`, and `EXECUTION_PROMPT.md` (the method spec). The source reports are in `data/raw/`.
+`scoring-matrix.csv` (all 93 scored cells with evidence), `gap-summary.csv` (patterns across the companies), `bhp-scorecard.md`, `woodside-scorecard.md`, `rio-tinto-scorecard.md`, `sensitivity.py` (the band-robustness check described under Method), `data/source-library.csv`, and `EXECUTION_PROMPT.md` (the method spec). The source reports are in `data/raw/`.

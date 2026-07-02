@@ -89,6 +89,37 @@ def test_sens_slope():
     print("PASS sens_slope: slope=%.4f intercept=%.4f" % (s, b))
 
 
+def test_pettitt():
+    # Monotone [1,2,3,4]: cp_index 2, K 4 (hand-computed); and a clear step of
+    # 30 zeros then 30 tens: change point at 30, highly significant
+    pt = su.pettitt([1, 2, 3, 4])
+    assert pt.cp_index == 2 and approx(pt.K, 4.0, 1e-9), pt
+    pt2 = su.pettitt([0.0] * 30 + [10.0] * 30)
+    assert pt2.cp_index == 30 and pt2.pvalue < 0.001, pt2
+    print("PASS pettitt: monotone cp=2 K=4; step cp=30 p=%.2e" % pt2.pvalue)
+
+
+def test_mann_kendall_tfpw():
+    # Strictly linear: zero residual variance, prewhitening skipped
+    tf = su.mann_kendall_tfpw(2 * np.arange(20.0) + 1)
+    assert not tf.prewhitened and tf.trend == "increasing" and tf.r1 == 0.0, tf
+    # White noise (fixed legacy seed): r1 below the 1.96/sqrt(n) gate, result
+    # must equal plain Mann-Kendall
+    w = np.random.RandomState(3).normal(size=50)
+    tw = su.mann_kendall_tfpw(w)
+    mw = su.mann_kendall(w)
+    assert not tw.prewhitened and abs(tw.pvalue - mw.pvalue) < 1e-12, tw
+    # AR(1) rho=0.8 (fixed legacy seed): autocorrelation detected and filtered
+    rng = np.random.RandomState(1)
+    e = rng.normal(size=200)
+    ar = np.zeros(200)
+    for i in range(1, 200):
+        ar[i] = 0.8 * ar[i - 1] + e[i]
+    ta = su.mann_kendall_tfpw(ar[100:])
+    assert ta.prewhitened and approx(ta.r1, 0.6082, 1e-3), ta
+    print("PASS mann_kendall_tfpw: linear skip, white-noise skip, AR(1) r1=%.3f filtered" % ta.r1)
+
+
 if __name__ == "__main__":
     test_t_pvalue()
     test_normal_pvalue()
@@ -97,4 +128,6 @@ if __name__ == "__main__":
     test_mann_kendall_monotonic()
     test_mann_kendall_flat()
     test_sens_slope()
+    test_pettitt()
+    test_mann_kendall_tfpw()
     print("\nALL TESTS PASSED")
