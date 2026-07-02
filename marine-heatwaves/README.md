@@ -80,7 +80,7 @@ the suite's shared, tested `stats_utils.py`.
 
 ```bash
 pip install -r requirements.txt
-# drop the ERDDAP OISST CSV(s) into ../dropzone/ (see DROP_FILES_HERE.md), then:
+# drop the ERDDAP OISST CSV(s) into ../dropzone/marine-heatwaves/ (see DROP_FILES_HERE.md), then:
 python3 build_dataset.py
 python3 analysis.py
 python3 viz.py

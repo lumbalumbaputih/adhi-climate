@@ -9,7 +9,7 @@ from September 1981. The easiest scriptable slice is an ERDDAP CSV subset of
 a small box off the WA coast; NOAA CoastWatch and NCEI both run ERDDAP
 servers carrying OISST. Drop one or more ERDDAP CSV exports (columns
 time, latitude, longitude, sst; ERDDAP puts a units row under the header)
-into ../dropzone/ or marine-heatwaves/data/raw/.
+into ../dropzone/marine-heatwaves/ or marine-heatwaves/data/raw/.
 
 The default study box is the Ningaloo coast, the epicentre of the famous
 2011 "Ningaloo Nino" event: roughly 21.5 S to 23.5 S, 112.5 E to 114.5 E.
@@ -207,7 +207,9 @@ def annual_metrics(flagged):
 def main(source_dir=None, out_dir="data"):
     here = os.path.dirname(os.path.abspath(__file__))
     candidates = [source_dir] if source_dir else [
-        os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+        os.path.join(here, "..", "dropzone", "marine-heatwaves"),
+        os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+        os.path.join(here, "data", "raw")]
     files = []
     for d in candidates:
         if d and os.path.isdir(d):

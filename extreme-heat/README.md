@@ -87,7 +87,7 @@ are tested with synthetic inputs in `test_project.py`. Both run in CI.
 ```bash
 pip install -r requirements.txt
 python3 build_dataset.py --fetch      # on a networked machine, or:
-#   drop GHCN/BoM daily CSVs into ../dropzone/ and run without --fetch
+#   drop GHCN/BoM daily CSVs into ../dropzone/extreme-heat/ and run without --fetch
 python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py

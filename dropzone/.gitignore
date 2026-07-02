@@ -1,6 +1,10 @@
-# Staging area for manually downloaded source data.
-# Ignore everything dropped here (it gets moved to cyclone-risk/data/raw/);
-# keep only the instructions and this file.
+# Staging area for manually downloaded source data, organised into one
+# subfolder per project. Ignore everything dropped here (it gets read by
+# each project's build_dataset.py, or moved into cyclone-risk/data/raw/ for
+# the older cyclone pipeline); keep only the instructions, this file, the
+# subfolders themselves, and their .gitkeep placeholders.
 *
 !.gitignore
 !DROP_FILES_HERE.md
+!*/
+!*/.gitkeep

@@ -87,7 +87,9 @@ def parse_wheat_csv(path):
 def main(source_dir=None, out_dir="data"):
     here = os.path.dirname(os.path.abspath(__file__))
     candidates = [source_dir] if source_dir else [
-        os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+        os.path.join(here, "..", "dropzone", "wheat-yields"),
+        os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+        os.path.join(here, "data", "raw")]
     files = []
     for d in candidates:
         if d and os.path.isdir(d):

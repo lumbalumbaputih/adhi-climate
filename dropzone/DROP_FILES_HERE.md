@@ -1,10 +1,16 @@
 # DROP DATA FILES HERE
 
-Download the files below from the official sources and drop them into this
-`dropzone/` folder. Each project's `build_dataset.py` detects its files by
+Download the files below from the official sources and drop them into the
+matching **subfolder** of `dropzone/` (`dropzone/water-security/`,
+`dropzone/sea-level/`, and so on, one per project below). Each project's
+`build_dataset.py` looks in its own subfolder first and detects files by
 content, so you do not need to rename anything. This staging area exists
 because the remote sessions that build the analyses often cannot reach the
 data hosts directly; you download, the pipeline does the rest.
+
+(The one exception is `cyclone-risk`, an older, already-complete project
+whose files still go straight into `dropzone/` itself, per its own section
+below.)
 
 ======================================================================
 PROJECT: water-security (Perth streamflow)          [DATA NEEDED]
@@ -17,7 +23,8 @@ Bureau of Meteorology, http://www.bom.gov.au/water/hrs/
 On the HRS map, pick 5-8 stations in the south-west WA region (the
 Darling Range and SW forest catchments east and south of Perth; choose
 the longest records on offer). For each station download the DAILY
-streamflow CSV ("Daily flow", ML/day) and drop the files here.
+streamflow CSV ("Daily flow", ML/day) and drop the files into
+    dropzone/water-security/
 The parser reads the standard HRS CSV layout (metadata lines, then
 Date / Flow columns) and pulls the station number from the metadata.
 
@@ -29,6 +36,7 @@ Used only as a cross-check of the gauged story. If the site lets you
 export the annual inflow series, save it as a CSV with columns
 year,inflow_GL and add a first line recording where it came from:
     # source: <URL you took it from>
+Drop it in dropzone/water-security/ alongside the HRS files.
 
 Then run, inside water-security/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
@@ -44,15 +52,18 @@ AEMO WEM data portal, https://data.wa.aemo.com.au
 Download the monthly "Facility SCADA" CSV files for the span you want
 analysed (the record starts in the mid-2000s; whole calendar years
 only, since incomplete years are excluded from trends). Drop them all
-here; the parser needs a date column, a facility column, and an
-energy (MWh) or power (MW) column.
+into
+    dropzone/swis-decarbonisation/
+the parser needs a date column, a facility column, and an energy (MWh)
+or power (MW) column.
 
 2. WEM facility register (fuel mapping)                   [REQUIRED]
 ----------------------------------------------------------------------
 From the same portal (or AEMO's WEM facilities page). Any CSV with a
-facility-code column plus a fuel or technology column works. If no
-register with fuels is available, hand-build facility_fuel.csv with
-columns facility,fuel and a "# source:" first line saying where each
+facility-code column plus a fuel or technology column works, dropped in
+the same dropzone/swis-decarbonisation/ folder. If no register with
+fuels is available, hand-build facility_fuel.csv with columns
+facility,fuel and a "# source:" first line saying where each
 assignment came from.
 
 3. NGA emission factors                                    [OPTIONAL]
@@ -75,7 +86,8 @@ Option A (preferred): on any machine with open network access, run
 which downloads Perth Airport and Port Hedland from the NCEI API and
 validates the station names.
 
-Option B: download daily TMAX/TMIN yourself and drop the files here.
+Option B: download daily TMAX/TMIN yourself and drop the files into
+    dropzone/extreme-heat/
 Accepted formats (detected by content, any filename):
   - GHCN daily-summaries CSV (STATION,NAME,DATE,TMAX[,TMIN]), from
     https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations=ASN00009021&startDate=1950-01-01&endDate=2025-12-31&dataTypes=TMAX,TMIN&format=csv&includeStationName=true&units=metric
@@ -103,7 +115,8 @@ for "OISST" and use its Data Access Form to build the URL). Subset:
 
 The parser expects the standard ERDDAP layout (header row, units row,
 then time,latitude,longitude,sst). If the server limits request size,
-split the download into several date ranges; drop all the files here
+split the download into several date ranges; drop all the files into
+    dropzone/marine-heatwaves/
 (one study box per run).
 
 Then run, inside marine-heatwaves/:
@@ -118,7 +131,8 @@ PSMSL monthly RLR data for Fremantle (station 111)         [REQUIRED]
 https://psmsl.org/data/obtaining/  ->  search "Fremantle" (station id
 111)  ->  download the monthly RLR data file. It is a small semicolon-
 separated text file (decimal year; height in mm; flags), typically
-named 111.rlrdata. Drop it here as-is.
+named 111.rlrdata. Drop it as-is into
+    dropzone/sea-level/
 
 Then run, inside sea-level/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
@@ -133,7 +147,8 @@ From ABARES (Australian crop report statistical tables, or the
 historical agricultural data on agriculture.gov.au/abares) or the ABS
 agricultural commodities collection. The spreadsheets change layout
 between vintages, so fill this simple CSV from whichever official
-table you download (keep the source line):
+table you download (keep the source line), and drop it into
+    dropzone/wheat-yields/
 
     # source: <URL of the table you used>
     year,wheat_area_ha,wheat_production_t

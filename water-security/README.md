@@ -111,7 +111,7 @@ Before the results are published in this README they must pass three checks:
 
 ```bash
 pip install -r requirements.txt
-# drop the HRS daily CSVs into ../dropzone/ (see DROP_FILES_HERE.md), then:
+# drop the HRS daily CSVs into ../dropzone/water-security/ (see DROP_FILES_HERE.md), then:
 python3 build_dataset.py
 python3 analysis.py
 python3 viz.py

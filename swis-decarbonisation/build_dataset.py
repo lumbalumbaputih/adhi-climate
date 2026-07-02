@@ -8,8 +8,9 @@ Generation: AEMO's Wholesale Electricity Market (WEM) data portal for the
 South West Interconnected System (SWIS), data.wa.aemo.com.au. Download the
 monthly "Facility SCADA" (or facility metered generation) CSV files for as
 many months as you want analysed (the record starts in the mid-2000s) and
-drop them into ../dropzone/ or swis-decarbonisation/data/raw/. Files are
-detected by content, so no renaming is needed.
+drop them into ../dropzone/swis-decarbonisation/ or
+swis-decarbonisation/data/raw/. Files are detected by content, so no
+renaming is needed.
 
 Facility-to-fuel mapping: AEMO's WEM facility register CSV if it carries a
 fuel/technology column. If the register you can find does not, create a
@@ -181,7 +182,9 @@ def write_factor_template(out_dir):
 def main(source_dir=None, out_dir="data"):
     here = os.path.dirname(os.path.abspath(__file__))
     candidates = [source_dir] if source_dir else [
-        os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+        os.path.join(here, "..", "dropzone", "swis-decarbonisation"),
+        os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+        os.path.join(here, "data", "raw")]
     files = []
     for d in candidates:
         if d and os.path.isdir(d):

@@ -80,7 +80,7 @@ Both run in CI.
 
 ```bash
 pip install -r requirements.txt
-# drop the PSMSL monthly RLR file into ../dropzone/ (see DROP_FILES_HERE.md), then:
+# drop the PSMSL monthly RLR file into ../dropzone/sea-level/ (see DROP_FILES_HERE.md), then:
 python3 build_dataset.py
 python3 analysis.py
 python3 viz.py

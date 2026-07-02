@@ -8,7 +8,8 @@ PSMSL (Permanent Service for Mean Sea Level) monthly Revised Local Reference
 (RLR) data for Fremantle, PSMSL station 111, one of the longest tide-gauge
 records in the Southern Hemisphere (from 1897). Download the "monthly RLR
 data" file from the station page at psmsl.org (Data > Obtaining monthly
-means > Fremantle) and drop it into ../dropzone/ or sea-level/data/raw/.
+means > Fremantle) and drop it into ../dropzone/sea-level/ or
+sea-level/data/raw/.
 
 The RLR file is semicolon-separated: decimal year; height (mm, RLR datum);
 days missing flag; quality flag; missing values are -99999. A plain CSV with
@@ -106,7 +107,9 @@ def to_annual(monthly):
 def main(source_dir=None, out_dir="data"):
     here = os.path.dirname(os.path.abspath(__file__))
     candidates = [source_dir] if source_dir else [
-        os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+        os.path.join(here, "..", "dropzone", "sea-level"),
+        os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+        os.path.join(here, "data", "raw")]
     files = []
     for d in candidates:
         if d and os.path.isdir(d):

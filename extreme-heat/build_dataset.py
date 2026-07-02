@@ -17,8 +17,8 @@ Two ways in:
    station NAME field against the expected name, so a mistyped station id
    cannot slip through.
 2. Dropzone ingestion (default): drop GHCN daily-summaries CSVs or BoM CDO
-   daily temperature CSVs into ../dropzone/ and run without --fetch. Files
-   are detected by content.
+   daily temperature CSVs into ../dropzone/extreme-heat/ and run without
+   --fetch. Files are detected by content.
 
 Definitions
 -----------
@@ -268,7 +268,9 @@ def main(argv):
         out_dir = argv[1] if len(argv) > 1 else "data"
         here = os.path.dirname(os.path.abspath(__file__))
         candidates = [source_dir] if source_dir else [
-            os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+            os.path.join(here, "..", "dropzone", "extreme-heat"),
+            os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+            os.path.join(here, "data", "raw")]
         files = []
         for d in candidates:
             if d and os.path.isdir(d):
