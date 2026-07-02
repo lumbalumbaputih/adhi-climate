@@ -16,7 +16,8 @@ physical-risk assessment. I found a real, not-just-chance long-term decline of
 about 2.9% per decade in April to October rainfall (Mann-Kendall p=0.001; a
 standard test for whether a trend is genuine), a step down around the year 2000
 (a sudden, lasting drop, confirmed by the Pettitt change-point test, p=0.006) that
-left 2000 to 2024 about 19% drier than the 1950 to 1974 baseline, and a faster
+left 2000 to 2024 about 17% drier than the 1950 to 1974 baseline (with the
+regional mm series adjusted for changing station availability), and a faster
 decline of roughly 4.4% per decade in the May to July early-winter peak, all
 consistent across the seven stations and with published CSIRO and Bureau of
 Meteorology figures. I delivered a fully reproducible analysis with every
@@ -28,7 +29,7 @@ publication-quality charts, published on GitHub.
 --- Interview headline (say this in about 15 seconds) ---
 "I measured how much South West WA's winter rainfall has fallen. Over 1950 to
 2024 the April-to-October total fell about 3% a decade, with a clear step down
-around 2000 that leaves the last 25 years roughly a fifth drier than the
+around 2000 that leaves the last 25 years roughly 17% drier than the
 mid-century baseline. Every one of the seven stations shows it. The decline
 itself isn't controversial; what carries nuance is the cause, which the science
 puts down largely to a strengthening high-pressure ridge and shifting storm

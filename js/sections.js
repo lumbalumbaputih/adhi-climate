@@ -347,11 +347,11 @@
     eyebrow: "The ocean warmed",
     text: "The sea where these cyclones form rose by about 0.5 °C since the 1980s. The trend is unmistakable, and statistically rock solid."
   }, {
-    eyebrow: "The storms did not",
-    text: "If warmer water meant stronger storms, peak winds should climb too. They didn't. Mean peak wind actually edged downward over the same years."
+    eyebrow: "The storms: it depends",
+    text: "If warmer water meant stronger storms, peak winds should climb too. On Australia's 10-minute wind record (shown here) they edged down; on the US record the same storms edged up. Neither trend is statistically solid."
   }, {
     eyebrow: "So they came apart",
-    text: "Warmer years were not stronger-storm years (correlation r = −0.22). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read straight off the recent record."
+    text: "Warmer years were not stronger-storm years: strip out the shared long-term trends and the year-to-year link is essentially zero (r = −0.08). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read off the recent record, in either direction."
   }];
   function ScrollyChart({
     D,
@@ -383,7 +383,7 @@
       viewBox: `0 0 ${W} ${H}`,
       className: "chart__svg scrolly__svg",
       role: "img",
-      "aria-label": "Ocean temperature rose between 1985 and 2024 while cyclone peak winds did not."
+      "aria-label": "Ocean temperature rose between 1985 and 2024 while the two cyclone wind records disagreed on the trend."
     }, [0, 1, 2].map(i => {
       const v = wlo + (whi - wlo) * i / 2;
       return /*#__PURE__*/React.createElement("g", {
@@ -472,7 +472,7 @@
       y: M.t + 15,
       textAnchor: "end",
       className: "scrolly__note"
-    }, "no link · r = −0.22"));
+    }, "no link · detrended r = −0.08"));
   }
 
   /* Reusable scrollytelling shell: a sticky graphic on the left whose
@@ -561,7 +561,7 @@
     text: "Around the year 2000 the average dropped to a new, lower level. Not a slow slide but a step down, and the wet years never climbed back over it."
   }, {
     eyebrow: "A drier normal",
-    text: "The last 25 years sit about 19% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now."
+    text: "The last 25 years sit about 17% below the 1950s and have stayed there. For Perth's water, wheatbelt farms and the banks that lend to them, this is the baseline to plan around now."
   }];
   function RainScrollyChart({
     D,

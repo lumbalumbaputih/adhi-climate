@@ -22,4 +22,16 @@ Emergency, Curtin University.
 
 The data is all public (from NOAA NCEI and the Bureau of Meteorology). The
 statistics are written from scratch and tested against known values; see each
-project's `stats_utils.py` and `test_stats.py`.
+project's `stats_utils.py` and `test_stats.py`. The two copies of
+`stats_utils.py` are kept byte-identical, and CI (GitHub Actions) runs both
+test suites and that identity check on every push and pull request.
+
+## Licensing
+
+The code in this repository is released under the [MIT License](LICENSE). The
+committed cleaned datasets are derived from public sources: IBTrACS and ERSSTv5
+(NOAA NCEI, public domain as US government works), GHCN-Daily (NOAA NCEI,
+redistributing Bureau of Meteorology station observations), the Marshall (2003)
+SAM index (British Antarctic Survey), and NOAA PSL climate indices. The
+original providers' terms apply to the data; please cite the sources listed in
+each project's README when reusing it.

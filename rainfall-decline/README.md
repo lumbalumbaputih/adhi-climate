@@ -11,9 +11,11 @@ must report their climate risks).
 > trend is genuine). It did not fall as a gentle slope. It dropped as a **step down
 > around the year 2000** (a sudden, lasting drop to a lower level), confirmed by the
 > Pettitt change-point test (a standard check for the point where a series shifts to
-> a new level), with p = 0.006. The regional total fell from about 571 mm in
-> 1950–1999 to about 475 mm in 2000–2024, which leaves the last 25 years roughly
-> **19% drier** than the 1950–1974 baseline (the early reference period). The early
+> a new level), with p = 0.006. The regional total fell from about 567 mm in
+> 1950–1999 to about 483 mm in 2000–2024 (figures adjusted so that years missing
+> one of the wetter stations do not read spuriously dry), which leaves the last 25
+> years roughly **17% drier** than the 1950–1974 baseline (the early reference
+> period). The early
 > winter peak (May–July) is falling even faster, about **4.4%/decade**, and the same
 > pattern shows up at **all seven weather stations** studied. The decline itself is
 > well established and matches the figures from CSIRO and the Bureau of Meteorology.
@@ -80,24 +82,31 @@ recent years), and because together they cover the full range from wet to dry:
    each station against its *own* 1950–1974 average, in both mm and %. The
    **regional series** is the average of the per-station % anomalies (a year counts
    only if at least 5 of the 7 stations have data), so the wet coastal sites do not
-   drown out the dry inland ones.
+   drown out the dry inland ones. Headline **mm** figures are
+   **composition-adjusted**: the full-network baseline is rescaled by the % anomaly
+   series, because a raw mm average of whichever 5-7 stations reported that year
+   reads spuriously dry whenever a wet station (Cape Leeuwin, 897 mm) is missing.
+   The raw station-mix figures are reported alongside for comparison; the
+   adjustment moves the pre/post drop from about 17% to about 15%.
 3. **Step-change**: the **Pettitt** test, a non-parametric change-point test (it
    finds where a series jumps to a new level without assuming any particular shape).
-4. **Trend**: the **Mann-Kendall** test for whether a trend is real, plus **Sen's
-   slope** (a robust way to size the trend that is not thrown off by odd years),
-   plus **OLS** (ordinary least squares, the standard straight-line fit) with a 95%
-   confidence band. These are run on the full record, on the May–July sub-season,
-   and on each station.
+4. **Trend**: the **Mann-Kendall** test for whether a trend is real (each p-value
+   also re-run with trend-free prewhitening, a standard correction for
+   year-to-year carry-over; it changed nothing here), plus **Sen's slope** (a
+   robust way to size the trend that is not thrown off by odd years), plus **OLS**
+   (ordinary least squares, the standard straight-line fit) with a 95% confidence
+   band. These are run on the full record, on the record before and after the
+   change point, on the May–July sub-season, and on each station.
 5. **Drivers**: Pearson correlation (a standard measure of how closely two things
    move together) of the cool-season rainfall anomaly against the cool-season IOD,
    SAM and ENSO indices, reported both **raw and detrended**. Detrended means the
    shared long-term trend is taken out first, so what is left is the year-to-year
    wobble.
 
-All the statistics, OLS, Pearson, Mann-Kendall, Sen's slope and the Pettitt test,
-are coded from scratch in [`stats_utils.py`](stats_utils.py) and checked against
-known values in [`test_stats.py`](test_stats.py) (22 checks). **scipy is not
-required.**
+All the statistics, OLS, Pearson, Mann-Kendall (plain and prewhitened), Sen's
+slope and the Pettitt test, are coded from scratch in
+[`stats_utils.py`](stats_utils.py) and checked against known values in
+[`test_stats.py`](test_stats.py) (28 checks). **scipy is not required.**
 
 ## Key findings
 
@@ -106,10 +115,17 @@ required.**
 | Apr–Oct trend, 1950–2024 | **−2.9%/decade** (≈ −20 mm/decade) | **Yes** (OLS p=0.0005; MK p=0.001, τ=−0.25) |
 | May–July trend, 1950–2024 | **−4.4%/decade** | **Yes** (MK p=0.0001) |
 | Step-change (Pettitt) | **~2000** | **Yes** (p=0.006) |
-| Pre/post the break | 571 mm (1950–99) → 475 mm (2000–24) = **−17%** | n/a |
-| 1950–1974 vs 2000–2024 | 587 mm → 475 mm = **−19%** | n/a |
+| Pre/post the break (composition-adjusted) | 567 mm (1950–99) → 483 mm (2000–24) = **−15%** | n/a |
+| 1950–1974 vs 2000–2024 (composition-adjusted) | 583 mm → 483 mm = **−17%** | n/a |
+| Trend *before* 2000 | flat (no slide toward the break) | No (MK p=0.71) |
 | Trend *after* 2000 | flat (stepped to a drier normal) | No (MK p=0.66) |
 | Stations declining | **7 of 7** (6 significant) | n/a |
+
+The flat trend on **both** sides of the break is what justifies calling this a
+step rather than a slope: the series does not drift down and then keep drifting;
+it sits on one level, drops, and sits on a new one. (The raw station-mix mm
+figures, without the composition adjustment, are 571 → 475 mm = −17%; the
+adjustment matters by about two percentage points and is the honest version.)
 | IOD (DMI) correlation | r = −0.41 raw / −0.26 detrended | raw p=0.0003; detrended p=0.027 |
 | ENSO (Niño 3.4) correlation | r = −0.41 raw / −0.35 detrended | raw p=0.0003; detrended p=0.002 |
 | SAM (Marshall) correlation | r = −0.31 raw / −0.20 detrended | raw p=0.010; detrended p=0.11 (n.s.) |
@@ -127,7 +143,7 @@ April–October** and **~20% May–July** decline for SW WA since 1970 (measured
 a 1900–1969 baseline), and they say a decline this large is "highly unlikely … due
 to natural variability alone." This analysis uses different stations, a different
 baseline period, and a completely separate set of code, yet it lands in the same
-place: about 19% drier (1950–74 vs 2000–24), with May–July falling the fastest. That
+place: about 17% drier (1950–74 vs 2000–24), with May–July falling the fastest. That
 agreement is the credibility check.
 
 ## What this means: AASB S2 chronic physical risk
@@ -176,11 +192,21 @@ published literature but does not prove cause.
 
 - Seven stations, not a full gridded regional product. The result is solid and
   spatially consistent, but it is not a substitute for BoM's gridded analysis.
+- **The station records are not homogenised.** GHCN-Daily redistributes the raw
+  gauge observations; station moves and instrument changes can create artificial
+  steps in a single record, which is exactly what a change-point test detects.
+  Averaging seven independent stations dilutes any one station's artefact, and
+  the agreement with CSIRO/BoM's published (quality-controlled) figures is the
+  practical check, but a fully homogenised comparison (for example against BoM's
+  gridded AGCD product) would close this gap properly.
 - The Perth Darling-scarp catchment is not directly included (its daily data was too
   gappy).
 - The Pettitt test reports a single main change point (~2000). The smaller mid-1970s
   step that the literature describes is visible in the series but is not tested
-  separately here.
+  separately here. The test also assumes independent observations; the series'
+  lag-1 autocorrelation is small (r1 ≈ −0.09), so this is unlikely to matter here,
+  but a Pettitt p-value on an autocorrelated series should generally be read with
+  care.
 - The driver correlation shows association, not formal attribution.
 
 ## Reproduce
@@ -215,7 +241,7 @@ rainfall-decline/
 ├── README.md                 ├── analysis.py        (step-change, trend, drivers)
 ├── requirements.txt          ├── viz.py             (5 charts)
 ├── rainfall_analysis.ipynb   ├── stats_utils.py     (MK, Sen, OLS, Pearson, Pettitt)
-├── cv-blurb.txt              ├── test_stats.py      (22 unit tests)
+├── cv-blurb.txt              ├── test_stats.py      (28 unit tests)
 ├── INTERVIEW_BRIEF.md        ├── build_dataset.py   (parse + clean)
 ├── data/   (committed CSVs; raw/ git-ignored)
 └── charts/ (5 × 300 dpi PNG)

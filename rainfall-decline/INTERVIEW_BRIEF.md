@@ -9,8 +9,8 @@ interpretation; the numbers below are the backbone.
 
 Winter rainfall in South West WA (the cool season) has fallen by about **3% a decade
 since 1950**, and there is a clear **step down around the year 2000** (a sudden,
-lasting drop to a lower level) that leaves the last 25 years roughly **a fifth (19%)
-drier** than the 1950–1974 baseline. It shows up at **every one of the seven stations**
+lasting drop to a lower level) that leaves the last 25 years roughly **17%
+drier** than the 1950–1974 baseline (composition-adjusted mm figures). It shows up at **every one of the seven stations**
 I looked at. The decline itself is not controversial: the Bureau of Meteorology and
 CSIRO have documented it for years. What carries some nuance is the *cause*, and that
 is the part worth understanding.
@@ -31,8 +31,10 @@ is the part worth understanding.
 
 3. **It is a step, not a slope.** A Pettitt change-point test (a standard check for
    the point where a series shifts to a new level) puts the biggest single break around
-   **2000** (p=0.006): the regional total drops from ~571 mm (1950–1999) to ~475 mm
-   (2000–2024). Interestingly, *since* 2000 there is no further trend. It stepped down
+   **2000** (p=0.006): the regional total drops from ~567 mm (1950–1999) to ~483 mm
+   (2000–2024; composition-adjusted so years missing a wet station do not read
+   spuriously dry). Interestingly, there is no trend *before* 2000 (p=0.71) and
+   none *since* 2000 either (p=0.66): flat, drop, flat. It stepped down
    to a new, drier normal and stayed there. There was also an earlier, smaller step in
    the mid-1970s that the research talks about; my single-break test simply picks out
    the stronger 2000 shift.
@@ -59,7 +61,7 @@ is the part worth understanding.
 | Full-record Apr–Oct trend | **−2.9%/decade** (≈ −20 mm/decade), p=0.001 |
 | May–July trend | **−4.4%/decade** |
 | Step-change year (Pettitt) | **~2000**, p=0.006 |
-| 1950–1974 vs 2000–2024 | 587 mm → 475 mm = **−19%** |
+| 1950–1974 vs 2000–2024 (composition-adjusted) | 583 mm → 483 mm = **−17%** |
 | Stations declining | **7 of 7** (6 significant) |
 | Driver correlations (raw) | IOD −0.41, ENSO −0.41, SAM −0.31 |
 

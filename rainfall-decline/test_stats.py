@@ -75,5 +75,36 @@ assert pt2.pvalue < 0.001, f"step change should be highly significant, got p={pt
 print(f"[PASS] Pettitt step p < 0.001 (p={pt2.pvalue:.2e})")
 PASS += 1
 
+# --- Mann-Kendall with trend-free prewhitening (Yue et al. 2002) ---
+# strictly linear series: zero residual variance, prewhitening skipped
+tf = s.mann_kendall_tfpw(2 * np.arange(20.0) + 1)
+check("TFPW r1 (linear)", tf.r1, 0.0, tol=1e-12)
+assert not tf.prewhitened and tf.trend == "increasing"
+print("[PASS] TFPW linear: prewhitening skipped, trend increasing")
+PASS += 1
+
+# white noise (fixed legacy seed): r1 below the 1.96/sqrt(n) gate, so the
+# result must be identical to plain Mann-Kendall
+w = np.random.RandomState(3).normal(size=50)
+tw = s.mann_kendall_tfpw(w)
+mw = s.mann_kendall(w)
+check("TFPW p == MK p (white noise)", tw.pvalue, mw.pvalue, tol=1e-12)
+assert not tw.prewhitened
+print("[PASS] TFPW white noise: prewhitening skipped")
+PASS += 1
+
+# AR(1) with rho=0.8 (fixed legacy seed): lag-1 autocorrelation detected in
+# the detrended residuals and filtered out before the MK test
+rng = np.random.RandomState(1)
+e = rng.normal(size=200)
+ar = np.zeros(200)
+for i in range(1, 200):
+    ar[i] = 0.8 * ar[i - 1] + e[i]
+ta = s.mann_kendall_tfpw(ar[100:])
+check("TFPW r1 (AR1 rho=0.8)", ta.r1, 0.6082, tol=1e-3)
+assert ta.prewhitened
+print("[PASS] TFPW AR(1): prewhitening applied")
+PASS += 1
+
 print(f"\n{PASS} passed, {FAIL} failed")
 raise SystemExit(1 if FAIL else 0)

@@ -31,46 +31,47 @@
         status: "Complete",
         category: ["Physical risk", "Climate data", "Data viz"],
         icon: "wind",
-        meta: "6 charts · reproducible notebook · 6 open datasets",
+        meta: "7 charts · reproducible notebook · 7 open datasets",
         summary:
           "Forty years of cyclone records, checked against one simple question: as the ocean warmed, did the storms hitting WA actually get stronger?",
         result: { value: "40", unit: "yrs", label: "of storm records" },
         headline:
-          "The ocean off Western Australia warmed about half a degree in 40 years. The cyclones did not get stronger.",
+          "The ocean off Western Australia warmed about half a degree in 40 years. Whether the cyclones weakened or strengthened depends on which wind record you trust, and that ambiguity is the finding.",
         body:
-          "Most people assume that as the ocean warms, storms get stronger. I put that to the test for Western Australia using 40 years of official cyclone records from international and Australian weather agencies, looking at how strong the storms got and how often they strengthened very fast. The answer was the opposite of what you would expect, and that is exactly why it is worth knowing. It matters because WA's biggest companies now have to report their climate risks under new Australian rules (AASB S2), and those reports need to be built on what the data really shows, not on gut feel.",
+          "Most people assume that as the ocean warms, storms get stronger. I put that to the test for Western Australia using 40 years of official cyclone records from international and Australian weather agencies, looking at how strong the storms got and how often they strengthened very fast. The answer turned out to hinge on the measurement itself: Australia's wind record drifts down while the US record for the very same storms drifts up, and neither trend is statistically solid. That ambiguity is exactly why it is worth knowing. It matters because WA's biggest companies now have to report their climate risks under new Australian rules (AASB S2), and those reports need to be built on what the data really shows, not on gut feel.",
         findings: [
           { value: "+0.5", unit: "°C", label: "The ocean is warming", text: "The sea where these cyclones form has warmed by about half a degree since the 1980s. This part is rock solid in the data." },
-          { value: "−3.6", unit: "kt/decade", label: "But the storms are not", text: "Despite the warmer ocean, the storms' top wind speeds have edged down, not up, over the 40 years." },
-          { value: "−0.22", unit: "link", label: "Warmer seas, stronger storms?", text: "No. Warmer years did not bring stronger storms here. The connection people assume simply is not in WA's record." },
+          { value: "−3.6 / +3.9", unit: "kt/decade", label: "Two records, two directions", text: "Australia's 10-minute wind record drifts down while the US 1-minute record drifts up, for the same storms. Neither trend is significant. The record cannot settle the direction." },
+          { value: "−0.08", unit: "link", label: "Warmer seas, stronger storms?", text: "No. Once the shared long-term trends are removed, warm years and strong-storm years are unrelated (r = −0.08). The connection people assume simply is not in WA's record." },
           { value: "~5", unit: "/year", label: "Storms near the coast", text: "About five cyclones come within 500 km of the WA coast in a typical year, a number that has held steady or dipped slightly." },
         ],
         charts: [
           { src: "cyclone-risk/charts/01_annual_count.png", caption: "How many cyclones each year: steady, with a slight dip" },
           { src: "cyclone-risk/charts/02_intensity_by_decade.png", caption: "How strong the storms got, decade by decade: edging down, not up" },
-          { src: "cyclone-risk/charts/03_trend_wind_speed.png", caption: "Average top wind speed over time: a gentle downward trend" },
-          { src: "cyclone-risk/charts/04_trend_pressure.png", caption: "A second way of measuring strength agrees: storms got slightly weaker" },
+          { src: "cyclone-risk/charts/03_trend_wind_speed.png", caption: "Same storms, two wind records, opposite trends" },
+          { src: "cyclone-risk/charts/04_trend_pressure.png", caption: "Pressure, the cleanest measure: leaning weaker, but borderline" },
           { src: "cyclone-risk/charts/05_rapid_intensification.png", caption: "Storms strengthening very fast: it looks like it is rising, but read with care" },
-          { src: "cyclone-risk/charts/06_sst_correlation.png", caption: "Warmer oceans did not mean stronger storms" },
+          { src: "cyclone-risk/charts/06_sst_correlation.png", caption: "Warmer oceans did not mean stronger storms, raw or detrended" },
+          { src: "cyclone-risk/charts/07_proximity_sensitivity.png", caption: "Robustness: peak strength near the coast, and 300/500/700 km definitions" },
         ],
         meaning:
-          "The lesson is simple but important: you cannot judge WA's future cyclone danger just by looking at the recent past. The ocean has warmed, yet the storms here have not gotten stronger, so honest climate-risk reporting has to lean on future projections rather than assume the past will repeat. And a quiet long-term trend does not mean we are safe. Severe Tropical Cyclone Narelle in 2026 caused around $500 million in damage, a reminder that the real danger lives in the rare, extreme storm, not the average one.",
+          "The lesson is simple but important: you cannot judge WA's future cyclone danger just by looking at the recent past. The ocean has warmed, yet the record cannot even settle whether the storms strengthened or weakened, so honest climate-risk reporting has to lean on future projections rather than extend the past in either direction. And a quiet long-term trend does not mean we are safe. Severe Tropical Cyclone Narelle in 2026 caused around $500 million in damage, a reminder that the real danger lives in the rare, extreme storm, not the average one.",
         resources: [
           { label: "Read the full analysis", href: ghBlob("cyclone-risk/README.md"), icon: "file-text" },
           { label: "Open the notebook", href: ghBlob("cyclone-risk/cyclone_analysis.ipynb"), icon: "bar-chart" },
-          { label: "Cleaned datasets (6 CSVs)", href: ghTree("cyclone-risk/data"), icon: "layers" },
+          { label: "Cleaned datasets (7 CSVs)", href: ghTree("cyclone-risk/data"), icon: "layers" },
           { label: "All charts", href: ghTree("cyclone-risk/charts"), icon: "scan" },
           { label: "View on GitHub", href: ghTree("cyclone-risk"), icon: "github" },
         ],
         feature: 5,
         dataset: {
           caption: "WA-affecting cyclones by decade (IBTrACS + BOM)",
-          columns: ["Decade", "WA storms", "Mean peak wind (kt)", "Mean min pressure (hPa)", "Reached Cat 3+"],
+          columns: ["Decade", "WA storms", "Peak wind, BOM (kt)", "Peak wind, USA (kt)", "Mean min pressure (hPa)", "Reached Cat 3+"],
           rows: [
-            ["1985–94", "47", "76", "959", "17%"],
-            ["1995–04", "55", "78", "956", "38%"],
-            ["2005–14", "50", "69", "964", "28%"],
-            ["2015–24", "42", "63", "973", "19%"],
+            ["1985–94", "47", "76", "65", "959", "17%"],
+            ["1995–04", "55", "78", "80", "955", "38%"],
+            ["2005–14", "50", "69", "77", "964", "28%"],
+            ["2015–24", "42", "63", "75", "973", "19%"],
           ],
         },
         vizKey: "cyclone",
@@ -96,15 +97,15 @@
         meta: "5 charts · reproducible pipeline · 6 open datasets",
         summary:
           "One of the clearest examples anywhere of a region drying out: the south-west corner of WA, where winter rain dropped sharply and never recovered.",
-        result: { value: "−19", unit: "%", label: "drier than the 1950s" },
+        result: { value: "−17", unit: "%", label: "drier than the 1950s" },
         headline:
           "South West WA's winter rain did not slowly tail off. It dropped suddenly around the year 2000 and never came back.",
         body:
           "Using 74 years of rainfall records from Bureau of Meteorology weather stations, I measured how much the cooler-months rain (April to October) in south-west WA has fallen, and what that means for the people who depend on it: water suppliers, farmers, and insurers. I was careful about the cause too, weighing natural climate cycles against human-caused climate change rather than overclaiming either way.",
         findings: [
           { value: "−2.9%", unit: "/decade", label: "Winter rain is falling", text: "The cooler-months rain has dropped about 3% every decade since 1950, roughly 20 mm less rain each decade. This is a real trend, not chance." },
-          { value: "~2000", unit: "", label: "When it changed", text: "The fall was not gradual. Rainfall dropped suddenly around the year 2000 and then settled at a new, lower level (from about 571 mm a year to 475 mm)." },
-          { value: "−19%", unit: "", label: "Drier than the 1950s", text: "The last 25 years have been about a fifth drier than the 1950s, and early winter (May to July) has dried out even faster." },
+          { value: "~2000", unit: "", label: "When it changed", text: "The fall was not gradual. Rainfall dropped suddenly around the year 2000 and then settled at a new, lower level (from about 567 mm a year to 483 mm, with the figures adjusted so years missing a wet station do not read spuriously dry)." },
+          { value: "−17%", unit: "", label: "Drier than the 1950s", text: "The last 25 years have been about 17% drier than the 1950s, and early winter (May to July) has dried out even faster." },
           { value: "7 / 7", unit: "", label: "Every station agrees", text: "All seven weather stations show the same drying, so this is a genuine regional change, not a quirk of one location." },
         ],
         charts: [

@@ -10,8 +10,8 @@ by NOAA in a script-friendly fixed-width format. Using them keeps the whole
 pipeline reproducible without manual web navigation; results are validated
 against BOM/CSIRO published figures in the README.
 
-Six long-record South West Land Division (SWLD) stations spanning the rainfall
-gradient (wet SW/coast -> Perth Hills catchment -> dry interior wheatbelt).
+Seven long-record South West Land Division (SWLD) stations spanning the
+rainfall gradient (wet SW corner and coast -> dry interior wheatbelt).
 
 Driver indices: NOAA PSL (DMI for the Indian Ocean Dipole; Nino 3.4 anomaly for
 ENSO) and the Marshall (2003) station-based Southern Annular Mode index (BAS).
@@ -53,7 +53,7 @@ MJJ_MONTHS = [5, 6, 7]
 BASE_START, BASE_END = 1950, 1974
 YEAR_MIN, YEAR_MAX = 1950, 2024
 MAX_MISSING_DAYS = 3               # per month; more than this -> month invalid
-MIN_BASE_YEARS = 15               # need this many valid baseline years per station
+MIN_BASE_YEARS = 22                # of 25 baseline years; all 7 stations pass
 MIN_STATIONS_PER_YEAR = 5          # of 7; else regional value for that year is NaN
 
 

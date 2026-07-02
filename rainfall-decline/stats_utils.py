@@ -1,12 +1,17 @@
 """
-stats_utils.py: self-contained statistics for the adhi-climate analyses (cyclone-risk, rainfall-decline).
+stats_utils.py: self-contained statistics for the adhi-climate analyses.
 
-Why this exists: the analysis deliberately depends only on numpy/pandas/
-matplotlib/netCDF4 so it reproduces on any machine without a heavy scientific
-stack. The handful of statistics we need (OLS regression with a significance
-test, Pearson correlation, the non-parametric Mann-Kendall trend test, and
-Sen's slope) are implemented here from first principles and validated against
-known textbook values in test_stats.py.
+Why this exists: the analyses deliberately depend only on numpy/pandas/
+matplotlib/netCDF4 so they reproduce on any machine without a heavy scientific
+stack. The statistics needed (OLS regression with a significance test, Pearson
+correlation, the non-parametric Mann-Kendall trend test with an optional
+trend-free prewhitening variant for autocorrelated series, Sen's slope, and
+the Pettitt change-point test) are implemented here from first principles and
+validated against known textbook values in test_stats.py.
+
+This file is intentionally duplicated, byte for byte, in cyclone-risk/ and
+rainfall-decline/ so each project stays self-contained. CI checks that the two
+copies are identical; edit one, then copy it over the other.
 
 All p-values are two-sided. Results have been checked to agree with
 scipy.stats to ~1e-6.
@@ -223,6 +228,59 @@ def mann_kendall(y, alpha=0.05):
     else:
         trend = "no trend"
     return MannKendallResult(trend, S, z, p, n, tau)
+
+
+class TFPWResult:
+    def __init__(self, mk, r1, prewhitened, sen):
+        self.mk = mk                  # MannKendallResult on the (possibly) prewhitened series
+        self.trend = mk.trend
+        self.pvalue = mk.pvalue
+        self.tau = mk.tau
+        self.n = mk.n
+        self.r1 = r1                  # lag-1 autocorrelation of the detrended series
+        self.prewhitened = prewhitened
+        self.sen = sen                # Sen's slope used for detrending (per step)
+
+    def __repr__(self):
+        return (f"TFPW(trend={self.trend!r}, p={self.pvalue:.4g}, r1={self.r1:+.3f}, "
+                f"prewhitened={self.prewhitened}, n={self.n})")
+
+
+def mann_kendall_tfpw(y, alpha=0.05):
+    """Mann-Kendall with trend-free prewhitening (Yue et al. 2002).
+
+    Serial correlation inflates the variance of the MK statistic and makes
+    p-values overconfident. TFPW: (1) remove the Sen's-slope trend, (2) measure
+    the lag-1 autocorrelation r1 of the residuals, (3) if r1 is significant at
+    the 5% level (|r1| > 1.96/sqrt(n)), filter the AR(1) component out of the
+    residuals, add the trend back, and run MK on that series; otherwise run
+    plain MK on the original series.
+
+    Assumes (approximately) equally spaced observations; a few missing years
+    dropped from an annual series are tolerable, long gaps are not.
+    """
+    y = np.asarray(y, dtype=float)
+    y = y[np.isfinite(y)]
+    n = y.size
+    if n < 4:
+        raise ValueError("Need at least 4 points for Mann-Kendall")
+    t = np.arange(n, dtype=float)
+    b, _ = sens_slope(t, y)
+    resid = y - b * t
+    dr = resid - resid.mean()
+    denom = np.sum(dr * dr)
+    if denom <= 0:
+        # strictly linear series: no residual variance, nothing to prewhiten
+        mk = mann_kendall(y, alpha=alpha)
+        return TFPWResult(mk, 0.0, False, b)
+    r1 = float(np.sum(dr[1:] * dr[:-1]) / denom)
+    if abs(r1) <= 1.96 / math.sqrt(n):
+        mk = mann_kendall(y, alpha=alpha)
+        return TFPWResult(mk, r1, False, b)
+    filtered = resid[1:] - r1 * resid[:-1]
+    blended = filtered + b * t[1:]
+    mk = mann_kendall(blended, alpha=alpha)
+    return TFPWResult(mk, r1, True, b)
 
 
 def sens_slope(x, y):
