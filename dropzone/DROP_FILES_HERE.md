@@ -1,12 +1,43 @@
 # DROP DATA FILES HERE
 
 Download the files below from the official sources and drop them into this
-`dropzone/` folder. I will validate them, move them to
-`cyclone-risk/data/raw/`, and run the analysis.
+`dropzone/` folder. Each project's `build_dataset.py` detects its files by
+content, so you do not need to rename anything. This staging area exists
+because the remote sessions that build the analyses often cannot reach the
+data hosts directly; you download, the pipeline does the rest.
 
-You do not need to rename anything. I will detect the files by content.
+======================================================================
+PROJECT: water-security (Perth streamflow)          [DATA NEEDED]
+======================================================================
 
+1. BoM Hydrologic Reference Stations - daily streamflow   [REQUIRED]
 ----------------------------------------------------------------------
+Bureau of Meteorology, http://www.bom.gov.au/water/hrs/
+
+On the HRS map, pick 5-8 stations in the south-west WA region (the
+Darling Range and SW forest catchments east and south of Perth; choose
+the longest records on offer). For each station download the DAILY
+streamflow CSV ("Daily flow", ML/day) and drop the files here.
+The parser reads the standard HRS CSV layout (metadata lines, then
+Date / Flow columns) and pulls the station number from the metadata.
+
+2. Water Corporation annual inflow to Perth dams          [OPTIONAL]
+----------------------------------------------------------------------
+https://www.watercorporation.com.au (search "streamflow")
+
+Used only as a cross-check of the gauged story. If the site lets you
+export the annual inflow series, save it as a CSV with columns
+year,inflow_GL and add a first line recording where it came from:
+    # source: <URL you took it from>
+
+Then run, inside water-security/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+======================================================================
+PROJECT: cyclone-risk (complete; files only needed to re-run
+the pipeline from scratch)
+======================================================================
+
 1. IBTrACS v04r01 - Southern Indian Ocean subset   [REQUIRED]
 ----------------------------------------------------------------------
 NOAA NCEI - International Best Track Archive for Climate Stewardship.
