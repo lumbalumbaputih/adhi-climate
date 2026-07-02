@@ -124,6 +124,29 @@ Then run, inside sea-level/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
+PROJECT: wheat-yields (WA wheatbelt)                [DATA NEEDED]
+======================================================================
+
+WA wheat area and production by season                     [REQUIRED]
+----------------------------------------------------------------------
+From ABARES (Australian crop report statistical tables, or the
+historical agricultural data on agriculture.gov.au/abares) or the ABS
+agricultural commodities collection. The spreadsheets change layout
+between vintages, so fill this simple CSV from whichever official
+table you download (keep the source line):
+
+    # source: <URL of the table you used>
+    year,wheat_area_ha,wheat_production_t
+    1975,3200000,4100000
+    ...
+
+Label each season by the year the crop was SOWN ("1975-76" -> 1975).
+Season-labelled exports ("1975-76" in a year/season column) also parse.
+
+Then run, inside wheat-yields/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+======================================================================
 PROJECT: cyclone-risk (complete; files only needed to re-run
 the pipeline from scratch)
 ======================================================================
