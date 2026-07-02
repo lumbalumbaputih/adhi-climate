@@ -12,6 +12,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**cyclone-risk**](cyclone-risk/): Tropical Cyclone Trends Affecting WA (1985–2024) | Acute physical risk | Complete |
 | [**rainfall-decline**](rainfall-decline/): South West WA Rainfall Decline (1950–2024) | Chronic physical risk | Complete |
 | [**aasb-s2-review**](aasb-s2-review/): Disclosure Gap Analysis, WA's Biggest Emitters (BHP, Rio Tinto, Woodside) | Disclosure review | Complete |
+| [**transition-risk**](transition-risk/): WA's Biggest Emitters Under the Safeguard Mechanism (2016–2024) | Transition risk | Planned |
 
 The portfolio site (`index.html`) ties these together: each project card opens a
 case study with the headline findings, the charts, and direct links to the
