@@ -13,7 +13,8 @@ whose files still go straight into `dropzone/` itself, per its own section
 below.)
 
 ======================================================================
-PROJECT: water-security (Perth streamflow)          [DATA NEEDED]
+PROJECT: water-security (Perth streamflow)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
 ======================================================================
 
 1. BoM Hydrologic Reference Stations - daily streamflow   [REQUIRED]
@@ -78,7 +79,8 @@ Then run, inside swis-decarbonisation/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
-PROJECT: extreme-heat (Perth + Pilbara)             [DATA NEEDED]
+PROJECT: extreme-heat (Perth + Pilbara)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
 ======================================================================
 
 Option A (preferred): on any machine with open network access, run

@@ -128,7 +128,7 @@ def parse_bom_cdo(path, log):
     sid_col = next((low[c] for c in low if "station number" in c), None)
     sid = str(df[sid_col].iloc[0]) if sid_col else os.path.basename(path)
     out = pd.DataFrame({
-        "station": sid, "name": sid,
+        "station": sid, "name": f"BoM CDO station {sid}",
         "date": pd.to_datetime(dict(year=df[low["year"]], month=df[low["month"]],
                                     day=df[low["day"]]), errors="coerce"),
         kind: pd.to_numeric(df[tcol], errors="coerce"),
