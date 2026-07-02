@@ -131,8 +131,12 @@ PSMSL monthly RLR data for Fremantle (station 111)         [REQUIRED]
 https://psmsl.org/data/obtaining/  ->  search "Fremantle" (station id
 111)  ->  download the monthly RLR data file. It is a small semicolon-
 separated text file (decimal year; height in mm; flags), typically
-named 111.rlrdata. Drop it as-is into
+named 111.rlrdata, with heights around 6500-7500 mm. Drop it as-is into
     dropzone/sea-level/
+
+CAREFUL: the station page also offers a "metric" file (111.metdata,
+heights in the hundreds of mm). That variant can contain datum shifts
+and the pipeline refuses it; it is the RLR file that is needed.
 
 Then run, inside sea-level/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py

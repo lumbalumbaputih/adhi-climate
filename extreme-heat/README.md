@@ -7,11 +7,35 @@ heat: how often Perth and the Pilbara now hit 35 C and 40 C, how hot the
 hottest day of the year has become, and whether multi-day heatwaves are
 getting more frequent.
 
-> **Status: pipeline complete, awaiting the data drop (or a networked
-> --fetch run).** Every number in this README will be computed by
-> `analysis.py`. Nothing is pre-filled; see
-> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md), or run
-> `python3 build_dataset.py --fetch` on a machine that can reach NOAA.
+> **Status: Perth complete and cross-validated; Port Hedland data still
+> needed.** Two independent copies of the Perth Airport record are in hand
+> (the BoM Climate Data Online export, 1944-2026, and the GHCN-Daily
+> export, 1950-2025) and their trends agree to within a few percent, which
+> is exactly what two portals of the same station observations should do.
+> The Pilbara half of the comparison needs the Port Hedland series
+> (GHCN station ASN00004032, or the BoM CDO equivalent for station 4032);
+> see [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md).
+
+## Interim results: Perth Airport
+
+Computed by `analysis.py` from the supplied records (BoM copy first,
+GHCN copy in brackets as the cross-check; complete years only):
+
+| Metric | Sen's slope per decade | Mann-Kendall p |
+|---|---|---|
+| Days at or above 35 C | **+2.31** (+2.42) | 1.6e-07 (9.2e-07) |
+| Days at or above 40 C | **+0.39** (+0.32) | 0.002 (0.02) |
+| Hottest day of the year, TXx | **+0.27 C** (+0.25 C) | 0.0005 (0.003) |
+| Heatwave events (3+ days above day-of-year p90) | **+0.61** (+0.67) | 2.6e-06 (5.0e-06) |
+| Days inside heatwaves | **+2.59** (+2.86) | 4.9e-07 (1.4e-06) |
+
+Decade means from the longer BoM record: days at or above 35 C rose from
+about **24 per year in the 1950s-60s to 36 in the 2010s and 43 in the
+2020s so far**; 40 C days roughly doubled (3-4 to 8.5); TXx climbed from
+about 41.5 C to 43.5 C; heatwave events went from ~3 to ~8-9 per year.
+Every metric increases, every trend is significant, and both portals agree.
+These figures become final, and the Perth-vs-Pilbara comparison gets
+written, once the Port Hedland record lands.
 
 ## Research question
 

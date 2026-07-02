@@ -50,6 +50,9 @@ WY_START_MONTH = 5            # water year starts 1 May
 BASE_START, BASE_END = 1975, 1999
 MAX_MISSING_DAYS = 15
 MIN_BASE_YEARS = 18
+MIN_STATIONS = 5              # a year enters the regional series only when at
+                              # least this many stations report; a "regional"
+                              # mean of one or two gauges is not regional
 
 
 # ---------------------------------------------------------------------------
@@ -72,7 +75,12 @@ def _find_header(lines):
 
 
 def _station_from_metadata(lines, fallback):
-    """Pull a station id/name out of '#' metadata lines if present."""
+    """Pull a station id/name out of '#' metadata lines if present.
+
+    Handles both explicit 'Station Number: 616999' metadata and the BoM HRS
+    layout, where the river name and id share one line:
+        #,"Murray River - Baden Powell (614006)"
+    """
     sid, name = None, None
     for ln in lines[:300]:
         if not ln.lstrip().startswith("#"):
@@ -84,6 +92,13 @@ def _station_from_metadata(lines, fallback):
         m2 = re.search(r"station\s*name\s*[:=]\s*(.+)", ln, flags=re.IGNORECASE)
         if m2 and name is None:
             name = m2.group(1).strip().strip(",")
+        m3 = re.search(r'"?([^"#,]+?)\s*\(([0-9]{6}[a-z]?)\)\s*"?\s*$', ln.strip(),
+                       flags=re.IGNORECASE)
+        if m3:
+            if sid is None:
+                sid = m3.group(2).upper()
+            if name is None:
+                name = m3.group(1).strip()
     return sid or fallback, name or (sid or fallback)
 
 
@@ -216,6 +231,12 @@ def build_regional(clean):
             .agg(regional_anom_pct=("anom_pct", "mean"),
                  n_stations=("station", "size"))
             .reset_index())
+    thin = reg[reg.n_stations < MIN_STATIONS]
+    if len(thin):
+        print(f"  dropped {len(thin)} water years with fewer than "
+              f"{MIN_STATIONS} reporting stations: "
+              f"{int(thin.water_year.min())}-{int(thin.water_year.max())}")
+        reg = reg[reg.n_stations >= MIN_STATIONS].reset_index(drop=True)
     full_base = float(keep.baseline_ML.mean())
     reg["regional_ML_adj"] = full_base * (1.0 + reg.regional_anom_pct / 100.0)
     return reg, c, full_base

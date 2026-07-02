@@ -57,6 +57,16 @@ def parse_rlr_monthly(path):
         return None
     df = pd.DataFrame(rows, columns=["decimal_year", "msl_mm"])
     df.loc[df.msl_mm <= MISSING, "msl_mm"] = np.nan
+    # RLR heights are defined to sit roughly 7000 mm above the datum; PSMSL's
+    # "metric" files sit near local datum (hundreds of mm) and can contain
+    # datum shifts, so they must not be analysed as a time series
+    med = float(df.msl_mm.median())
+    if med < 3000:
+        raise SystemExit(
+            f"This looks like a PSMSL METRIC file (median height {med:.0f} mm), "
+            "not the RLR file. Metric data can contain datum shifts and is not "
+            "safe for trend analysis. Download the 'monthly RLR data' file "
+            "(e.g. 111.rlrdata) from the same PSMSL station page instead.")
     df["year"] = df.decimal_year.astype(int)
     # PSMSL encodes month k as year + (k - 0.5)/12
     df["month"] = (np.round((df.decimal_year - df.year) * 12 + 0.5)
@@ -114,7 +124,8 @@ def main(source_dir=None, out_dir="data"):
     for d in candidates:
         if d and os.path.isdir(d):
             files += [os.path.join(d, f) for f in sorted(os.listdir(d))
-                      if f.lower().endswith((".csv", ".txt", ".rlrdata", ".dat"))]
+                      if f.lower().endswith((".csv", ".txt", ".rlrdata",
+                                             ".metdata", ".dat"))]
     monthly, provenance = None, []
     for path in files:
         try:

@@ -1,0 +1,703 @@
+station,station_name,water_year,total_ML,days_missing,complete
+614006,Murray River - Baden Powell,1963,697638.9981131235,25,False
+614006,Murray River - Baden Powell,1964,1098049.9016088955,0,True
+614006,Murray River - Baden Powell,1965,341779.78550620977,0,True
+614006,Murray River - Baden Powell,1966,273628.54034284153,0,True
+614006,Murray River - Baden Powell,1967,586126.6249522824,0,True
+614006,Murray River - Baden Powell,1968,393386.98979616887,0,True
+614006,Murray River - Baden Powell,1969,98035.30344866356,0,True
+614006,Murray River - Baden Powell,1970,316613.16839246685,0,True
+614006,Murray River - Baden Powell,1971,155507.90399999134,0,True
+614006,Murray River - Baden Powell,1972,138399.14879999644,0,True
+614006,Murray River - Baden Powell,1973,359902.2239999746,0,True
+614006,Murray River - Baden Powell,1974,724090.3200002229,0,True
+614006,Murray River - Baden Powell,1975,221702.48639993323,0,True
+614006,Murray River - Baden Powell,1976,79702.53120000612,0,True
+614006,Murray River - Baden Powell,1977,78565.1672648295,0,True
+614006,Murray River - Baden Powell,1978,246874.86720006392,0,True
+614006,Murray River - Baden Powell,1979,45016.2144000033,0,True
+614006,Murray River - Baden Powell,1980,93552.39101063648,0,True
+614006,Murray River - Baden Powell,1981,389684.82239999995,0,True
+614006,Murray River - Baden Powell,1982,88749.21600000825,0,True
+614006,Murray River - Baden Powell,1983,630918.4607999992,0,True
+614006,Murray River - Baden Powell,1984,175530.67199998838,0,True
+614006,Murray River - Baden Powell,1985,212157.10080001416,0,True
+614006,Murray River - Baden Powell,1986,136970.0064000017,0,True
+614006,Murray River - Baden Powell,1987,95692.66560002306,0,True
+614006,Murray River - Baden Powell,1988,362848.37760004075,0,True
+614006,Murray River - Baden Powell,1989,167962.7231999987,0,True
+614006,Murray River - Baden Powell,1990,208918.95653042063,0,True
+614006,Murray River - Baden Powell,1991,325530.74880006316,0,True
+614006,Murray River - Baden Powell,1992,397443.19679997925,0,True
+614006,Murray River - Baden Powell,1993,184354.35839996376,0,True
+614006,Murray River - Baden Powell,1994,242690.3424000077,0,True
+614006,Murray River - Baden Powell,1995,288711.12959996215,0,True
+614006,Murray River - Baden Powell,1996,531597.9455998539,0,True
+614006,Murray River - Baden Powell,1997,112681.49759998955,0,True
+614006,Murray River - Baden Powell,1998,208439.91359997983,0,True
+614006,Murray River - Baden Powell,1999,277733.31839997007,0,True
+614006,Murray River - Baden Powell,2000,279938.8512000335,0,True
+614006,Murray River - Baden Powell,2001,67553.48159998706,0,True
+614006,Murray River - Baden Powell,2002,149532.0479999998,0,True
+614006,Murray River - Baden Powell,2003,229414.0319999645,0,True
+614006,Murray River - Baden Powell,2004,193411.84320002398,0,True
+614006,Murray River - Baden Powell,2005,278353.92959999177,0,True
+614006,Murray River - Baden Powell,2006,62366.544000013404,0,True
+614006,Murray River - Baden Powell,2007,188404.27199998283,0,True
+614006,Murray River - Baden Powell,2008,190537.83359993345,0,True
+614006,Murray River - Baden Powell,2009,269404.79039999295,0,True
+614006,Murray River - Baden Powell,2010,39712.29119998752,0,True
+614006,Murray River - Baden Powell,2011,165704.31360000276,0,True
+614006,Murray River - Baden Powell,2012,76459.42080002313,0,True
+614006,Murray River - Baden Powell,2013,131529.48479998112,0,True
+614006,Murray River - Baden Powell,2014,115616.07359999514,0,True
+614006,Murray River - Baden Powell,2015,30481.660800001468,0,True
+614006,Murray River - Baden Powell,2016,131959.67303987796,0,True
+614006,Murray River - Baden Powell,2017,313086.28344883636,0,True
+614006,Murray River - Baden Powell,2018,259012.4704481533,0,True
+614006,Murray River - Baden Powell,2019,86570.51106428592,0,True
+614006,Murray River - Baden Powell,2020,63718.96320000803,0,True
+614006,Murray River - Baden Powell,2021,398759.58719989465,0,True
+614006,Murray River - Baden Powell,2022,206057.69280000613,0,True
+614006,Murray River - Baden Powell,2023,112403.98079998195,61,False
+614037,Big Brook - O'Neil Rd,1982,0.0,344,False
+614037,Big Brook - O'Neil Rd,1983,10151.561666553453,0,True
+614037,Big Brook - O'Neil Rd,1984,4750.984409682398,0,True
+614037,Big Brook - O'Neil Rd,1985,2916.560465871435,0,True
+614037,Big Brook - O'Neil Rd,1986,2325.094993521334,0,True
+614037,Big Brook - O'Neil Rd,1987,1494.4694900765678,0,True
+614037,Big Brook - O'Neil Rd,1988,8056.298685576677,0,True
+614037,Big Brook - O'Neil Rd,1989,2855.151010432625,0,True
+614037,Big Brook - O'Neil Rd,1990,3507.8531971363886,0,True
+614037,Big Brook - O'Neil Rd,1991,9440.818475552845,0,True
+614037,Big Brook - O'Neil Rd,1992,6963.797698463919,0,True
+614037,Big Brook - O'Neil Rd,1993,2734.40499256779,0,True
+614037,Big Brook - O'Neil Rd,1994,2836.9268260483573,0,True
+614037,Big Brook - O'Neil Rd,1995,5237.336932288367,0,True
+614037,Big Brook - O'Neil Rd,1996,13990.386781042926,0,True
+614037,Big Brook - O'Neil Rd,1997,1420.795417660952,0,True
+614037,Big Brook - O'Neil Rd,1998,2071.4247113533547,0,True
+614037,Big Brook - O'Neil Rd,1999,4232.502045416011,0,True
+614037,Big Brook - O'Neil Rd,2000,5021.065094854586,0,True
+614037,Big Brook - O'Neil Rd,2001,73.67407241731874,0,True
+614037,Big Brook - O'Neil Rd,2002,2419.325254960612,0,True
+614037,Big Brook - O'Neil Rd,2003,3449.725822298389,0,True
+614037,Big Brook - O'Neil Rd,2004,2027.0302527109525,0,True
+614037,Big Brook - O'Neil Rd,2005,2696.315583498402,0,True
+614037,Big Brook - O'Neil Rd,2006,845.1357545171275,0,True
+614037,Big Brook - O'Neil Rd,2007,5269.553144494988,0,True
+614037,Big Brook - O'Neil Rd,2008,1390.0475046708157,0,True
+614037,Big Brook - O'Neil Rd,2009,7033.757837572812,0,True
+614037,Big Brook - O'Neil Rd,2010,0.0,0,True
+614037,Big Brook - O'Neil Rd,2011,2516.578485373445,0,True
+614037,Big Brook - O'Neil Rd,2012,792.7952060005281,0,True
+614037,Big Brook - O'Neil Rd,2013,2450.6777617459397,0,True
+614037,Big Brook - O'Neil Rd,2014,1776.0374573473161,0,True
+614037,Big Brook - O'Neil Rd,2015,160.56283777704158,0,True
+614037,Big Brook - O'Neil Rd,2016,966.1408840094297,0,True
+614037,Big Brook - O'Neil Rd,2017,4844.383978751939,0,True
+614037,Big Brook - O'Neil Rd,2018,4056.0606137261198,0,True
+614037,Big Brook - O'Neil Rd,2019,1059.9654142179224,0,True
+614037,Big Brook - O'Neil Rd,2020,849.830399999782,0,True
+614037,Big Brook - O'Neil Rd,2021,4563.302400000551,0,True
+614037,Big Brook - O'Neil Rd,2022,2551.8239999991943,0,True
+614037,Big Brook - O'Neil Rd,2023,1056.4991999993367,61,False
+614044,Yarragil Brook - Yarragil Formation,1952,2584.3268986270778,29,False
+614044,Yarragil Brook - Yarragil Formation,1953,2778.7319427522643,0,True
+614044,Yarragil Brook - Yarragil Formation,1954,1957.0993454404047,0,True
+614044,Yarragil Brook - Yarragil Formation,1955,14734.128546858252,0,True
+614044,Yarragil Brook - Yarragil Formation,1956,8143.667370647489,0,True
+614044,Yarragil Brook - Yarragil Formation,1957,8092.120075374995,0,True
+614044,Yarragil Brook - Yarragil Formation,1958,4613.137655148264,0,True
+614044,Yarragil Brook - Yarragil Formation,1959,2195.5103999999997,0,True
+614044,Yarragil Brook - Yarragil Formation,1960,3742.211639147536,0,True
+614044,Yarragil Brook - Yarragil Formation,1961,3898.3680000000004,0,True
+614044,Yarragil Brook - Yarragil Formation,1962,2737.7567999999997,0,True
+614044,Yarragil Brook - Yarragil Formation,1963,8262.6048,0,True
+614044,Yarragil Brook - Yarragil Formation,1964,14571.48031921729,0,True
+614044,Yarragil Brook - Yarragil Formation,1965,4765.460194490628,0,True
+614044,Yarragil Brook - Yarragil Formation,1966,4292.914731665153,0,True
+614044,Yarragil Brook - Yarragil Formation,1967,7235.827200000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1968,6705.504,0,True
+614044,Yarragil Brook - Yarragil Formation,1969,1600.3872,0,True
+614044,Yarragil Brook - Yarragil Formation,1970,5046.4511999999995,0,True
+614044,Yarragil Brook - Yarragil Formation,1971,3794.32363635488,0,True
+614044,Yarragil Brook - Yarragil Formation,1972,1732.9248000000002,0,True
+614044,Yarragil Brook - Yarragil Formation,1973,5260.291200000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1974,8861.184000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1975,1952.8031180830394,0,True
+614044,Yarragil Brook - Yarragil Formation,1976,684.7891359974241,0,True
+614044,Yarragil Brook - Yarragil Formation,1977,1009.6783135728048,0,True
+614044,Yarragil Brook - Yarragil Formation,1978,1656.8064,0,True
+614044,Yarragil Brook - Yarragil Formation,1979,357.6096,0,True
+614044,Yarragil Brook - Yarragil Formation,1980,1229.4765137319341,0,True
+614044,Yarragil Brook - Yarragil Formation,1981,2928.5280000000002,0,True
+614044,Yarragil Brook - Yarragil Formation,1982,837.4752,0,True
+614044,Yarragil Brook - Yarragil Formation,1983,3820.7808,0,True
+614044,Yarragil Brook - Yarragil Formation,1984,1707.6960000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1985,1873.9296000000002,0,True
+614044,Yarragil Brook - Yarragil Formation,1986,466.90560000000005,0,True
+614044,Yarragil Brook - Yarragil Formation,1987,635.3856000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1988,3707.6831999999995,0,True
+614044,Yarragil Brook - Yarragil Formation,1989,967.6800000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1990,1574.4672,0,True
+614044,Yarragil Brook - Yarragil Formation,1991,2867.0976,0,True
+614044,Yarragil Brook - Yarragil Formation,1992,3475.1808,0,True
+614044,Yarragil Brook - Yarragil Formation,1993,950.9184000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1994,1095.4656,0,True
+614044,Yarragil Brook - Yarragil Formation,1995,1601.5968,0,True
+614044,Yarragil Brook - Yarragil Formation,1996,2710.4544,0,True
+614044,Yarragil Brook - Yarragil Formation,1997,561.7728000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,1998,1327.3632000000002,0,True
+614044,Yarragil Brook - Yarragil Formation,1999,2272.8384,0,True
+614044,Yarragil Brook - Yarragil Formation,2000,2400.7968,0,True
+614044,Yarragil Brook - Yarragil Formation,2001,13.6512,0,True
+614044,Yarragil Brook - Yarragil Formation,2002,938.3904,0,True
+614044,Yarragil Brook - Yarragil Formation,2003,1327.0176000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,2004,959.0400000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,2005,1073.6064000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,2006,196.47360000000003,0,True
+614044,Yarragil Brook - Yarragil Formation,2007,1032.7392000000002,0,True
+614044,Yarragil Brook - Yarragil Formation,2008,589.0752,0,True
+614044,Yarragil Brook - Yarragil Formation,2009,1614.9887999999996,0,True
+614044,Yarragil Brook - Yarragil Formation,2010,0.0,0,True
+614044,Yarragil Brook - Yarragil Formation,2011,32.4,0,True
+614044,Yarragil Brook - Yarragil Formation,2012,202.2624,0,True
+614044,Yarragil Brook - Yarragil Formation,2013,661.9104,0,True
+614044,Yarragil Brook - Yarragil Formation,2014,478.7424,0,True
+614044,Yarragil Brook - Yarragil Formation,2015,0.0,0,True
+614044,Yarragil Brook - Yarragil Formation,2016,125.02079999999998,0,True
+614044,Yarragil Brook - Yarragil Formation,2017,1050.9696000000001,0,True
+614044,Yarragil Brook - Yarragil Formation,2018,724.2912,0,True
+614044,Yarragil Brook - Yarragil Formation,2019,71.62559999999999,0,True
+614044,Yarragil Brook - Yarragil Formation,2020,98.23679999999999,0,True
+614044,Yarragil Brook - Yarragil Formation,2021,755.0496,0,True
+614044,Yarragil Brook - Yarragil Formation,2022,298.16639999999995,0,True
+614044,Yarragil Brook - Yarragil Formation,2023,123.297896682472,61,False
+614196,Williams River - Saddleback Rd Bridge,1966,76257.85891653417,45,False
+614196,Williams River - Saddleback Rd Bridge,1967,166340.88312502322,0,True
+614196,Williams River - Saddleback Rd Bridge,1968,100398.65653710633,0,True
+614196,Williams River - Saddleback Rd Bridge,1969,24530.08258352729,0,True
+614196,Williams River - Saddleback Rd Bridge,1970,91977.22580064026,0,True
+614196,Williams River - Saddleback Rd Bridge,1971,41980.92162138865,0,True
+614196,Williams River - Saddleback Rd Bridge,1972,40531.68889376526,0,True
+614196,Williams River - Saddleback Rd Bridge,1973,88421.42627015221,0,True
+614196,Williams River - Saddleback Rd Bridge,1974,194494.86471460483,0,True
+614196,Williams River - Saddleback Rd Bridge,1975,55479.41772628929,0,True
+614196,Williams River - Saddleback Rd Bridge,1976,21145.976424725373,0,True
+614196,Williams River - Saddleback Rd Bridge,1977,19743.139188630874,0,True
+614196,Williams River - Saddleback Rd Bridge,1978,67938.11915630617,0,True
+614196,Williams River - Saddleback Rd Bridge,1979,12351.30925876594,0,True
+614196,Williams River - Saddleback Rd Bridge,1980,19882.73084267789,0,True
+614196,Williams River - Saddleback Rd Bridge,1981,114962.75773091073,0,True
+614196,Williams River - Saddleback Rd Bridge,1982,18788.27331849723,0,True
+614196,Williams River - Saddleback Rd Bridge,1983,163122.91948056727,0,True
+614196,Williams River - Saddleback Rd Bridge,1984,42026.453137270924,0,True
+614196,Williams River - Saddleback Rd Bridge,1985,66268.39984703294,0,True
+614196,Williams River - Saddleback Rd Bridge,1986,30765.56752553952,0,True
+614196,Williams River - Saddleback Rd Bridge,1987,20306.278506542192,0,True
+614196,Williams River - Saddleback Rd Bridge,1988,104477.89503312837,0,True
+614196,Williams River - Saddleback Rd Bridge,1989,40595.36389796587,0,True
+614196,Williams River - Saddleback Rd Bridge,1990,49383.911264538634,0,True
+614196,Williams River - Saddleback Rd Bridge,1991,82970.94958872846,0,True
+614196,Williams River - Saddleback Rd Bridge,1992,108318.78510935785,0,True
+614196,Williams River - Saddleback Rd Bridge,1993,39289.63752307597,0,True
+614196,Williams River - Saddleback Rd Bridge,1994,58368.897834921125,0,True
+614196,Williams River - Saddleback Rd Bridge,1995,67779.23403731274,0,True
+614196,Williams River - Saddleback Rd Bridge,1996,143885.11963988678,0,True
+614196,Williams River - Saddleback Rd Bridge,1997,28215.7162384247,0,True
+614196,Williams River - Saddleback Rd Bridge,1998,69463.98652261251,0,True
+614196,Williams River - Saddleback Rd Bridge,1999,63482.078429038535,0,True
+614196,Williams River - Saddleback Rd Bridge,2000,78003.26249128953,0,True
+614196,Williams River - Saddleback Rd Bridge,2001,23908.538512798397,0,True
+614196,Williams River - Saddleback Rd Bridge,2002,45015.80882913833,0,True
+614196,Williams River - Saddleback Rd Bridge,2003,59380.18131392687,0,True
+614196,Williams River - Saddleback Rd Bridge,2004,77946.49929219381,0,True
+614196,Williams River - Saddleback Rd Bridge,2005,83712.93186276472,0,True
+614196,Williams River - Saddleback Rd Bridge,2006,18886.334552898486,0,True
+614196,Williams River - Saddleback Rd Bridge,2007,55001.29361073181,0,True
+614196,Williams River - Saddleback Rd Bridge,2008,56029.07902433894,0,True
+614196,Williams River - Saddleback Rd Bridge,2009,70421.44431964283,0,True
+614196,Williams River - Saddleback Rd Bridge,2010,14179.395301660561,0,True
+614196,Williams River - Saddleback Rd Bridge,2011,54120.12486213776,0,True
+614196,Williams River - Saddleback Rd Bridge,2012,31467.288535053573,0,True
+614196,Williams River - Saddleback Rd Bridge,2013,51678.1841316452,0,True
+614196,Williams River - Saddleback Rd Bridge,2014,44960.6871837173,0,True
+614196,Williams River - Saddleback Rd Bridge,2015,16211.897979444038,0,True
+614196,Williams River - Saddleback Rd Bridge,2016,53845.636563269734,0,True
+614196,Williams River - Saddleback Rd Bridge,2017,93968.35789197488,0,True
+614196,Williams River - Saddleback Rd Bridge,2018,83518.51111011681,0,True
+614196,Williams River - Saddleback Rd Bridge,2019,35649.54637124163,0,True
+614196,Williams River - Saddleback Rd Bridge,2020,27032.68663555051,0,True
+614196,Williams River - Saddleback Rd Bridge,2021,139475.1744000047,0,True
+614196,Williams River - Saddleback Rd Bridge,2022,77596.01280001005,0,True
+614196,Williams River - Saddleback Rd Bridge,2023,39336.62399999476,61,False
+614224,Hotham River - Marradong Rd Bridge,1966,95693.42480475403,47,False
+614224,Hotham River - Marradong Rd Bridge,1967,281036.2336051857,0,True
+614224,Hotham River - Marradong Rd Bridge,1968,157310.43105905948,0,True
+614224,Hotham River - Marradong Rd Bridge,1969,19310.10299232081,0,True
+614224,Hotham River - Marradong Rd Bridge,1970,106166.42715928658,0,True
+614224,Hotham River - Marradong Rd Bridge,1971,38435.136718930364,0,True
+614224,Hotham River - Marradong Rd Bridge,1972,46281.14046276729,0,True
+614224,Hotham River - Marradong Rd Bridge,1973,140133.8950356745,0,True
+614224,Hotham River - Marradong Rd Bridge,1974,324717.7643260681,0,True
+614224,Hotham River - Marradong Rd Bridge,1975,88249.95967393358,0,True
+614224,Hotham River - Marradong Rd Bridge,1976,30890.75613410464,0,True
+614224,Hotham River - Marradong Rd Bridge,1977,23599.787386970525,0,True
+614224,Hotham River - Marradong Rd Bridge,1978,123878.73093081637,0,True
+614224,Hotham River - Marradong Rd Bridge,1979,16729.24209779049,0,True
+614224,Hotham River - Marradong Rd Bridge,1980,35103.63073546838,0,True
+614224,Hotham River - Marradong Rd Bridge,1981,179395.9682355821,0,True
+614224,Hotham River - Marradong Rd Bridge,1982,33760.193754816864,0,True
+614224,Hotham River - Marradong Rd Bridge,1983,333496.1128162431,0,True
+614224,Hotham River - Marradong Rd Bridge,1984,72512.24647123773,0,True
+614224,Hotham River - Marradong Rd Bridge,1985,76317.48484682027,0,True
+614224,Hotham River - Marradong Rd Bridge,1986,69431.38751851,0,True
+614224,Hotham River - Marradong Rd Bridge,1987,43993.262705535104,0,True
+614224,Hotham River - Marradong Rd Bridge,1988,130624.68710648686,0,True
+614224,Hotham River - Marradong Rd Bridge,1989,68765.32824243729,0,True
+614224,Hotham River - Marradong Rd Bridge,1990,66756.9551885007,0,True
+614224,Hotham River - Marradong Rd Bridge,1991,142215.62187415824,0,True
+614224,Hotham River - Marradong Rd Bridge,1992,170847.09872299962,0,True
+614224,Hotham River - Marradong Rd Bridge,1993,85170.48312468291,0,True
+614224,Hotham River - Marradong Rd Bridge,1994,117406.31784355726,0,True
+614224,Hotham River - Marradong Rd Bridge,1995,148019.0380780239,0,True
+614224,Hotham River - Marradong Rd Bridge,1996,276558.9743383929,0,True
+614224,Hotham River - Marradong Rd Bridge,1997,45977.7892994158,0,True
+614224,Hotham River - Marradong Rd Bridge,1998,89375.75450688662,0,True
+614224,Hotham River - Marradong Rd Bridge,1999,140657.91235433117,0,True
+614224,Hotham River - Marradong Rd Bridge,2000,123712.32411209222,0,True
+614224,Hotham River - Marradong Rd Bridge,2001,32164.468139299748,0,True
+614224,Hotham River - Marradong Rd Bridge,2002,60543.48355280632,0,True
+614224,Hotham River - Marradong Rd Bridge,2003,112964.7418667081,0,True
+614224,Hotham River - Marradong Rd Bridge,2004,64799.03986157649,0,True
+614224,Hotham River - Marradong Rd Bridge,2005,126163.32547985505,0,True
+614224,Hotham River - Marradong Rd Bridge,2006,22215.74230412969,0,True
+614224,Hotham River - Marradong Rd Bridge,2007,74443.98253229957,0,True
+614224,Hotham River - Marradong Rd Bridge,2008,87808.97296418536,0,True
+614224,Hotham River - Marradong Rd Bridge,2009,137550.1829339733,0,True
+614224,Hotham River - Marradong Rd Bridge,2010,16027.75873256541,0,True
+614224,Hotham River - Marradong Rd Bridge,2011,88295.14698766265,0,True
+614224,Hotham River - Marradong Rd Bridge,2012,28105.299524732844,0,True
+614224,Hotham River - Marradong Rd Bridge,2013,46899.938819929004,0,True
+614224,Hotham River - Marradong Rd Bridge,2014,47886.62930286508,0,True
+614224,Hotham River - Marradong Rd Bridge,2015,11288.534006688373,0,True
+614224,Hotham River - Marradong Rd Bridge,2016,71071.43568667368,0,True
+614224,Hotham River - Marradong Rd Bridge,2017,181024.97468350604,0,True
+614224,Hotham River - Marradong Rd Bridge,2018,136164.27105579994,0,True
+614224,Hotham River - Marradong Rd Bridge,2019,40088.82119509647,0,True
+614224,Hotham River - Marradong Rd Bridge,2020,23270.716799994076,0,True
+614224,Hotham River - Marradong Rd Bridge,2021,248869.75679999965,0,True
+614224,Hotham River - Marradong Rd Bridge,2022,121106.27520001018,0,True
+614224,Hotham River - Marradong Rd Bridge,2023,65254.204800001404,61,False
+616002,Darkin River - Pine Plantation,1968,10521.273599998525,45,False
+616002,Darkin River - Pine Plantation,1969,977.961600000135,0,True
+616002,Darkin River - Pine Plantation,1970,8814.070500304328,0,True
+616002,Darkin River - Pine Plantation,1971,3236.9759999999264,0,True
+616002,Darkin River - Pine Plantation,1972,1357.6895999998703,0,True
+616002,Darkin River - Pine Plantation,1973,10539.763199998275,0,True
+616002,Darkin River - Pine Plantation,1974,27613.871999995994,0,True
+616002,Darkin River - Pine Plantation,1975,4883.500799999428,0,True
+616002,Darkin River - Pine Plantation,1976,754.0128000002882,0,True
+616002,Darkin River - Pine Plantation,1977,951.1776000001296,0,True
+616002,Darkin River - Pine Plantation,1978,7157.980799996935,0,True
+616002,Darkin River - Pine Plantation,1979,49.93920000000727,0,True
+616002,Darkin River - Pine Plantation,1980,722.3904000000387,0,True
+616002,Darkin River - Pine Plantation,1981,6109.084800000871,0,True
+616002,Darkin River - Pine Plantation,1982,462.6719999999604,0,True
+616002,Darkin River - Pine Plantation,1983,11918.620799996255,0,True
+616002,Darkin River - Pine Plantation,1984,2657.5348669969053,0,True
+616002,Darkin River - Pine Plantation,1985,964.5696000002698,0,True
+616002,Darkin River - Pine Plantation,1986,3421.0944000004815,0,True
+616002,Darkin River - Pine Plantation,1987,1175.9040000001671,0,True
+616002,Darkin River - Pine Plantation,1988,6161.4432000008765,0,True
+616002,Darkin River - Pine Plantation,1989,498.70079999999695,0,True
+616002,Darkin River - Pine Plantation,1990,2383.430399999693,0,True
+616002,Darkin River - Pine Plantation,1991,5011.200000000108,0,True
+616002,Darkin River - Pine Plantation,1992,5647.449599999451,0,True
+616002,Darkin River - Pine Plantation,1993,770.342399999987,0,True
+616002,Darkin River - Pine Plantation,1994,962.4960000002771,0,True
+616002,Darkin River - Pine Plantation,1995,3681.417600001449,0,True
+616002,Darkin River - Pine Plantation,1996,14536.627200001754,0,True
+616002,Darkin River - Pine Plantation,1997,911.6063999996845,0,True
+616002,Darkin River - Pine Plantation,1998,1615.507199999472,0,True
+616002,Darkin River - Pine Plantation,1999,4262.19839999914,0,True
+616002,Darkin River - Pine Plantation,2000,3209.5008000008525,0,True
+616002,Darkin River - Pine Plantation,2001,13.392000000005634,0,True
+616002,Darkin River - Pine Plantation,2002,255.05279999990677,0,True
+616002,Darkin River - Pine Plantation,2003,3328.300799999472,0,True
+616002,Darkin River - Pine Plantation,2004,506.90880000012766,0,True
+616002,Darkin River - Pine Plantation,2005,4695.408000001297,0,True
+616002,Darkin River - Pine Plantation,2006,0.0,0,True
+616002,Darkin River - Pine Plantation,2007,2439.9359999999115,0,True
+616002,Darkin River - Pine Plantation,2008,1988.4960000001581,0,True
+616002,Darkin River - Pine Plantation,2009,4166.1216000004615,0,True
+616002,Darkin River - Pine Plantation,2010,0.0,0,True
+616002,Darkin River - Pine Plantation,2011,1170.2015999994603,0,True
+616002,Darkin River - Pine Plantation,2012,2.6784000000022816,0,True
+616002,Darkin River - Pine Plantation,2013,633.6575999997353,0,True
+616002,Darkin River - Pine Plantation,2014,108.86400000004078,0,True
+616002,Darkin River - Pine Plantation,2015,5.011200000003628,0,True
+616002,Darkin River - Pine Plantation,2016,225.41760000003296,0,True
+616002,Darkin River - Pine Plantation,2017,822.0960000000831,0,True
+616002,Darkin River - Pine Plantation,2018,3383.942400001318,0,True
+616002,Darkin River - Pine Plantation,2019,499.0463999997791,0,True
+616002,Darkin River - Pine Plantation,2020,3.8880000000033115,0,True
+616002,Darkin River - Pine Plantation,2021,5451.840000000779,0,True
+616002,Darkin River - Pine Plantation,2022,2809.468799999245,0,True
+616002,Darkin River - Pine Plantation,2023,273.3696000000834,61,False
+616006,Brockman River - Tanamerah,1980,7656.488840355063,37,False
+616006,Brockman River - Tanamerah,1981,40603.65273198702,0,True
+616006,Brockman River - Tanamerah,1982,11837.774691928356,0,True
+616006,Brockman River - Tanamerah,1983,34849.57853589919,0,True
+616006,Brockman River - Tanamerah,1984,17281.57679302797,0,True
+616006,Brockman River - Tanamerah,1985,3846.0433763370606,0,True
+616006,Brockman River - Tanamerah,1986,22943.459308424466,0,True
+616006,Brockman River - Tanamerah,1987,22417.353269329327,0,True
+616006,Brockman River - Tanamerah,1988,26532.973069047715,0,True
+616006,Brockman River - Tanamerah,1989,11176.189219533922,0,True
+616006,Brockman River - Tanamerah,1990,11993.213148873254,0,True
+616006,Brockman River - Tanamerah,1991,29112.871282471275,0,True
+616006,Brockman River - Tanamerah,1992,29942.942019477225,0,True
+616006,Brockman River - Tanamerah,1993,24466.566100552784,0,True
+616006,Brockman River - Tanamerah,1994,13365.892840646353,0,True
+616006,Brockman River - Tanamerah,1995,56342.68212543682,0,True
+616006,Brockman River - Tanamerah,1996,32693.485565004725,0,True
+616006,Brockman River - Tanamerah,1997,12642.875048695152,0,True
+616006,Brockman River - Tanamerah,1998,20227.3040374115,0,True
+616006,Brockman River - Tanamerah,1999,55084.22680279965,0,True
+616006,Brockman River - Tanamerah,2000,17709.702170551638,0,True
+616006,Brockman River - Tanamerah,2001,9421.782400030535,0,True
+616006,Brockman River - Tanamerah,2002,8715.699537242572,0,True
+616006,Brockman River - Tanamerah,2003,26540.49010392953,0,True
+616006,Brockman River - Tanamerah,2004,12100.78451012869,0,True
+616006,Brockman River - Tanamerah,2005,28217.3937017122,0,True
+616006,Brockman River - Tanamerah,2006,5572.196513005133,0,True
+616006,Brockman River - Tanamerah,2007,6922.584308227009,0,True
+616006,Brockman River - Tanamerah,2008,9727.907165433799,0,True
+616006,Brockman River - Tanamerah,2009,20997.58410616177,0,True
+616006,Brockman River - Tanamerah,2010,3724.2155696153504,0,True
+616006,Brockman River - Tanamerah,2011,10886.912980595249,0,True
+616006,Brockman River - Tanamerah,2012,4670.584340557885,0,True
+616006,Brockman River - Tanamerah,2013,13520.985686793363,0,True
+616006,Brockman River - Tanamerah,2014,17216.34275467665,0,True
+616006,Brockman River - Tanamerah,2015,6317.419798807044,0,True
+616006,Brockman River - Tanamerah,2016,28426.57479849141,0,True
+616006,Brockman River - Tanamerah,2017,22839.534036542653,0,True
+616006,Brockman River - Tanamerah,2018,39940.023630836746,0,True
+616006,Brockman River - Tanamerah,2019,11401.795243196211,0,True
+616006,Brockman River - Tanamerah,2020,6089.731199998456,0,True
+616006,Brockman River - Tanamerah,2021,38820.81599999914,0,True
+616006,Brockman River - Tanamerah,2022,31922.3808000146,0,True
+616006,Brockman River - Tanamerah,2023,6482.419200000118,61,False
+616013,Helena River - Ngangaguringuring,1971,0.7272657510185645,333,False
+616013,Helena River - Ngangaguringuring,1972,759.9788981509433,0,True
+616013,Helena River - Ngangaguringuring,1973,2813.529599999813,0,True
+616013,Helena River - Ngangaguringuring,1974,8100.60479999677,0,True
+616013,Helena River - Ngangaguringuring,1975,2572.387199999498,0,True
+616013,Helena River - Ngangaguringuring,1976,676.5984000000989,0,True
+616013,Helena River - Ngangaguringuring,1977,563.0688000000033,0,True
+616013,Helena River - Ngangaguringuring,1978,1806.3114419198687,0,True
+616013,Helena River - Ngangaguringuring,1979,551.8367999999994,0,True
+616013,Helena River - Ngangaguringuring,1980,562.5504000001113,0,True
+616013,Helena River - Ngangaguringuring,1981,5750.006399999738,0,True
+616013,Helena River - Ngangaguringuring,1982,1016.0171940462106,0,True
+616013,Helena River - Ngangaguringuring,1983,4256.438658966367,0,True
+616013,Helena River - Ngangaguringuring,1984,1038.2687999997827,0,True
+616013,Helena River - Ngangaguringuring,1985,844.5600000000368,0,True
+616013,Helena River - Ngangaguringuring,1986,2208.9887999997477,0,True
+616013,Helena River - Ngangaguringuring,1987,862.099200000044,0,True
+616013,Helena River - Ngangaguringuring,1988,1948.2335999998108,0,True
+616013,Helena River - Ngangaguringuring,1989,879.9839999999579,0,True
+616013,Helena River - Ngangaguringuring,1990,1510.4448000003747,0,True
+616013,Helena River - Ngangaguringuring,1991,1893.369599999975,0,True
+616013,Helena River - Ngangaguringuring,1992,1829.9519999993522,0,True
+616013,Helena River - Ngangaguringuring,1993,780.0191999999861,0,True
+616013,Helena River - Ngangaguringuring,1994,793.3247999999364,0,True
+616013,Helena River - Ngangaguringuring,1995,2635.8047999997934,0,True
+616013,Helena River - Ngangaguringuring,1996,5868.374399998062,0,True
+616013,Helena River - Ngangaguringuring,1997,1165.9680000001651,0,True
+616013,Helena River - Ngangaguringuring,1998,1307.3183999998573,0,True
+616013,Helena River - Ngangaguringuring,1999,2612.1312000007447,0,True
+616013,Helena River - Ngangaguringuring,2000,1641.4272000003746,0,True
+616013,Helena River - Ngangaguringuring,2001,809.0496000000662,0,True
+616013,Helena River - Ngangaguringuring,2002,762.825599999911,0,True
+616013,Helena River - Ngangaguringuring,2003,1765.9295999999556,0,True
+616013,Helena River - Ngangaguringuring,2004,1037.7504000001911,0,True
+616013,Helena River - Ngangaguringuring,2005,1751.1551999999301,0,True
+616013,Helena River - Ngangaguringuring,2006,855.1007999999453,0,True
+616013,Helena River - Ngangaguringuring,2007,1191.1104000000255,0,True
+616013,Helena River - Ngangaguringuring,2008,1199.577600000076,0,True
+616013,Helena River - Ngangaguringuring,2009,1681.171200000576,0,True
+616013,Helena River - Ngangaguringuring,2010,386.89919999999233,0,True
+616013,Helena River - Ngangaguringuring,2011,601.3440000000217,0,True
+616013,Helena River - Ngangaguringuring,2012,338.2560000000057,0,True
+616013,Helena River - Ngangaguringuring,2013,587.1744000000356,0,True
+616013,Helena River - Ngangaguringuring,2014,454.72320000004925,0,True
+616013,Helena River - Ngangaguringuring,2015,298.7627926347616,0,True
+616013,Helena River - Ngangaguringuring,2016,540.3690220773406,0,True
+616013,Helena River - Ngangaguringuring,2017,512.5248000000768,206,False
+616019,Brockman River - Yalliawirra,1974,40.60773296686399,344,False
+616019,Brockman River - Yalliawirra,1975,41890.76452974497,0,True
+616019,Brockman River - Yalliawirra,1976,14787.176360726029,0,True
+616019,Brockman River - Yalliawirra,1977,8617.306533292533,0,True
+616019,Brockman River - Yalliawirra,1978,31319.10284812564,0,True
+616019,Brockman River - Yalliawirra,1979,13314.411645507727,0,True
+616019,Brockman River - Yalliawirra,1980,18629.445494274772,0,True
+616019,Brockman River - Yalliawirra,1981,101393.84833146955,0,True
+616019,Brockman River - Yalliawirra,1982,29139.936378140246,0,True
+616019,Brockman River - Yalliawirra,1983,76255.79294809318,0,True
+616019,Brockman River - Yalliawirra,1984,38297.58495818563,0,True
+616019,Brockman River - Yalliawirra,1985,12623.90738621179,0,True
+616019,Brockman River - Yalliawirra,1986,44762.42244593363,0,True
+616019,Brockman River - Yalliawirra,1987,44160.4776042741,0,True
+616019,Brockman River - Yalliawirra,1988,53961.88835099167,0,True
+616019,Brockman River - Yalliawirra,1989,24904.204231971016,0,True
+616019,Brockman River - Yalliawirra,1990,26780.886291071147,0,True
+616019,Brockman River - Yalliawirra,1991,76278.25680036616,0,True
+616019,Brockman River - Yalliawirra,1992,71457.42770174966,0,True
+616019,Brockman River - Yalliawirra,1993,48417.72320897723,0,True
+616019,Brockman River - Yalliawirra,1994,33595.72787721903,0,True
+616019,Brockman River - Yalliawirra,1995,97412.07622605706,0,True
+616019,Brockman River - Yalliawirra,1996,74255.2141037252,0,True
+616019,Brockman River - Yalliawirra,1997,27119.658463325104,0,True
+616019,Brockman River - Yalliawirra,1998,41104.87529766637,0,True
+616019,Brockman River - Yalliawirra,1999,94865.45297246498,0,True
+616019,Brockman River - Yalliawirra,2000,44247.13623441564,0,True
+616019,Brockman River - Yalliawirra,2001,18551.772405044714,0,True
+616019,Brockman River - Yalliawirra,2002,20131.240418593112,0,True
+616019,Brockman River - Yalliawirra,2003,54073.6892157934,0,True
+616019,Brockman River - Yalliawirra,2004,26450.754061986376,0,True
+616019,Brockman River - Yalliawirra,2005,59432.26837821761,0,True
+616019,Brockman River - Yalliawirra,2006,13712.885825172893,0,True
+616019,Brockman River - Yalliawirra,2007,18752.910282381905,0,True
+616019,Brockman River - Yalliawirra,2008,22754.06797109095,0,True
+616019,Brockman River - Yalliawirra,2009,41496.17832450237,0,True
+616019,Brockman River - Yalliawirra,2010,5729.578322757126,0,True
+616019,Brockman River - Yalliawirra,2011,20062.46647084864,0,True
+616019,Brockman River - Yalliawirra,2012,5912.399520540172,0,True
+616019,Brockman River - Yalliawirra,2013,32522.128537121378,0,True
+616019,Brockman River - Yalliawirra,2014,27934.837102770998,0,True
+616019,Brockman River - Yalliawirra,2015,9232.03849086241,0,True
+616019,Brockman River - Yalliawirra,2016,46741.66100765786,0,True
+616019,Brockman River - Yalliawirra,2017,43528.704308374494,0,True
+616019,Brockman River - Yalliawirra,2018,84947.18570591908,0,True
+616019,Brockman River - Yalliawirra,2019,21938.404216088857,0,True
+616019,Brockman River - Yalliawirra,2020,7707.743999997411,0,True
+616019,Brockman River - Yalliawirra,2021,80174.18880002633,0,True
+616019,Brockman River - Yalliawirra,2022,59559.40800001438,0,True
+616019,Brockman River - Yalliawirra,2023,8406.720000000169,61,False
+616041,Wungong Brook - Vardi Rd,1981,17143.664364230903,2,True
+616041,Wungong Brook - Vardi Rd,1982,7246.406902277196,0,True
+616041,Wungong Brook - Vardi Rd,1983,17903.629571119473,0,True
+616041,Wungong Brook - Vardi Rd,1984,14489.790184881704,0,True
+616041,Wungong Brook - Vardi Rd,1985,8501.38184379176,0,True
+616041,Wungong Brook - Vardi Rd,1986,8970.820394920222,0,True
+616041,Wungong Brook - Vardi Rd,1987,7963.523098978764,0,True
+616041,Wungong Brook - Vardi Rd,1988,20320.88391397705,0,True
+616041,Wungong Brook - Vardi Rd,1989,10618.002002263805,0,True
+616041,Wungong Brook - Vardi Rd,1990,12478.046434410164,0,True
+616041,Wungong Brook - Vardi Rd,1991,18762.510335806932,0,True
+616041,Wungong Brook - Vardi Rd,1992,17194.893120362703,0,True
+616041,Wungong Brook - Vardi Rd,1993,8675.024002013053,0,True
+616041,Wungong Brook - Vardi Rd,1994,8474.687601559632,0,True
+616041,Wungong Brook - Vardi Rd,1995,11650.870481700553,0,True
+616041,Wungong Brook - Vardi Rd,1996,18008.419589987694,0,True
+616041,Wungong Brook - Vardi Rd,1997,8987.493497674444,0,True
+616041,Wungong Brook - Vardi Rd,1998,7179.714491259898,0,True
+616041,Wungong Brook - Vardi Rd,1999,10009.908891963885,0,True
+616041,Wungong Brook - Vardi Rd,2000,14802.778015348875,0,True
+616041,Wungong Brook - Vardi Rd,2001,3376.0873349259764,0,True
+616041,Wungong Brook - Vardi Rd,2002,6774.981401082078,0,True
+616041,Wungong Brook - Vardi Rd,2003,10037.812582065319,0,True
+616041,Wungong Brook - Vardi Rd,2004,5872.733291410012,0,True
+616041,Wungong Brook - Vardi Rd,2005,6643.583529116719,0,True
+616041,Wungong Brook - Vardi Rd,2006,1807.001504213488,0,True
+616041,Wungong Brook - Vardi Rd,2007,6338.197942397856,0,True
+616041,Wungong Brook - Vardi Rd,2008,3893.126298577562,0,True
+616041,Wungong Brook - Vardi Rd,2009,7831.17494654694,0,True
+616041,Wungong Brook - Vardi Rd,2010,207.59308766185035,0,True
+616041,Wungong Brook - Vardi Rd,2011,3509.5585460946795,0,True
+616041,Wungong Brook - Vardi Rd,2012,1043.839899383803,0,True
+616041,Wungong Brook - Vardi Rd,2013,3016.7949289386324,0,True
+616041,Wungong Brook - Vardi Rd,2014,1610.7253930323202,0,True
+616041,Wungong Brook - Vardi Rd,2015,61.16350647717492,0,True
+616041,Wungong Brook - Vardi Rd,2016,785.7091686578445,0,True
+616041,Wungong Brook - Vardi Rd,2017,1834.333589784257,0,True
+616041,Wungong Brook - Vardi Rd,2018,3455.5513763285276,0,True
+616041,Wungong Brook - Vardi Rd,2019,886.3267698591274,0,True
+616041,Wungong Brook - Vardi Rd,2020,601.7759999998987,0,True
+616041,Wungong Brook - Vardi Rd,2021,3309.8976000007306,0,True
+616041,Wungong Brook - Vardi Rd,2022,1647.90719999993,0,True
+616041,Wungong Brook - Vardi Rd,2023,470.96639999994284,61,False
+616178,Jane Brook - National Park,1963,27876.03642595311,0,True
+616178,Jane Brook - National Park,1964,32062.375873457993,0,True
+616178,Jane Brook - National Park,1965,26454.73175030623,0,True
+616178,Jane Brook - National Park,1966,12479.101689105872,0,True
+616178,Jane Brook - National Park,1967,22372.717401559497,0,True
+616178,Jane Brook - National Park,1968,17580.1508304427,0,True
+616178,Jane Brook - National Park,1969,6292.535618114453,0,True
+616178,Jane Brook - National Park,1970,14701.16170383965,0,True
+616178,Jane Brook - National Park,1971,10785.534429309077,0,True
+616178,Jane Brook - National Park,1972,7569.730523939942,0,True
+616178,Jane Brook - National Park,1973,19551.399268143654,0,True
+616178,Jane Brook - National Park,1974,22919.96993288628,0,True
+616178,Jane Brook - National Park,1975,12832.765336598042,0,True
+616178,Jane Brook - National Park,1976,5989.913537330979,0,True
+616178,Jane Brook - National Park,1977,5720.455520196299,0,True
+616178,Jane Brook - National Park,1978,11113.631439692508,0,True
+616178,Jane Brook - National Park,1979,5020.352234381042,0,True
+616178,Jane Brook - National Park,1980,10577.263549572916,0,True
+616178,Jane Brook - National Park,1981,19985.839314564473,0,True
+616178,Jane Brook - National Park,1982,8504.07774785551,0,True
+616178,Jane Brook - National Park,1983,13459.168861688904,0,True
+616178,Jane Brook - National Park,1984,9117.958384333526,0,True
+616178,Jane Brook - National Park,1985,7013.50854345137,0,True
+616178,Jane Brook - National Park,1986,11372.51015912009,0,True
+616178,Jane Brook - National Park,1987,8479.377429620416,0,True
+616178,Jane Brook - National Park,1988,12984.767294981437,0,True
+616178,Jane Brook - National Park,1989,7934.329498164107,0,True
+616178,Jane Brook - National Park,1990,9047.484749083642,0,True
+616178,Jane Brook - National Park,1991,16546.36318237659,0,True
+616178,Jane Brook - National Park,1992,13945.834222766569,0,True
+616178,Jane Brook - National Park,1993,8012.489596084213,0,True
+616178,Jane Brook - National Park,1994,5878.071187269099,0,True
+616178,Jane Brook - National Park,1995,11341.15975520011,0,True
+616178,Jane Brook - National Park,1996,16868.935520192535,0,True
+616178,Jane Brook - National Park,1997,7070.509277844205,0,True
+616178,Jane Brook - National Park,1998,4134.625997550167,0,True
+616178,Jane Brook - National Park,1999,8268.474712362166,0,True
+616178,Jane Brook - National Park,2000,9351.31593635046,0,True
+616178,Jane Brook - National Park,2001,4405.638580170526,0,True
+616178,Jane Brook - National Park,2002,4715.774394124651,0,True
+616178,Jane Brook - National Park,2003,7860.142178704361,0,True
+616178,Jane Brook - National Park,2004,5553.080636473918,0,True
+616178,Jane Brook - National Park,2005,9357.447833536788,0,True
+616178,Jane Brook - National Park,2006,3388.7800244800565,0,True
+616178,Jane Brook - National Park,2007,6530.815960831572,0,True
+616178,Jane Brook - National Park,2008,6550.766217869967,0,True
+616178,Jane Brook - National Park,2009,8318.82536107609,0,True
+616178,Jane Brook - National Park,2010,538.8296695225383,0,True
+616178,Jane Brook - National Park,2011,4611.2730477348105,0,True
+616178,Jane Brook - National Park,2012,2503.1958873924304,0,True
+616178,Jane Brook - National Park,2013,4903.013170134887,0,True
+616178,Jane Brook - National Park,2014,3770.1667564258755,0,True
+616178,Jane Brook - National Park,2015,923.0664381885643,0,True
+616178,Jane Brook - National Park,2016,3252.841909423742,0,True
+616178,Jane Brook - National Park,2017,4133.284455069,0,True
+616178,Jane Brook - National Park,2018,5796.702588915001,0,True
+616178,Jane Brook - National Park,2019,2563.6554338745,0,True
+616178,Jane Brook - National Park,2020,1837.814400000339,0,True
+616178,Jane Brook - National Park,2021,4932.921599999118,0,True
+616178,Jane Brook - National Park,2022,4176.31680000038,0,True
+616178,Jane Brook - National Park,2023,1834.8768000000084,61,False
+616216,Helena River - Poison Lease Gs,1966,5228.672108861789,26,False
+616216,Helena River - Poison Lease Gs,1967,19521.614314798913,0,True
+616216,Helena River - Poison Lease Gs,1968,10589.540670281911,0,True
+616216,Helena River - Poison Lease Gs,1969,1412.6011783488086,0,True
+616216,Helena River - Poison Lease Gs,1970,7810.477467614701,0,True
+616216,Helena River - Poison Lease Gs,1971,3418.6175437376605,0,True
+616216,Helena River - Poison Lease Gs,1972,2743.551606588064,0,True
+616216,Helena River - Poison Lease Gs,1973,12410.914016638231,0,True
+616216,Helena River - Poison Lease Gs,1974,28561.345985382508,0,True
+616216,Helena River - Poison Lease Gs,1975,8584.042722353646,0,True
+616216,Helena River - Poison Lease Gs,1976,1321.2733023005746,0,True
+616216,Helena River - Poison Lease Gs,1977,1020.1591603627176,0,True
+616216,Helena River - Poison Lease Gs,1978,7265.275104452293,0,True
+616216,Helena River - Poison Lease Gs,1979,594.5384248712593,0,True
+616216,Helena River - Poison Lease Gs,1980,1577.1987222204425,0,True
+616216,Helena River - Poison Lease Gs,1981,18045.16138583184,0,True
+616216,Helena River - Poison Lease Gs,1982,1879.263296170283,0,True
+616216,Helena River - Poison Lease Gs,1983,13238.567493144898,0,True
+616216,Helena River - Poison Lease Gs,1984,2325.793535922201,0,True
+616216,Helena River - Poison Lease Gs,1985,2036.3437868563822,0,True
+616216,Helena River - Poison Lease Gs,1986,5696.371061605145,0,True
+616216,Helena River - Poison Lease Gs,1987,1997.5488801915747,0,True
+616216,Helena River - Poison Lease Gs,1988,7423.306027149905,0,True
+616216,Helena River - Poison Lease Gs,1989,1111.227827679993,0,True
+616216,Helena River - Poison Lease Gs,1990,3365.3933510721736,0,True
+616216,Helena River - Poison Lease Gs,1991,6981.441544544735,0,True
+616216,Helena River - Poison Lease Gs,1992,6021.1596009305995,0,True
+616216,Helena River - Poison Lease Gs,1993,1064.7430620095042,0,True
+616216,Helena River - Poison Lease Gs,1994,1310.9913559904103,0,True
+616216,Helena River - Poison Lease Gs,1995,7411.900843004655,0,True
+616216,Helena River - Poison Lease Gs,1996,21200.07724773056,0,True
+616216,Helena River - Poison Lease Gs,1997,2057.512499847933,0,True
+616216,Helena River - Poison Lease Gs,1998,2289.504313652131,0,True
+616216,Helena River - Poison Lease Gs,1999,7414.406527399478,0,True
+616216,Helena River - Poison Lease Gs,2000,3836.634823133381,0,True
+616216,Helena River - Poison Lease Gs,2001,740.6457459666663,0,True
+616216,Helena River - Poison Lease Gs,2002,991.3005883661355,0,True
+616216,Helena River - Poison Lease Gs,2003,4721.573429082449,0,True
+616216,Helena River - Poison Lease Gs,2004,2137.2623859336113,0,True
+616216,Helena River - Poison Lease Gs,2005,4721.055011621386,0,True
+616216,Helena River - Poison Lease Gs,2006,1103.1923570344795,0,True
+616216,Helena River - Poison Lease Gs,2007,3065.834461517099,0,True
+616216,Helena River - Poison Lease Gs,2008,2486.7621575665694,0,True
+616216,Helena River - Poison Lease Gs,2009,5199.122313583521,0,True
+616216,Helena River - Poison Lease Gs,2010,0.0,0,True
+616216,Helena River - Poison Lease Gs,2011,1219.0586595711923,0,True
+616216,Helena River - Poison Lease Gs,2012,75.77535221797142,0,True
+616216,Helena River - Poison Lease Gs,2013,1503.410636935079,0,True
+616216,Helena River - Poison Lease Gs,2014,564.5566150425315,0,True
+616216,Helena River - Poison Lease Gs,2015,0.0,0,True
+616216,Helena River - Poison Lease Gs,2016,907.4897655024024,0,True
+616216,Helena River - Poison Lease Gs,2017,2059.848340985192,0,True
+616216,Helena River - Poison Lease Gs,2018,4408.196413958972,0,True
+616216,Helena River - Poison Lease Gs,2019,1545.6638830491095,0,True
+616216,Helena River - Poison Lease Gs,2020,285.3791999999785,0,True
+616216,Helena River - Poison Lease Gs,2021,7304.169599998836,0,True
+616216,Helena River - Poison Lease Gs,2022,5731.776000000936,0,True
+616216,Helena River - Poison Lease Gs,2023,500.2861577450535,61,False
+617003,Gingin Brook - Bookine Bookine,1972,24229.995891816743,23,False
+617003,Gingin Brook - Bookine Bookine,1973,34156.169274091786,0,True
+617003,Gingin Brook - Bookine Bookine,1974,71534.14592079859,0,True
+617003,Gingin Brook - Bookine Bookine,1975,38116.5990985274,0,True
+617003,Gingin Brook - Bookine Bookine,1976,19968.725808019713,0,True
+617003,Gingin Brook - Bookine Bookine,1977,14573.480459369666,0,True
+617003,Gingin Brook - Bookine Bookine,1978,39980.218970534894,0,True
+617003,Gingin Brook - Bookine Bookine,1979,21927.038650805192,0,True
+617003,Gingin Brook - Bookine Bookine,1980,20144.201559526216,0,True
+617003,Gingin Brook - Bookine Bookine,1981,47982.03419753745,0,True
+617003,Gingin Brook - Bookine Bookine,1982,30739.360044683624,0,True
+617003,Gingin Brook - Bookine Bookine,1983,40328.83770875746,0,True
+617003,Gingin Brook - Bookine Bookine,1984,35551.42181526574,0,True
+617003,Gingin Brook - Bookine Bookine,1985,17695.23052233825,0,True
+617003,Gingin Brook - Bookine Bookine,1986,58813.75231224154,0,True
+617003,Gingin Brook - Bookine Bookine,1987,46403.01163005565,0,True
+617003,Gingin Brook - Bookine Bookine,1988,42536.065194640425,0,True
+617003,Gingin Brook - Bookine Bookine,1989,25904.143423566646,0,True
+617003,Gingin Brook - Bookine Bookine,1990,28407.80483530419,0,True
+617003,Gingin Brook - Bookine Bookine,1991,58525.5262625045,0,True
+617003,Gingin Brook - Bookine Bookine,1992,54941.449157685034,0,True
+617003,Gingin Brook - Bookine Bookine,1993,46335.447849788754,0,True
+617003,Gingin Brook - Bookine Bookine,1994,30938.681836280586,0,True
+617003,Gingin Brook - Bookine Bookine,1995,64273.54510648399,0,True
+617003,Gingin Brook - Bookine Bookine,1996,44635.121513159516,0,True
+617003,Gingin Brook - Bookine Bookine,1997,19582.52363704469,0,True
+617003,Gingin Brook - Bookine Bookine,1998,31351.494805605544,0,True
+617003,Gingin Brook - Bookine Bookine,1999,73930.93214561346,0,True
+617003,Gingin Brook - Bookine Bookine,2000,27272.007578114826,0,True
+617003,Gingin Brook - Bookine Bookine,2001,21598.29161265366,0,True
+617003,Gingin Brook - Bookine Bookine,2002,18093.87410552755,0,True
+617003,Gingin Brook - Bookine Bookine,2003,34357.651033083945,0,True
+617003,Gingin Brook - Bookine Bookine,2004,20259.371021252162,0,True
+617003,Gingin Brook - Bookine Bookine,2005,26073.139272885386,0,True
+617003,Gingin Brook - Bookine Bookine,2006,11004.256310553534,0,True
+617003,Gingin Brook - Bookine Bookine,2007,12201.137445787874,0,True
+617003,Gingin Brook - Bookine Bookine,2008,15568.181026319904,0,True
+617003,Gingin Brook - Bookine Bookine,2009,17398.882995169737,0,True
+617003,Gingin Brook - Bookine Bookine,2010,6059.918136440455,0,True
+617003,Gingin Brook - Bookine Bookine,2011,13450.289792081045,0,True
+617003,Gingin Brook - Bookine Bookine,2012,4737.845290751613,0,True
+617003,Gingin Brook - Bookine Bookine,2013,13990.800034048983,0,True
+617003,Gingin Brook - Bookine Bookine,2014,14138.714601546862,0,True
+617003,Gingin Brook - Bookine Bookine,2015,8083.375595992337,0,True
+617003,Gingin Brook - Bookine Bookine,2016,22932.027278796522,0,True
+617003,Gingin Brook - Bookine Bookine,2017,22713.894586220005,0,True
+617003,Gingin Brook - Bookine Bookine,2018,24780.977618646106,0,True
+617003,Gingin Brook - Bookine Bookine,2019,10197.09166236182,0,True
+617003,Gingin Brook - Bookine Bookine,2020,6953.585916007959,0,True
+617003,Gingin Brook - Bookine Bookine,2021,31835.14012631349,0,True
+617003,Gingin Brook - Bookine Bookine,2022,23926.924800002773,0,True
+617003,Gingin Brook - Bookine Bookine,2023,6019.942428798688,61,False
