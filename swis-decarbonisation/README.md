@@ -79,7 +79,7 @@ project are tested with synthetic inputs in `test_project.py`. Both run in CI.
 
 ```bash
 pip install -r requirements.txt
-# drop the AEMO files into ../dropzone/ (see DROP_FILES_HERE.md), then:
+# drop the AEMO files into ../dropzone/swis-decarbonisation/ (see DROP_FILES_HERE.md), then:
 python3 build_dataset.py
 python3 analysis.py
 python3 viz.py

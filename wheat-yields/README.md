@@ -89,7 +89,7 @@ validated in `test_project.py`. Both run in CI.
 
 ```bash
 pip install -r requirements.txt
-# drop the wheat CSV into ../dropzone/ (see DROP_FILES_HERE.md), then:
+# drop the wheat CSV into ../dropzone/wheat-yields/ (see DROP_FILES_HERE.md), then:
 python3 build_dataset.py
 python3 analysis.py
 python3 viz.py

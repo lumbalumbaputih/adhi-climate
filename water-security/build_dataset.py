@@ -9,8 +9,8 @@ bom.gov.au/water/hrs/. HRS stations are the BoM's curated set of long-record,
 high-quality gauges in catchments with minimal regulation, which is exactly
 what a trend analysis needs. Download the daily streamflow CSV for 5-8
 south-west WA stations (Darling Range / SW forest catchments) and drop the
-files into ../dropzone/ (or water-security/data/raw/). This script detects
-them by content, not by filename.
+files into ../dropzone/water-security/ (or water-security/data/raw/). This
+script detects them by content, not by filename.
 
 Optional cross-check: Water Corporation's published annual inflow to Perth
 dams. If you transcribe or export it, save it as a CSV with columns
@@ -36,7 +36,8 @@ Usage
 -----
     python3 build_dataset.py [source_dir] [out_dir]
 
-Defaults: source_dir = ../dropzone (falling back to data/raw), out_dir = data.
+Defaults: source_dir = ../dropzone/water-security (falling back to the flat
+../dropzone/ and then data/raw), out_dir = data.
 Exits non-zero with instructions if no usable streamflow files are found.
 """
 import os
@@ -227,7 +228,9 @@ def build_regional(clean):
 def main(source_dir=None, out_dir="data"):
     here = os.path.dirname(os.path.abspath(__file__))
     candidates = [source_dir] if source_dir else [
-        os.path.join(here, "..", "dropzone"), os.path.join(here, "data", "raw")]
+        os.path.join(here, "..", "dropzone", "water-security"),
+        os.path.join(here, "..", "dropzone"),      # back-compat: flat dropzone
+        os.path.join(here, "data", "raw")]
     files = []
     for d in candidates:
         if d and os.path.isdir(d):
