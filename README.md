@@ -17,7 +17,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**swis-decarbonisation**](swis-decarbonisation/): How Fast Is WA's Main Grid Decarbonising? | Transition analytics | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 | [**extreme-heat**](extreme-heat/): Extreme Heat in Perth and the Pilbara (1945–2025) | Acute physical risk | Complete |
 | [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast | Acute physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
-| [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897-present) | Chronic physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend | Financial materiality | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 
 The portfolio site (`index.html`) ties these together: each project card opens a

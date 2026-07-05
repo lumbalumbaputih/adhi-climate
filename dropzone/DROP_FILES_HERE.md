@@ -125,7 +125,8 @@ Then run, inside marine-heatwaves/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
-PROJECT: sea-level (Fremantle tide gauge)           [DATA NEEDED]
+PROJECT: sea-level (Fremantle tide gauge)   [COMPLETE: data is in;
+file below only needed to re-run from scratch]
 ======================================================================
 
 PSMSL monthly RLR data for Fremantle (station 111)         [REQUIRED]
