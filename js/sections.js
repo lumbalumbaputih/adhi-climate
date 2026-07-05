@@ -915,7 +915,77 @@
     }, /*#__PURE__*/React.createElement(Icon, {
       name: r.icon,
       size: 15
-    }), r.label)))));
+    }), r.label))), p.updates && p.updates.length > 0 && /*#__PURE__*/React.createElement(Reveal, {
+      className: "story__updates"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "updates__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      tick: true
+    }, "How this project evolved"), /*#__PURE__*/React.createElement("p", {
+      className: "updates__lead"
+    }, "Good analysis does not stay still. This is the project's history in order: what we found after publishing, and why each finding earned an update.")), /*#__PURE__*/React.createElement("ol", {
+      className: "updates"
+    }, p.updates.map((u, i) => /*#__PURE__*/React.createElement("li", {
+      className: "updates__item",
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "updates__dot",
+      "aria-hidden": "true"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "updates__card"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "updates__meta"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "updates__date"
+    }, u.date), /*#__PURE__*/React.createElement("span", {
+      className: "updates__title"
+    }, u.title)), /*#__PURE__*/React.createElement("p", {
+      className: "updates__row"
+    }, /*#__PURE__*/React.createElement("strong", null, "What we found"), u.found), /*#__PURE__*/React.createElement("p", {
+      className: "updates__row"
+    }, /*#__PURE__*/React.createElement("strong", null, "What changed"), u.change))))))));
+  }
+
+  /* A quick, playful index of all the stories: five cards, one glance,
+     each jumping straight to its full story below. */
+  function PProjectIndex() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "pindex"
+    }, P.projects.map((p, i) => /*#__PURE__*/React.createElement(Reveal, {
+      as: "a",
+      className: "pindex__card",
+      key: p.id,
+      href: "#" + p.id,
+      delay: i * 60
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pindex__top"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pindex__num"
+    }, String(i + 1).padStart(2, "0")), /*#__PURE__*/React.createElement("span", {
+      className: "pindex__icon"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: p.icon,
+      size: 19
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "pindex__title"
+    }, p.title), /*#__PURE__*/React.createElement("div", {
+      className: "pindex__year"
+    }, p.year), /*#__PURE__*/React.createElement("p", {
+      className: "pindex__sum"
+    }, p.summary), /*#__PURE__*/React.createElement("div", {
+      className: "pindex__stat"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "v"
+    }, p.result.value), p.result.unit && /*#__PURE__*/React.createElement("span", {
+      className: "u"
+    }, p.result.unit), /*#__PURE__*/React.createElement("span", {
+      className: "l"
+    }, p.result.label)), /*#__PURE__*/React.createElement("span", {
+      className: "pindex__go"
+    }, "Jump to the story ", /*#__PURE__*/React.createElement(Icon, {
+      name: "arrow-down-right",
+      size: 14
+    })))));
   }
   function PStories() {
     return /*#__PURE__*/React.createElement("div", {
@@ -928,7 +998,7 @@
       className: "section-head section-head--slim"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tick: true
-    }, "Personal projects"), /*#__PURE__*/React.createElement("p", null, "Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just a respect for what the data actually says.")))), P.projects.map((p, i) => /*#__PURE__*/React.createElement(PStory, {
+    }, "Personal projects"), /*#__PURE__*/React.createElement("p", null, "Five finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: three physical-risk stories, the sequel that ties two of them together, and the disclosure review that puts it all in business terms.")), /*#__PURE__*/React.createElement(PProjectIndex, null))), P.projects.map((p, i) => /*#__PURE__*/React.createElement(PStory, {
       key: p.id,
       p: p,
       index: i

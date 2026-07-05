@@ -340,5 +340,33 @@ read.
 - **Kossin et al.**, *Global increase in major tropical cyclone exceedance probability over the past four decades* (PNAS 117:11975, 2020). The upward global intensity signal in the homogenised satellite record, which is why this analysis refuses to lean on a single agency's wind series.
 - **Yue et al.**, *The influence of autocorrelation on the ability to detect trend in hydrological series* (Hydrological Processes 16:1807, 2002). The trend-free prewhitening correction used for every Mann-Kendall p-value here.
 
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**15 Jun 2026 · First published.** Forty years of official cyclone records,
+put against one question: as the ocean off WA warmed, did the storms get
+stronger? The first pass suggested they had drifted slightly weaker.
+Published the full pipeline: annual counts, intensity by decade, long-term
+trends, rapid intensification and the ocean-temperature link.
+
+**18 Jun 2026 · Plain-language rewrite.** The write-up assumed the reader knew
+what a Mann-Kendall test was, which defeats the point of a portfolio anyone
+can read. Rewrote every reader-facing sentence in plain English and moved the
+technical detail into the methods notes, without softening a single number.
+
+**2 Jul 2026 · The audit that changed the headline.** A full self-audit caught
+a real problem: the "storms drifted weaker" headline leaned on Australia's
+10-minute wind record, which covers only about 41% of these storms, with
+coverage growing over time; the US 1-minute record for the very same storms
+trends the other way. Rebuilt the analysis to show both wind records side by
+side, kept pressure as the tie-breaker, added detrended SST-intensity
+correlations and a coastal-proximity sensitivity check (chart 07), and
+rewrote the headline to what the data actually supports: the record cannot
+settle the direction, and that ambiguity is the finding.
+
+---
+
 *Analysis by Adhi Muhammad Faris Katili. Data: IBTrACS (NOAA NCEI), BOM, NOAA
 ERSSTv5. Part of the [adhi-climate](../) portfolio.*
