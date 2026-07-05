@@ -59,11 +59,13 @@ def parse_rlr_monthly(path):
     df.loc[df.msl_mm <= MISSING, "msl_mm"] = np.nan
     # RLR heights are defined to sit roughly 7000 mm above the datum; PSMSL's
     # "metric" files sit near local datum (hundreds of mm) and can contain
-    # datum shifts, so they must not be analysed as a time series
+    # datum shifts, so they must not be analysed as a time series. Raise
+    # (rather than return None) so the caller reports why the file was
+    # rejected instead of silently falling through to the CSV parser.
     med = float(df.msl_mm.median())
     if med < 3000:
-        raise SystemExit(
-            f"This looks like a PSMSL METRIC file (median height {med:.0f} mm), "
+        raise ValueError(
+            f"this looks like a PSMSL METRIC file (median height {med:.0f} mm), "
             "not the RLR file. Metric data can contain datum shifts and is not "
             "safe for trend analysis. Download the 'monthly RLR data' file "
             "(e.g. 111.rlrdata) from the same PSMSL station page instead.")

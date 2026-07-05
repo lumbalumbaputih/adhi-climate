@@ -1,4 +1,4 @@
-# Chronic Physical Climate Risk: Sea-Level Rise at Fremantle (1897-present)
+# Chronic Physical Climate Risk: Sea-Level Rise at Fremantle (1897-2022)
 
 A data analysis written for **AASB S2 physical-risk assessment** (AASB S2 is
 Australia's mandatory climate-disclosure standard). The Fremantle tide gauge
@@ -7,10 +7,45 @@ since 1897, which makes it the single best place in Australia to ask the two
 questions that matter for coastal assets: how fast is the sea rising here,
 and is the rise speeding up?
 
-> **Status: pipeline complete, awaiting the data drop.** Every number in
-> this README will be computed by `analysis.py` from the file described in
-> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md). Nothing is
-> pre-filled.
+> **In one paragraph.** Fremantle's sea level has risen about **22 cm since
+> 1897**, at a long-run rate of **+1.78 mm/yr** (OLS p = 1.8e-24; Sen's
+> slope +1.69 mm/yr over 113 complete years). The rise has not been steady:
+> the rate was +1.44 mm/yr before 1993 but **+5.11 mm/yr in the
+> satellite-altimetry era (1993-2022)**, roughly 3.5 times the earlier pace,
+> and the fastest 30-year window in the record is 1985-2014 at +5.62 mm/yr.
+> Yet a centred quadratic fit puts the acceleration at **+0.013 mm/yr^2
+> with p = 0.11, short of the significance bar**: the record's strong
+> ENSO-driven swings (higher sea level in La Nina years via the Leeuwin
+> Current) and the mid-century pause (the 1962-1991 window reads
+> -0.84 mm/yr) leave room for a slow-then-fast history without a clean
+> quadratic shape. The honest AASB S2 reading: the long-run rise is
+> unequivocal and the recent era is far faster than the century average,
+> but this single gauge cannot yet prove smooth acceleration, and the
+> number includes whatever the land under Fremantle is doing (vertical
+> land motion is not corrected for).
+
+## Results
+
+Computed by `analysis.py` on annual means of the monthly RLR series,
+complete years only (113 of 126; a complete year has 10+ months, so the
+1942 wartime disruption and 12 other years are excluded, never
+interpolated). Rates are OLS with classical stderr, alongside Sen's slope:
+
+| Series | n | OLS rate (mm/yr) | p | Sen's slope (mm/yr) |
+|---|---|---|---|---|
+| Full record (1897-2022) | 113 | **+1.78 +/- 0.14** | 1.8e-24 | +1.69 |
+| Pre-1993 | 83 | +1.44 +/- 0.18 | 6.8e-12 | +1.41 |
+| 1993 on (altimetry era) | 30 | **+5.11 +/- 1.22** | 2.6e-4 | +5.16 |
+
+Acceleration, from the centred quadratic over the full record: **+0.0132
+mm/yr^2** (2 x b2), **p = 0.11, not statistically significant**. The
+30-year rolling rates (`data/rolling_rates.csv`) run from **-0.84 mm/yr
+(1962-1991)** to **+5.62 mm/yr (1985-2014)**, which is exactly why no
+single recent window should be quoted as "the" trend.
+
+Charts: `charts/01_msl_series.png` (the full series with trend),
+`charts/02_rolling_rate.png` (the 30-year rolling rate),
+`charts/03_eras.png` (the era comparison).
 
 ## Research question
 
@@ -51,16 +86,20 @@ only carries simple OLS) and unit-tested in `test_project.py` against exact
 planted quadratics; the shared statistics are validated in `test_stats.py`.
 Both run in CI.
 
-## Validation plan
+## Validation
 
-1. The full-record rate should match published Fremantle estimates (BoM,
-   CSIRO and the tide-gauge literature put the long-run rate near the
-   global-average order of 1.5-2 mm/yr, with a faster recent era); if it is
-   wildly off, suspect the parse before the ocean.
-2. The 1943 wartime gap and other missing stretches must appear as
-   incomplete years, not as zeros.
-3. The rolling-rate curve should show the well-documented mid-century slow
-   period and faster recent decades, consistent with the literature on
+1. **Full-record rate vs the literature: passes.** BoM, CSIRO and the
+   tide-gauge literature put Fremantle's long-run rate near the
+   global-average order of 1.5-2 mm/yr with a faster recent era; the
+   pipeline reads +1.78 mm/yr over 1897-2022 and +5.11 mm/yr since 1993.
+2. **Gaps stay gaps: passes.** The 1942 wartime disruption survives as an
+   incomplete year (3 months present, year excluded), as do 12 other thin
+   years (a 1899-1914 cluster, 1926, 1965, 1967); nothing is interpolated
+   or zero-filled.
+3. **Rolling-rate shape vs the literature: passes.** The 30-year curve
+   shows the well-documented mid-century slow period (bottoming at
+   -0.84 mm/yr for 1962-1991) and the faster recent decades (peaking at
+   +5.62 mm/yr for 1985-2014), consistent with published work on
    Australian tide gauges.
 
 ## Limitations (write-up must keep these)

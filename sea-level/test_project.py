@@ -51,7 +51,7 @@ check_true("-99999 becomes NaN", m[(m.year == 1960) & (m.month == 3)]
 check_true("month decoding: first row is January",
            m.iloc[0].month == 1 and m.iloc[11].month == 12)
 
-# --- metric-file guard: local-datum heights must abort ---------------------------
+# --- metric-file guard: local-datum heights must be refused ----------------------
 metric_lines = []
 for y in range(1950, 2000):
     for mo in range(1, 13):
@@ -62,10 +62,20 @@ with tempfile.TemporaryDirectory() as td:
     open(p, "w").write("\n".join(metric_lines))
     try:
         bd.parse_rlr_monthly(p)
-        aborted = False
-    except SystemExit as e:
-        aborted = "METRIC" in str(e)
-check_true("metric-datum file is refused with an explanation", aborted)
+        refused = False
+    except ValueError as e:
+        refused = "METRIC" in str(e)
+check_true("metric-datum file is refused with an explanation", refused)
+
+# a metric file sitting next to the RLR file (it sorts first) must be skipped,
+# not abort the whole scan
+with tempfile.TemporaryDirectory() as src, tempfile.TemporaryDirectory() as out:
+    open(os.path.join(src, "111.metdata"), "w").write("\n".join(metric_lines))
+    open(os.path.join(src, "111.rlrdata"), "w").write("\n".join(lines))
+    bd.main(src, out)
+    prov = pd.read_csv(os.path.join(out, "source-library.csv"))
+check_true("scan skips the metric file and uses the RLR file beside it",
+           list(prov.file) == ["111.rlrdata"])
 
 # --- annual completeness --------------------------------------------------------
 annual = bd.to_annual(m)
