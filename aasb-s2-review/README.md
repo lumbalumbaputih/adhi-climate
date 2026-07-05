@@ -59,3 +59,28 @@ These scores reflect public disclosure only, and one reviewer's reading. A few o
 ## Files
 
 `scoring-matrix.csv` (all 93 scored cells with evidence), `gap-summary.csv` (patterns across the companies), `bhp-scorecard.md`, `woodside-scorecard.md`, `rio-tinto-scorecard.md`, `sensitivity.py` (the band-robustness check described under Method), `data/source-library.csv`, and `EXECUTION_PROMPT.md` (the method spec). The source reports are in `data/raw/`.
+
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**18 Jun 2026 · First published.** Australia's new climate-disclosure rules
+(AASB S2) give every big company the same test. Reading BHP, Rio Tinto and
+Woodside against it, line by line, showed three very different levels of
+readiness. Published the three scorecards, 93 evidence-backed cells and the
+cross-company gap summary, with every score tied to a page in the company's
+own report.
+
+**20 Jun 2026 · A better picture than a table.** The flat scores table on the
+portfolio site mostly repeated what the radar chart already said, and it
+buried the most interesting pattern: the row-level gaps all three companies
+share. Replaced it with a 31-requirement heatmap so the shared weak band
+(asset-level metrics and dollar figures on the impact) jumps out at a glance.
+
+**2 Jul 2026 · Showing the working.** The audit asked a fair question: the
+scores looked defensible, but a reader could not see the rubric behind them
+or test whether the rankings would survive a different judgement call.
+Published the 0-4 rubric anchors, stated the equal-pillar weighting openly,
+and added `sensitivity.py`, which proves the maturity bands survive a
+one-point swing on all 21 medium-confidence scores.

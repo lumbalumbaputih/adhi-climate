@@ -255,6 +255,32 @@ rainfall-decline/
 - Hawke et al. (2025), *A Review of Drivers of Cool Season Rainfall in Southwest Western Australia*, WIREs Climate Change: https://wires.onlinelibrary.wiley.com/doi/10.1002/wcc.70028
 - Data: GHCN-Daily (NOAA NCEI); NOAA PSL climate indices; Marshall (2003) SAM index (BAS).
 
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**18 Jun 2026 · First published.** Seventy-four years of Bureau of Meteorology
+rainfall showed the south-west's winter rain did not fade slowly: it dropped
+suddenly around 2000 and settled at a new, lower level. Published the full
+pipeline: the step-change test, the long-term trend, the climate-driver
+checks and all seven stations, decade by decade.
+
+**2 Jul 2026 · Fixing a quiet bias in the headline number.** The audit found
+the raw regional average had a composition problem: in years where a wet
+station was missing from the record, the region looked spuriously dry, which
+overstated the decline by about 2 percentage points. Switched the headline
+figures to composition-adjusted values (567 mm down to 483 mm across the
+break; 17% drier than the 1950s), added a pre-break flat-trend check, and
+stated the caveats plainly: the stations are not re-homogenised, and step
+tests can be fooled by autocorrelation.
+
+**2 Jul 2026 · The question it left behind.** Drier is one thing, but Perth
+does not drink rain, it drinks streamflow. The obvious follow-up became the
+[water-security](../water-security/) project, a direct sequel built on this
+project's regional rainfall series. Its answer: the rivers fell about three
+times harder than the rain.
+
 ---
 
 *Author: Adhi Muhammad Faris Katili · Master of Environment and Climate Emergency,

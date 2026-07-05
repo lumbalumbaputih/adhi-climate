@@ -541,8 +541,58 @@
               </a>
             ))}
           </div>
+
+          {p.updates && p.updates.length > 0 && (
+            <Reveal className="story__updates">
+              <div className="updates__head">
+                <Eyebrow tick>How this project evolved</Eyebrow>
+                <p className="updates__lead">Good analysis does not stay still. This is the project's history in order: what we found after publishing, and why each finding earned an update.</p>
+              </div>
+              <ol className="updates">
+                {p.updates.map((u, i) => (
+                  <li className="updates__item" key={i}>
+                    <span className="updates__dot" aria-hidden="true" />
+                    <div className="updates__card">
+                      <div className="updates__meta">
+                        <span className="updates__date">{u.date}</span>
+                        <span className="updates__title">{u.title}</span>
+                      </div>
+                      <p className="updates__row"><strong>What we found</strong>{u.found}</p>
+                      <p className="updates__row"><strong>What changed</strong>{u.change}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          )}
         </div>
       </section>
+    );
+  }
+
+  /* A quick, playful index of all the stories: five cards, one glance,
+     each jumping straight to its full story below. */
+  function PProjectIndex() {
+    return (
+      <div className="pindex">
+        {P.projects.map((p, i) => (
+          <Reveal as="a" className="pindex__card" key={p.id} href={"#" + p.id} delay={i * 60}>
+            <div className="pindex__top">
+              <span className="pindex__num">{String(i + 1).padStart(2, "0")}</span>
+              <span className="pindex__icon"><Icon name={p.icon} size={19} /></span>
+            </div>
+            <div className="pindex__title">{p.title}</div>
+            <div className="pindex__year">{p.year}</div>
+            <p className="pindex__sum">{p.summary}</p>
+            <div className="pindex__stat">
+              <span className="v">{p.result.value}</span>
+              {p.result.unit && <span className="u">{p.result.unit}</span>}
+              <span className="l">{p.result.label}</span>
+            </div>
+            <span className="pindex__go">Jump to the story <Icon name="arrow-down-right" size={14} /></span>
+          </Reveal>
+        ))}
+      </div>
     );
   }
 
@@ -553,8 +603,9 @@
           <div className="wrap">
             <Reveal className="section-head section-head--slim">
               <Eyebrow tick>Personal projects</Eyebrow>
-              <p>Three projects I took on myself, simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I wanted to work through from the raw data myself, then check my numbers against the published science. No client, no brief, just a respect for what the data actually says.</p>
+              <p>Five finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: three physical-risk stories, the sequel that ties two of them together, and the disclosure review that puts it all in business terms.</p>
             </Reveal>
+            <PProjectIndex />
           </div>
         </section>
         {P.projects.map((p, i) => <PStory key={p.id} p={p} index={i} />)}
