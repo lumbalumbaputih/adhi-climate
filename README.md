@@ -24,6 +24,10 @@ The portfolio site (`index.html`) ties these together: each project card opens a
 case study with the headline findings, the charts, and direct links to the
 write-up, notebook, and open data behind every number.
 
+The standard workflow for building and updating all of this, from staging raw
+data to adding a project to the front page to re-encrypting the study notes, is
+written up in [`PROCEDURE.md`](PROCEDURE.md).
+
 **Author:** Adhi Muhammad Faris Katili · Master of Environment and Climate
 Emergency, Curtin University.
 
