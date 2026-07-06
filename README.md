@@ -19,6 +19,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast | Acute physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
 | [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend | Financial materiality | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1940–2025) | Acute physical risk | Planned, [self-downloading data](bushfire-weather/EXECUTION_PROMPT.md) |
 
 The portfolio site (`index.html`) ties these together: each project card opens a
 case study with the headline findings, the charts, and direct links to the
