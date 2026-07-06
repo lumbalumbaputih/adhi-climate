@@ -1,0 +1,2 @@
+n_seasons,overlap,tech_trend_t_ha_per_decade,tech_trend_p,r_raw_yield_vs_rain,p_raw,r_detrended_yield_vs_rain,p_detrended,r_both_detrended,p_both_detrended,yield_pct_per_10pct_rain,sens_p,sens_r2,driest_decile_cut_pct,driest_decile_mean_yield_anom_pct,other_years_mean_yield_anom_pct
+73,1950-2022,0.16641375621154747,3.3845717106350007e-16,-0.35058740277501627,0.0023590197204456567,-0.12182972580094982,0.304524779748394,-0.15103079536193445,0.2021442825490728,-1.547877474732927,0.304524779748394,0.014842482088734617,-28.12214720894488,-0.03540217148557212,0.4530770765673729
