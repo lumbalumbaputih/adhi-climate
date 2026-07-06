@@ -125,3 +125,24 @@ python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py
 ```
+
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**5 Jul 2026 · First published.** The Fremantle tide gauge, running since 1897,
+is one of the longest sea-level records in the Southern Hemisphere. It shows
+the sea has risen about 22 cm, and far faster since 1993 than over the century
+as a whole. Published the pipeline from the PSMSL research-grade record: the
+full series with its trend, the 30-year rolling rate, and the era comparison,
+complete years only and nothing interpolated.
+
+**5 Jul 2026 · Choosing honesty over a bigger headline.** The recent rate,
+5.1 mm a year, is dramatic and tempting to headline as acceleration. But the
+quadratic acceleration term is not statistically significant (p = 0.11): a real
+mid-century pause and strong El Nino and La Nina swings leave the curve
+unproven on this single gauge. Reported the unequivocal long-run rise and the
+far faster recent era as the finding, kept acceleration flagged as not yet
+proven, and stated openly that this is relative sea level with land motion not
+corrected for.

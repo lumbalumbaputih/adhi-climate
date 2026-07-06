@@ -603,7 +603,7 @@
           <div className="wrap">
             <Reveal className="section-head section-head--slim">
               <Eyebrow tick>Personal projects</Eyebrow>
-              <p>Five finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: three physical-risk stories, the sequel that ties two of them together, and the disclosure review that puts it all in business terms.</p>
+              <p>Six finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: four physical-risk stories, the sequel that ties two of them together, and the disclosure review that puts it all in business terms.</p>
             </Reveal>
             <PProjectIndex />
           </div>

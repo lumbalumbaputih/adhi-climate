@@ -185,3 +185,24 @@ python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py   # the proof the stats are right
 ```
+
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**2 Jul 2026 · First published.** The rainfall-decline project ended on a
+question: Perth does not drink rain, it drinks streamflow, so what did the
+drying do to the rivers that fill the dams? Twelve BoM reference gauges and 56
+years of daily flow had the answer. Published the full pipeline: the 2001
+step-down, the rain-versus-river comparison, the elasticity estimate and the
+annual series, with Water Corporation's own dam-inflow figures kept as a
+cross-check.
+
+**2 Jul 2026 · The multiplier that became the headline.** The rivers did not
+just fall, they fell more than three times harder than the rain: winter
+rainfall down about 12%, streamflow down 41% against the same baseline. That
+amplifier, not the rainfall figure, is the real exposure. Framed the whole
+story around the dry-catchment amplifier, added both elasticity estimates
+(2.55 non-parametric and 3.67 log-log, % of flow per % of rain), and stated
+plainly that reading the rainfall number alone understates the risk threefold.

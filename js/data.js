@@ -11,15 +11,15 @@
       role: "Climate & Sustainability",
       tagline: "I turn Western Australia's climate data into decisions business and government can act on.",
       intro:
-        "I dig into the real climate risks facing Western Australia, like what is actually happening to its cyclones, its drying south-west, its shrinking rivers and its hotter summers, and I check how the state's biggest companies report those risks under Australia's new climate rules (AASB S2). The goal is simple: turn raw climate data into clear answers that business and government can act on.",
+        "I dig into the real climate risks facing Western Australia, like what is actually happening to its cyclones, its drying south-west, its shrinking rivers, its hotter summers and its rising seas, and I check how the state's biggest companies report those risks under Australia's new climate rules (AASB S2). The goal is simple: turn raw climate data into clear answers that business and government can act on.",
       location: "Western Australia · remote-friendly",
       email: "adhiazure@gmail.com",
       linkedin: "https://www.linkedin.com/in/adhi-m/",
       availability: "Available for internships · Perth, WA or remote",
     },
     stats: [
-      { label: "Projects complete", value: "5", caption: "storms to scorecards" },
-      { label: "Longest record", value: "81", unit: "yrs", caption: "Perth heat, 1945–2025" },
+      { label: "Projects complete", value: "6", caption: "storms to scorecards" },
+      { label: "Longest record", value: "126", unit: "yrs", caption: "Fremantle sea level, 1897–2022" },
       { label: "Storms tracked", value: "193", caption: "within 500 km of WA" },
       { label: "Emitters scored", value: "3", caption: "WA ASX majors" },
     ],
@@ -247,6 +247,20 @@
           { type: "line", key: "anomaly", title: "Streamflow year by year, with the long trend" },
         ],
         tags: ["BoM reference river gauges", "Sequel to the rainfall story", "The dry-catchment amplifier"],
+        updates: [
+          {
+            date: "2 Jul 2026",
+            title: "First published",
+            found: "The rainfall project ended on a question: Perth does not drink rain, it drinks streamflow, so what did the drying do to the rivers that fill the dams? Twelve BoM reference gauges and 56 years of daily flow had the answer.",
+            change: "Published the full pipeline: the 2001 step-down, the rain-versus-river comparison, the elasticity estimate and the annual series, with Water Corporation's own dam-inflow figures kept as a cross-check.",
+          },
+          {
+            date: "2 Jul 2026",
+            title: "The multiplier that became the headline",
+            found: "The rivers did not just fall, they fell more than three times harder than the rain: winter rainfall down about 12%, streamflow down 41% against the same baseline. That amplifier, not the rainfall figure, is the real exposure.",
+            change: "Framed the whole story around the dry-catchment amplifier, added both elasticity estimates (2.5 to 3.7% of flow per 1% of rain), and stated plainly that reading the rainfall number alone understates the risk by a factor of three.",
+          },
+        ],
       },
       {
         id: "extreme-heat",
@@ -301,6 +315,80 @@
           { type: "line", key: "hedland_hw", title: "Port Hedland: days inside heatwaves each year" },
         ],
         tags: ["BoM + NOAA, cross-checked", "Two stations, two speeds", "Occupational heat stress"],
+        updates: [
+          {
+            date: "2 Jul 2026",
+            title: "First published",
+            found: "Eighty years of daily temperatures for Perth Airport showed hot days climbing steadily: about 2.3 more days a year above 35 °C every decade. Every Perth number was computed twice, from two independent archives, and agreed within a few percent.",
+            change: "Published the pipeline: the 35 °C and 40 °C day counts, the hottest day of each year and multi-day heatwaves, each figure cross-checked between the Bureau of Meteorology and NOAA archives.",
+          },
+          {
+            date: "2 Jul 2026",
+            title: "Adding the Pilbara",
+            found: "Perth alone told only half the story. The industrial north, where the heat-stress stakes are highest, was missing, and it turned out to be heating twice as fast, already spending more than five months a year at 35 °C or above.",
+            change: "Added Port Hedland as the second station, kept the two risk stories side by side, and reported the one trend that did not clear the significance bar (Hedland's 40 °C days, p = 0.09) as exactly that, rather than rounding it up to a finding.",
+          },
+        ],
+      },
+      {
+        id: "fremantle-sea-level",
+        title: "Sea-Level Rise at Fremantle",
+        year: "1897–2022",
+        status: "Complete",
+        category: ["Physical risk", "Climate data", "Data viz"],
+        icon: "trending-up",
+        meta: "3 charts · 126-year tide gauge · reproducible pipeline",
+        summary:
+          "One of the Southern Hemisphere's longest sea-level records, asked the two questions coastal owners care about: how fast is the sea rising here, and is the rise speeding up?",
+        result: { value: "+22", unit: "cm", label: "risen since 1897" },
+        headline:
+          "Fremantle's sea has risen about 22 cm since 1897. The recent pace, 5.1 mm a year since 1993, is roughly three and a half times the century-long average, yet this one gauge still cannot prove the rise is smoothly accelerating.",
+        body:
+          "The Fremantle tide gauge has been reading sea level since 1897, which makes it one of the best places in Australia to measure long-run coastal risk. Using the research-grade PSMSL monthly record, I measured the long-run rate of rise, compared the satellite-altimetry era (1993 onward) with everything before it, and tested for acceleration. The honest finding has two halves: the long-run rise is unequivocal and the recent decades are far faster than the century average, but the record's strong El Niño and La Niña swings, plus a real mid-century pause, mean a single gauge cannot yet prove clean, smooth acceleration. It also measures relative sea level, so whatever the land itself is doing is baked into the number.",
+        findings: [
+          { value: "+1.78", unit: "mm/yr", label: "The long-run rise is rock solid", text: "Over the full 1897 to 2022 record the sea rose 1.78 mm a year (p around 1e-24), about 22 cm in total. Sen's slope agrees at 1.69 mm/yr. This part is not in doubt." },
+          { value: "5.1", unit: "mm/yr", label: "The recent era is much faster", text: "Since 1993, the satellite-altimetry era, the rate is 5.11 mm/yr, roughly 3.5 times the 1.44 mm/yr measured before 1993. The fastest 30-year window in the record is 1985 to 2014 at 5.62 mm/yr." },
+          { value: "p = 0.11", unit: "", label: "But acceleration is not proven", text: "A centred quadratic fit puts the acceleration at 0.013 mm per year squared, short of the significance bar. A slow-then-fast history is there, but this single gauge cannot pin it to a clean curve." },
+          { value: "−0.84", unit: "mm/yr", label: "The record is not a straight line", text: "The 30-year rate swings from a mid-century pause (1962 to 1991 reads slightly negative) to the fast recent decades. That is exactly why no single window should be quoted as 'the' trend." },
+        ],
+        meaning:
+          "For anyone with coastal assets, ports, jetties, low-lying land or infrastructure, this is textbook chronic physical risk: the water is rising, it has already risen 22 cm, and the recent pace is several times the long-run average. But the project is also a lesson in honest uncertainty. The headline a risk reporter should carry is the unequivocal long-run rise and the far faster recent era, not a precise acceleration figure this record cannot yet support. And because a tide gauge measures relative sea level, land motion at the site is in the number and is not corrected for here, which any AASB S2 disclosure built on it has to say out loud.",
+        resources: [
+          { label: "Read the full analysis", href: ghBlob("sea-level/README.md"), icon: "file-text" },
+          { label: "Cleaned datasets (6 CSVs)", href: ghTree("sea-level/data"), icon: "layers" },
+          { label: "All charts", href: ghTree("sea-level/charts"), icon: "scan" },
+          { label: "View on GitHub", href: ghTree("sea-level"), icon: "github" },
+        ],
+        dataset: {
+          caption: "Rate of rise by era at Fremantle (PSMSL monthly RLR, station 111)",
+          columns: ["Series", "Years", "Complete years", "OLS rate (mm/yr)", "Sen's slope (mm/yr)"],
+          rows: [
+            ["Full record", "1897–2022", "113", "+1.78", "+1.69"],
+            ["Pre-1993", "1897–1992", "83", "+1.44", "+1.41"],
+            ["Altimetry era", "1993–2022", "30", "+5.11", "+5.16"],
+          ],
+        },
+        vizKey: "sealevel",
+        viz: [
+          { type: "line", key: "msl_series", title: "Sea level at Fremantle, 1897 to 2022" },
+          { type: "line", key: "rolling_rate", title: "The 30-year rate, window by window" },
+          { type: "bar", key: "eras", title: "Rate of rise: full record vs the recent era" },
+        ],
+        tags: ["PSMSL research-grade tide gauge", "Fast recent era, unproven acceleration", "Relative sea level, land motion included"],
+        updates: [
+          {
+            date: "5 Jul 2026",
+            title: "First published",
+            found: "The Fremantle tide gauge, running since 1897, is one of the longest sea-level records in the Southern Hemisphere. It shows the sea has risen about 22 cm, and far faster since 1993 than over the century as a whole.",
+            change: "Published the pipeline from the PSMSL research-grade record: the full series with its trend, the 30-year rolling rate, and the era comparison, complete years only and nothing interpolated.",
+          },
+          {
+            date: "5 Jul 2026",
+            title: "Choosing honesty over a bigger headline",
+            found: "The recent rate, 5.1 mm a year, is dramatic and tempting to headline as acceleration. But the quadratic acceleration term is not statistically significant (p = 0.11): a real mid-century pause and strong El Niño and La Niña swings leave the curve unproven on this single gauge.",
+            change: "Reported the unequivocal long-run rise and the far faster recent era as the finding, kept acceleration flagged as not yet proven, and stated openly that this is relative sea level with land motion not corrected for.",
+          },
+        ],
       },
       {
         id: "aasb-s2-readiness",

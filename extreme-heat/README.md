@@ -139,3 +139,23 @@ python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py
 ```
+
+## Update log
+
+How this project evolved, in order. Each entry says what we found and why it
+earned an update.
+
+**2 Jul 2026 · First published.** Eighty years of daily temperatures for Perth
+Airport showed hot days climbing steadily: about 2.3 more days a year above
+35 C every decade. Every Perth number was computed twice, from two independent
+archives (BoM CDO and NOAA GHCN-Daily), and agreed within a few percent.
+Published the pipeline: the 35 C and 40 C day counts, the hottest day of each
+year, and multi-day heatwaves.
+
+**2 Jul 2026 · Adding the Pilbara.** Perth alone told only half the story. The
+industrial north, where the heat-stress stakes are highest, was missing, and
+it turned out to be heating twice as fast, already spending more than five
+months a year at 35 C or above. Added Port Hedland as the second station, kept
+the two risk stories side by side, and reported the one trend that did not
+clear the significance bar (Hedland's 40 C days, p = 0.09) as exactly that,
+rather than rounding it up to a finding.
