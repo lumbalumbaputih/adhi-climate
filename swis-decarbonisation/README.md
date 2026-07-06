@@ -7,11 +7,35 @@ risk arriving, this project measures the energy transition actually
 happening, which is the flip side of **AASB S2 transition risk**: the pace of
 grid decarbonisation drives every WA company's scope 2 trajectory.
 
-> **Status: pipeline complete, awaiting the data drop.** Every number in this
-> README will be computed by `analysis.py` from the files described below.
-> Nothing is pre-filled; see
-> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md) for the
-> download list, then run the three scripts in order.
+> **Status: complete.** Every number below is computed by `analysis.py` from
+> AEMO's monthly WEM Facility SCADA files (2006 to 2023), fetched from the
+> AEMO data portal, with facilities assigned to fuels from the OpenNEM WEM
+> registry; see [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md).
+
+## Results
+
+Trends are measured over the **complete calendar years 2007 to 2022** (2006
+and 2023 are partial and excluded). Shares are of utility-scale SCADA
+generation, which totals roughly **18 TWh a year**.
+
+- **Renewables are rising fast:** the renewable share went from **4.8% (2007)
+  to 22.9% (2022)**, about **+9 percentage points per decade** (Mann-Kendall
+  p = 1.3e-05). Almost all of it is **wind**, up from 4.2% to 20.2%
+  (+8 pp/decade); utility **solar** is small but growing (0% to 2.2%).
+- **Gas is being displaced:** its share fell from **52.0% to 40.9%**, about
+  **-9 pp/decade** (p = 9e-05), the mirror image of the renewables rise.
+- **Coal has drifted down, not fallen off a cliff:** 43.2% to 36.2%, a real
+  decline but not statistically significant over these years (p = 0.75). The
+  large Collie and Muja retirements are scheduled for 2023 to 2029, past the
+  window of complete data, so the steep part of the coal decline is still
+  ahead.
+
+**Scope honesty.** SCADA sees only registered, utility-scale facilities. WA's
+large rooftop-solar fleet is behind the meter and appears here only as
+suppressed demand, so this renewable share is a **floor**, not the whole
+picture. Emissions intensity is not computed: it needs emission factors the
+pipeline refuses to invent (see the empty `data/emission_factors.csv`
+template), so it is left for a follow-up rather than guessed.
 
 ## Research question
 
@@ -85,3 +109,15 @@ python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py
 ```
+
+## Update log
+
+**2026-07-06 · First published.** Ran the pipeline on AEMO's monthly WEM
+Facility SCADA files, 2006 to 2023 (206 monthly files, 94 facilities). Fuels
+were assigned from the OpenNEM WEM facility registry, matched to SCADA codes
+by station prefix, with a handful of documented manual assignments for large
+WA stations OpenNEM does not list separately; every assignment is recorded in
+`facility_fuel.csv`. Annual totals land near 18 TWh a year, in line with
+published WEM figures. Emissions intensity is deliberately left uncomputed
+until the emission-factors template is filled from the National Greenhouse
+Accounts workbook.
