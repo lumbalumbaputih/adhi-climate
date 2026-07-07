@@ -1,0 +1,13 @@
+# Fill factor_t_per_MWh (tonnes CO2-e per MWh sent out) from the
+# current National Greenhouse Accounts factors workbook, and cite
+# it in the source column. Leave rows blank to exclude a fuel
+# (blank factors mean intensity is simply not computed).
+fuel,factor_t_per_MWh,source
+bio,,
+coal,,
+gas,,
+distillate,,
+wind,,
+solar,,
+storage,,
+other,,

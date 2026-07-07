@@ -14,11 +14,11 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**aasb-s2-review**](aasb-s2-review/): Disclosure Gap Analysis, WA's Biggest Emitters (BHP, Rio Tinto, Woodside) | Disclosure review | Complete |
 | [**transition-risk**](transition-risk/): WA's Biggest Emitters Under the Safeguard Mechanism (2016–2024) | Transition risk | Planned |
 | [**water-security**](water-security/): Perth Water Security, Streamflow After the Rainfall Step-Change (1967–2022) | Chronic physical risk | Complete |
-| [**swis-decarbonisation**](swis-decarbonisation/): How Fast Is WA's Main Grid Decarbonising? | Transition analytics | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**swis-decarbonisation**](swis-decarbonisation/): How Fast Is WA's Main Grid Decarbonising? (2006–2023) | Transition analytics | Complete |
 | [**extreme-heat**](extreme-heat/): Extreme Heat in Perth and the Pilbara (1945–2025) | Acute physical risk | Complete |
-| [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast | Acute physical risk | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast (1982–2026) | Acute physical risk | Complete |
 | [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
-| [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend | Financial materiality | Pipeline ready, [awaiting data](dropzone/DROP_FILES_HERE.md) |
+| [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
 | [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1940–2025) | Acute physical risk | Planned, [self-downloading data](bushfire-weather/EXECUTION_PROMPT.md) |
 
 The portfolio site (`index.html`) ties these together: each project card opens a
@@ -32,8 +32,11 @@ written up in [`PROCEDURE.md`](PROCEDURE.md).
 **Author:** Adhi Muhammad Faris Katili · Master of Environment and Climate
 Emergency, Curtin University.
 
-The data is all public (from NOAA NCEI and the Bureau of Meteorology). The
-statistics are written from scratch and tested against known values; see each
+The data is all public: NOAA NCEI and the Bureau of Meteorology for the
+weather and ocean records, plus NOAA OISST (marine heatwaves), AEMO's WEM data
+portal (grid generation), and the ABS historical agriculture collection (wheat
+yields). The statistics are written from scratch and tested against known
+values; see each
 project's `stats_utils.py` and `test_stats.py`. The two copies of
 `stats_utils.py` are kept byte-identical, and CI (GitHub Actions) runs both
 test suites and that identity check on every push and pull request.
@@ -43,7 +46,9 @@ test suites and that identity check on every push and pull request.
 The code in this repository is released under the [MIT License](LICENSE). The
 committed cleaned datasets are derived from public sources: IBTrACS and ERSSTv5
 (NOAA NCEI, public domain as US government works), GHCN-Daily (NOAA NCEI,
-redistributing Bureau of Meteorology station observations), the Marshall (2003)
-SAM index (British Antarctic Survey), and NOAA PSL climate indices. The
-original providers' terms apply to the data; please cite the sources listed in
-each project's README when reusing it.
+redistributing Bureau of Meteorology station observations), OISST v2.1 (NOAA
+NCEI / CoastWatch), the Marshall (2003) SAM index (British Antarctic Survey),
+NOAA PSL climate indices, WEM Facility SCADA data (AEMO), fuel mappings from
+the OpenNEM WEM registry, and historical crop statistics (Australian Bureau of
+Statistics, 7124.0). The original providers' terms apply to the data; please
+cite the sources listed in each project's README when reusing it.

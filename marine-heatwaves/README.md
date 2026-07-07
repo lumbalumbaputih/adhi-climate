@@ -8,10 +8,11 @@ devastated the Shark Bay scallop and Abrolhos fisheries, killed seagrass
 meadows, and pushed species ranges south. This project measures how often
 they happen, how strong they get, and whether they are becoming more common.
 
-> **Status: pipeline complete, awaiting the data drop.** Every number in
-> this README will be computed by `analysis.py` from the files described in
-> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md). Nothing is
-> pre-filled.
+> **Status: complete.** Every number below is computed by `analysis.py` from
+> OISST v2.1 daily sea-surface temperature for the Ningaloo box (1982 to
+> 2026), fetched from NOAA CoastWatch ERDDAP and gap-filled from NOAA NCEI's
+> daily archive so the record is unbroken; see
+> [dropzone/DROP_FILES_HERE.md](../dropzone/DROP_FILES_HERE.md).
 
 ## Research question
 
@@ -19,6 +20,29 @@ How many marine-heatwave days a year does the Ningaloo coast experience,
 what were the biggest events on record, and is there a trend? The 2011
 event doubles as the pipeline's own validation case: if the analysis does
 not find a major event spanning the 2010-11 summer, the inputs are wrong.
+
+## Results
+
+Over 1982 to 2026 the pipeline detects **103 marine-heatwave events** off the
+Ningaloo coast.
+
+- **The 2011 Ningaloo Nino is the longest event on record:** 26 September
+  2010 to 26 January 2011, **123 consecutive days**, peaking **3.7 C above
+  the climatological mean** (category II Strong). It is exactly the event the
+  validation plan required the analysis to find, and it falls where the
+  literature puts it.
+- **The most intense peak** in the record is **3.8 C above climatology**, on
+  2 January 2025.
+- **Marine-heatwave days per year** are rising at **+4.6 days per decade**,
+  just outside significance (Mann-Kendall p = 0.06), so this is reported as a
+  suggestive trend, not a settled one.
+- **Peak intensity** (+0.24 C per decade, p = 0.01) and **annual-mean SST**
+  (+0.12 C per decade, p = 0.04) are both rising significantly. The ocean off
+  Ningaloo is measurably warmer, and its hot extremes are getting hotter.
+
+The MHW-day trend is measured against the fixed 1982-2011 baseline in a
+warming ocean, so part of it is warming showing through by construction; the
+significant mean-SST trend is the cleaner statement of that warming.
 
 ## Data
 
@@ -86,3 +110,13 @@ python3 analysis.py
 python3 viz.py
 python3 test_stats.py && python3 test_project.py
 ```
+
+## Update log
+
+**2026-07-06 · First published.** Ran the pipeline on OISST v2.1 daily SST for
+the Ningaloo box, 1982 to 2026. The CoastWatch ERDDAP aggregation was missing
+scattered days in 2015 and 2016; those days were filled from NOAA NCEI's daily
+OISST archive onto the identical grid, so the record is unbroken and
+single-source in effect. The 2011 Ningaloo Nino validation case is detected as
+the longest event on record (123 days, peak 3.7 C), confirming the inputs and
+the Hobday detection are sound.

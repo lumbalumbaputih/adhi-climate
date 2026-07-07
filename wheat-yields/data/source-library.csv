@@ -1,0 +1,2 @@
+file,n_rows,first,last,columns_matched,source
+wheat_wa_abs_1860_2022.csv,150,1861,2022,"year=year, area=wheat_area_ha, production=wheat_production_t","https://www.abs.gov.au/statistics/industry/agriculture/agricultural-commodities-australia/2021-22/Historic%20Ag%20Commodities_1860%20to%202022.xlsx (ABS 7124.0, Table 4 Wheat, Western Australia; released 2024-04-19)"

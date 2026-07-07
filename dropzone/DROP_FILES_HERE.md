@@ -43,8 +43,18 @@ Then run, inside water-security/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
-PROJECT: swis-decarbonisation (WA main grid)        [DATA NEEDED]
+PROJECT: swis-decarbonisation (WA main grid)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
 ======================================================================
+
+How it was fetched (2026-07-06, self-download from the session):
+the 206 monthly "Facility SCADA" CSVs 2006-09 to 2023-10 come straight
+from https://data.wa.aemo.com.au/datafiles/facility-scada/ (each file
+is facility-scada-YYYY-MM.csv). The facility-to-fuel mapping was built
+from the OpenNEM WEM registry
+(https://data.opennem.org.au/v3/geo/au_facilities.json), matched to the
+SCADA facility codes by station prefix, and written to
+facility_fuel.csv with per-row provenance.
 
 1. AEMO WEM facility generation (SCADA), monthly CSVs     [REQUIRED]
 ----------------------------------------------------------------------
@@ -65,7 +75,8 @@ facility-code column plus a fuel or technology column works, dropped in
 the same dropzone/swis-decarbonisation/ folder. If no register with
 fuels is available, hand-build facility_fuel.csv with columns
 facility,fuel and a "# source:" first line saying where each
-assignment came from.
+assignment came from (this is what the completed run did, sourcing
+fuels from the OpenNEM WEM registry).
 
 3. NGA emission factors                                    [OPTIONAL]
 ----------------------------------------------------------------------
@@ -102,8 +113,19 @@ Then run, inside extreme-heat/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
-PROJECT: marine-heatwaves (Ningaloo coast)          [DATA NEEDED]
+PROJECT: marine-heatwaves (Ningaloo coast)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
 ======================================================================
+
+How it was fetched (2026-07-06, self-download from the session): one
+CSV per year, pulled from NOAA CoastWatch ERDDAP dataset
+ncdcOisst21Agg_LonPM180 (griddap .csv, box below, one calendar year per
+request). That aggregation turned out to be missing scattered days in
+2015 and 2016; those days were filled from NOAA NCEI's daily OISST v2.1
+files (www.ncei.noaa.gov/data/sea-surface-temperature-optimum-
+interpolation/v2.1/access/avhrr/), subset to the SAME 9x9 grid cells so
+the daily spatial footprint is identical across the record. Result: an
+unbroken 1982-2026 series.
 
 NOAA OISST v2.1 daily SST for the study box, as ERDDAP CSV   [REQUIRED]
 ----------------------------------------------------------------------
@@ -145,8 +167,17 @@ Then run, inside sea-level/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
-PROJECT: wheat-yields (WA wheatbelt)                [DATA NEEDED]
+PROJECT: wheat-yields (WA wheatbelt)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
 ======================================================================
+
+How it was fetched (2026-07-06, self-download from the session): the WA
+wheat series was taken from the ABS data cube "Historical Selected
+Agriculture Commodities, by State (1860 to 2022)" (7124.0), Table 4
+(Wheat), Western Australia row, released 2024-04-19, at
+www.abs.gov.au/statistics/industry/agriculture/agricultural-commodities-
+australia/2021-22/. Its area and production rows were transcribed into
+the CSV contract below (1861-2022) with the source URL recorded.
 
 WA wheat area and production by season                     [REQUIRED]
 ----------------------------------------------------------------------
