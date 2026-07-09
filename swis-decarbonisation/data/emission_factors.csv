@@ -1,13 +1,15 @@
-# Fill factor_t_per_MWh (tonnes CO2-e per MWh sent out) from the
-# current National Greenhouse Accounts factors workbook, and cite
-# it in the source column. Leave rows blank to exclude a fuel
-# (blank factors mean intensity is simply not computed).
+# Scope 1 emission intensity per fuel bucket, tonnes CO2-e per MWh generated,
+# derived from the Clean Energy Regulator's published designated generation
+# facility data for the SWIS (2023-24 reporting year). Storage is left blank:
+# batteries generate no primary energy (their scope 1 is trivially small and
+# their MWh is net of charging). These are fleet-average factors for an
+# intensity INDEX, not a greenhouse inventory.
 fuel,factor_t_per_MWh,source
-bio,,
-coal,,
-gas,,
-distillate,,
-wind,,
-solar,,
+bio,0.0761,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Landfill Gas"
+coal,0.9358,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Black Coal"
+gas,0.5783,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Gas"
+distillate,0.7217,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Diesel"
+wind,0.0002,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Wind"
+solar,0.0021,"CER Greenhouse and energy information, designated generation facilities 2023-24 (cer.gov.au, retrieved 2026-07-07): SWIS facilities, sum(scope 1 t CO2-e)/sum(MWh) by primary fuel; Solar"
 storage,,
-other,,
+other,0.5783,"unmapped facilities (interruptible loads, test kit); peak share 0.0065% of SWIS generation, so any factor in [0,1] moves fleet intensity by under 0.0005%; gas factor applied as a conservative placeholder"

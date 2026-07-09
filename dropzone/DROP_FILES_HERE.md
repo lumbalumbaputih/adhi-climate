@@ -12,6 +12,58 @@ data hosts directly; you download, the pipeline does the rest.
 whose files still go straight into `dropzone/` itself, per its own section
 below.)
 
+Since the environment gained full internet access, the newer projects fetch
+their own data with a script instead of needing a manual drop:
+`bushfire-weather` (`python3 fetch_data.py`), `marine-heatwaves`,
+`swis-decarbonisation`, `wheat-yields` and `transition-risk` all downloaded
+directly from the session. Their sections below record exactly what was
+pulled and from where, so a re-run needs no hand-staging.
+
+======================================================================
+PROJECT: bushfire-weather (SW WA fire danger)   [COMPLETE: data is in;
+files below only needed to re-run from scratch]
+======================================================================
+
+Self-fetching: run, inside bushfire-weather/,
+    python3 fetch_data.py
+which downloads everything below into dropzone/bushfire-weather/ (about
+110 MB, cached and resumable), then build/analyse/visualise:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
+1. ERA5 hourly weather via Open-Meteo archive API        [REQUIRED]
+----------------------------------------------------------------------
+https://archive-api.open-meteo.com/v1/archive (keyless, free for
+non-commercial use). Hourly temperature_2m, relative_humidity_2m,
+wind_speed_10m and precipitation, timezone Australia/Perth, 1940 to the
+present, for four sites: Perth Airport (-31.9275, 115.9764), Manjimup
+(-34.2410, 116.1456), Merredin (-31.4820, 118.2790) and Margaret River
+(-33.9550, 115.0750). fetch_data.py requests one decade chunk per site.
+
+2. GHCN-Daily Perth Airport (validation)                 [REQUIRED]
+----------------------------------------------------------------------
+https://www.ncei.noaa.gov/access/services/data/v1 dataset=daily-summaries,
+station ASN00009021, dataTypes=TMAX,PRCP, units=metric. Used only to
+validate ERA5 against the observed station record.
+
+======================================================================
+PROJECT: transition-risk (WA Safeguard emitters)   [COMPLETE: data is
+in; files below only needed to re-run from scratch]
+======================================================================
+
+The Clean Energy Regulator's published Safeguard facility files, one CSV
+per compliance year, from cer.gov.au. Drop them into
+    dropzone/transition-risk/
+(the parser detects the vintage from the filename's year and normalises
+the shifting column names). The pages, all under
+cer.gov.au/markets/reports-and-data/:
+  - "Safeguard facility reported emissions" 2016-17 through 2021-22
+  - "Safeguard facility covered emissions data 2022-23"
+  - "2023-24 baselines and emissions data" (the reformed format)
+  - "2024-25 baselines and emissions data"
+Take the CSV (not the Excel) "baselines and emissions" / "facility data"
+table from each page. Then run, inside transition-risk/:
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+
 ======================================================================
 PROJECT: water-security (Perth streamflow)   [COMPLETE: data is in;
 files below only needed to re-run from scratch]

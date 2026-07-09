@@ -1,0 +1,13 @@
+facility,scenario,cumulative_shortfall_t_2025_2029,cost_at_spot_37.50_m,cost_at_low_30.00_m,cost_at_ceiling_path_m,note
+Gorgon Operations,flat,8276027.602130871,310.35103507990766,248.28082806392615,763.3773953205684,illustrative; assumes full shortfall met with purchased units at the stated price
+Gorgon Operations,trend,17446157.60213087,654.2309100799076,523.3847280639261,1617.2636675106598,illustrative; assumes full shortfall met with purchased units at the stated price
+North West Shelf Project,flat,7931388.666654684,297.42707499955065,237.94165999964056,725.8103343930246,illustrative; assumes full shortfall met with purchased units at the stated price
+North West Shelf Project,trend,4548282.666654684,170.56059999955065,136.4484799996405,410.7888711461641,illustrative; assumes full shortfall met with purchased units at the stated price
+Wheatstone Operations,flat,2750299.6270231605,103.13623601336852,82.50898881069482,255.72659218470582,illustrative; assumes full shortfall met with purchased units at the stated price
+Wheatstone Operations,trend,3186882.1270231605,119.50807976336851,95.60646381069482,296.379429541257,illustrative; assumes full shortfall met with purchased units at the stated price
+WOR01,flat,2783777.840112978,104.39166900423669,83.51333520338933,257.14151511072816,illustrative; assumes full shortfall met with purchased units at the stated price
+WOR01,trend,1063626.5901129781,39.885997129236685,31.908797703389347,96.96782744592662,illustrative; assumes full shortfall met with purchased units at the stated price
+FLNG,flat,0.0,0.0,0.0,0.0,illustrative; assumes full shortfall met with purchased units at the stated price
+FLNG,trend,0.0,0.0,0.0,0.0,illustrative; assumes full shortfall met with purchased units at the stated price
+Pluto LNG,flat,1925424.743394943,72.20342787731036,57.76274230184829,177.1797442287066,illustrative; assumes full shortfall met with purchased units at the stated price
+Pluto LNG,trend,1858130.993394943,69.67991225231036,55.743929801848296,170.9136161226501,illustrative; assumes full shortfall met with purchased units at the stated price

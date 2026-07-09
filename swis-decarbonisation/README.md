@@ -30,12 +30,20 @@ generation, which totals roughly **18 TWh a year**.
   window of complete data, so the steep part of the coal decline is still
   ahead.
 
+- **The grid is getting cleaner per unit of energy:** emissions intensity
+  fell from **0.71 to 0.58 t CO2-e per MWh** over 2007-2022, about
+  **-0.06 t/MWh per decade** (Mann-Kendall p = 5e-04). The factors behind
+  the index are derived from the CER's published SWIS facility data
+  (scope 1 emissions over generation, by primary fuel, 2023-24), recorded
+  per row in `data/emission_factors.csv`.
+
 **Scope honesty.** SCADA sees only registered, utility-scale facilities. WA's
 large rooftop-solar fleet is behind the meter and appears here only as
 suppressed demand, so this renewable share is a **floor**, not the whole
-picture. Emissions intensity is not computed: it needs emission factors the
-pipeline refuses to invent (see the empty `data/emission_factors.csv`
-template), so it is left for a follow-up rather than guessed.
+picture. The intensity series is an index built on fleet-average fuel
+factors, not a greenhouse inventory; the factor file records the source and
+the one de-minimis placeholder (the "other" bucket, at most 0.0065% of
+generation).
 
 ## Research question
 
@@ -118,6 +126,14 @@ were assigned from the OpenNEM WEM facility registry, matched to SCADA codes
 by station prefix, with a handful of documented manual assignments for large
 WA stations OpenNEM does not list separately; every assignment is recorded in
 `facility_fuel.csv`. Annual totals land near 18 TWh a year, in line with
-published WEM figures. Emissions intensity is deliberately left uncomputed
-until the emission-factors template is filled from the National Greenhouse
-Accounts workbook.
+published WEM figures. Emissions intensity was deliberately left uncomputed
+until the factors template could be filled from a documented source.
+
+**2026-07-07 · Intensity series added.** Filled `data/emission_factors.csv`
+with per-fuel scope 1 intensities derived from the CER's designated
+generation facility data for the SWIS (2023-24): coal 0.936, gas 0.578,
+distillate 0.722, landfill gas 0.076, wind and solar about zero t CO2-e/MWh.
+The resulting index falls from 0.71 to 0.58 t/MWh over 2007-2022, a
+significant decline (Sen -0.06 t/MWh per decade, MK p = 5e-04), consistent
+with published SWIS averages. The intensity chart now renders alongside the
+mix charts.

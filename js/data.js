@@ -18,10 +18,10 @@
       availability: "Available for internships · Perth, WA or remote",
     },
     stats: [
-      { label: "Projects complete", value: "6", caption: "storms to scorecards" },
-      { label: "Longest record", value: "126", unit: "yrs", caption: "Fremantle sea level, 1897–2022" },
-      { label: "Storms tracked", value: "193", caption: "within 500 km of WA" },
-      { label: "Emitters scored", value: "3", caption: "WA ASX majors" },
+      { label: "Projects complete", value: "11", caption: "storms to safeguards" },
+      { label: "Longest record", value: "161", unit: "yrs", caption: "WA wheat yields, 1861–2022" },
+      { label: "Facilities analysed", value: "175", caption: "WA power + Safeguard emitters" },
+      { label: "Risk types covered", value: "4", caption: "AASB S2, all four quadrants" },
     ],
     projects: [
       {
@@ -387,6 +387,410 @@
             title: "Choosing honesty over a bigger headline",
             found: "The recent rate, 5.1 mm a year, is dramatic and tempting to headline as acceleration. But the quadratic acceleration term is not statistically significant (p = 0.11): a real mid-century pause and strong El Niño and La Niña swings leave the curve unproven on this single gauge.",
             change: "Reported the unequivocal long-run rise and the far faster recent era as the finding, kept acceleration flagged as not yet proven, and stated openly that this is relative sea level with land motion not corrected for.",
+          },
+        ],
+      },
+      {
+        id: "bushfire-weather",
+        title: "Fire Danger Trends in South West WA",
+        year: "1941–2026",
+        status: "Complete",
+        category: ["Physical risk", "Climate data", "Data viz"],
+        icon: "sun",
+        meta: "5 charts · 4 sites · FFDI built from scratch, validated vs station data",
+        summary:
+          "Eighty-five years of daily fire weather at four WA sites, built from ERA5 reanalysis. The trend is not one line: rising in the wheatbelt, spiking around Perth in the 2020s, and falling in the southern forests.",
+        result: { value: "42", unit: "days", label: "Perth's Very High days, 2020s vs 25 in the 2000s" },
+        headline:
+          "I computed the McArthur Forest Fire Danger Index (FFDI) from scratch, daily since 1941, for Perth, Merredin, Manjimup and Margaret River. The honest headline is that south-west WA has no single fire-weather trend: it depends where you stand.",
+        body:
+          "Fire is the acute physical risk this portfolio had not yet covered, and in WA it is the one insurers and shires price first. There is no long daily record of humidity and wind at these towns, so I used ERA5 reanalysis (a physics model pinned to observations, pulled hourly from the keyless Open-Meteo archive) and built the full index chain by hand: the Keetch-Byram drought index, the Noble et al. drought factor, and the Mark 5 FFDI, each transcribed from the original papers and unit-tested against their published calibration points. Then I checked the whole thing against the real Perth Airport station record: ERA5's daily maximum temperature matches the observations at r = 0.96, and the known disaster days (Wooroloo 2021, Waroona 2016) land in the top 0.1% of all days, which is the proof the pipeline reads the weather faithfully.",
+        findings: [
+          {
+            value: "+3.0",
+            unit: "days/decade",
+            label: "The wheatbelt is getting more dangerous",
+            text: "Merredin's Very High fire-danger days (FFDI ≥ 25) are rising about 3 per decade since 1975 (p = 0.03), reaching 81 a season in the 2020s, the highest of any decade on record.",
+          },
+          {
+            value: "42 vs 25",
+            unit: "days",
+            label: "Perth's 2020s spike",
+            text: "Perth shows no significant long-run trend, but the 2020s so far average 42 Very High days a season against 25 in the 2000s, the worst decade since the unreliable 1940s.",
+          },
+          {
+            value: "−0.8",
+            unit: "days/decade",
+            label: "The forests are going the other way",
+            text: "Manjimup, in the southern forests, is falling about 0.8 Very High days per decade since 1975 (p = 0.03), from roughly 10 a season mid-century to 4 to 6 now. An unexpected result, reported as it stands.",
+          },
+          {
+            value: "r = 0.96",
+            unit: "",
+            label: "The reanalysis checks out",
+            text: "ERA5 grid-cell maximum temperature tracks the observed Perth Airport record at r = 0.96 with a small −0.5 °C bias, so the fire-weather trends rest on data that agrees with the real station.",
+          },
+        ],
+        meaning:
+          "For an AASB S2 reporter with WA exposure, the lesson is that a single regional fire-risk assumption cannot be justified: the wheatbelt trend and the Perth 2020s spike argue for more weight north and east of the scarp, while the forest-belt decline shows the region is not one story. Two honesty notes ride along: absolute FFDI here runs low because ERA5 winds are grid-cell averages, so the trends and relative changes are the result, not the raw counts; and the pre-1975 reanalysis looks too fiery against the known wet mid-century, so those decades are shaded on the charts and kept out of the headline.",
+        resources: [
+          { label: "Read the full analysis", href: "https://github.com/lumbalumbaputih/adhi-climate/blob/main/bushfire-weather/README.md", icon: "file-text" },
+          { label: "Cleaned datasets", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/bushfire-weather/data", icon: "layers" },
+          { label: "All charts", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/bushfire-weather/charts", icon: "scan" },
+          { label: "View on GitHub", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/bushfire-weather", icon: "github" },
+        ],
+        dataset: {
+          caption: "Very High fire-danger days per season (FFDI ≥ 25), by decade and site (ERA5 reanalysis)",
+          columns: ["Decade", "Perth", "Merredin", "Manjimup"],
+          rows: [
+            ["1960s", "29", "64", "8"],
+            ["1970s", "36", "66", "8"],
+            ["1980s", "30", "64", "8"],
+            ["1990s", "30", "70", "4"],
+            ["2000s", "25", "70", "3"],
+            ["2010s", "29", "68", "4"],
+            ["2020s", "42", "81", "6"],
+          ],
+        },
+        vizKey: "bushfire",
+        viz: [
+          { type: "line", key: "perth_vh", title: "Perth: Very High fire-danger days per season (FFDI ≥ 25)" },
+          { type: "line", key: "merredin_vh", title: "Merredin (wheatbelt): Very High days per season" },
+          {
+            type: "bar", key: "decades_vh", title: "Very High days per season, decade by decade",
+            keys: [
+              { k: "perth", label: "Perth", color: "var(--accent)" },
+              { k: "merredin", label: "Merredin", color: "#FFC234" },
+              { k: "manjimup", label: "Manjimup", color: "#1F9D55" },
+            ],
+          },
+        ],
+        tags: ["ERA5, self-downloaded", "FFDI from scratch", "Three sites, three trends"],
+        updates: [
+          {
+            date: "7 Jul 2026",
+            title: "First published",
+            found: "Eighty-five years of daily fire weather at four WA sites, built from ERA5 reanalysis downloaded by the pipeline itself, showed no single regional trend: rising in the wheatbelt, spiking at Perth in the 2020s, falling in the southern forests. The index chain reproduces its published calibration points and ERA5 matches the Perth Airport station at r = 0.96.",
+            change: "Published the FFDI pipeline for Perth, Merredin, Manjimup and Margaret River, with the suspect pre-satellite decades shaded and excluded from the headline, and the reanalysis validated against the real station record.",
+          },
+        ],
+      },
+      {
+        id: "marine-heatwaves",
+        title: "Marine Heatwaves off the WA Coast",
+        year: "1982–2026",
+        status: "Complete",
+        category: ["Physical risk", "Climate data", "Data viz"],
+        icon: "globe",
+        meta: "4 charts · 44 years of daily SST · Hobday detection from scratch",
+        summary:
+          "Forty-four years of daily sea temperature off Ningaloo. The pipeline finds 103 marine heatwaves, correctly flags the 2011 Ningaloo Niño as the longest on record, and shows the ocean measurably warming.",
+        result: { value: "123", unit: "days", label: "the 2011 Ningaloo Niño, longest on record" },
+        headline:
+          "Marine heatwaves are the ocean's version of a heatwave, and off WA they wreck fisheries and seagrass. I built the standard Hobday detection from scratch on 44 years of daily satellite SST, and the 2011 Ningaloo Niño falls out of it exactly where the science says it should.",
+        body:
+          "The study box sits over the Ningaloo coast, the epicentre of the 2011 event that devastated the Shark Bay scallop and Abrolhos fisheries. The data is NOAA's OISST v2.1 daily sea-surface temperature. Getting it clean was its own small battle: the fast ERDDAP feed had genuine gaps across 2015 and 2016, so the pipeline patches those days from NOAA's authoritative daily archive onto the identical grid, giving an unbroken record with no seam. On top of it sits the Hobday et al. definition, coded by hand: a day-of-year climatology and 90th-percentile threshold over the 1982–2011 baseline, then events of five or more consecutive days above it. The 2011 event is the built-in check: if it did not appear as a major multi-month event, the inputs would be wrong.",
+        findings: [
+          {
+            value: "123",
+            unit: "days",
+            label: "The 2011 Ningaloo Niño",
+            text: "Detected running 26 Sep 2010 to 26 Jan 2011, the longest single event in the record, peaking 3.7 °C above the climatological mean. It lands exactly where the literature puts it, validating the pipeline.",
+          },
+          {
+            value: "103",
+            unit: "events",
+            label: "Marine heatwaves since 1982",
+            text: "The Hobday detection finds 103 distinct events over 44 years off Ningaloo, with the most intense peak, 3.8 °C above climatology, occurring as recently as January 2025.",
+          },
+          {
+            value: "+0.12",
+            unit: "°C/decade",
+            label: "The ocean is warming",
+            text: "Annual mean SST is rising about 0.12 °C per decade (p = 0.04), a significant warming trend that is the clean statement behind the noisier count of heatwave days.",
+          },
+          {
+            value: "71 vs 11",
+            unit: "days",
+            label: "Heatwave days are climbing",
+            text: "Marine-heatwave days averaged 71 a year in the 2020s against just 11 in the 2000s. Some of that is warming showing through a fixed baseline, which the write-up states plainly.",
+          },
+        ],
+        meaning:
+          "For the fishing, aquaculture and tourism operators along this coast, marine heatwaves are the acute ocean risk, and both their frequency and their peak intensity are trending up on a significantly warming baseline. The honest caveat is built into the method: heatwave-day counts are measured against a fixed 1982–2011 climatology, so in a warming ocean part of the rising count is simply that warming, which is why the significant mean-SST trend is reported as the cleaner underlying signal.",
+        resources: [
+          { label: "Read the full analysis", href: "https://github.com/lumbalumbaputih/adhi-climate/blob/main/marine-heatwaves/README.md", icon: "file-text" },
+          { label: "Cleaned datasets", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/marine-heatwaves/data", icon: "layers" },
+          { label: "All charts", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/marine-heatwaves/charts", icon: "scan" },
+          { label: "View on GitHub", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/marine-heatwaves", icon: "github" },
+        ],
+        dataset: {
+          caption: "Marine-heatwave days and mean sea-surface temperature by decade (NOAA OISST v2.1, Ningaloo box)",
+          columns: ["Decade", "MHW days/yr", "Mean SST (°C)"],
+          rows: [
+            ["1980s", "39", "25.3"],
+            ["1990s", "24", "25.1"],
+            ["2000s", "11", "25.1"],
+            ["2010s", "44", "25.4"],
+            ["2020s", "71", "25.7"],
+          ],
+        },
+        vizKey: "mhw",
+        viz: [
+          { type: "line", key: "mhw_days", title: "Marine-heatwave days per year off Ningaloo" },
+          { type: "line", key: "mean_sst", title: "Annual mean sea-surface temperature" },
+          { type: "bar", key: "top_events", title: "The eight longest marine heatwaves on record (duration, days)" },
+        ],
+        tags: ["NOAA OISST, gap-filled", "Hobday from scratch", "2011 event validated"],
+        updates: [
+          {
+            date: "7 Jul 2026",
+            title: "First published",
+            found: "Forty-four years of daily SST off Ningaloo yielded 103 marine-heatwave events under the Hobday definition, with the 2011 Ningaloo Niño coming out as the longest on record (123 days, peak 3.7 °C) and annual mean SST warming significantly. The CoastWatch feed was missing scattered days in 2015 and 2016.",
+            change: "Filled the missing days from NOAA's daily OISST archive onto the identical grid for an unbroken record, then published the detection with the 2011 event as the built-in validation case and the fixed-baseline caveat stated openly.",
+          },
+        ],
+      },
+      {
+        id: "wheat-yields",
+        title: "WA Wheat Yields and the Drying Trend",
+        year: "1861–2022",
+        status: "Complete",
+        category: ["Physical risk", "Climate data", "Data viz"],
+        icon: "sprout",
+        meta: "4 charts · 150 seasons · yield trend detrended against rainfall",
+        summary:
+          "A century and a half of WA wheat. Yields have quadrupled on farming technology, and once you remove that trend the link to the rainfall decline is real but surprisingly weak, which is the finding.",
+        result: { value: "+0.17", unit: "t/ha/decade", label: "the technology yield trend" },
+        headline:
+          "WA wheat yields have climbed from well under one tonne a hectare to about two, driven by farming technology, not weather. The interesting question is what the south-west's rainfall decline did on top of that, and the honest answer is: less than you would guess.",
+        body:
+          "This project pairs the state's wheat record with the growing-season rainfall from the rainfall-decline project. The wheat data is the full ABS historical series, 1861 to 2022, 150 seasons. The trap here is that yields rise steeply on technology (better varieties, fertiliser, machinery, agronomy), so a naive correlation with rainfall is dominated by that shared upward-and-downward drift and badly overstates the climate link. The pipeline detrends first: it fits and removes the technology trend, then asks whether the leftover year-to-year yield wobble tracks the rainfall wobble. That is the statistically honest way to isolate the weather signal from the progress signal.",
+        findings: [
+          {
+            value: "+0.17",
+            unit: "t/ha/decade",
+            label: "Technology, not weather, drove the yield",
+            text: "The long-run yield trend is about 0.17 tonnes per hectare per decade and overwhelmingly significant (p ≈ 3 × 10⁻¹⁶). Mean yield roughly doubled from the 1970s to the 2020s.",
+          },
+          {
+            value: "weak",
+            unit: "",
+            label: "The rainfall link is real but modest",
+            text: "Once yields and rainfall are both detrended, the correlation between them is weak and not statistically significant. The drying matters, but it is not the dominant driver of year-to-year yield.",
+          },
+          {
+            value: "150",
+            unit: "seasons",
+            label: "One of the longest records here",
+            text: "The ABS series runs from 1861, giving 150 seasons of area and production, one of the longest continuous records in the whole portfolio.",
+          },
+          {
+            value: "2.05",
+            unit: "t/ha",
+            label: "The 2020s are the most productive decade",
+            text: "Despite the drying, the 2020s so far average about 2.05 t/ha, the highest of any decade, because technology gains have outrun the rainfall headwind, so far.",
+          },
+        ],
+        meaning:
+          "For a grower, an agribusiness lender or an AASB S2 financial-materiality assessment, the message is nuanced: the drying south-west is a genuine chronic risk, but across the whole state and the whole record it has so far been masked by faster technology gains, not translated one-for-one into lost yield. That is a more defensible, and more useful, statement than a scary raw correlation, and it is exactly the kind of signal-versus-progress separation that honest climate-risk work turns on.",
+        resources: [
+          { label: "Read the full analysis", href: "https://github.com/lumbalumbaputih/adhi-climate/blob/main/wheat-yields/README.md", icon: "file-text" },
+          { label: "Cleaned datasets", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/wheat-yields/data", icon: "layers" },
+          { label: "All charts", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/wheat-yields/charts", icon: "scan" },
+          { label: "View on GitHub", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/wheat-yields", icon: "github" },
+        ],
+        dataset: {
+          caption: "WA wheat mean yield by decade (ABS historical agriculture series, 7124.0)",
+          columns: ["Decade", "Mean yield (t/ha)"],
+          rows: [
+            ["1970s", "1.07"],
+            ["1980s", "1.11"],
+            ["1990s", "1.63"],
+            ["2000s", "1.63"],
+            ["2010s", "1.80"],
+            ["2020s", "2.05"],
+          ],
+        },
+        vizKey: "wheat",
+        viz: [
+          { type: "line", key: "yield", title: "WA wheat yield, 1861–2022 (with technology trend)" },
+          { type: "line", key: "area", title: "Area sown to wheat (million hectares)" },
+          { type: "bar", key: "decade_yield", title: "Mean yield by decade (t/ha)" },
+        ],
+        tags: ["ABS 1861–2022", "Detrended, not naive", "Signal vs progress"],
+        updates: [
+          {
+            date: "7 Jul 2026",
+            title: "First published",
+            found: "A century and a half of WA wheat showed yields quadrupling on farming technology (about +0.17 t/ha per decade), and once that trend is removed the link between year-to-year yield and growing-season rainfall is real but weak and not significant.",
+            change: "Published the paired analysis, detrending yields before testing the rainfall link so the technology signal is not mistaken for a climate one, using the full ABS series downloaded by the pipeline.",
+          },
+        ],
+      },
+      {
+        id: "swis-decarbonisation",
+        title: "How Fast Is WA's Main Grid Decarbonising?",
+        year: "2006–2023",
+        status: "Complete",
+        category: ["Transition analytics", "Climate data", "Data viz"],
+        icon: "leaf",
+        meta: "4 charts · 206 monthly files · 94 facilities mapped to fuels",
+        summary:
+          "Seventeen years of WA's main grid from AEMO metering. The renewable share more than quadrupled to 23%, emissions intensity fell from 0.71 to 0.58 t/MWh, and coal has barely started to move.",
+        result: { value: "23%", unit: "", label: "renewable share, 2022, from under 5%" },
+        headline:
+          "Where the rest of this portfolio measures climate risk arriving, this one measures the energy transition actually happening: the South West Interconnected System's generation mix, facility by facility, from AEMO's own metering.",
+        body:
+          "The SWIS is the grid that powers Perth and the south-west, and its decarbonisation pace drives every WA company's scope 2 trajectory. I pulled all 206 monthly AEMO facility-metering files from 2006 to 2023, then mapped each of the 94 generators to a fuel using the OpenNEM registry, every assignment recorded, none guessed. From there the pipeline builds the annual fuel mix, tests the trends with the same statistics as the rest of the suite, and, using per-fuel emission factors taken from the regulator's own published facility data, computes an emissions-intensity index for the grid.",
+        findings: [
+          {
+            value: "4.8 → 22.9%",
+            unit: "",
+            label: "Renewables more than quadrupled",
+            text: "The renewable share of utility generation rose from 4.8% in 2007 to 22.9% in 2022, about +9 percentage points per decade (p = 1 × 10⁻⁵). Wind did almost all of the work.",
+          },
+          {
+            value: "0.71 → 0.58",
+            unit: "t/MWh",
+            label: "The grid got cleaner per unit",
+            text: "Emissions intensity fell from 0.71 to 0.58 tonnes CO₂-e per MWh, a significant decline (p = 5 × 10⁻⁴), driven by wind and solar displacing gas.",
+          },
+          {
+            value: "−9",
+            unit: "pp/decade",
+            label: "Gas is being displaced",
+            text: "Gas fell from 52% to 41% of the mix, the mirror image of the renewables rise. It, not coal, is what new renewables have pushed aside so far.",
+          },
+          {
+            value: "43 → 36%",
+            unit: "",
+            label: "Coal has barely started",
+            text: "Coal drifted from 43% to 36% but the change is not statistically significant. The big Collie and Muja retirements are scheduled for 2023 to 2029, past the window of complete data, so the steep decline is still ahead.",
+          },
+        ],
+        meaning:
+          "For a WA business setting a scope 2 emissions target, the grid is genuinely getting cleaner but is nowhere near clean: still four-tenths gas and a third coal in the latest complete year. The honest scope note matters here: this measures only registered, utility-scale generation, so WA's world-leading rooftop solar, which sits behind the meter, does not appear as supply, which means the renewable share shown is a floor, not the whole picture. The intensity series is an index on documented fuel factors, not a full greenhouse inventory.",
+        resources: [
+          { label: "Read the full analysis", href: "https://github.com/lumbalumbaputih/adhi-climate/blob/main/swis-decarbonisation/README.md", icon: "file-text" },
+          { label: "Cleaned datasets", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/swis-decarbonisation/data", icon: "layers" },
+          { label: "All charts", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/swis-decarbonisation/charts", icon: "scan" },
+          { label: "View on GitHub", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/swis-decarbonisation", icon: "github" },
+        ],
+        dataset: {
+          caption: "SWIS generation mix and emissions intensity, four-yearly (AEMO WEM metering; CER emission factors)",
+          columns: ["Year", "Coal %", "Gas %", "Renewables %", "Intensity (t/MWh)"],
+          rows: [
+            ["2007", "43.2", "52.0", "4.8", "0.71"],
+            ["2012", "47.5", "44.6", "7.9", "0.70"],
+            ["2017", "49.2", "41.6", "9.2", "0.70"],
+            ["2022", "36.2", "40.9", "22.9", "0.58"],
+          ],
+        },
+        vizKey: "swis",
+        viz: [
+          { type: "line", key: "renewables", title: "Renewable share of SWIS utility generation" },
+          { type: "line", key: "intensity", title: "Grid emissions intensity (t CO₂-e/MWh)" },
+          {
+            type: "bar", key: "mix", title: "Coal, gas and renewables share by year",
+            keys: [
+              { k: "coal", label: "Coal", color: "#6B6259" },
+              { k: "gas", label: "Gas", color: "#FFC234" },
+              { k: "renewables", label: "Renewables", color: "#1F9D55" },
+            ],
+          },
+        ],
+        tags: ["AEMO metering, self-downloaded", "94 facilities mapped", "Rooftop solar is invisible"],
+        updates: [
+          {
+            date: "7 Jul 2026",
+            title: "First published",
+            found: "Seventeen years of AEMO metering showed the SWIS renewable share more than quadrupling to 23% (wind the main driver) while gas fell and coal barely moved, and a first-cut analysis left emissions intensity uncomputed rather than invent emission factors.",
+            change: "Published the fuel-mix pipeline built from all 206 monthly files, with facilities mapped to fuels from the OpenNEM registry, then added the intensity series using per-fuel factors from the regulator's own published SWIS facility data.",
+          },
+        ],
+      },
+      {
+        id: "transition-risk",
+        title: "WA's Biggest Emitters Under the Safeguard Mechanism",
+        year: "2016–2025",
+        status: "Complete",
+        category: ["Transition risk", "Climate data", "Data viz"],
+        icon: "bar-chart",
+        meta: "5 charts · 9 compliance years · scenarios, not forecasts",
+        summary:
+          "The Clean Energy Regulator's facility data, filtered to WA. It shows a concentrated, LNG-heavy emissions base where most big facilities are already above their declining baselines, and buying units to comply.",
+        result: { value: "56", unit: "of 81", label: "WA facilities above baseline in 2024-25" },
+        headline:
+          "The Safeguard Mechanism is Australia's sharpest transition-policy lever: every large facility's emissions baseline now declines each year, and exceeding it costs real money in carbon units. Turned on WA's data, it shows the squeeze has already started.",
+        body:
+          "This is the transition-risk half of AASB S2, and it reuses the same regulator data every company is measured against. I downloaded all nine published compliance years (2016-17 to 2024-25) from the Clean Energy Regulator, normalised their shifting column formats, and filtered to WA. One trap needed care: some early years report a multi-year cumulative baseline that dwarfs annual emissions, so the parser flags those from the files' own markers and excludes them from the headroom maths rather than mixing them in. Everything downstream, the concentration picture, the emissions-vs-baseline gap, the crossover scenarios and the cost sensitivity, follows the project's own rule: exceeding a baseline and surrendering units is compliance, framed as cost exposure, never wrongdoing.",
+        findings: [
+          {
+            value: "56 of 81",
+            unit: "",
+            label: "Most big facilities are already over",
+            text: "In 2024-25, 56 of 81 WA facilities reported covered emissions above their baseline, including four of the six biggest (Gorgon, North West Shelf, Worsley, Pluto). They comply by surrendering carbon units.",
+          },
+          {
+            value: "66%",
+            unit: "",
+            label: "The emissions base is concentrated",
+            text: "The top ten facilities hold 66% of WA's 47 Mt of covered emissions. LNG and oil-and-gas alone are over half; Chevron's two facilities cover 13 Mt, Woodside's five another 8 Mt.",
+          },
+          {
+            value: "~$0.9bn",
+            unit: "",
+            label: "The illustrative cost of standing still",
+            text: "If the six biggest facilities held emissions flat while baselines decline at the default 4.9% a year, the 2025–2029 unit bill at spot ACCU prices is about $0.9 bn, roughly $2.2 bn at the legislated ceiling. Illustrative, with every assumption stated.",
+          },
+          {
+            value: "+0.6",
+            unit: "Mt/yr",
+            label: "Mining emissions are still rising",
+            text: "Nothing in the WA panel is significantly declining. Metal ore mining is rising about 0.6 Mt a year (p = 0.001) and transport is up too; the total drifts upward against baselines heading down.",
+          },
+        ],
+        meaning:
+          "For WA reporters the Safeguard is no longer a future risk but a present cost: most large facilities are in structural shortfall against baselines that keep falling, so the disclosure question shifts from when this binds to what the unit bill does to operating cost and what abatement changes the path. The scenarios here are deliberately what-ifs, never forecasts, every projection carries its assumption in the same breath and every dollar figure is a range, because the companies, not this analysis, know their real production and abatement plans.",
+        resources: [
+          { label: "Read the full analysis", href: "https://github.com/lumbalumbaputih/adhi-climate/blob/main/transition-risk/README.md", icon: "file-text" },
+          { label: "Cleaned datasets", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/transition-risk/data", icon: "layers" },
+          { label: "All charts", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/transition-risk/charts", icon: "scan" },
+          { label: "View on GitHub", href: "https://github.com/lumbalumbaputih/adhi-climate/tree/main/transition-risk", icon: "github" },
+        ],
+        dataset: {
+          caption: "WA's six biggest Safeguard facilities, 2024-25 (Clean Energy Regulator)",
+          columns: ["Facility", "Covered (Mt)", "Baseline (Mt)", "Headroom (Mt)"],
+          rows: [
+            ["Gorgon", "9.02", "8.54", "−0.48"],
+            ["North West Shelf", "5.75", "4.83", "−0.92"],
+            ["Wheatstone", "4.02", "4.03", "+0.00"],
+            ["Worsley", "3.22", "3.09", "−0.13"],
+            ["Prelude FLNG", "2.25", "3.68", "+1.42"],
+            ["Pluto", "1.89", "1.74", "−0.14"],
+          ],
+        },
+        vizKey: "transition",
+        viz: [
+          { type: "bar", key: "top_facilities", title: "WA's ten biggest Safeguard facilities (covered emissions, Mt, 2024-25)" },
+          { type: "line", key: "wa_total", title: "WA total covered emissions, 2016–2024 (Mt)" },
+          {
+            type: "bar", key: "sectors", title: "Covered emissions by sector, by year (Mt)",
+            keys: [
+              { k: "lng", label: "LNG / oil & gas", color: "var(--accent)" },
+              { k: "mining", label: "Metal ore mining", color: "#FFC234" },
+              { k: "alumina", label: "Alumina & metals", color: "#2E3192" },
+            ],
+          },
+        ],
+        tags: ["CER data, all 9 years", "Scenarios, not forecasts", "Compliance = cost, not blame"],
+        updates: [
+          {
+            date: "7 Jul 2026",
+            title: "First published",
+            found: "All nine Safeguard compliance years for WA showed a concentrated, LNG-heavy emissions base where 56 of 81 facilities were already above their declining baselines in 2024-25, complying by surrendering units, while total emissions still drift upward. Some early years hide a multi-year cumulative baseline that would distort the headroom maths.",
+            change: "Published the WA exposure analysis, flagging and excluding the cumulative baselines from the files' own markers, and reporting crossovers and costs strictly as assumption-labelled scenarios, with exceedance framed as cost exposure rather than wrongdoing.",
           },
         ],
       },

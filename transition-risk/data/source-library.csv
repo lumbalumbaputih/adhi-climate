@@ -1,0 +1,10 @@
+file,year,n_rows,columns_matched
+2016-17_safeguard-facility-data-2016-17-0.csv,2016,204,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered emissions', accus='Australian carbon credit units surrendered', smcs=None"
+2017-18_safeguard-facility-data-2017-18-0.csv,2017,215,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered emissions', accus='Australian carbon credit units surrendered', smcs=None"
+2018-19_safeguard-facility-data-2018-19-0.csv,2018,210,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered emissions', accus='Australian carbon credit units surrendered', smcs=None"
+2019-20_safeguard-facility-data-2019-20-0.csv,2019,217,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered emissions', accus='ACCUs  surrendered', smcs=None"
+2020-21_safeguard-facility-data-2020-21.csv,2020,213,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered Emissions', accus='ACCUs surrendered', smcs=None"
+2021-22_safeguard-facility-data-2021-22-0.csv,2021,220,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered Emissions', accus='ACCUs surrendered', smcs=None"
+2022-23_safeguard-facilities-data-2022-23.csv,2022,218,"matched: facility='Facility name', baseline='Baseline number', covered='Reported covered Emissions', accus='ACCUs surrendered', smcs=None"
+2023-24_2023-24-baselines-and-emissions-table.csv,2023,233,"matched: facility='Facility name', baseline='Baseline emissions number', covered='Covered emissions', accus='ACCUs surrendered', smcs='SMCs surrendered'"
+2024-25_baselines-and-emissions-table-2024-25.csv,2024,228,"matched: facility='Facility name', baseline='Baseline emissions number', covered='Covered emissions', accus='ACCUs surrendered', smcs='SMCs surrendered'"

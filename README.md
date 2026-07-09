@@ -12,14 +12,14 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**cyclone-risk**](cyclone-risk/): Tropical Cyclone Trends Affecting WA (1985–2024) | Acute physical risk | Complete |
 | [**rainfall-decline**](rainfall-decline/): South West WA Rainfall Decline (1950–2024) | Chronic physical risk | Complete |
 | [**aasb-s2-review**](aasb-s2-review/): Disclosure Gap Analysis, WA's Biggest Emitters (BHP, Rio Tinto, Woodside) | Disclosure review | Complete |
-| [**transition-risk**](transition-risk/): WA's Biggest Emitters Under the Safeguard Mechanism (2016–2024) | Transition risk | Planned |
+| [**transition-risk**](transition-risk/): WA's Biggest Emitters Under the Safeguard Mechanism (2016–2025) | Transition risk | Complete |
 | [**water-security**](water-security/): Perth Water Security, Streamflow After the Rainfall Step-Change (1967–2022) | Chronic physical risk | Complete |
 | [**swis-decarbonisation**](swis-decarbonisation/): How Fast Is WA's Main Grid Decarbonising? (2006–2023) | Transition analytics | Complete |
 | [**extreme-heat**](extreme-heat/): Extreme Heat in Perth and the Pilbara (1945–2025) | Acute physical risk | Complete |
 | [**marine-heatwaves**](marine-heatwaves/): Marine Heatwaves off the WA Coast (1982–2026) | Acute physical risk | Complete |
 | [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
-| [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1940–2025) | Acute physical risk | Planned, [self-downloading data](bushfire-weather/EXECUTION_PROMPT.md) |
+| [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1941–2026) | Acute physical risk | Complete |
 
 The portfolio site (`index.html`) ties these together: each project card opens a
 case study with the headline findings, the charts, and direct links to the
@@ -48,7 +48,9 @@ committed cleaned datasets are derived from public sources: IBTrACS and ERSSTv5
 (NOAA NCEI, public domain as US government works), GHCN-Daily (NOAA NCEI,
 redistributing Bureau of Meteorology station observations), OISST v2.1 (NOAA
 NCEI / CoastWatch), the Marshall (2003) SAM index (British Antarctic Survey),
-NOAA PSL climate indices, WEM Facility SCADA data (AEMO), fuel mappings from
-the OpenNEM WEM registry, and historical crop statistics (Australian Bureau of
-Statistics, 7124.0). The original providers' terms apply to the data; please
-cite the sources listed in each project's README when reusing it.
+NOAA PSL climate indices, ERA5 reanalysis (Copernicus/ECMWF, obtained via the
+Open-Meteo archive API), WEM Facility SCADA data (AEMO), fuel mappings from
+the OpenNEM WEM registry, historical crop statistics (Australian Bureau of
+Statistics, 7124.0), and Safeguard Mechanism facility data (Clean Energy
+Regulator). The original providers' terms apply to the data; please cite the
+sources listed in each project's README when reusing it.
