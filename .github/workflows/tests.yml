@@ -24,14 +24,12 @@ jobs:
       - name: statistics and pipeline tests (every project)
         run: |
           for d in */; do
-            if [ -f "${d}test_stats.py" ]; then
-              echo "=== ${d}test_stats.py ==="
-              (cd "$d" && python test_stats.py)
-            fi
-            if [ -f "${d}test_project.py" ]; then
-              echo "=== ${d}test_project.py ==="
-              (cd "$d" && python test_project.py)
-            fi
+            for t in test_stats.py test_fire_indices.py test_project.py; do
+              if [ -f "${d}${t}" ]; then
+                echo "=== ${d}${t} ==="
+                (cd "$d" && python "$t")
+              fi
+            done
           done
       - name: AASB S2 band-sensitivity check runs clean
         working-directory: aasb-s2-review

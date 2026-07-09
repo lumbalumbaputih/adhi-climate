@@ -1,0 +1,2 @@
+comparison,n_days,pearson_r,bias_c,rmse_c,rain_day_agreement,first,last
+ERA5 tmax vs GHCN tmax (Perth Airport),29968,0.9644740186229878,-0.4736852642819007,1.9077568429746783,0.8350240256273358,1944-06-03,2026-06-25

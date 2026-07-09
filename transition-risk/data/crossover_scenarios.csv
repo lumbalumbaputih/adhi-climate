@@ -1,0 +1,13 @@
+facility,scenario,assumption,latest_covered_t,latest_baseline_t,already_above,first_year_above_baseline
+Gorgon Operations,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,9021856.0,8543442.0,True,2025-26
+Gorgon Operations,recent Sen trend continues,emissions moving +611342 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,9021856.0,8543442.0,True,2025-26
+North West Shelf Project,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,5750304.0,4829212.0,True,2025-26
+North West Shelf Project,recent Sen trend continues,emissions moving -225540 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,5750304.0,4829212.0,True,2025-26
+Wheatstone Operations,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,4020667.0,4025022.0,False,2025-26
+Wheatstone Operations,recent Sen trend continues,emissions moving +29106 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,4020667.0,4025022.0,False,2025-26
+WOR01,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,3218588.0,3087049.0,True,2025-26
+WOR01,recent Sen trend continues,emissions moving -114677 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,3218588.0,3087049.0,True,2025-26
+FLNG,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,2253798.0,3675438.0,False,not by 2029-30
+FLNG,recent Sen trend continues,emissions moving +115100 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,2253798.0,3675438.0,False,not by 2029-30
+Pluto LNG,flat at latest year,emissions flat at +0 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,1888110.0,1743127.0,True,2025-26
+Pluto LNG,recent Sen trend continues,emissions moving -4486 t/yr from the 2024-25 level; baseline declines 4.9%/yr from its 2024-25 value,1888110.0,1743127.0,True,2025-26

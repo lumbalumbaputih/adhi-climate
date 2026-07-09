@@ -1,0 +1,6 @@
+site,label,source,first,last,n_days,mean_annual_rain_mm,spin_up_year_dropped
+perth_airport,Perth Airport,"ERA5 via Open-Meteo archive API (hourly, local time)",1941-01-01,2026-06-30,31227,573.8,1940
+manjimup,Manjimup,"ERA5 via Open-Meteo archive API (hourly, local time)",1941-01-01,2026-06-30,31227,548.9,1940
+merredin,Merredin,"ERA5 via Open-Meteo archive API (hourly, local time)",1941-01-01,2026-06-30,31227,279.8,1940
+margaret_river,Margaret River,"ERA5 via Open-Meteo archive API (hourly, local time)",1941-01-01,2026-06-30,31227,677.5,1940
+perth_airport,"PERTH AIRPORT, AS",GHCN-Daily ASN00009021 via NCEI data service,1944-05-01,2026-06-25,30006,,
