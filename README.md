@@ -21,9 +21,10 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
 | [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1941–2026) | Acute physical risk | Complete |
 
-The portfolio site (`index.html`) ties these together: each project card opens a
-case study with the headline findings, the charts, and direct links to the
-write-up, notebook, and open data behind every number.
+The portfolio site (`index.html`) ties these together: each project card opens
+that project's own page (`projects/<id>.html`) with the headline findings, the
+interactive charts, and direct links to the write-up, notebook, and open data
+behind every number, so any single analysis can be shared by URL.
 
 The standard workflow for building and updating all of this, from staging raw
 data to adding a project to the front page to re-encrypting the study notes, is

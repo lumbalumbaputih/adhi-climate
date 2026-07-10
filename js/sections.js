@@ -168,6 +168,7 @@
   }
 
   /* -------------------------------------------------------------------- Nav */
+  /* Paths are root-absolute so the same nav works from / and /projects/. */
   function PNav({
     onContact
   }) {
@@ -177,9 +178,9 @@
       className: "wrap nav__inner"
     }, /*#__PURE__*/React.createElement("a", {
       className: "nav__brand",
-      href: "#top"
+      href: "/"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "assets/logo-mark.svg",
+      src: "/assets/logo-mark.svg",
       alt: ""
     }), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
       className: "nav__name"
@@ -189,10 +190,10 @@
       className: "nav__links"
     }, /*#__PURE__*/React.createElement("a", {
       className: "nav__link",
-      href: "#work"
+      href: "/#work"
     }, "Projects"), /*#__PURE__*/React.createElement("a", {
       className: "nav__link",
-      href: "#about"
+      href: "/#about"
     }, "About")), /*#__PURE__*/React.createElement("div", {
       className: "nav__actions"
     }, /*#__PURE__*/React.createElement(PThemeToggle, null), /*#__PURE__*/React.createElement(Button, {
@@ -200,7 +201,7 @@
       size: "sm",
       className: "nav__cv",
       as: "a",
-      href: "assets/2026-06-24-Adhi Resume - ESG.pdf",
+      href: "/assets/2026-06-24-Adhi Resume - ESG.pdf",
       target: "_blank",
       rel: "noopener noreferrer",
       iconLeft: /*#__PURE__*/React.createElement(Icon, {
@@ -979,8 +980,8 @@
     }, /*#__PURE__*/React.createElement("strong", null, "What changed"), u.change))))))));
   }
 
-  /* A quick, playful index of all the stories: five cards, one glance,
-     each jumping straight to its full story below. */
+  /* A quick, playful index of all the stories: one card per project, each
+     opening that project's own page under /projects/. */
   function PProjectIndex() {
     return /*#__PURE__*/React.createElement("div", {
       className: "pindex"
@@ -988,7 +989,7 @@
       as: "a",
       className: "pindex__card",
       key: p.id,
-      href: "#" + p.id,
+      href: "/projects/" + p.id + ".html",
       delay: i * 60
     }, /*#__PURE__*/React.createElement("div", {
       className: "pindex__top"
@@ -1015,8 +1016,8 @@
       className: "l"
     }, p.result.label)), /*#__PURE__*/React.createElement("span", {
       className: "pindex__go"
-    }, "Jump to the story ", /*#__PURE__*/React.createElement(Icon, {
-      name: "arrow-down-right",
+    }, "Read the story ", /*#__PURE__*/React.createElement(Icon, {
+      name: "arrow-right",
       size: 14
     })))));
   }
@@ -1031,11 +1032,65 @@
       className: "section-head section-head--slim"
     }, /*#__PURE__*/React.createElement(Eyebrow, {
       tick: true
-    }, "Personal projects"), /*#__PURE__*/React.createElement("p", null, "Eleven finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: the physical-risk stories first (cyclones, drying, rivers, heat, seas, fire and marine heatwaves), then wheat and the grid, and the transition-risk and disclosure pieces that put it all in business terms.")), /*#__PURE__*/React.createElement(PProjectIndex, null))), P.projects.map((p, i) => /*#__PURE__*/React.createElement(PStory, {
-      key: p.id,
+    }, "Personal projects"), /*#__PURE__*/React.createElement("p", null, "Eleven finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Every card opens that project's full story on its own page, with the interactive charts, the findings, and links to the write-up, notebook and open data behind every number: the physical-risk stories first (cyclones, drying, rivers, heat, seas, fire and marine heatwaves), then wheat and the grid, and the transition-risk and disclosure pieces that put it all in business terms.")), /*#__PURE__*/React.createElement(PProjectIndex, null))));
+  }
+
+  /* ------------------------------------------------- standalone project page */
+  function PPageNav({
+    index
+  }) {
+    const n = P.projects.length;
+    const prev = P.projects[(index - 1 + n) % n];
+    const next = P.projects[(index + 1) % n];
+    const card = (p, i, dir) => /*#__PURE__*/React.createElement("a", {
+      className: "pagenav__card pagenav__card--" + dir,
+      href: "/projects/" + p.id + ".html"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pagenav__dir"
+    }, dir === "prev" && /*#__PURE__*/React.createElement(Icon, {
+      name: "arrow-right",
+      size: 14,
+      style: {
+        transform: "rotate(180deg)"
+      }
+    }), dir === "prev" ? "Previous project" : "Next project", dir === "next" && /*#__PURE__*/React.createElement(Icon, {
+      name: "arrow-right",
+      size: 14
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "pagenav__num"
+    }, String(i + 1).padStart(2, "0")), /*#__PURE__*/React.createElement("span", {
+      className: "pagenav__title"
+    }, p.title));
+    return /*#__PURE__*/React.createElement("nav", {
+      className: "pagenav",
+      "aria-label": "More projects"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "wrap pagenav__grid"
+    }, card(prev, (index - 1 + n) % n, "prev"), card(next, (index + 1) % n, "next")));
+  }
+  function PProjectPage({
+    p,
+    index
+  }) {
+    return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("div", {
+      className: "crumbs"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "wrap"
+    }, /*#__PURE__*/React.createElement("a", {
+      className: "crumbs__back",
+      href: "/#work"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "arrow-right",
+      size: 14,
+      style: {
+        transform: "rotate(180deg)"
+      }
+    }), "All projects"))), /*#__PURE__*/React.createElement(PStory, {
       p: p,
-      index: i
-    })));
+      index: index
+    }), /*#__PURE__*/React.createElement(PPageNav, {
+      index: index
+    }));
   }
 
   /* Get-in-touch card, kept at the bottom as the closing call to action. */
@@ -1100,7 +1155,7 @@
     }, /*#__PURE__*/React.createElement("div", {
       className: "footer__brand"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "assets/logo-mark.svg",
+      src: "/assets/logo-mark.svg",
       alt: ""
     }), /*#__PURE__*/React.createElement("span", null, P.profile.name)), /*#__PURE__*/React.createElement("div", {
       className: "footer__meta"
@@ -1141,6 +1196,7 @@
     PHero,
     PStatBand,
     PStories,
+    PProjectPage,
     PContact,
     PFooter
   });
