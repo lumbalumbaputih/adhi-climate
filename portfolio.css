@@ -14,26 +14,45 @@
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
 .nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .nav__brand img { width: 34px; height: 34px; border-radius: var(--radius-sm); }
-.nav__name { display: block; font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--text-strong); line-height: 1; }
+.nav__name { display: block; font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--text-strong); line-height: 1; white-space: nowrap; }
 .nav__role { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; white-space: nowrap; }
 .nav__links { display: flex; align-items: center; gap: var(--space-8); }
 .nav__link { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--text-body); cursor: pointer; text-decoration: none; transition: color var(--duration-fast) var(--ease-standard); }
 .nav__link:hover { color: var(--accent-text); text-decoration: none; }
 .nav__actions { display: flex; align-items: center; gap: var(--space-3); }
-@media (max-width: 760px) { .nav__links { display: none; } }
+@media (max-width: 760px) {
+  .nav__links { display: none; }
+  .nav__role { display: none; }
+  .nav__inner { gap: var(--space-3); }
+  .nav__actions { gap: var(--space-2); }
+}
+/* !important is needed on the two hides below: the design-system button CSS
+   is injected in a <style> tag after this sheet (so it wins ties), and the
+   Icon component sets display as an inline style. */
+@media (max-width: 620px) {
+  .nav__cv { display: none !important; }
+}
+@media (max-width: 400px) {
+  .nav__name { font-size: 15px; }
+  .nav__brand img { width: 30px; height: 30px; }
+  .nav__cta svg { display: none !important; }
+}
 
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: var(--space-24) 0 var(--space-20); overflow: hidden; }
 .hero__inner { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .hero__eyebrow { margin-bottom: var(--space-5); }
-.hero__title { font-size: clamp(2.75rem, 6vw, var(--text-6xl)); line-height: 1.04; letter-spacing: var(--tracking-tighter); color: var(--text-strong); margin-bottom: var(--space-6); }
+.hero__title { font-size: clamp(2.15rem, 6vw, var(--text-6xl)); line-height: 1.06; letter-spacing: var(--tracking-tighter); color: var(--text-strong); margin-bottom: var(--space-6); }
 .hero__title .accent { color: var(--accent); }
 .hero__lead { font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--text-body); max-width: 58ch; margin: 0 auto var(--space-8); }
 .hero__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; justify-content: center; }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-5) var(--space-6); margin-top: var(--space-10); padding-top: var(--space-8); border-top: 1px solid var(--border-subtle); }
 .hero__meta-item { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--text-muted); }
 .hero__meta-item svg { color: var(--accent); }
-@media (max-width: 760px) { .hero { padding: var(--space-16) 0 var(--space-12); } }
+@media (max-width: 760px) {
+  .hero { padding: var(--space-16) 0 var(--space-12); }
+  .hero__lead { font-size: var(--text-md); }
+}
 
 /* ---------- Stat band ---------- */
 .statband { background: var(--bg-subtle); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
@@ -136,8 +155,11 @@ html { scroll-behavior: smooth; }
 .chart__svg { width: 100%; height: auto; display: block; overflow: visible; }
 .chart__grid { stroke: var(--border-subtle); stroke-width: 1; }
 .chart__axis { stroke: var(--border-default); stroke-width: 1; }
-.chart__tick { font-family: var(--font-mono); font-size: 10px; fill: var(--text-muted); }
-.chart__axlabel { font-family: var(--font-mono); font-size: 10px; fill: var(--text-faint); letter-spacing: 0.03em; }
+/* --ck is set per chart from its rendered width (viewBox units / CSS px), so
+   SVG text keeps a constant on-screen size no matter how far the chart is
+   scaled up or down. Falls back to 1 (raw viewBox size) without JS. */
+.chart__tick { font-family: var(--font-mono); font-size: calc(11px * var(--ck, 1)); fill: var(--text-muted); }
+.chart__axlabel { font-family: var(--font-mono); font-size: calc(11px * var(--ck, 1)); fill: var(--text-faint); letter-spacing: 0.03em; }
 .chart__line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .chart__line--mean { stroke: var(--text-strong); stroke-width: 1.6; opacity: 0.65; }
 .chart__line--draw { animation: chartDraw 1100ms var(--ease-out) both; }
@@ -160,7 +182,10 @@ html { scroll-behavior: smooth; }
 .chart__pt.is-hi { fill: var(--leaf); opacity: 1; }
 .chart__pt--draw { animation: chartPt 500ms var(--ease-out) both; }
 @keyframes chartPt { from { opacity: 0; transform: scale(0); } to { opacity: 0.7; transform: scale(1); } }
-.chart__rnote { font-family: var(--font-mono); font-size: 11px; fill: var(--text-muted); }
+.chart__rnote { font-family: var(--font-mono); font-size: calc(11.5px * var(--ck, 1)); fill: var(--text-muted); }
+.chart__legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
+.chart__legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart__legend .chart__legend-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
 .chart__tip-bg { fill: #1f2733; stroke: rgba(255,255,255,0.14); stroke-width: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3)); }
 .chart__tip-h { font-family: var(--font-mono); font-size: 11px; font-weight: 600; fill: #ffffff; }
 .chart__tip-t { font-family: var(--font-mono); font-size: 11px; fill: #b9c2cf; }
@@ -210,25 +235,26 @@ html { scroll-behavior: smooth; }
 .story__map-note { font-size: var(--text-sm); color: var(--blue-100); line-height: var(--leading-relaxed); margin-top: var(--space-3); max-width: 70ch; }
 .map__svg { max-height: 620px; }
 .map__grat { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
-.map__grat-label { font-family: var(--font-mono); font-size: 9px; fill: rgba(255,255,255,0.35); }
+.map__grat-label { font-family: var(--font-mono); font-size: calc(9.5px * var(--ck, 1)); fill: rgba(255,255,255,0.35); }
 .map__coast { fill: none; stroke: rgba(255,255,255,0.55); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
 .map__track { fill: none; opacity: 0.55; stroke-linejoin: round; stroke-linecap: round; transition: opacity var(--duration-fast) var(--ease-standard); cursor: pointer; }
 .map__track.is-hi { opacity: 1; }
 .map__track.is-dim { opacity: 0.12; }
 .map__track.is-hidden { opacity: 0; pointer-events: none; }
 .map__city { fill: #fff; stroke: var(--bg-inverse); stroke-width: 1; }
-.map__city-label { font-family: var(--font-mono); font-size: 10px; fill: rgba(255,255,255,0.8); }
+.map__city-label { font-family: var(--font-mono); font-size: calc(10.5px * var(--ck, 1)); fill: rgba(255,255,255,0.8); }
 .map__info-bg { fill: rgba(255,255,255,0.96); }
 .map__info-h { font-family: var(--font-display); font-size: 14px; font-weight: 600; fill: #181e26; }
 .map__info-t { font-family: var(--font-mono); font-size: 12px; fill: #6b7886; }
-.map__count { font-family: var(--font-mono); font-size: 11px; fill: rgba(255,255,255,0.5); }
+.map__count { font-family: var(--font-mono); font-size: calc(11px * var(--ck, 1)); fill: rgba(255,255,255,0.5); }
 .map__legend { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); }
 .map__legend-l { color: var(--blue-200); white-space: nowrap; }
 .map__ramp { flex: 1; max-width: 260px; height: 8px; border-radius: 999px; background: linear-gradient(90deg, #6b7a8f, #1fa9c7, #1f9d55, #ffc234, #ff5c39, #b5179e); }
 
 /* Map filters (season + minimum peak wind) */
-.map__controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-4) var(--space-8); margin-bottom: var(--space-5); }
-.map__ctrl { display: flex; flex-direction: column; gap: 7px; flex: 1 1 220px; min-width: 190px; max-width: 320px; }
+.map__controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-4) var(--space-6); margin-bottom: var(--space-5); }
+.map__ctrl { display: flex; flex-direction: column; gap: 7px; flex: 1 1 220px; min-width: min(190px, 100%); max-width: 320px; }
+@media (max-width: 640px) { .story__map { padding: var(--space-5) var(--space-4) var(--space-4); } }
 .map__ctrl-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
 .map__ctrl-l { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--blue-200); }
 .map__ctrl-v { font-family: var(--font-mono); font-size: var(--text-sm); color: #fff; font-variant-numeric: tabular-nums; }
@@ -247,7 +273,7 @@ html { scroll-behavior: smooth; }
 .scrolly__svg { width: 100%; height: auto; }
 .scrolly__series { transition: opacity 500ms var(--ease-out); }
 .scrolly__line { fill: none; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
-.scrolly__note { font-family: var(--font-mono); font-size: 12px; font-weight: 600; fill: #FF5C39; }
+.scrolly__note { font-family: var(--font-mono); font-size: calc(12px * var(--ck, 1)); font-weight: 600; fill: #FF5C39; }
 .scrolly__legend { display: flex; gap: var(--space-5); margin-top: var(--space-3); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
 .scrolly__legend span { display: inline-flex; align-items: center; gap: 6px; }
 .scrolly__sw { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
@@ -259,8 +285,13 @@ html { scroll-behavior: smooth; }
 .scrolly__card p { font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); }
 @media (max-width: 860px) {
   .scrolly { grid-template-columns: 1fr; gap: var(--space-4); }
-  .scrolly__graphic { position: sticky; top: 70px; z-index: 1; }
-  .scrolly__step { min-height: 64vh; }
+  .scrolly__graphic { position: sticky; top: 70px; z-index: 1; padding: var(--space-3) var(--space-3) var(--space-2); }
+  /* Keep the step cards below the pinned graphic: cards anchor to the top of
+     each step and the tall bottom padding provides the scroll distance, so the
+     active card is always read in the clear space under the chart. */
+  .scrolly__steps { padding-top: var(--space-6); }
+  .scrolly__step { min-height: 0; align-items: flex-start; padding-bottom: 55vh; }
+  .scrolly__step:last-child { padding-bottom: 18vh; }
 }
 @media (prefers-reduced-motion: reduce) { .scrolly__series { transition: none; } }
 
@@ -269,7 +300,7 @@ html { scroll-behavior: smooth; }
 .rainmap__pt { stroke: rgba(255,255,255,0.85); stroke-width: 1.5; transition: opacity var(--duration-fast) var(--ease-standard), stroke-width var(--duration-fast) var(--ease-standard); }
 .rainmap__pt.is-hi { stroke-width: 2.5; }
 .rainmap__pt.is-dim { opacity: 0.4; }
-.rainmap__label { font-family: var(--font-mono); font-size: 10px; fill: rgba(255,255,255,0.82); pointer-events: none; }
+.rainmap__label { font-family: var(--font-mono); font-size: calc(10.5px * var(--ck, 1)); fill: rgba(255,255,255,0.82); pointer-events: none; }
 
 /* ---------- AASB S2 radar (light card) ---------- */
 .story__radar { margin-top: var(--space-10); background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-lg); }
@@ -277,8 +308,8 @@ html { scroll-behavior: smooth; }
 .radar__svg { width: 100%; max-width: 480px; height: auto; display: block; margin: var(--space-2) auto 0; }
 .radar__ring { fill: none; stroke: var(--border-subtle); }
 .radar__spoke { stroke: var(--border-subtle); }
-.radar__axis-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; fill: var(--text-muted); }
-.radar__ringlabel { font-family: var(--font-mono); font-size: 9px; fill: var(--text-faint); }
+.radar__axis-label { font-family: var(--font-mono); font-size: calc(11px * var(--ck, 1)); letter-spacing: 0.02em; fill: var(--text-muted); }
+.radar__ringlabel { font-family: var(--font-mono); font-size: calc(9.5px * var(--ck, 1)); fill: var(--text-faint); }
 .radar__poly { stroke-width: 2.2; stroke-linejoin: round; transition: opacity var(--duration-fast) var(--ease-standard); }
 .radar__dot { stroke: var(--surface-card); stroke-width: 1.6; cursor: pointer; }
 .radar__tip-bg { fill: #181e26; }
@@ -295,7 +326,11 @@ html { scroll-behavior: smooth; }
 
 /* ---------- AASB S2 sub-indicator heatmap (light card) ---------- */
 .story__matrix { margin-top: var(--space-6); background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-lg); }
-.sheat__grid { display: grid; gap: 3px; align-items: stretch; }
+.sheat__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--border-default) transparent; }
+.sheat__scroll::-webkit-scrollbar { height: 8px; }
+.sheat__scroll::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 999px; }
+.sheat__grid { display: grid; gap: 3px; align-items: stretch; min-width: 480px; }
+.sheat__corner, .sheat__rowh { position: sticky; left: 0; z-index: 1; background: var(--surface-card); }
 .sheat__corner { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); display: flex; align-items: flex-end; padding: 0 0 6px 2px; }
 .sheat__colh { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--text-strong); text-align: center; padding: 0 0 6px; align-self: end; }
 .sheat__pillar { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--accent-text); background: var(--accent-soft); border-radius: var(--radius-sm); padding: 6px 10px; margin-top: 6px; }
