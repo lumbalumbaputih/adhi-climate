@@ -134,8 +134,8 @@
           </nav>
           <div className="nav__actions">
             <PThemeToggle />
-            <Button variant="secondary" size="sm" as="a" href="assets/2026-06-24-Adhi Resume - ESG.pdf" target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
-            <Button variant="primary" size="sm" onClick={onContact} iconRight={<Icon name="arrow-right" size={16} />}>Get in touch</Button>
+            <Button variant="secondary" size="sm" className="nav__cv" as="a" href="assets/2026-06-24-Adhi Resume - ESG.pdf" target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
+            <Button variant="primary" size="sm" className="nav__cta" onClick={onContact} iconRight={<Icon name="arrow-right" size={16} />}>Get in touch</Button>
           </div>
         </div>
       </header>
@@ -233,6 +233,13 @@
     { eyebrow: "So they came apart", text: "Warmer years were not stronger-storm years: strip out the shared long-term trends and the year-to-year link is essentially zero (r = −0.08). Ocean heat and storm strength decoupled, which is exactly why WA's future cyclone risk can't be read off the recent record, in either direction." },
   ];
 
+  function niceTicks(lo, hi, n) {
+    const step0 = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+    const norm = step0 / mag, step = mag * (norm >= 5 ? 5 : norm >= 2 ? 2 : 1);
+    const out = []; for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(Math.round(v * 100) / 100);
+    return out;
+  }
+
   function ScrollyChart({ D, stage }) {
     const W = 560, H = 340, M = { l: 46, r: 46, t: 16, b: 32 };
     const IW = W - M.l - M.r, IH = H - M.t - M.b;
@@ -245,15 +252,18 @@
     const ysW = (v) => M.t + IH - (v - wlo) / (whi - wlo) * IH;
     const ysS = (v) => M.t + IH - (v - slo) / (shi - slo) * IH;
     const ln = (arr, f) => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]).toFixed(1) + " " + f(p[1]).toFixed(1)).join(" ");
+    const wind = "#FF5C39";
     return (
       <svg viewBox={`0 0 ${W} ${H}`} className="chart__svg scrolly__svg" role="img" aria-label="Ocean temperature rose between 1985 and 2024 while the two cyclone wind records disagreed on the trend.">
-        {[0, 1, 2].map((i) => { const v = wlo + (whi - wlo) * i / 2; return (
-          <g key={"w" + i}>
+        {niceTicks(wlo, whi, 3).map((v) => (
+          <g key={"w" + v}>
             <line x1={M.l} x2={M.l + IW} y1={ysW(v)} y2={ysW(v)} className="chart__grid" />
-            <text x={M.l - 8} y={ysW(v) + 3} textAnchor="end" className="chart__tick">{Math.round(v)}</text>
-          </g>); })}
-        {[0, 1, 2].map((i) => { const v = slo + (shi - slo) * i / 2; return (
-          <text key={"s" + i} x={M.l + IW + 8} y={ysS(v) + 3} textAnchor="start" className="chart__tick" style={{ fill: "var(--accent)" }}>{(v > 0 ? "+" : "") + v.toFixed(1)}</text>); })}
+            <text x={M.l - 8} y={ysW(v) + 3} textAnchor="end" className="chart__tick" style={{ fill: wind, opacity: 0.9 }}>{Math.round(v)}</text>
+          </g>))}
+        {niceTicks(slo, shi, 3).map((v) => (
+          <text key={"s" + v} x={M.l + IW + 8} y={ysS(v) + 3} textAnchor="start" className="chart__tick" style={{ fill: "var(--accent)" }}>{(v > 0 ? "+" : "") + v.toFixed(1)}</text>))}
+        <text x={M.l - 8} y={M.t - 3} textAnchor="end" className="chart__tick" style={{ fill: wind }}>kt</text>
+        <text x={M.l + IW + 8} y={M.t - 3} textAnchor="start" className="chart__tick" style={{ fill: "var(--accent)" }}>°C</text>
         <text x={xs(1985)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">1985</text>
         <text x={xs(2005)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">2005</text>
         <text x={xs(2024)} y={H - M.b + 18} textAnchor="middle" className="chart__tick">2024</text>
@@ -276,6 +286,8 @@
   function Scrolly({ title, legend, steps, children }) {
     const [stage, setStage] = React.useState(1);
     const stepRefs = React.useRef([]);
+    const chartRef = React.useRef(null);
+    const ck = window.AdhiCharts.useChartScale(chartRef, 560);
     React.useEffect(() => {
       if (typeof IntersectionObserver === "undefined") { setStage(steps.length - 1); return; }
       const io = new IntersectionObserver((entries) => {
@@ -288,7 +300,7 @@
       <div className="scrolly">
         <div className="scrolly__graphic">
           <div className="story__chart-title">{title}</div>
-          {children(stage)}
+          <div ref={chartRef} style={{ "--ck": ck }}>{children(stage)}</div>
           <div className="scrolly__legend">
             {legend.map((l, i) => (
               <span key={i}><span className="scrolly__sw" style={{ background: l.c }} />{l.t}</span>
