@@ -117,24 +117,25 @@
   }
 
   /* -------------------------------------------------------------------- Nav */
+  /* Paths are root-absolute so the same nav works from / and /projects/. */
   function PNav({ onContact }) {
     return (
       <header className="nav">
         <div className="wrap nav__inner">
-          <a className="nav__brand" href="#top">
-            <img src="assets/logo-mark.svg" alt="" />
+          <a className="nav__brand" href="/">
+            <img src="/assets/logo-mark.svg" alt="" />
             <span>
               <span className="nav__name">{P.profile.name}</span>
               <span className="nav__role">{P.profile.role}</span>
             </span>
           </a>
           <nav className="nav__links">
-            <a className="nav__link" href="#work">Projects</a>
-            <a className="nav__link" href="#about">About</a>
+            <a className="nav__link" href="/#work">Projects</a>
+            <a className="nav__link" href="/#about">About</a>
           </nav>
           <div className="nav__actions">
             <PThemeToggle />
-            <Button variant="secondary" size="sm" className="nav__cv" as="a" href="assets/2026-06-24-Adhi Resume - ESG.pdf" target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
+            <Button variant="secondary" size="sm" className="nav__cv" as="a" href="/assets/2026-06-24-Adhi Resume - ESG.pdf" target="_blank" rel="noopener noreferrer" iconLeft={<Icon name="file-text" size={16} />}>CV</Button>
             <Button variant="primary" size="sm" className="nav__cta" onClick={onContact} iconRight={<Icon name="arrow-right" size={16} />}>Get in touch</Button>
           </div>
         </div>
@@ -582,13 +583,13 @@
     );
   }
 
-  /* A quick, playful index of all the stories: five cards, one glance,
-     each jumping straight to its full story below. */
+  /* A quick, playful index of all the stories: one card per project, each
+     opening that project's own page under /projects/. */
   function PProjectIndex() {
     return (
       <div className="pindex">
         {P.projects.map((p, i) => (
-          <Reveal as="a" className="pindex__card" key={p.id} href={"#" + p.id} delay={i * 60}>
+          <Reveal as="a" className="pindex__card" key={p.id} href={"/projects/" + p.id + ".html"} delay={i * 60}>
             <div className="pindex__top">
               <span className="pindex__num">{String(i + 1).padStart(2, "0")}</span>
               <span className="pindex__icon"><Icon name={p.icon} size={19} /></span>
@@ -601,7 +602,7 @@
               {p.result.unit && <span className="u">{p.result.unit}</span>}
               <span className="l">{p.result.label}</span>
             </div>
-            <span className="pindex__go">Jump to the story <Icon name="arrow-down-right" size={14} /></span>
+            <span className="pindex__go">Read the story <Icon name="arrow-right" size={14} /></span>
           </Reveal>
         ))}
       </div>
@@ -615,13 +616,55 @@
           <div className="wrap">
             <Reveal className="section-head section-head--slim">
               <Eyebrow tick>Personal projects</Eyebrow>
-              <p>Eleven finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Pick a card to jump straight to its story, or scroll and read them in order: the physical-risk stories first (cyclones, drying, rivers, heat, seas, fire and marine heatwaves), then wheat and the grid, and the transition-risk and disclosure pieces that put it all in business terms.</p>
+              <p>Eleven finished projects, all mine, taken on simply because I love working with data and wanted answers. Each one started with a Western Australian climate question I worked through from the raw data myself, then checked against the published science. No client, no brief, just a respect for what the data actually says. Every card opens that project's full story on its own page, with the interactive charts, the findings, and links to the write-up, notebook and open data behind every number: the physical-risk stories first (cyclones, drying, rivers, heat, seas, fire and marine heatwaves), then wheat and the grid, and the transition-risk and disclosure pieces that put it all in business terms.</p>
             </Reveal>
             <PProjectIndex />
           </div>
         </section>
-        {P.projects.map((p, i) => <PStory key={p.id} p={p} index={i} />)}
       </div>
+    );
+  }
+
+  /* ------------------------------------------------- standalone project page */
+  function PPageNav({ index }) {
+    const n = P.projects.length;
+    const prev = P.projects[(index - 1 + n) % n];
+    const next = P.projects[(index + 1) % n];
+    const card = (p, i, dir) => (
+      <a className={"pagenav__card pagenav__card--" + dir} href={"/projects/" + p.id + ".html"}>
+        <span className="pagenav__dir">
+          {dir === "prev" && <Icon name="arrow-right" size={14} style={{ transform: "rotate(180deg)" }} />}
+          {dir === "prev" ? "Previous project" : "Next project"}
+          {dir === "next" && <Icon name="arrow-right" size={14} />}
+        </span>
+        <span className="pagenav__num">{String(i + 1).padStart(2, "0")}</span>
+        <span className="pagenav__title">{p.title}</span>
+      </a>
+    );
+    return (
+      <nav className="pagenav" aria-label="More projects">
+        <div className="wrap pagenav__grid">
+          {card(prev, (index - 1 + n) % n, "prev")}
+          {card(next, (index + 1) % n, "next")}
+        </div>
+      </nav>
+    );
+  }
+
+  function PProjectPage({ p, index }) {
+    return (
+      <main>
+        <div className="crumbs">
+          <div className="wrap">
+            <a className="crumbs__back" href="/#work">
+              <Icon name="arrow-right" size={14} style={{ transform: "rotate(180deg)" }} />
+              All projects
+            </a>
+          </div>
+        </div>
+        <PStory p={p} index={index} />
+        <PPageNav index={index} />
+      </main>
     );
   }
 
@@ -652,7 +695,7 @@
       <footer className="footer">
         <div className="wrap footer__inner">
           <div className="footer__brand">
-            <img src="assets/logo-mark.svg" alt="" />
+            <img src="/assets/logo-mark.svg" alt="" />
             <span>{P.profile.name}</span>
           </div>
           <div className="footer__meta">© 2026 · Climate &amp; Sustainability · Built with the Adhi design system</div>
@@ -666,5 +709,5 @@
     );
   }
 
-  Object.assign(window, { PNav, PHero, PStatBand, PStories, PContact, PFooter });
+  Object.assign(window, { PNav, PHero, PStatBand, PStories, PProjectPage, PContact, PFooter });
 })();
