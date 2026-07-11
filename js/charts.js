@@ -222,7 +222,11 @@
   }
 
   /* --------------------------------------------------------------- MapChart */
-  const WIND_STOPS = [[20, "#6b7a8f"], [50, "#1fa9c7"], [80, "#1f9d55"], [105, "#ffc234"], [125, "#ff5c39"], [150, "#b5179e"]];
+  /* Plasma-like ramp: lightness rises monotonically with wind speed, so
+     "brighter = stronger" holds even for colour-blind readers, and the
+     strongest storms glow against the dark basemap. */
+  const WIND_STOPS = [[20, "#3b4568"], [50, "#7e4e90"], [80, "#b4559b"], [105, "#e0637c"], [125, "#f88f4d"], [150, "#fdc746"]];
+  const SEVERE_KT = 64;   // highlight threshold for the default view
   function hx(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
   function windColor(w) {
     if (!w) return "#9aa7b8";
@@ -296,9 +300,15 @@
         React.createElement("path", { d: path(data.coast), className: "map__coast" }),
         data.tracks.map((t, i) => {
           const vis = matches(t);
-          const cls = "map__track" + (!vis ? " is-hidden" : hi === i ? " is-hi" : hi != null ? " is-dim" : "");
+          /* Default view: severe storms in full colour, the weak majority as
+             faint grey context. Any slider filter switches to showing every
+             match in colour. */
+          const context = !filtered && (t.w || 0) < SEVERE_KT && hi !== i;
+          const cls = "map__track" + (!vis ? " is-hidden" : hi === i ? " is-hi" : hi != null ? " is-dim" : context ? " is-context" : "");
           return React.createElement("path", {
-            key: i, d: path(t.p), fill: "none", stroke: windColor(t.w), strokeWidth: hi === i ? 3 : 1.4,
+            key: i, d: path(t.p), fill: "none",
+            stroke: context ? "#5b6880" : windColor(t.w),
+            strokeWidth: hi === i ? 3 : context ? 1 : 1.7,
             className: cls, style: { pointerEvents: "none" },
           });
         }),
@@ -322,9 +332,13 @@
         React.createElement("text", { x: VW - m, y: VH - m, textAnchor: "end", className: "map__count" }, countTxt)
       ),
       React.createElement("div", { className: "map__legend" },
-        React.createElement("span", { className: "map__legend-l" }, "Peak wind"),
-        React.createElement("span", { className: "map__ramp" }),
-        React.createElement("span", { className: "map__legend-l" }, "weaker → stronger (Cat 5)")
+        React.createElement("span", { className: "map__legend-l" }, "Peak wind (kt)"),
+        React.createElement("span", { className: "map__scale" },
+          React.createElement("span", { className: "map__ramp" }),
+          React.createElement("span", { className: "map__scale-ticks" },
+            WIND_STOPS.map((s) => React.createElement("span", { key: s[0] }, s[0])))
+        ),
+        !filtered && React.createElement("span", { className: "map__legend-l" }, "severe (≥ " + SEVERE_KT + " kt) in colour, weaker in grey")
       )
     );
   }
@@ -493,17 +507,81 @@
     );
   }
 
+  /* ------------------------------------------------------------ DotCompare */
+  /* The honest version of the pillar comparison: one row per AASB S2 pillar,
+     one dot per company on a 0-4 scale, a grey bar showing the spread. Takes
+     the same data object as RadarChart. */
+  function DotCompare({ data, label }) {
+    const [hidden, setHidden] = useState({});
+    const [hov, setHov] = useState(null);   // { si, ai }
+    const wrapRef = React.useRef(null);
+    const ck = useChartScale(wrapRef, W);
+    const axes = data.axes, max = data.max || 4;
+    const ML = 118, MR = 20, MT = 14, MB = 34, ROW = 54;
+    const DH = MT + axes.length * ROW + MB;
+    const x = (v) => ML + v / max * (W - ML - MR);
+    const rowY = (i) => MT + i * ROW + ROW / 2;
+    const visible = data.series.filter((s) => !hidden[s.name]);
+    const hovSeries = hov ? data.series[hov.si] : null;
+    return React.createElement("div", { className: "dotc", ref: wrapRef, style: { "--ck": ck } },
+      React.createElement("svg", { viewBox: `0 0 ${W} ${DH}`, className: "chart__svg", role: "img", "aria-label": label },
+        Array.from({ length: max + 1 }, (_, v) => React.createElement("g", { key: "g" + v },
+          React.createElement("line", { x1: x(v), x2: x(v), y1: MT, y2: DH - MB, className: "chart__grid" }),
+          React.createElement("text", { x: x(v), y: DH - MB + 18, textAnchor: "middle", className: "chart__tick" }, v)
+        )),
+        axes.map((ax, ai) => {
+          const vals = visible.map((s) => s.values[ai]);
+          const lo = Math.min.apply(null, vals), hi2 = Math.max.apply(null, vals);
+          return React.createElement("g", { key: "r" + ai },
+            React.createElement("text", { x: ML - 12, y: rowY(ai) + 4, textAnchor: "end", className: "dotc__row" }, ax),
+            visible.length > 1 && React.createElement("line", {
+              x1: x(lo), x2: x(hi2), y1: rowY(ai), y2: rowY(ai), className: "dotc__span",
+            }),
+            visible.map((s) => {
+              const si = data.series.indexOf(s);
+              const active = hov && hov.si === si && hov.ai === ai;
+              return React.createElement("circle", {
+                key: s.name, cx: x(s.values[ai]), cy: rowY(ai), r: active ? 8 : 6,
+                className: "dotc__dot", style: { fill: s.color, opacity: hov && hov.si !== si ? 0.35 : 1, stroke: "transparent", strokeWidth: 12 },
+                onMouseEnter: () => setHov({ si, ai }), onMouseLeave: () => setHov(null),
+                onClick: () => setHov({ si, ai }),
+              });
+            })
+          );
+        }),
+        hovSeries && hov.ai != null && React.createElement(Tip, {
+          x: x(hovSeries.values[hov.ai]), y: rowY(hov.ai) - 6,
+          lines: [hovSeries.name, axes[hov.ai] + ": " + hovSeries.values[hov.ai].toFixed(1) + " / " + max], k: ck,
+        })
+      ),
+      React.createElement("div", { className: "radar__legend" },
+        data.series.map((s) => React.createElement("button", {
+          key: s.name, type: "button", className: "radar__toggle" + (hidden[s.name] ? " is-off" : ""),
+          "aria-pressed": !hidden[s.name],
+          onClick: () => setHidden((h) => Object.assign({}, h, { [s.name]: !h[s.name] })),
+          onMouseEnter: () => setHov({ si: data.series.indexOf(s), ai: null }), onMouseLeave: () => setHov(null),
+        },
+          React.createElement("span", { className: "radar__sw", style: { background: s.color } }),
+          React.createElement("span", { className: "radar__toggle-name" }, s.name),
+          React.createElement("span", { className: "radar__toggle-score" }, s.overall + " · " + s.band)
+        ))
+      )
+    );
+  }
+
   /* ------------------------------------------------------------- ScoreHeat */
   /* The 31 AASB S2 sub-requirements as a grouped heatmap: rows are the
      requirements (grouped by pillar), columns are the three companies, each
      cell shaded by its 0-4 score. Hover or tap a cell to load the full
      requirement, score and gap note into the detail panel below. */
+  /* Orange-to-teal, not red-to-green: the ends stay distinct for red-green
+     colour-blind readers, and lightness still orders the scale. */
   function scoreCell(s) {
     if (s == null) return { bg: "var(--bg-muted)", fg: "var(--text-faint)" };
-    if (s >= 3.5) return { bg: "#1F9D55", fg: "#ffffff" };
-    if (s >= 2.5) return { bg: "#8FD0A8", fg: "#10331f" };
+    if (s >= 3.5) return { bg: "#0E7A66", fg: "#ffffff" };
+    if (s >= 2.5) return { bg: "#8FD3C3", fg: "#0f332c" };
     if (s >= 1.5) return { bg: "#F4B740", fg: "#3d2b00" };
-    return { bg: "#E5484D", fg: "#ffffff" };
+    return { bg: "#E8590C", fg: "#ffffff" };
   }
   function ScoreHeat({ data, label }) {
     const [sel, setSel] = useState(null);   // { pi, ri, ci }
@@ -554,7 +632,7 @@
       ),
       React.createElement("div", { className: "sheat__legend" },
         React.createElement("span", { className: "sheat__legend-l" }, "Score"),
-        [["0-1", "#E5484D"], ["2", "#F4B740"], ["3", "#8FD0A8"], ["4", "#1F9D55"]].map((k) =>
+        [["0-1", "#E8590C"], ["2", "#F4B740"], ["3", "#8FD3C3"], ["4", "#0E7A66"]].map((k) =>
           React.createElement("span", { key: k[0], className: "sheat__legend-k" },
             React.createElement("span", { className: "sheat__legend-sw", style: { background: k[1] } }), k[0])),
         React.createElement("span", { className: "sheat__legend-l" }, "weaker → more complete")
@@ -562,5 +640,5 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, ScoreHeat, useChartScale };
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, useChartScale };
 })();
