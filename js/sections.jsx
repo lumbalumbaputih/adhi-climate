@@ -485,11 +485,16 @@
             <span className="story__meaning-tag">Why it matters</span>{p.meaning}
           </Reveal>
 
-          {p.radar && window.AdhiCharts && window.AdhiCharts.RadarChart && (
+          {p.radar && window.AdhiCharts && window.AdhiCharts.DotCompare && (
             <Reveal className="story__radar" delay={120}>
               <div className="story__chart-title">How the three compare, pillar by pillar</div>
-              {React.createElement(window.AdhiCharts.RadarChart, { data: p.radar, label: "Radar chart comparing Rio Tinto, Woodside and BHP across the four AASB S2 pillars (governance, strategy, risk management, and metrics and targets), each scored out of 4." })}
-              <p className="story__radar-note">Each company scored out of 4 on the four AASB S2 pillars. Toggle a company in the legend, or hover a point for its score. A bigger, rounder shape means more complete disclosure, but here's the catch this whole project turns on: reporting well (a big shape) is not the same as being low-risk.</p>
+              {React.createElement(window.AdhiCharts.DotCompare, { data: p.radar, label: "Dot plot comparing Rio Tinto, Woodside and BHP on the four AASB S2 pillars (governance, strategy, risk management, and metrics and targets), each scored out of 4." })}
+              <p className="story__radar-note">Each dot is one company's pillar score out of 4, and the grey bar is the spread between the three. Toggle a company in the legend, or hover a dot for the number. The gap is widest on metrics and targets, where Rio Tinto pulls a full point clear of BHP, while governance is the one pillar where Woodside edges ahead. But the catch this whole project turns on still applies: reporting well is not the same as being low-risk.</p>
+              <details className="radar-alt">
+                <summary>Prefer the radar view?</summary>
+                {React.createElement(window.AdhiCharts.RadarChart, { data: p.radar, label: "Radar chart of the same four pillar scores for Rio Tinto, Woodside and BHP." })}
+                <p className="story__radar-note">Same data as a shape: bigger and rounder means more complete disclosure. Radars flatter small differences on a four-axis diamond, which is why the dots above are the primary view.</p>
+              </details>
             </Reveal>
           )}
 
@@ -497,7 +502,7 @@
             <Reveal className="story__matrix" delay={120}>
               <div className="story__chart-title">All 31 requirements, company by company</div>
               {React.createElement(window.AdhiCharts.ScoreHeat, { data: window.AASBMATRIX, label: "Heatmap of the 31 AASB S2 sub-requirements scored 0 to 4 for Rio Tinto, Woodside and BHP, grouped by pillar." })}
-              <p className="story__matrix-note">Every one of the 31 requirements, scored 0 to 4 straight from each company's own report. Greener is more complete. The amber band across the asset-level metrics (M4 to M6) is the gap all three share: which assets are actually at risk, and a dollar figure on the financial impact. Hover or tap any cell for the requirement and the gap note.</p>
+              <p className="story__matrix-note">Every one of the 31 requirements, scored 0 to 4 straight from each company's own report. Deeper teal is more complete; orange is a gap. The amber band across the asset-level metrics (M4 to M6) is the gap all three share: which assets are actually at risk, and a dollar figure on the financial impact. Hover or tap any cell for the requirement and the gap note.</p>
             </Reveal>
           )}
 
@@ -523,7 +528,7 @@
             <Reveal className="story__map">
               <div className="story__chart-title">Where these storms tracked, season by season</div>
               {React.createElement(window.AdhiCharts.MapChart, { data: window.MAPDATA, label: "Tracks of the 193 cyclones that came within 500 km of WA, 1985 to 2024, coloured by peak wind." })}
-              <p className="story__map-note">Every cyclone that came within 500 km of the WA coast, coloured by peak wind. Hover a track to see the storm, or use the sliders to filter by season and storm strength. Notice how they sweep in from the north-west toward the Pilbara and Kimberley.</p>
+              <p className="story__map-note">Every cyclone that came within 500 km of the WA coast. Severe storms (peak wind 64 kt and over) are drawn in colour, brighter meaning stronger, while the weaker majority sit in grey behind them. Hover or tap a track to see the storm, or use the sliders to filter by season and strength. Notice how the severe ones sweep in from the north-west toward the Pilbara and Kimberley.</p>
             </Reveal>
           )}
 

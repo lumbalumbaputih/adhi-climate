@@ -70,6 +70,11 @@ moving parts:
   hand**; they are written by `tools/build-pages.js` from `js/data.js`. Each
   page sets `window.PROJECT_ID` and loads only the data files that story needs
   (`mapdata.js`, `scrollydata.js`, `aasbdata.js` are skipped where unused).
+- `assets/og/<id>.png`: the social-share card each project page points its
+  `og:image` at. Rendered by `node tools/build-og.js` (a manual step, needs a
+  local Chrome/Chromium; set `OG_CHROME` if it is not found) and committed.
+  If a project has no card yet, its page falls back to the global
+  `assets/og-card.png`.
 - `portfolio.css` / `styles.css` / `tokens/`: the styling.
 
 ### Adding a completed project to the site
@@ -94,7 +99,10 @@ moving parts:
    `index.html` (per-project meta is generated for you).
 4. **Recompile and regenerate:** `npm run build`. This also writes the new
    `projects/<id>.html` page and refreshes `sitemap.xml`; commit them.
-5. **Verify it renders** (see step 5 below).
+5. **Render the share card:** `node tools/build-og.js`, then commit the new
+   `assets/og/<id>.png`. Rerun it if a project's title, year or headline stat
+   changes.
+6. **Verify it renders** (see the verification section below).
 
 ## The update log (how a project evolved)
 
@@ -174,6 +182,7 @@ To update the notes:
 - [ ] Story object added to `js/data.js`; chart data added to `js/chartdata.js`.
 - [ ] Stat band, intro, stories-intro count, and `index.html` meta updated.
 - [ ] `projects/<id>.html` generated and committed; `sitemap.xml` refreshed.
+- [ ] `assets/og/<id>.png` share card rendered and committed.
 - [ ] `updates` timeline on the site and an `## Update log` in the README.
 - [ ] `npm run build` run; `.jsx` edited, not `.js`.
 - [ ] Site rendered headlessly with no errors; all charts and tables present.
