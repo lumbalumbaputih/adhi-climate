@@ -36,6 +36,10 @@ probe required "Open-Meteo ERA5 archive" \
 probe required "NOAA NCEI data service (GHCN)" \
   "https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations=ASN00009021&startDate=2020-01-01&endDate=2020-01-02&dataTypes=TMAX&format=csv"
 
+# Required by high-water (project #12)
+probe required "UHSLC tide gauges (hourly)" \
+  "https://uhslc.soest.hawaii.edu/data/csv/rqds/indian/hourly/h175a.csv"
+
 # Used by other projects' pipelines and re-runs
 probe optional "NOAA PSL downloads (ERSSTv5)" \
   "https://downloads.psl.noaa.gov/Datasets/noaa.ersst.v5/"
@@ -50,9 +54,9 @@ probe optional "Bureau of Meteorology" \
 
 echo
 if [ "$fails" -eq 0 ]; then
-  echo "Required hosts reachable: bushfire-weather can self-fetch."
+  echo "Required hosts reachable: the self-fetch pipelines can run."
 else
   echo "Required hosts unreachable: fix the environment network settings"
-  echo "(see bushfire-weather/EXECUTION_PROMPT.md) or stage files in dropzone/."
+  echo "(see the project's EXECUTION_PROMPT.md) or stage files in dropzone/."
 fi
 exit "$fails"
