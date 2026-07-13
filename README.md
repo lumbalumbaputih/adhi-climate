@@ -20,6 +20,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
 | [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1941–2026) | Acute physical risk | Complete |
+| [**high-water**](high-water/): Coastal Flood Hours at Fremantle (1984–2026) | Acute physical risk | Planned, see the [execution prompt](high-water/EXECUTION_PROMPT.md) |
 
 The portfolio site (`index.html`) ties these together: each project card opens
 that project's own page (`projects/<id>.html`) with the headline findings, the
