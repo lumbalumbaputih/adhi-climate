@@ -1,0 +1,2 @@
+n_overlap_years,pearson_r,p,mean_offset_mm,offset_sd_mm,note
+37,0.9989,2.5231596714577098e-48,5999.3,3.7,offset is the constant RLR-vs-station-zero datum gap; the two series should and do move together
