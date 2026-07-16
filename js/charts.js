@@ -5,6 +5,56 @@
   const IW = W - M.l - M.r, IH = H - M.t - M.b;
   const round = (n, d = 1) => { const p = Math.pow(10, d); return Math.round(n * p) / p; };
 
+  /* Shared number format: thousands separators above 1000, one decimal below,
+     unit appended once. Used by tooltips and direct labels so every value on
+     every chart reads the same way. */
+  function fmt(v, unit) {
+    if (v == null || isNaN(v)) return "";
+    const n = Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("en-US") : round(v, 1);
+    return n + (unit || "");
+  }
+
+  /* One keyboard model for every chart: left/right (or up/down) walk the marks,
+     Home/End jump to the ends, Escape clears. Returns an onKeyDown handler that
+     drives the same `hi` state the mouse hover uses, so focus and hover show the
+     identical tooltip. */
+  function arrowKeys(count, hi, setHi) {
+    return (e) => {
+      if (!count) return;
+      const cur = hi == null ? -1 : hi;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { setHi(Math.min(count - 1, cur + 1)); e.preventDefault(); }
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { setHi(Math.max(0, (cur < 0 ? count : cur) - 1)); e.preventDefault(); }
+      else if (e.key === "Home") { setHi(0); e.preventDefault(); }
+      else if (e.key === "End") { setHi(count - 1); e.preventDefault(); }
+      else if (e.key === "Escape") { setHi(null); }
+    };
+  }
+
+  /* Event markers (labelled vertical lines at a named x) and a reference line
+     (a labelled horizontal threshold). Shared by the line and scatter charts so
+     the written finding, "the rivers stepped down in 2001", can be drawn on the
+     chart that shows it. `nudgeEnd` keeps a right-edge label from overflowing. */
+  function Marks({ marks, xs, refline, ys, plotTop, plotBottom }) {
+    if (!marks && !refline) return null;
+    return React.createElement("g", { style: { pointerEvents: "none" } },
+      (marks || []).map((mk, i) => {
+        const x = xs(mk.x);
+        const nearRight = x > W - 70;
+        return React.createElement("g", { key: "mk" + i },
+          React.createElement("line", { className: "chart__mark", x1: x, x2: x, y1: plotTop, y2: plotBottom }),
+          mk.label && React.createElement("text", {
+            x: x + (nearRight ? -4 : 4), y: plotTop + 11, textAnchor: nearRight ? "end" : "start",
+            className: "chart__mark-label",
+          }, mk.label)
+        );
+      }),
+      refline && React.createElement("g", null,
+        React.createElement("line", { className: "chart__refline", x1: M.l, x2: M.l + IW, y1: ys(refline.y), y2: ys(refline.y) }),
+        refline.label && React.createElement("text", { x: M.l + IW - 3, y: ys(refline.y) - 4, textAnchor: "end", className: "chart__refline-label" }, refline.label)
+      )
+    );
+  }
+
   function ticks(min, max, n = 4) {
     if (min === max) { min -= 1; max += 1; }
     const span = max - min, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
@@ -75,9 +125,13 @@
     );
   }
 
-  function Svg({ children, label, refEl, k = 1, after }) {
+  function Svg({ children, label, refEl, k = 1, after, onKeyDown }) {
+    const svgProps = { viewBox: `0 0 ${W} ${H}`, className: "chart__svg", role: "img", "aria-label": label };
+    /* When a chart passes a key handler it is operable: make the SVG a focus
+       stop and let arrow keys reach every value the mouse can. */
+    if (onKeyDown) { svgProps.tabIndex = 0; svgProps.onKeyDown = onKeyDown; }
     return React.createElement("div", { className: "chart", ref: refEl, style: { "--ck": k } },
-      React.createElement("svg", { viewBox: `0 0 ${W} ${H}`, className: "chart__svg", role: "img", "aria-label": label }, children),
+      React.createElement("svg", svgProps, children),
       after || null
     );
   }
@@ -100,8 +154,30 @@
     const line = (arr) => arr.map((p, i) => (i ? "L" : "M") + xs(p[0]) + " " + ys(p[1])).join(" ");
     const yfmt = (t) => round(t, t % 1 ? 1 : 0);
     const tip = hi != null && pts[hi]
-      ? React.createElement(Tip, { x: xs(pts[hi][0]), y: ys(pts[hi][1]), lines: [String(pts[hi][0]), round(pts[hi][1], 1) + (data.unit || "")], k: ck }) : null;
-    return React.createElement(Svg, { label, refEl: wrapRef, k: ck },
+      ? React.createElement(Tip, { x: xs(pts[hi][0]), y: ys(pts[hi][1]), lines: [String(pts[hi][0]), fmt(pts[hi][1], data.unit)], k: ck }) : null;
+    const marks = (data.marks || []).filter((m) => xs(m.x) >= M.l - 1 && xs(m.x) <= M.l + IW + 1);
+
+    /* Legend: shown only when there is more than a single line to name. A lone
+       series needs no legend box, the title names it. */
+    const leg = [];
+    if (data.bars) {
+      if (data.posLabel) leg.push({ sw: "var(--chart-pos)", label: data.posLabel });
+      if (data.negLabel) leg.push({ sw: "var(--chart-neg)", label: data.negLabel });
+    } else {
+      leg.push({ ln: "chart__legend-ln", label: data.seriesLabel || "Observed" });
+    }
+    if (data.overlay) leg.push({ ln: "chart__legend-ln chart__legend-ln--mean", label: data.overlayLabel || "Rolling mean" });
+    if (data.trend) leg.push({ ln: "chart__legend-ln chart__legend-ln--trend", label: data.trendLabel || "Trend" });
+    if (data.pre || data.post) leg.push({ ln: "chart__legend-ln chart__legend-ln--step", label: data.stepLabel || "Period mean" });
+    if (data.band) leg.push({ band: true, label: data.bandLabel || "95% range" });
+    const legend = leg.length >= 2 ? React.createElement("div", { className: "chart__legend" },
+      leg.map((e, i) => React.createElement("span", { key: i },
+        e.band ? React.createElement("span", { className: "chart__legend-band" })
+          : e.sw ? React.createElement("span", { className: "chart__legend-sw", style: { background: e.sw } })
+          : React.createElement("span", { className: e.ln }),
+        e.label))) : null;
+
+    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, after: legend, onKeyDown: arrowKeys(pts.length, hi, setHi) },
       React.createElement(Axes, { xTicks: ticks(x0, x1, 4).filter((t) => t >= Math.min.apply(null, xv) - 1 && t <= Math.max.apply(null, xv) + 1), yTicks: ticks(y0, y1, 4), xs, ys, xfmt: (t) => Math.round(t), yfmt, ylabel: data.ylabel }),
       data.band && React.createElement("path", { className: "chart__band", d: "M" + data.band.map((b) => xs(b[0]) + " " + ys(b[1])).join(" L ") + " L " + data.band.slice().reverse().map((b) => xs(b[0]) + " " + ys(b[2])).join(" L ") + " Z" }),
       data.bars && pts.map((p, i) => React.createElement("rect", {
@@ -113,6 +189,8 @@
       data.trend && React.createElement("line", { className: "chart__trend", x1: xs(data.trend[0]), y1: ys(data.trend[1]), x2: xs(data.trend[2]), y2: ys(data.trend[3]) }),
       data.pre && React.createElement("line", { className: "chart__step", x1: xs(data.pre.x0), y1: ys(data.pre.y), x2: xs(data.pre.x1), y2: ys(data.pre.y) }),
       data.post && React.createElement("line", { className: "chart__step", x1: xs(data.post.x0), y1: ys(data.post.y), x2: xs(data.post.x1), y2: ys(data.post.y) }),
+      React.createElement(Marks, { marks, refline: data.refline, xs, ys, plotTop: M.t, plotBottom: M.t + IH }),
+      data.xlabel && React.createElement("text", { x: M.l + IW / 2, y: H - 4, textAnchor: "middle", className: "chart__axlabel" }, data.xlabel),
       hi != null && pts[hi] && React.createElement("line", { className: "chart__guide", x1: xs(pts[hi][0]), x2: xs(pts[hi][0]), y1: M.t, y2: M.t + IH }),
       hi != null && pts[hi] && !data.bars && React.createElement("circle", { className: "chart__dot", cx: xs(pts[hi][0]), cy: ys(pts[hi][1]), r: 4 }),
       pts.map((p, i) => React.createElement("rect", {
@@ -136,17 +214,18 @@
     const band = IW / bars.length, bw = band * 0.62;
     const yfmt = (t) => round(t, 0);
     function lines(b) {
-      if (grouped) return [b.label].concat(data.keys.map((k) => k.label + ": " + round(b[k.k], 1) + (data.unit || "")));
+      if (grouped) return [b.label].concat(data.keys.map((k) => k.label + ": " + fmt(b[k.k], data.unit)));
       const ex = []; if (b.n != null) ex.push("n = " + b.n); if (b.median != null) ex.push("median " + b.median + " kt"); if (b.pres != null) ex.push(b.pres + " hPa"); if (b.cat3 != null) ex.push("Cat 3+: " + b.cat3 + "%");
-      return [b.label, round(b.value, 1) + (data.unit || "")].concat(ex);
+      return [b.label, fmt(b.value, data.unit)].concat(ex);
     }
     const hb = hi != null ? bars[hi] : null;
     // Legend lives outside the SVG so it can never collide with tall bars.
     const legend = grouped ? React.createElement("div", { className: "chart__legend" },
       data.keys.map((k, i) => React.createElement("span", { key: i },
         React.createElement("span", { className: "chart__legend-sw", style: { background: k.color || "var(--accent)" } }), k.label))) : null;
-    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, after: legend },
+    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, after: legend, onKeyDown: arrowKeys(bars.length, hi, setHi) },
       React.createElement(Axes, { xTicks: [], yTicks: ticks(0, y1, 4), xs: () => 0, ys, yfmt, ylabel: data.ylabel }),
+      data.xlabel && React.createElement("text", { x: M.l + IW / 2, y: H - 3, textAnchor: "middle", className: "chart__axlabel" }, data.xlabel),
       bars.map((b, bi) => {
         const cx = M.l + band * bi + band / 2;
         const segs = grouped ? data.keys : [{ k: "value", color: "var(--accent)" }];
@@ -179,9 +258,10 @@
     const xs = (v) => M.l + (v - x0) / (x1 - x0) * IW;
     const ys = (v) => M.t + IH - (v - y0) / (y1 - y0) * IH;
     const hp = hi != null ? pts[hi] : null;
-    return React.createElement(Svg, { label, refEl: wrapRef, k: ck },
+    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, onKeyDown: arrowKeys(pts.length, hi, setHi) },
       React.createElement(Axes, { xTicks: ticks(x0, x1, 4), yTicks: ticks(y0, y1, 4), xs, ys, xfmt: (t) => round(t, 1), yfmt: (t) => round(t, 0), ylabel: data.ylabel }),
       data.xlabel && React.createElement("text", { x: M.l + IW / 2, y: H - 4, textAnchor: "middle", className: "chart__axlabel" }, data.xlabel),
+      React.createElement(Marks, { marks: (data.marks || []).filter((m) => xs(m.x) >= M.l - 1 && xs(m.x) <= M.l + IW + 1), refline: data.refline, xs, ys, plotTop: M.t, plotBottom: M.t + IH }),
       data.trend && React.createElement("line", { className: "chart__trend", x1: xs(data.trend[0]), y1: ys(data.trend[1]), x2: xs(data.trend[2]), y2: ys(data.trend[3]) }),
       data.r != null && React.createElement("text", { x: M.l + IW - 4, y: M.t + 14, textAnchor: "end", className: "chart__rnote" }, "r = " + data.r),
       pts.map((p, i) => React.createElement("circle", {
@@ -191,7 +271,7 @@
         onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null),
         onClick: () => setHi(i),
       })),
-      hp && React.createElement(Tip, { x: xs(hp[0]), y: ys(hp[1]), lines: [hp[2] != null ? String(hp[2]) : "", round(hp[1], 1) + " · " + round(hp[0], 2)].filter(Boolean), k: ck })
+      hp && React.createElement(Tip, { x: xs(hp[0]), y: ys(hp[1]), lines: [hp[2] != null ? String(hp[2]) : "", fmt(hp[1]) + " · " + round(hp[0], 2)].filter(Boolean), k: ck })
     );
   }
 
