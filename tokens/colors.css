@@ -104,4 +104,14 @@
   --chart-band: rgba(42, 120, 214, 0.14);/* confidence-interval fill         */
   --chart-mark: var(--neutral-500);      /* event marker line                */
   --chart-dot-ring: var(--surface-card); /* ring around the active point     */
+
+  /* Fuel-mix palette (SWIS generation stack). A domain palette: coal reads as
+     dark, gas warm, wind cool, solar as sun, the folded remainder grey. Bands
+     are position-anchored and labelled, so the two neutral ends are legible
+     without carrying hue. Dark-surface variants live in portfolio.css. */
+  --fuel-coal:  #454F5B;
+  --fuel-gas:   var(--chart-6);
+  --fuel-wind:  var(--chart-1);
+  --fuel-solar: var(--chart-4);
+  --fuel-other: var(--neutral-400);
 }

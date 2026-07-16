@@ -720,5 +720,69 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, useChartScale };
+  /* ------------------------------------------------------------- AreaChart */
+  /* Stacked area over time. Bands are drawn bottom-to-top in `series` order;
+     each band carries a thin surface-coloured stroke so neighbours read as
+     separate fills without a border. The widest bands get a direct label; the
+     rest lean on the legend (listed top-of-stack first, matching the eye) and
+     the per-year hover breakdown. */
+  function AreaChart({ data, label }) {
+    const [hi, setHi] = useState(null);
+    const wrapRef = React.useRef(null);
+    const ck = useChartScale(wrapRef, W);
+    const rows = data.rows, series = data.series;
+    const xvals = rows.map((r) => r.x);
+    const xmin = Math.min.apply(null, xvals), xmax = Math.max.apply(null, xvals);
+    const xs = (v) => M.l + (v - xmin) / (xmax - xmin) * IW;
+    const totals = rows.map((r) => series.reduce((a, s) => a + (r[s.k] || 0), 0));
+    // Percent stacks (every year summing to ~100) pin the axis at 100.
+    const near100 = totals.every((t) => Math.abs(t - 100) < 1.5);
+    const ymax = (data.stack100 || near100) ? 100 : Math.max.apply(null, totals) * 1.02;
+    const ys = (v) => M.t + IH - v / ymax * IH;
+
+    // Cumulative bottom/top for each band at each row.
+    const cum = rows.map(() => 0);
+    const bands = series.map((s) => {
+      const seg = rows.map((r, ri) => { const lo = cum[ri]; const top = lo + (r[s.k] || 0); cum[ri] = top; return { x: r.x, lo, hi: top }; });
+      return { s, seg };
+    });
+    const bandPath = (seg) => {
+      const top = seg.map((p, i) => (i ? "L" : "M") + xs(p.x).toFixed(1) + " " + ys(p.hi).toFixed(1)).join(" ");
+      const bot = seg.slice().reverse().map((p) => "L" + xs(p.x).toFixed(1) + " " + ys(p.lo).toFixed(1)).join(" ");
+      return top + " " + bot + " Z";
+    };
+    const yfmt = (t) => round(t, 0);
+    const r = hi != null ? rows[hi] : null;
+    const tipLines = r ? [String(r.x)].concat(series.slice().reverse().map((s) => s.label + " " + fmt(r[s.k] || 0, data.unit))) : null;
+    // Legend in stack order, top band first.
+    const legend = React.createElement("div", { className: "chart__legend" },
+      series.slice().reverse().map((s, i) => React.createElement("span", { key: i },
+        React.createElement("span", { className: "chart__legend-sw", style: { background: s.color } }), s.label)));
+
+    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, after: legend, onKeyDown: arrowKeys(rows.length, hi, setHi) },
+      React.createElement(Axes, { xTicks: ticks(xmin, xmax, 4).filter((t) => t >= xmin && t <= xmax), yTicks: ticks(0, ymax, 4), xs, ys, xfmt: (t) => Math.round(t), yfmt, ylabel: data.ylabel }),
+      bands.map((b, bi) => React.createElement("path", {
+        key: bi, className: "chart__area-band", d: bandPath(b.seg), style: { fill: b.s.color },
+      })),
+      // Direct labels inside bands thick enough to hold them at the last year.
+      bands.map((b, bi) => {
+        const last = b.seg[b.seg.length - 1];
+        const th = ys(last.lo) - ys(last.hi);
+        if (th < 22) return null;
+        return React.createElement("text", {
+          key: "l" + bi, x: xs(last.x) - 6, y: (ys(last.lo) + ys(last.hi)) / 2 + 3.5, textAnchor: "end",
+          className: "chart__area-label",
+        }, b.s.label);
+      }),
+      data.xlabel && React.createElement("text", { x: M.l + IW / 2, y: H - 3, textAnchor: "middle", className: "chart__axlabel" }, data.xlabel),
+      r && React.createElement("line", { className: "chart__guide", x1: xs(r.x), x2: xs(r.x), y1: M.t, y2: M.t + IH }),
+      rows.map((row, i) => React.createElement("rect", {
+        key: "h" + i, x: xs(row.x) - IW / rows.length / 2, y: M.t, width: IW / rows.length, height: IH, fill: "transparent",
+        onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null), onClick: () => setHi(i),
+      })),
+      tipLines && React.createElement(Tip, { x: xs(r.x), y: M.t + 4, lines: tipLines, k: ck })
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, AreaChart, useChartScale };
 })();
