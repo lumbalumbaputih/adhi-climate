@@ -19,10 +19,10 @@
   transition: background-color var(--duration-fast) var(--ease-standard),
               border-color var(--duration-fast) var(--ease-standard),
               color var(--duration-fast) var(--ease-standard),
-              transform var(--duration-fast) var(--ease-standard);
+              transform 160ms var(--ease-out);
   text-decoration: none;
 }
-.adhi-btn:active { transform: translateY(1px); }
+.adhi-btn:active { transform: scale(0.97); }
 .adhi-btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
 .adhi-btn[disabled] { opacity: 0.45; cursor: not-allowed; transform: none; }
 .adhi-btn--sm { height: 32px; padding: 0 var(--space-3); font-size: var(--text-sm); }
@@ -56,10 +56,11 @@
   background: transparent; color: var(--text-body); cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-standard),
               color var(--duration-fast) var(--ease-standard),
-              border-color var(--duration-fast) var(--ease-standard);
+              border-color var(--duration-fast) var(--ease-standard),
+              transform 160ms var(--ease-out);
 }
 .adhi-iconbtn:hover:not([disabled]) { background: var(--bg-muted); color: var(--text-strong); }
-.adhi-iconbtn:active:not([disabled]) { transform: translateY(1px); }
+.adhi-iconbtn:active:not([disabled]) { transform: scale(0.96); }
 .adhi-iconbtn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
 .adhi-iconbtn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .adhi-iconbtn--sm { width: 32px; height: 32px; }
@@ -140,10 +141,12 @@
   background: var(--surface-card); color: var(--text-body); border: 1px solid var(--border-default);
   transition: border-color var(--duration-fast) var(--ease-standard),
               background-color var(--duration-fast) var(--ease-standard),
-              color var(--duration-fast) var(--ease-standard);
+              color var(--duration-fast) var(--ease-standard),
+              transform 160ms var(--ease-out);
 }
 .adhi-tag--interactive { cursor: pointer; }
 .adhi-tag--interactive:hover { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
+.adhi-tag--interactive:active { transform: scale(0.97); }
 .adhi-tag--selected { background: var(--accent); color: var(--text-on-accent); border-color: var(--accent); }
 .adhi-tag__remove {
   display: inline-flex; align-items: center; justify-content: center;
@@ -207,7 +210,9 @@
               border-color var(--duration-base) var(--ease-standard),
               transform var(--duration-base) var(--ease-out);
 }
-.adhi-card--interactive:hover { box-shadow: var(--shadow-lg); border-color: var(--border-default); transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .adhi-card--interactive:hover { box-shadow: var(--shadow-lg); border-color: var(--border-default); transform: translateY(-2px); }
+}
 .adhi-card--accent-edge { border-top: 3px solid var(--accent); }
 .adhi-card--leaf-edge { border-top: 3px solid var(--leaf); }
   `);
