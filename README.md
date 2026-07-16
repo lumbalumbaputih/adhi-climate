@@ -20,7 +20,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**sea-level**](sea-level/): Sea-Level Rise at Fremantle (1897–2022) | Chronic physical risk | Complete |
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
 | [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1941–2026) | Acute physical risk | Complete |
-| [**high-water**](high-water/): Coastal Flood Hours at Fremantle (1984–2026) | Acute physical risk | Planned, see the [execution prompt](high-water/EXECUTION_PROMPT.md) |
+| [**high-water**](high-water/): Coastal Flood Hours at Fremantle (1984–2026) | Acute physical risk | Complete |
 
 The portfolio site (`index.html`) ties these together: each project card opens
 that project's own page (`projects/<id>.html`) with the headline findings, the
@@ -36,7 +36,8 @@ Emergency, Curtin University.
 
 The data is all public: NOAA NCEI and the Bureau of Meteorology for the
 weather and ocean records, plus NOAA OISST (marine heatwaves), AEMO's WEM data
-portal (grid generation), and the ABS historical agriculture collection (wheat
+portal (grid generation), the University of Hawaii Sea Level Center (hourly
+tide-gauge data), and the ABS historical agriculture collection (wheat
 yields). The statistics are written from scratch and tested against known
 values; see each
 project's `stats_utils.py` and `test_stats.py`. The two copies of
@@ -49,7 +50,10 @@ The code in this repository is released under the [MIT License](LICENSE). The
 committed cleaned datasets are derived from public sources: IBTrACS and ERSSTv5
 (NOAA NCEI, public domain as US government works), GHCN-Daily (NOAA NCEI,
 redistributing Bureau of Meteorology station observations), OISST v2.1 (NOAA
-NCEI / CoastWatch), the Marshall (2003) SAM index (British Antarctic Survey),
+NCEI / CoastWatch), UHSLC research-quality and fast-delivery hourly sea-level
+data (Caldwell, Merrifield & Thompson, University of Hawaii Sea Level Center,
+NOAA NCEI dataset doi:10.7289/V5T43R7N),
+the Marshall (2003) SAM index (British Antarctic Survey),
 NOAA PSL climate indices, ERA5 reanalysis (Copernicus/ECMWF, obtained via the
 Open-Meteo archive API), WEM Facility SCADA data (AEMO), fuel mappings from
 the OpenNEM WEM registry, historical crop statistics (Australian Bureau of
