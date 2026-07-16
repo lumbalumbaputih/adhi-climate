@@ -85,10 +85,23 @@
   --focus-ring:     var(--blue-400);
   --focus-ring-offset: var(--neutral-0);
 
-  --data-1: var(--blue-500);
-  --data-2: var(--green-500);
-  --data-3: var(--blue-300);
-  --data-4: var(--amber-500);
-  --data-5: var(--blue-800);
-  --data-6: var(--green-700);
+  /* ---------- Chart palette ----------
+     Validated with the data-viz colour checks (lightness band, chroma floor,
+     adjacent-pair colour-vision separation, contrast) against the light chart
+     surface (#fff) and the dark surface (#181E26). Dark overrides live in
+     portfolio.css. See tokens/CHART-COLOURS.md. Categorical slots are assigned
+     in a fixed order and never cycled. */
+  --chart-1: #2A78D6;   /* blue    */
+  --chart-2: #008300;   /* green   */
+  --chart-3: #E87BA4;   /* magenta */
+  --chart-4: #EDA100;   /* yellow  */
+  --chart-5: #1BAF7A;   /* aqua    */
+  --chart-6: #EB6834;   /* orange  */
+  --chart-pos: #2A78D6;                  /* above baseline / wetter / cooler */
+  --chart-neg: #EB6834;                  /* below baseline / drier / hotter  */
+  --chart-trend: var(--leaf);            /* OLS / reference trend annotation */
+  --chart-context: var(--neutral-400);   /* de-emphasised (grey) series      */
+  --chart-band: rgba(42, 120, 214, 0.14);/* confidence-interval fill         */
+  --chart-mark: var(--neutral-500);      /* event marker line                */
+  --chart-dot-ring: var(--surface-card); /* ring around the active point     */
 }

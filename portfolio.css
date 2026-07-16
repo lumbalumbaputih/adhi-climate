@@ -165,18 +165,18 @@ html { scroll-behavior: smooth; }
 .chart__line--draw { animation: chartDraw 1100ms var(--ease-out) both; }
 @keyframes chartDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 .chart__line--draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
-.chart__band { fill: var(--accent); opacity: 0.12; stroke: none; }
-.chart__trend { stroke: var(--leaf); stroke-width: 2; stroke-dasharray: 6 4; }
-.chart__step { stroke: var(--leaf); stroke-width: 2.5; }
+.chart__band { fill: var(--chart-band); stroke: none; }
+.chart__trend { stroke: var(--chart-trend); stroke-width: 2; stroke-dasharray: 6 4; }
+.chart__step { stroke: var(--chart-trend); stroke-width: 2.5; }
 .chart__guide { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 3 3; }
-.chart__dot { fill: var(--accent); stroke: #fff; stroke-width: 1.5; }
+.chart__dot { fill: var(--accent); stroke: var(--chart-dot-ring); stroke-width: 1.5; }
 .chart__bar { transition: filter var(--duration-fast) var(--ease-standard); }
 .chart__bar.is-hi { filter: brightness(1.12); }
 .chart__bar--draw { transform-box: fill-box; transform-origin: bottom; animation: chartBar 600ms var(--ease-out) both; }
 @keyframes chartBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 .chart__bar2 { transition: filter var(--duration-fast) var(--ease-standard); }
-.chart__bar2.is-pos { fill: #1FA9C7; }
-.chart__bar2.is-neg { fill: #FF5C39; }
+.chart__bar2.is-pos { fill: var(--chart-pos); }
+.chart__bar2.is-neg { fill: var(--chart-neg); }
 .chart__bar2.is-hi { filter: brightness(1.15); }
 .chart__pt { fill: var(--accent); opacity: 0.7; transition: r var(--duration-fast) var(--ease-standard); cursor: pointer; }
 .chart__pt.is-hi { fill: var(--leaf); opacity: 1; }
@@ -186,6 +186,25 @@ html { scroll-behavior: smooth; }
 .chart__legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
 .chart__legend span { display: inline-flex; align-items: center; gap: 6px; }
 .chart__legend .chart__legend-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+/* Line-style legend swatches, so a line chart can name its line, trend, mean
+   and band the same way a bar chart names its groups. */
+.chart__legend-ln { width: 16px; height: 0; border-top: 2.5px solid var(--accent); display: inline-block; }
+.chart__legend-ln--trend { border-top-style: dashed; border-top-color: var(--chart-trend); }
+.chart__legend-ln--step { border-top-color: var(--chart-trend); }
+.chart__legend-ln--mean { border-top-color: var(--text-strong); opacity: 0.65; }
+.chart__legend-band { width: 14px; height: 10px; border-radius: 3px; background: var(--chart-band); display: inline-block; }
+
+/* Event markers (a labelled vertical line at a named year) and reference lines
+   (a labelled horizontal threshold). A refline is dashed on purpose: dashing
+   legitimately reads as "threshold" here, unlike on a plain gridline. */
+.chart__mark { stroke: var(--chart-mark); stroke-width: 1; stroke-dasharray: 2 3; }
+.chart__mark-label { font-family: var(--font-mono); font-size: calc(9.5px * var(--ck, 1)); fill: var(--text-muted); }
+.chart__refline { stroke: var(--chart-mark); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.chart__refline-label { font-family: var(--font-mono); font-size: calc(9.5px * var(--ck, 1)); fill: var(--text-muted); }
+
+/* Keyboard focus: the charts are operable with arrow keys, so the focused
+   chart must show a ring. */
+.chart__svg:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
 .chart__tip-bg { fill: #1f2733; stroke: rgba(255,255,255,0.14); stroke-width: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3)); }
 .chart__tip-h { font-family: var(--font-mono); font-size: 11px; font-weight: 600; fill: #ffffff; }
 .chart__tip-t { font-family: var(--font-mono); font-size: 11px; fill: #b9c2cf; }
@@ -464,4 +483,17 @@ html { scroll-behavior: smooth; }
   --success-soft: rgba(52,215,149,0.16);
   --warning-soft: rgba(245,158,11,0.18);
   --danger-soft: rgba(229,72,77,0.18);
+
+  /* Chart palette, stepped for the dark surface (#181E26) and validated as a
+     set. Same six hues as light, re-stepped, not a separate palette. */
+  --chart-1: #3987E5;
+  --chart-2: #008300;
+  --chart-3: #D55181;
+  --chart-4: #C98500;
+  --chart-5: #199E70;
+  --chart-6: #D95926;
+  --chart-pos: #3987E5;
+  --chart-neg: #D95926;
+  --chart-context: var(--neutral-600);
+  --chart-band: rgba(57, 135, 229, 0.20);
 }
