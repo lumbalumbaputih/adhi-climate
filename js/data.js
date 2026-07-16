@@ -18,7 +18,7 @@
       availability: "Available for internships · Perth, WA or remote",
     },
     stats: [
-      { label: "Projects complete", value: "11", caption: "storms to safeguards" },
+      { label: "Projects complete", value: "12", caption: "storms to safeguards" },
       { label: "Longest record", value: "161", unit: "yrs", caption: "WA wheat yields, 1861–2022" },
       { label: "Facilities analysed", value: "175", caption: "WA power + Safeguard emitters" },
       { label: "Risk types covered", value: "4", caption: "AASB S2, all four quadrants" },
@@ -387,6 +387,69 @@
             title: "Choosing honesty over a bigger headline",
             found: "The recent rate, 5.1 mm a year, is dramatic and tempting to headline as acceleration. But the quadratic acceleration term is not statistically significant (p = 0.11): a real mid-century pause and strong El Niño and La Niña swings leave the curve unproven on this single gauge.",
             change: "Reported the unequivocal long-run rise and the far faster recent era as the finding, kept acceleration flagged as not yet proven, and stated openly that this is relative sea level with land motion not corrected for.",
+          },
+        ],
+      },
+      {
+        id: "fremantle-high-water",
+        title: "High Water at Fremantle",
+        year: "1984–2026",
+        status: "Complete",
+        category: ["Physical risk", "Climate data", "Data viz"],
+        icon: "waves",
+        meta: "5 charts · 42-year hourly record · self-fetching pipeline",
+        summary:
+          "The sea-level project showed the mean rising. This one counts what that does: the hours each year the water actually stands at levels that were rare in the 1980s.",
+        result: { value: "3×", unit: "", label: "more high-water hours" },
+        headline:
+          "Fremantle now spends almost three times as many hours a year at levels that were rare in the 1980s: 43 hours a year then, 125 now. Re-count the same hours with each year's mean removed and the increase vanishes. It is not stormier weather. It is the higher sea.",
+        body:
+          "A mean sea-level trend is an abstraction; nobody's wharf floods by an average. So I took the same Fremantle gauge the sea-level project used, switched from monthly means to the full hourly record (research-quality 1984 to 2021, extended to the present with the fast-delivery feed), fixed three benchmarks at the 99.0th, 99.5th and 99.9th percentiles of the first decade, and counted hours above them, year by year. The count nearly tripled. Then I asked the question that matters for attribution: what if each year had kept the baseline decade's mean level? Re-counted that way, the series is flat, no trend at all. The storms and tides have not changed; the platform they ride on has. For AASB S2 preparers with coastal assets this is the whole acute-risk mechanism in one dataset: every fixed asset is a fixed threshold, and a higher mean multiplies how often the sea clears it.",
+        findings: [
+          { value: "43 → 125", unit: "hrs/yr", label: "High water, then vs now", text: "Hours at or above 1350 mm (the 99.5th percentile of 1984-1993): about 43 a year in that baseline decade, 125 a year in 2013-2023. The trend is significant (Sen's slope +2.2 hours per year each year, Mann-Kendall p = 0.008)." },
+          { value: "p = 0.39", unit: "", label: "Storminess alone: no trend", text: "Re-count every year's hours with that year's mean anomaly removed and the series goes flat: roughly 21 to 30 hours a year across four decades. The entire increase came from the higher mean level, not from stronger storms or tides." },
+          { value: "+128", unit: "mm", label: "The baseline lifted", text: "The annual-mean level rose from about 717 mm (1984-1993) to 845 mm (2013-2023) on the station datum: long-run rise plus the La Niña highs of 2011 and 2021-2023. The annual maximum climbed at the same 5 mm/yr pace as the mean, exactly what a lifted baseline with unchanged storms looks like." },
+          { value: "r = 0.999", unit: "", label: "Checked against the sibling record", text: "Annual means computed from these hourly readings track the independent PSMSL monthly record (the sea-level project's data) almost perfectly over 37 shared years, with a constant datum offset and 3.7 mm of spread. The record's biggest hours land on documented storms: May 2003, June 2012, ex-TC Mangga in May 2020." },
+        ],
+        meaning:
+          "This is the acute half of coastal risk, quantified on Australia's benchmark tide gauge. Chronic rise (the sea-level project) tells you the direction; this project tells you the operational consequence: the hours per year a fixed level is exceeded, which is what a port apron, a substation slab or an access road actually experiences, and it multiplied by three while the underlying storminess stayed flat. Two honesty notes carry the disclosure. First, a gauge exceedance is a statistical benchmark, not a certified flood of anyone's property; mapping 1350 mm on this datum onto a given asset needs a local survey. Second, part of the recent lift is La Niña riding on the long-run rise, and the analysis reports both the raw counts assets experienced and the mean-adjusted counts that isolate the mechanism.",
+        resources: [
+          { label: "Read the full analysis", href: ghBlob("high-water/README.md"), icon: "file-text" },
+          { label: "Cleaned datasets (10 CSVs)", href: ghTree("high-water/data"), icon: "layers" },
+          { label: "All charts", href: ghTree("high-water/charts"), icon: "scan" },
+          { label: "View on GitHub", href: ghTree("high-water"), icon: "github" },
+        ],
+        dataset: {
+          caption: "High-water hours per year at Fremantle by decade (UHSLC hourly, station 175; benchmarks fixed on 1984-1993)",
+          columns: ["Decade", "Complete years", "Hours ≥ 1350 mm (raw)", "Same hours, mean anomaly removed"],
+          rows: [
+            ["1980s", "6", "50", "29"],
+            ["1990s", "9", "54", "29"],
+            ["2000s", "10", "74", "34"],
+            ["2010s", "10", "100", "21"],
+            ["2020s (to 2023)", "3", "263", "28"],
+          ],
+        },
+        vizKey: "highwater",
+        viz: [
+          { type: "line", key: "hours", title: "Hours at or above 1350 mm each year" },
+          { type: "line", key: "lift", title: "The extremes ride on the rising mean" },
+          { type: "bar", key: "decomp", title: "Same storms, higher sea: raw vs mean-adjusted", keys: [
+            { k: "raw", label: "What happened", color: "#1FA9C7" },
+            { k: "adj", label: "Mean anomaly removed", color: "#6B6259" },
+          ] },
+        ],
+        tags: [
+          "UHSLC hourly tide gauge",
+          "Three times the high-water hours",
+          "The mean did it, not the storms",
+        ],
+        updates: [
+          {
+            date: "16 Jul 2026",
+            title: "First published",
+            found: "Counting hourly exceedances above benchmarks fixed on the first decade of the record, Fremantle's high-water hours nearly tripled by 2013-2023, while the same count with each year's mean anomaly removed showed no trend at all: the increase is the higher mean level, not stormier weather.",
+            change: "Published the suite's second fully self-fetching pipeline (UHSLC research-quality hourly spliced with fast-delivery from 2022, flagged everywhere), with the full cleaned hourly record committed so every count can be recomputed from the repo alone, and validation against the sibling sea-level project's independent PSMSL record at r = 0.999.",
           },
         ],
       },

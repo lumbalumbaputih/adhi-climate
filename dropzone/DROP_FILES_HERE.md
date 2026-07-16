@@ -219,6 +219,31 @@ Then run, inside sea-level/:
     python3 build_dataset.py && python3 analysis.py && python3 viz.py
 
 ======================================================================
+PROJECT: high-water (Fremantle hourly extremes)   [COMPLETE: data is
+in; files below only needed to re-run from scratch]
+======================================================================
+
+Self-fetching: run, inside high-water/,
+    python3 build_dataset.py && python3 analysis.py && python3 viz.py
+which downloads both feeds below into dropzone/high-water/ (about 12 MB,
+cached) and proceeds. If uhslc.soest.hawaii.edu is unreachable (check
+with tools/check-data-access.sh), download them by hand instead:
+
+1. UHSLC research-quality hourly, Fremantle (station 175a)  [REQUIRED]
+----------------------------------------------------------------------
+https://uhslc.soest.hawaii.edu/data/csv/rqds/indian/hourly/h175a.csv
+Headerless CSV (year, month, day, hour, sea level in mm above station
+zero; missing = -32767), 1984 through 2021. Drop it as-is into
+    dropzone/high-water/
+
+2. UHSLC fast-delivery hourly, Fremantle (station 175)      [REQUIRED]
+----------------------------------------------------------------------
+https://uhslc.soest.hawaii.edu/data/csv/fast/hourly/h175.csv
+Same format, 1984 to the present; the pipeline uses it from 2022 on
+only. Drop it as-is into
+    dropzone/high-water/
+
+======================================================================
 PROJECT: wheat-yields (WA wheatbelt)   [COMPLETE: data is in;
 files below only needed to re-run from scratch]
 ======================================================================

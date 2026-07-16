@@ -1,0 +1,4 @@
+benchmark,pctl_of_baseline,level_mm,baseline_years,baseline_mean_mm,baseline_hours
+b1,99.0,1280,1984-1993,715.3,86687
+b2,99.5,1350,1984-1993,715.3,86687
+b3,99.9,1480,1984-1993,715.3,86687
