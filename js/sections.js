@@ -332,11 +332,15 @@
     if (spec.keys) data = Object.assign({}, data, {
       keys: spec.keys
     });
+    if (spec.series) data = Object.assign({}, data, {
+      series: spec.series
+    });
     const Comp = {
       line: AC.LineChart,
       bar: AC.BarChart,
       scatter: AC.ScatterChart,
-      heat: AC.HeatTable
+      heat: AC.HeatTable,
+      area: AC.AreaChart
     }[spec.type];
     return Comp ? React.createElement(Comp, {
       data,
@@ -817,7 +821,8 @@
     if (hasViz) p.viz.forEach(spec => cards.push({
       kind: "chart",
       title: spec.title,
-      spec
+      spec,
+      wide: spec.wide
     }));
     if (p.scoreboard) cards.push({
       kind: "table",

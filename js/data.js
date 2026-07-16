@@ -752,6 +752,16 @@
         },
         vizKey: "swis",
         viz: [
+          {
+            type: "area", key: "fuel_mix", title: "What powers the grid: the generation stack, 2007–2022", wide: true,
+            series: [
+              { k: "coal", label: "Coal", color: "var(--fuel-coal)" },
+              { k: "gas", label: "Gas", color: "var(--fuel-gas)" },
+              { k: "wind", label: "Wind", color: "var(--fuel-wind)" },
+              { k: "solar", label: "Solar", color: "var(--fuel-solar)" },
+              { k: "other", label: "Other", color: "var(--fuel-other)" },
+            ],
+          },
           { type: "line", key: "renewables", title: "Renewable share of SWIS utility generation" },
           { type: "line", key: "intensity", title: "Grid emissions intensity (t CO₂-e/MWh)" },
           {

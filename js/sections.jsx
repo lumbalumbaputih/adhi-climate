@@ -223,7 +223,8 @@
     if (!data) return null;
     if (spec.sub) data = Object.assign({}, data[spec.sub], { ylabel: data.ylabel });
     if (spec.keys) data = Object.assign({}, data, { keys: spec.keys });
-    const Comp = { line: AC.LineChart, bar: AC.BarChart, scatter: AC.ScatterChart, heat: AC.HeatTable }[spec.type];
+    if (spec.series) data = Object.assign({}, data, { series: spec.series });
+    const Comp = { line: AC.LineChart, bar: AC.BarChart, scatter: AC.ScatterChart, heat: AC.HeatTable, area: AC.AreaChart }[spec.type];
     return Comp ? React.createElement(Comp, { data, label: spec.title }) : null;
   }
 
@@ -454,7 +455,7 @@
     // Collect everything heavy into one ordered list of rail cards: charts
     // first, then any scoreboard / raw-data table.
     const cards = [];
-    if (hasViz) p.viz.forEach((spec) => cards.push({ kind: "chart", title: spec.title, spec }));
+    if (hasViz) p.viz.forEach((spec) => cards.push({ kind: "chart", title: spec.title, spec, wide: spec.wide }));
     if (p.scoreboard) cards.push({ kind: "table", title: "Disclosure scores, 0 to 4", data: p.scoreboard, caption: "Disclosure scores, 0 to 4", wide: true });
     if (p.dataset) cards.push({ kind: "table", title: p.dataset.caption, data: p.dataset, caption: p.dataset.caption, wide: true });
 
