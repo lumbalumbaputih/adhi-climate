@@ -601,6 +601,7 @@
         },
         vizKey: "mhw",
         viz: [
+          { type: "bubble", key: "events", title: "Every marine heatwave on record: when, how hot, how long", wide: true },
           { type: "line", key: "mhw_days", title: "Marine-heatwave days per year off Ningaloo" },
           { type: "line", key: "mean_sst", title: "Annual mean sea-surface temperature" },
           { type: "bar", key: "top_events", title: "The eight longest marine heatwaves on record (duration, days)" },
