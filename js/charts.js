@@ -832,5 +832,53 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, AreaChart, CalendarHeat, useChartScale };
+  /* ---------------------------------------------------------- BubbleTimeline */
+  /* Every detected event as a bubble: x is when it peaked, y its peak
+     intensity, the area its duration, the colour its ordered severity class
+     (an ordinal warm ramp, moderate -> strong, not two unrelated hues). A
+     size legend keys the area; a category legend keys the colour. Overlapping
+     bubbles carry a thin surface ring so they stay separable. */
+  function BubbleTimeline({ data, label }) {
+    const [hi, setHi] = useState(null);
+    const wrapRef = React.useRef(null);
+    const ck = useChartScale(wrapRef, W);
+    const pts = data.points, cats = data.cats, sizes = data.sizes;
+    const xvals = pts.map((p) => p.x);
+    const [x0, x1] = domain(xvals, 0.02), [y0, y1] = domain(pts.map((p) => p.y), 0.12);
+    const xs = (v) => M.l + (v - x0) / (x1 - x0) * IW;
+    const ys = (v) => M.t + IH - (v - y0) / (y1 - y0) * IH;
+    const dmax = Math.max.apply(null, pts.map((p) => p.d));
+    const rad = (d) => 3 + Math.sqrt(d / dmax) * 15;   // area-proportional
+    const order = pts.map((_, i) => i).sort((a, b) => rad(pts[b].d) - rad(pts[a].d)); // big first, small on top
+    const hp = hi != null ? pts[hi] : null;
+
+    const sizeLegend = React.createElement("span", { className: "bubl__sizes" },
+      sizes.map((s) => React.createElement("span", { key: s, className: "bubl__size" },
+        React.createElement("svg", { width: 2 * rad(s) + 4, height: 2 * rad(s) + 4, viewBox: `0 0 ${2 * rad(s) + 4} ${2 * rad(s) + 4}` },
+          React.createElement("circle", { cx: rad(s) + 2, cy: rad(s) + 2, r: rad(s), className: "bubl__size-mark" })),
+        React.createElement("span", null, s + " d"))));
+    const legend = React.createElement("div", { className: "chart__legend bubl__legend" },
+      cats.map((c, i) => React.createElement("span", { key: i },
+        React.createElement("span", { className: "chart__legend-sw", style: { background: c.color } }), c.label)),
+      sizeLegend);
+
+    return React.createElement(Svg, { label, refEl: wrapRef, k: ck, after: legend, onKeyDown: arrowKeys(pts.length, hi, setHi) },
+      React.createElement(Axes, { xTicks: ticks(x0, x1, 5).filter((t) => t >= Math.min.apply(null, xvals) - 1 && t <= Math.max.apply(null, xvals) + 1), yTicks: ticks(y0, y1, 4), xs, ys, xfmt: (t) => Math.round(t), yfmt: (t) => round(t, 1), ylabel: data.ylabel }),
+      order.map((i) => {
+        const p = pts[i], on = hi === i;
+        return React.createElement("circle", {
+          key: i, cx: xs(p.x), cy: ys(p.y), r: rad(p.d) * (on ? 1.14 : 1),
+          className: "bubl__dot" + (on ? " is-hi" : hi != null ? " is-dim" : ""),
+          style: { fill: cats[p.c].color },
+          onMouseEnter: () => setHi(i), onMouseLeave: () => setHi(null), onClick: () => setHi(i),
+        });
+      }),
+      hp && React.createElement(Tip, {
+        x: xs(hp.x), y: ys(hp.y) - rad(hp.d), k: ck,
+        lines: [hp.label, fmt(hp.y, " °C") + " peak", fmt(hp.d, data.unit) + " · " + cats[hp.c].label],
+      })
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, AreaChart, CalendarHeat, BubbleTimeline, useChartScale };
 })();

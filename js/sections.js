@@ -341,7 +341,8 @@
       scatter: AC.ScatterChart,
       heat: AC.HeatTable,
       area: AC.AreaChart,
-      calheat: AC.CalendarHeat
+      calheat: AC.CalendarHeat,
+      bubble: AC.BubbleTimeline
     }[spec.type];
     return Comp ? React.createElement(Comp, {
       data,
