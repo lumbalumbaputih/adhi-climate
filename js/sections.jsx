@@ -224,7 +224,7 @@
     if (spec.sub) data = Object.assign({}, data[spec.sub], { ylabel: data.ylabel });
     if (spec.keys) data = Object.assign({}, data, { keys: spec.keys });
     if (spec.series) data = Object.assign({}, data, { series: spec.series });
-    const Comp = { line: AC.LineChart, bar: AC.BarChart, scatter: AC.ScatterChart, heat: AC.HeatTable, area: AC.AreaChart }[spec.type];
+    const Comp = { line: AC.LineChart, bar: AC.BarChart, scatter: AC.ScatterChart, heat: AC.HeatTable, area: AC.AreaChart, calheat: AC.CalendarHeat }[spec.type];
     return Comp ? React.createElement(Comp, { data, label: spec.title }) : null;
   }
 

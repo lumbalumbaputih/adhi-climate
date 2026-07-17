@@ -784,5 +784,53 @@
     );
   }
 
-  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, AreaChart, useChartScale };
+  /* ----------------------------------------------------------- CalendarHeat */
+  /* A months x years calendar heatmap on a single-hue sequential ramp (more
+     hours = deeper blue). The ramp is opacity over a fixed blue, so it reads
+     the same way on the light and the dark card: pale/near-surface at zero,
+     saturated at the maximum. A hovered cell loads its month, year and value
+     into the readout line below; the colourbar names the two ends. */
+  const MONTH_FULL = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function calHeatColor(v, max) {
+    if (v == null) return "var(--bg-muted)";
+    const t = Math.pow(Math.max(0, v) / max, 0.72);   // gamma lifts the low end so faint months still read
+    return "rgba(42,120,214," + (0.05 + 0.92 * t).toFixed(3) + ")";
+  }
+  function CalendarHeat({ data, label }) {
+    const [hov, setHov] = useState(null);
+    const years = data.years, months = data.monthLabels, matrix = data.matrix, max = data.max;
+    const cols = "2.1rem repeat(" + years.length + ", minmax(13px, 1fr))";
+    const hv = hov ? { m: hov.mi, y: hov.yi, v: matrix[hov.mi][hov.yi] } : null;
+    return React.createElement("div", { className: "calheat", role: "group", "aria-label": label },
+      React.createElement("div", { className: "calheat__scroll" },
+        React.createElement("div", { className: "calheat__grid", style: { gridTemplateColumns: cols } },
+          React.createElement("div", { className: "calheat__corner" }),
+          years.map((y) => React.createElement("div", { key: "y" + y, className: "calheat__colh" }, y % 5 === 0 ? String(y) : "")),
+          months.map((mlab, mi) => [
+            React.createElement("div", { key: "m" + mi, className: "calheat__rowh" }, mlab),
+            matrix[mi].map((v, yi) => React.createElement("div", {
+              key: mi + "-" + yi,
+              className: "calheat__cell" + (hov && hov.mi === mi && hov.yi === yi ? " is-hi" : ""),
+              style: { background: calHeatColor(v, max) },
+              title: MONTH_FULL[mi] + " " + years[yi] + ": " + v + (data.unit || ""),
+              onMouseEnter: () => setHov({ mi, yi }), onMouseLeave: () => setHov(null),
+            })),
+          ])
+        )
+      ),
+      React.createElement("div", { className: "calheat__readout" },
+        hv ? React.createElement(React.Fragment, null,
+          React.createElement("strong", null, MONTH_FULL[hv.m] + " " + years[hv.y]),
+          " · " + fmt(hv.v) + " hours at or above the benchmark")
+          : React.createElement("span", { className: "calheat__hint" }, "Hover a cell for its month, year and hours over the benchmark. Deeper blue means more hours of high water.")
+      ),
+      React.createElement("div", { className: "calheat__legend" },
+        React.createElement("span", { className: "calheat__legend-l" }, "0"),
+        React.createElement("span", { className: "calheat__ramp" }),
+        React.createElement("span", { className: "calheat__legend-l" }, fmt(max) + (data.unit || ""))
+      )
+    );
+  }
+
+  window.AdhiCharts = { LineChart, BarChart, ScatterChart, HeatTable, MapChart, RainMapChart, RadarChart, DotCompare, ScoreHeat, AreaChart, CalendarHeat, useChartScale };
 })();

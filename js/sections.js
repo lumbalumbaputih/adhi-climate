@@ -340,7 +340,8 @@
       bar: AC.BarChart,
       scatter: AC.ScatterChart,
       heat: AC.HeatTable,
-      area: AC.AreaChart
+      area: AC.AreaChart,
+      calheat: AC.CalendarHeat
     }[spec.type];
     return Comp ? React.createElement(Comp, {
       data,
