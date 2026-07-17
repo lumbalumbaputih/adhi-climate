@@ -432,6 +432,7 @@
         },
         vizKey: "highwater",
         viz: [
+          { type: "calheat", key: "flood_calendar", title: "When the high water comes: hours over the benchmark, month by month", wide: true },
           { type: "line", key: "hours", title: "Hours at or above 1350 mm each year" },
           { type: "line", key: "lift", title: "The extremes ride on the rising mean" },
           { type: "bar", key: "decomp", title: "Same storms, higher sea: raw vs mean-adjusted", keys: [
