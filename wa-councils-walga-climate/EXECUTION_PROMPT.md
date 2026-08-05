@@ -26,15 +26,18 @@ literature has not yet asked of it, using methods (systematic review plus
 document analysis) that are standard for a coursework-length research
 project and realistic inside a four-month window.
 
-**Population in scope.** WA local governments that are signatories to
-WALGA's Western Australian Local Government Declaration on Climate Change.
-As of this scoping search (5 August 2026), WALGA's own site states 62 local
-governments have signed, representing over 87 per cent of WA's population
-(WALGA, n.d.). That aggregate figure is a starting point only: it does not
-give a per-council signing date, which Objectives 2 and 3 need, so the
-signatory list and dates must be rebuilt from primary sources (council
-agenda items, minutes and WALGA State Council records), not quoted from the
-aggregate count.
+**Population in scope.** WA local governments, split into two groups for
+Objectives 2 and 3: those confirmed as signatories to WALGA's Western
+Australian Local Government Declaration on Climate Change, and those with
+no public confirmation of signatory status found. As of this scoping search
+(5 August 2026), WALGA's own site states 62 local governments have signed,
+representing over 87 per cent of WA's population (WALGA, n.d.). That
+aggregate figure is a starting point only: it does not name which councils,
+so the signatory list must be rebuilt council by council from each
+council's own public statements (`data/signatory-sample.csv`), not quoted
+from the aggregate count. Per-council signing dates, originally needed for
+a before/after design, are recorded where found but are no longer required
+by the design; see "Design pivot" below.
 
 **Repo.** Umbrella repo `adhi-climate`, subfolder `wa-councils-walga-climate/`.
 
@@ -112,6 +115,46 @@ WALGA's instrument.
 
 ---
 
+## Design pivot: from before/after to signatories versus non-signatories
+
+Objectives 2 and 3 originally called for a within-council before/after
+comparison (Objective 2) plus a cross-council comparison group over the
+same period (Objective 3), both keyed to each council's confirmed signing
+date. Step 4 (`data/signatory-sample.csv`, `data/signatory-search-log.md`)
+ran that sample-building step for real, across roughly 18 WA councils, and
+found a structural wall: signatory status is usually easy to confirm from
+a council's own page, but a signing date almost never is. Of six confirmed
+signatories found, only one (Shire of Harvey) had even a medium-confidence
+date, corroborated across two references but not read from the primary
+minutes document itself. No confirmed non-signatory was found at all.
+Neither Objective 2's within-council before/after design nor Objective 3's
+comparison-group design, as originally written, can run on a sample that
+thin.
+
+Ris confirmed the pivot on 5 August 2026: drop the before/after, temporal
+claim, and keep the comparison structure with the axis that is actually
+answerable from public sources, confirmed signatory status versus no
+public confirmation of signatory status, applied to each council's
+**current** climate-related policy documents rather than a before-and-after
+pair. Objectives 2 and 3 below are written to reflect that pivot; the
+original before/after wording is preserved in git history
+(`EXECUTION_PROMPT.md` as of commit `2b71a7a`) rather than deleted, since
+the reasoning for changing it is itself part of the project's record.
+
+The cost of the pivot is explicit: this design can show that signatory and
+non-confirmed-signatory councils' current policies differ (or do not), not
+that signing *caused* a difference, since there is no longer a before
+state to compare against. That is a real downgrade from the original
+research question, not a free substitution, and the write-up must say so
+plainly rather than let the comparison read as causal. It also mirrors the
+closest methodological precedent in the literature review: Hicks, Davidson,
+Lau et al. (2025, S4 in `slr/included-studies.csv`) compare declared
+against non-declared Victorian councils' current policy text, not a
+before/after pair for the same councils, so there is precedent for treating
+this as a legitimate design rather than a fallback of last resort.
+
+---
+
 ## Division of labour
 
 - **Kai**: runs the SLR search and screening, builds the document corpus and
@@ -126,14 +169,19 @@ WALGA's instrument.
 
 ## Read before starting (the credibility tests)
 
-1. **Correlation is not causation.** A council's climate policy can change
-   for reasons unconnected to signing the Declaration: a change of council
-   after an election, a new corporate business plan cycle, WALGA's own
-   Sector Climate Change Adaptation Plan template, state government funding
-   rounds, or simple staff turnover. Objective 3's comparison group exists
-   specifically to guard against reading a state-wide trend as a
-   Declaration effect. Say plainly in the write-up what the design can and
-   cannot establish.
+1. **Correlation is not causation, and this design cannot even show
+   temporal order.** Since the pivot to a cross-sectional design (see
+   "Design pivot" above), a difference between signatory and
+   non-confirmed-signatory councils' current policy content shows an
+   association at one point in time, nothing more. It cannot show the
+   policy content changed after signing, only that it currently looks
+   different. A council's climate policy can differ for reasons unconnected
+   to signing the Declaration entirely: council size and resourcing, an
+   election result, WALGA's own Sector Climate Change Adaptation Plan
+   template, state government funding rounds, or simple staff turnover.
+   Objective 3's comparison group exists to show whether signatories differ
+   from non-confirmed-signatories at all, not to isolate why. Say plainly
+   in the write-up what the design can and cannot establish.
 
 2. **A Declaration is not an emergency.** Never import an emergency-
    declaration threshold (for example, "disrupts the status quo") as the
@@ -154,12 +202,13 @@ WALGA's instrument.
    documents needs a note confirming the corpus was searched, not just
    skimmed.
 
-5. **Track signing dates from primary sources.** WALGA's aggregate
-   signatory count (62 councils, 87 per cent of WA's population, as read on
-   5 August 2026) will have moved by the time this project runs. Build the
-   sample's per-council signing dates from council agenda items, minutes or
-   direct confirmation with WALGA, and record the date each figure was
-   retrieved.
+5. **"Not confirmed as signatory" is not "confirmed non-signatory."**
+   Objective 3's comparison group is built from councils where no public
+   statement of signatory status was found. That is absence of evidence,
+   not evidence of absence: some of those councils may in fact be
+   signatories whose own web presence simply does not say so. State this
+   plainly wherever the comparison group is used, and do not let "not
+   confirmed as signatory" quietly read as "non-signatory" in the write-up.
 
 6. **Objective 4 needs ethics clearance before any interview is booked.**
    Interviews with council staff are human research and require Curtin HREC
@@ -185,17 +234,20 @@ the claim that no existing study addresses WALGA's Declaration specifically.
 Output an adapted coding framework for Objectives 2 and 3, with every
 adaptation from the source frameworks stated and justified.
 
-**Objective 2: Document analysis, arm 1 (within-council, before and after).**
-For a sample of WALGA-Declaration signatory councils, apply the Objective 1
-coding framework to each council's planning and policy documents from before
-and after its signing date, to test whether measurable change in climate
-policy content follows the signing.
+**Objective 2: Document analysis, arm 1 (confirmed signatories, current
+state).** For a sample of WA councils confirmed as WALGA Declaration
+signatories, apply the Objective 1 coding framework to each council's
+current planning and policy documents (strategic community plan, climate
+or environment strategy, annual report), to establish what their climate
+policy content actually looks like right now.
 
-**Objective 3: Document analysis, arm 2 (across councils).** Apply the same
-coding framework to a comparison group, non-signatory councils, or
-early-signing versus late-signing councils, over the matching period, to
-check whether any change found in Objective 2 is distinct to signatories or
-reflects a wider WA local-government trend.
+**Objective 3: Document analysis, arm 2 (comparison group, current state).**
+Apply the same coding framework to a comparison group of WA councils with
+no public confirmation of signatory status, over the same current
+documents, to test whether confirmed signatories' policy content differs
+from the comparison group's. As of the pivot recorded above, this
+comparison is cross-sectional (one point in time), not a before/after test,
+so a difference found here shows association, not that signing caused it.
 
 **Objective 4 (optional, first cut only): Interviews.** Semi-structured
 interviews with council officers involved in the decision to sign or in
@@ -216,15 +268,23 @@ which are the project's core evidence base.
   government policy change after a climate-emergency or climate-declaration
   instrument, and what do they assume about the instrument's strength that
   does not hold for WALGA's Declaration?
-- RQ2. Within WA councils that have signed WALGA's Declaration, does their
-  climate-related policy content change measurably between the period before
-  and after signing?
-- RQ3. Where change is found, does it resemble the outcomes reported for
-  formal emergency declarations in the literature (Bush and Doyon 2025;
+- RQ2. Do WA councils confirmed as WALGA Declaration signatories show more
+  developed climate-related policy content, scored against the adapted
+  coding framework, in their current planning documents than WA councils
+  with no public confirmation of signatory status?
+- RQ3. Where a difference is found, does it resemble the outcomes reported
+  for formal emergency declarations in the literature (Bush and Doyon 2025;
   Greenfield, Moloney and Granberg 2022), or is it smaller or different in
   kind, consistent with a weaker instrument?
-- RQ4. Is any change specific to signatory councils, or does it also appear
-  in non-signatory or later-signing councils over the same period?
+- RQ4. How much does policy content vary within the confirmed-signatory
+  group itself, and does any of that variation track plausible confounds
+  (council size, region, metropolitan versus regional) rather than
+  signatory status?
+
+RQ2 to RQ4 were originally framed as a before/after test (see "Design
+pivot" above); they are stated here in their current, cross-sectional
+form. The original wording is preserved in git history rather than
+deleted.
 
 ---
 
@@ -235,10 +295,11 @@ which are the project's core evidence base.
 | 1 | Register the SLR search protocol: databases, search strings, inclusion and exclusion criteria | 1 | `slr/search-protocol.md` |
 | 2 | Run the search, screen records, log the PRISMA-style flow | 1 | `slr/prisma-log.csv`, `slr/included-studies.csv` |
 | 3 | Extract and compare frameworks from included studies; adapt a coding scheme for a non-emergency declaration | 1 | `slr/framework-synthesis.md`, `coding-framework.md` |
-| 4 | Rebuild the signatory sample: confirm councils, signing dates and sources | 2, 3 | `data/signatory-sample.csv` |
-| 5 | Build the document corpus per sampled council (before and after signing, plus comparison group) | 2, 3 | `data/source-library.csv`, `data/raw/` (gitignored) |
-| 6 | Code the within-council before/after corpus against the adapted framework | 2 | `data/coding-matrix-within.csv` |
-| 7 | Code the comparison-group corpus over the same period | 3 | `data/coding-matrix-comparison.csv` |
+| 4 | Rebuild the signatory sample: confirm councils, status and sources | 2, 3 | `data/signatory-sample.csv`, `data/signatory-search-log.md` |
+| 4b | Pivot design: drop the before/after comparison, keep signatories versus non-confirmed-signatories, current state (confirmed by Ris, 5 Aug 2026) | 2, 3 | this file, "Design pivot" |
+| 5 | Build the document corpus: current planning documents for the confirmed-signatory sample and the comparison sample | 2, 3 | `data/source-library.csv`, `data/raw/` (gitignored) |
+| 6 | Code the confirmed-signatory corpus against the adapted framework | 2 | `data/coding-matrix-signatories.csv` |
+| 7 | Code the comparison-group corpus and compare against the signatory group | 3 | `data/coding-matrix-comparison.csv` |
 | 8 | Synthesise findings against RQ1 to RQ4; write the plain-English report | 1 to 3 | `README.md` |
 | 9 | (If scope allows) Draft Objective 4 interview protocol, seek HREC clearance, run a first cut of interviews | 4 | `interviews/protocol.md`, `interviews/notes/` (gitignored, de-identified summaries only) |
 
@@ -248,9 +309,9 @@ which are the project's core evidence base.
 
 | Month | Focus |
 |-------|-------|
-| 1 | Objective 1: search protocol, screening, framework synthesis, adapted coding scheme. Rebuild the signatory sample and confirm per-council signing dates. |
-| 2 | Objective 2: build the document corpus for the within-council sample; begin coding. |
-| 3 | Finish Objective 2 coding; Objective 3: build and code the comparison-group corpus. |
+| 1 | Objective 1: search protocol, screening, framework synthesis, adapted coding scheme. Rebuild the signatory sample; pivot the design once the sample-building result is in (see "Design pivot"). |
+| 2 | Objective 2: build and code the document corpus for the confirmed-signatory sample. |
+| 3 | Objective 3: build and code the document corpus for the comparison group; run the signatory-versus-comparison analysis. |
 | 4 | Synthesis and write-up against RQ1 to RQ4. If time and ethics clearance allow, draft and run a first cut of Objective 4 interviews; otherwise record it as future work. |
 
 ---
@@ -263,9 +324,9 @@ which are the project's core evidence base.
 | PRISMA-style log | `slr/prisma-log.csv`, `slr/included-studies.csv` | Records found, screened, excluded (with reason), included |
 | Framework synthesis | `slr/framework-synthesis.md` | What each included study's framework assumes about the strength of the instrument studied, and what must change to apply it to WALGA's Declaration |
 | Adapted coding framework | `coding-framework.md` | The scheme applied in Objectives 2 and 3, with every adaptation from source frameworks stated and justified |
-| Signatory sample | `data/signatory-sample.csv` | Council, signing date, source, date retrieved, sample arm (within-council or comparison) |
+| Signatory sample | `data/signatory-sample.csv`, `data/signatory-search-log.md` | Council, signatory status, signing date where found (not required by the design), source, date retrieved, confidence |
 | Source library | `data/source-library.csv` | Provenance for every document coded: council, document type, title, date, url, date retrieved |
-| Coding matrices | `data/coding-matrix-within.csv`, `data/coding-matrix-comparison.csv` | One row per council per document per coding item, with evidence (document, page or section) |
+| Coding matrices | `data/coding-matrix-signatories.csv`, `data/coding-matrix-comparison.csv` | One row per council per document per coding item, with evidence (document, page or section) |
 | Written summary | `README.md` | Plain-English: question, method, findings against RQ1 to RQ4, limitations, how to reproduce |
 | Interview materials (if Objective 4 proceeds) | `interviews/protocol.md`, de-identified summaries only | HREC-cleared protocol; no raw recordings or identifying notes committed to the repo |
 
@@ -287,8 +348,9 @@ adhi-climate/
     ├── data/
     │   ├── raw/                   # gitignored: downloaded council documents
     │   ├── signatory-sample.csv
+    │   ├── signatory-search-log.md
     │   ├── source-library.csv
-    │   ├── coding-matrix-within.csv
+    │   ├── coding-matrix-signatories.csv
     │   └── coding-matrix-comparison.csv
     └── interviews/                # only if Objective 4 proceeds
         ├── protocol.md
@@ -304,7 +366,7 @@ adhi-climate/
 | Writing style | Chicago 17th author-date for all citations. IELTS 6.5 to 7 reading level: clear, structured, hedged. No em dashes. No double-hyphens. Cohesive paragraphs in the README and synthesis documents; tables and short lists are fine for protocols and matrices |
 | Evidence | Every policy-content claim cited to a document, date and page or section; never fabricate quotes, page numbers, or document titles |
 | Instrument honesty | Never treat the Declaration as an emergency declaration; state explicitly, every time a source framework is used, how it was adapted |
-| Causal honesty | State plainly what the before/after and comparison-group design can and cannot establish about causation |
+| Causal honesty | The design is cross-sectional (current state only, since the "Design pivot"). State plainly that it can show an association between signatory status and policy content, not that signing caused any difference |
 | Ethics | Objective 4 requires Curtin HREC clearance (or confirmed exemption) before any council officer is contacted; no identifying interview material committed to the repo |
 | Scope discipline | Objectives 1 to 3 are the four-month deliverable. Objective 4 is optional and must not compress the document-analysis arms |
 
@@ -313,16 +375,24 @@ adhi-climate/
 ## Limitations to state upfront
 
 The signatory count and population share quoted from WALGA's site are a
-snapshot (5 August 2026) and will move; the sample used in Objectives 2 and
-3 must be pinned to confirmed signing dates, not the aggregate figure. The
-"no existing study addresses WALGA's Declaration" claim is provisional until
-Objective 1's documented search confirms it. A before/after document
-comparison, even with a comparison group, cannot fully rule out confounds
-specific to individual councils (a change of mayor, an unrelated funding
-grant); the write-up should flag where a finding could plausibly have
-another cause. Coding council planning documents is an interpretive task;
-a second-pass review (Ris) before any finding is locked, in the same spirit
-as the two-pass scoring used in the AASB S2 review, keeps that honest.
+snapshot (5 August 2026) and will move; the samples used in Objectives 2
+and 3 are pinned to individually confirmed signatory statements
+(`data/signatory-sample.csv`), not the aggregate figure. The "no existing
+study addresses WALGA's Declaration" claim is provisional until Objective
+1's documented search confirms it. The comparison-group design (see "Design
+pivot") is cross-sectional: it can show that confirmed signatories' and
+non-confirmed-signatories' current policy content differs, or does not, but
+cannot show that signing caused any difference, since there is no before
+state in the design to compare against. It also cannot fully rule out
+confounds between the two groups (council size, resourcing, region); the
+write-up should flag where a finding could plausibly have another cause.
+The comparison group itself is "no public confirmation of signatory status
+found," not a verified list of non-signatories, so a genuine signatory
+could be sitting inside the comparison group undetected, which would work
+against finding a real difference, not for one. Coding council planning
+documents is an interpretive task; a second-pass review (Ris) before any
+finding is locked, in the same spirit as the two-pass scoring used in the
+AASB S2 review, keeps that honest.
 
 ---
 
@@ -349,13 +419,18 @@ https://walga.asn.au/policy-and-advocacy/our-policy-areas/environment/climate-ch
 
 ## Session start instruction
 
-Start with **Step 1 of Objective 1**. Do not sample or code any council
-document yet. First draft the SLR search protocol (databases, search
-strings, inclusion and exclusion criteria) and run it, then show the
-PRISMA-style flow and the list of included studies, with the "no existing
-study on WALGA's Declaration" claim either confirmed or corrected. Pause for
-Ris to confirm the included-studies list and the adapted coding framework
-before any council document is gathered or coded. Garbage in, garbage out:
-the whole comparison in Objectives 2 and 3 rests on a coding framework
-that has been honestly adapted, not borrowed wholesale from a literature
-built for a stronger instrument.
+Objective 1 (Steps 1 to 3) and Step 4 are done: the SLR, the adapted
+coding framework, the signatory search, and the design pivot are all
+recorded above and in `slr/`, `coding-framework.md` and `data/`. Continue
+from **Step 5**: build the document corpus (current strategic community
+plan, climate or environment strategy, and annual report, where each
+exists) for the confirmed-signatory sample in `data/signatory-sample.csv`,
+log it in `data/source-library.csv`, then do the same for a comparison
+sample of councils with no public confirmation of signatory status. Code
+both against `coding-framework.md`'s items into
+`data/coding-matrix-signatories.csv` and `data/coding-matrix-comparison.csv`,
+citing document, date and page or section for every non-zero score. Given
+this project's real time and tool constraints, treat the first sample built
+in one sitting as a labelled pilot tranche of Objectives 2 and 3, not the
+full four-month sample, and say so plainly in `README.md` rather than
+implying completeness a small sample cannot support.

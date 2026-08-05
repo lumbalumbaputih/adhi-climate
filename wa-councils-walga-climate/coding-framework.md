@@ -49,30 +49,40 @@ checkable). P10 to P12 are recorded as short descriptive codes, not scored
 on the 0 to 2 scale, since they describe document form and context rather
 than policy substance.
 
-## Applying the framework across Objectives 2 and 3
+## Applying the framework across Objectives 2 and 3 (updated after the design pivot)
 
-**Objective 2 (within-council, before and after).** For each sampled
-signatory council, code the most recent planning document set from before
-its confirmed signing date and the most recent set from after. A change in
-any P1 to P9 score between the two periods is the unit of evidence for
-RQ2. P11 and P12 are read for interpretive context alongside the score
-change, not folded into it.
+`EXECUTION_PROMPT.md`'s "Design pivot" section records why this changed:
+Step 4 found signing dates almost never publicly available, so the
+before/after application below was replaced with a cross-sectional one.
+The coding items themselves (P1 to P12) did not need to change, since
+none of them depend on having two time points; only how they are applied
+did.
 
-**Objective 3 (across councils).** Code the comparison group's documents
-over the matching period using the same items. A change pattern that
-appears in both signatory and comparison councils over the same period is
-evidence of a state-wide or diffusion-driven change (Schulze 2024's
-channels, S8), not a Declaration effect, and should be reported as such
-rather than credited to signing.
+**Objective 2 (confirmed signatories, current state).** For each council in
+`data/signatory-sample.csv` confirmed as a WALGA Declaration signatory,
+code its current planning document set (strategic community plan, climate
+or environment strategy, annual report, whichever exist) against P1 to
+P12. There is no before state to compare against; the score itself, not a
+change in score, is the unit of evidence for RQ2.
+
+**Objective 3 (comparison group, current state).** Code the same document
+types for a comparison group of councils with no public confirmation of
+signatory status, using the same items. Compare the two groups' scores.
+Following credibility point 5 in `EXECUTION_PROMPT.md`, report this
+group as "not confirmed as signatory," never as "non-signatory," since
+absence of a public statement is not proof of non-signing.
 
 ## What this framework cannot settle
 
-Even with a comparison group, a score change following a council's signing
-date is an association, not a proven cause. P11 exists specifically so
-that, where a document trail names another plausible driver (a funding
-round, an election, a new corporate plan cycle), that alternative
-explanation is recorded next to the finding rather than left for a reader
-to guess at. This mirrors the causal-honesty rule in `EXECUTION_PROMPT.md`.
+Since the pivot, a score difference between the confirmed-signatory group
+and the comparison group is an association at one point in time, not a
+proven cause, and not even proof of a before/after change, since there is
+no before state in the design at all. P11 exists specifically so that,
+where a document trail names another plausible driver of a council's
+policy content (a funding round, an election, a new corporate plan cycle),
+that alternative explanation is recorded next to the finding rather than
+left for a reader to guess at. This mirrors the causal-honesty rule in
+`EXECUTION_PROMPT.md`.
 
 ## References
 
