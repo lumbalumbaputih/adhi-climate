@@ -1,0 +1,49 @@
+council,item_id,item_desc,score,evidence,confidence
+City of Swan,P1,Named target with baseline and date,0,"Page lists nine general sustainability topics with no named targets, baselines or dates",confirmed absent in this excerpt
+City of Swan,P2,Named responsible person or committee,0,Not present in this excerpt,confirmed absent in this excerpt
+City of Swan,P3,Budget or resourcing commitment,0,Not present in this excerpt,confirmed absent in this excerpt
+City of Swan,P4,Reporting or review cadence,0,Not present in this excerpt,confirmed absent in this excerpt
+City of Swan,P5,Mitigation and adaptation both addressed,0,"Page lists general topics (water conservation, energy efficiency, biodiversity) without a mitigation or adaptation framing",confirmed absent in this excerpt
+City of Swan,P6,Cross-council collaboration,0,Not present in this excerpt,confirmed absent in this excerpt
+City of Swan,P7,First Peoples acknowledgement,1,"'The City of Swan acknowledges the Traditional Custodians of this region, the Whadjuk people of the Noongar Nation'","partial; generic, not tied to climate planning"
+City of Swan,P8,Justice or equity content,0,Not present in this excerpt,confirmed absent in this excerpt
+City of Swan,P9,Biodiversity or natural-environment link,1,"'Wildlife/biodiversity' listed as one of nine general sustainability focus areas","partial; general sustainability page, not a climate strategy"
+City of Swan,P10,Document form,none found,"This is a general sustainability directory page, not a dedicated climate or environment strategy",descriptive
+City of Swan,P11,Stated purpose or driver,unclear,Not evidenced in this excerpt,interpretive context
+City of Swan,P12,Reference to which WALGA instrument,none found,"No mention of WALGA's Declaration in this excerpt; the City has separately been the target of a public petition to declare a climate emergency, a different instrument again",not confirmed as signatory
+City of Joondalup,P1,Named target with baseline and date,0,"Page references a 'Climate Change Plan 2025-2035' but no quantified target is given in this excerpt",not found in this excerpt; full plan not directly read
+City of Joondalup,P2,Named responsible person or committee,0,Not identified in this excerpt,not found in this excerpt
+City of Joondalup,P3,Budget or resourcing commitment,0,Not stated in this excerpt,not found in this excerpt
+City of Joondalup,P4,Reporting or review cadence,0,Not specified in this excerpt,not found in this excerpt
+City of Joondalup,P5,Mitigation and adaptation both addressed,2,"'Responding effectively to climate change requires both reducing energy use and greenhouse gas emissions (mitigation) and being ready to adapt to climate change impacts as they occur (adaptation)'",confirmed present
+City of Joondalup,P6,Cross-council collaboration,2,"Joined the Cities Power Partnership in 2022, described as collaborating with '180 other local governments'; also joined WALGA's Power Purchase Agreement to buy renewable energy",confirmed present
+City of Joondalup,P7,First Peoples acknowledgement,1,"Acknowledgement of the 'Whadjuk people of the Noongar nation' present","partial; generic, not tied to climate planning"
+City of Joondalup,P8,Justice or equity content,0,Not identified in this excerpt,not found in this excerpt
+City of Joondalup,P9,Biodiversity or natural-environment link,0,"Page states no direct biodiversity link; related pages cover gardening and transport, not biodiversity specifically",confirmed absent in this excerpt
+City of Joondalup,P10,Document form,standalone,"Dedicated 'Climate Change Plan 2025-2035'; the City adopted its first Climate Change Strategy in 2014, described as internationally recognised as an early mover",descriptive
+City of Joondalup,P11,Stated purpose or driver,early-mover leadership,"'Recognised internationally as one of the first local governments to adopt a Climate Change Strategy' (2016); suggests a reputational or leadership driver predating and independent of WALGA's Declaration",interpretive context
+City of Joondalup,P12,Reference to which WALGA instrument,none found; WALGA membership for energy purchasing only,"Page explicitly 'not stated as a signatory to any declaration'; the only WALGA reference is joining WALGA's Power Purchase Agreement, a separate renewable-electricity buying program, not the Declaration",not confirmed as signatory
+City of Cockburn,P1,Named target with baseline and date,2,"Search-engine summary of council pages: 'corporate targets of net zero emissions and a transition to 100 per cent renewable electricity'; 'net zero community emissions by 2050'; '100 per cent of non-hazardous waste diverted from landfill by 2030'",confirmed via summary; primary Climate Change Strategy document not directly read (Sustainability Policy PDF was image-based and unreadable)
+City of Cockburn,P2,Named responsible person or committee,0,Not named in the summary available,not found in this excerpt
+City of Cockburn,P3,Budget or resourcing commitment,0,Not stated in the summary available,not found in this excerpt
+City of Cockburn,P4,Reporting or review cadence,0,Not stated in the summary available,not found in this excerpt
+City of Cockburn,P5,Mitigation and adaptation both addressed,2,"Mitigation: net zero and renewable electricity targets. Adaptation: strategy described as a 'resilience roadmap' building 'adaptive capacity'",confirmed via summary; document not directly read
+City of Cockburn,P6,Cross-council collaboration,1,"'Will work with the Cockburn community and the State Government' to align with WA's emissions target; names a state-government partnership, not a cross-council one",partial
+City of Cockburn,P7,First Peoples acknowledgement,0,Not stated in the summary available,not found in this excerpt
+City of Cockburn,P8,Justice or equity content,0,Not stated in the summary available,not found in this excerpt
+City of Cockburn,P9,Biodiversity or natural-environment link,2,"Biodiversity named as one of five sustainability areas within the Climate Change Strategy 2020-2030 itself",confirmed via summary; document not directly read
+City of Cockburn,P10,Document form,standalone,"Dedicated 'Climate Change Strategy 2020-2030', endorsed by Council in 2020",descriptive
+City of Cockburn,P11,Stated purpose or driver,state-government alignment,"Targets explicitly framed as 'aligning with the WA government's proposed emissions reduction target'",interpretive context
+City of Cockburn,P12,Reference to which WALGA instrument,none found,No mention of WALGA's Declaration found in this pass; the City separately co-developed corporate emissions inventory guidelines with WALGA and the City of Swan (a different WALGA program),not confirmed as signatory
+City of Bunbury,P1,Named target with baseline and date,2,"Search-engine summary: 'organisational target to reach net zero corporate emissions by 2040, with an aspirational goal of reaching that target by 2035'",confirmed via summary; primary strategy document not directly read (source page returned only a JavaScript loading placeholder)
+City of Bunbury,P2,Named responsible person or committee,1,"'Governance' is listed as one of the strategy's six focus areas, implying a governance mechanism, but no specific person or committee is named in the summary available",partial
+City of Bunbury,P3,Budget or resourcing commitment,0,Not stated in the summary available,not found in this excerpt
+City of Bunbury,P4,Reporting or review cadence,0,Not stated in the summary available,not found in this excerpt
+City of Bunbury,P5,Mitigation and adaptation both addressed,2,"Mitigation: 'energy and emissions' focus area. Adaptation: 'climate resilience and community' focus area",confirmed via summary; document not directly read
+City of Bunbury,P6,Cross-council collaboration,0,"A citiespowerpartnership.org.au page title referenced 'City of Bunbury's climate and sustainability commitments,' suggesting Cities Power Partnership membership, but this was not verified against readable page content in this pass","not found in this excerpt; lead not verified, scored 0 rather than assumed"
+City of Bunbury,P7,First Peoples acknowledgement,0,Not stated in the summary available,not found in this excerpt
+City of Bunbury,P8,Justice or equity content,1,"'Community, culture and wellbeing' listed as a focus area alongside climate resilience, plausibly touching equity, but not stated explicitly as an equity or justice consideration",partial
+City of Bunbury,P9,Biodiversity or natural-environment link,2,"'Greening and biodiversity' explicitly named as one of the strategy's six focus areas",confirmed via summary; document not directly read
+City of Bunbury,P10,Document form,standalone,"Dedicated 'Sustainability and Environmental Strategy 2023-2028', unanimously supported by Council on 5 September 2023",descriptive
+City of Bunbury,P11,Stated purpose or driver,unclear,Not evidenced in this excerpt beyond the unanimous council vote,interpretive context
+City of Bunbury,P12,Reference to which WALGA instrument,none found,No mention of WALGA's Declaration found in this pass,not confirmed as signatory

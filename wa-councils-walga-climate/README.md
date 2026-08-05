@@ -1,13 +1,13 @@
 # WA Councils' Climate Policy-Making After the WALGA Declaration
 
-**Status: Objective 1 done; design pivoted; document sampling for
-Objectives 2 and 3 starting.** The systematic literature review is written
-up below and in `slr/`. Step 4 (rebuilding the signatory sample) found that
-signing dates are almost never publicly available, so the design pivoted
-from a before/after comparison to a cross-sectional one: confirmed
-signatories versus non-confirmed-signatories, current policy content. See
-"The design pivot" below. This file will become the full plain-English
-findings write-up once Objectives 2 and 3's document sample is coded.
+**Status: Objective 1 done; design pivoted; Objectives 2 and 3 have a
+small first pilot tranche (n = 4 signatories, n = 4 comparison), not yet
+the full sample.** The systematic literature review is written up below
+and in `slr/`. Step 4 (rebuilding the signatory sample) found that signing
+dates are almost never publicly available, so the design pivoted from a
+before/after comparison to a cross-sectional one: confirmed signatories
+versus non-confirmed-signatories, current policy content. See "The design
+pivot" and "Objectives 2 and 3: a first, small pilot tranche" below.
 Project scope, method and constraints live in
 [`EXECUTION_PROMPT.md`](EXECUTION_PROMPT.md).
 
@@ -84,10 +84,58 @@ four-month scope. Interviews with council officers (Objective 4) are
 optional, ethics-gated, and treated as a first cut to extend later, not a
 requirement for this phase.
 
+## Objectives 2 and 3: a first, small pilot tranche
+
+A pilot sample was built and coded against the 12-item framework: four
+confirmed WALGA Declaration signatories (Shire of Harvey, City of
+Kalamunda, City of Busselton, Shire of Denmark) and four councils with no
+public confirmation of signatory status (City of Swan, City of Joondalup,
+City of Cockburn, City of Bunbury). This is a small, first-pass pilot, not
+the full four-month sample: eight councils, one current document set each,
+scored against nine of the twelve coding items (`data/coding-matrix-
+signatories.csv`, `data/coding-matrix-comparison.csv`, provenance in
+`data/source-library.csv`).
+
+**The headline number has to be read with its own caveat attached.** On
+the nine scored items (P1 to P9, each 0 to 2), the confirmed-signatory
+group averaged 0.39 per item and the comparison group averaged 0.61, the
+comparison group scoring *higher*. Taken at face value that is the
+opposite of what a Declaration effect would predict. It should not be
+taken at face value. Roughly half of this pilot's data points came from
+search-engine summaries or webpages that were truncated, returned a 403,
+or served only a JavaScript loading placeholder rather than the actual
+policy document (`data/source-library.csv` records exactly which; City of
+Kalamunda's Action Plan PDF and City of Cockburn's Sustainability Policy
+PDF, for two examples, were never directly read). A "0" in these matrices
+usually means "not found in what could be accessed," not "confirmed absent
+from the council's full corpus." The comparison group happened to have two
+councils (Cockburn, Bunbury) whose strategies were well summarised by
+search results even though the primary documents themselves were
+unreachable, while two signatory-group councils (Kalamunda, Busselton)
+were hit by access failures on the primary or near-primary source. That
+is very plausibly an access artifact, not a real difference between the
+groups, and this pilot is too small and too access-limited to tell the two
+apart. Two real, useful findings survive that caveat regardless: Shire of
+Harvey's page names a "Shire of Harvey Climate Change Declaration" in
+wording that does not clearly distinguish whether it means WALGA's
+Declaration or a locally branded version of it, the same ambiguity found
+at City of Albany, so it is flagged for disambiguation rather than scored
+as confirmed; and City of Joondalup, in the comparison group, is a
+documented early mover (a Climate Change Strategy adopted in 2014,
+independent of WALGA's Declaration), which is itself evidence that strong
+climate policy content can and does exist for reasons that have nothing to
+do with signing.
+
 ## What happens next
 
-Document collection and coding for Objectives 2 and 3, against the pivoted
-design above, per `EXECUTION_PROMPT.md`'s session-start instruction.
+Scaling this pilot to a defensible sample needs primary documents read
+directly, not search-engine summaries standing in for them, which this
+session's tools could not reliably fetch (PDF size limits, 403s,
+JavaScript-rendered pages). That is a tooling gap more than a scope one:
+the documents exist and are public. The next session should prioritise
+direct downloads of each council's Climate Change Strategy or Action Plan
+PDF (or a plain-text extraction of it) before adding more councils to the
+sample, and only then expand the sample size.
 
 ## Files
 
@@ -122,5 +170,14 @@ across roughly 18 WA councils and found signing dates are almost never
 publicly available, even though signatory status usually is. Pivoted
 Objectives 2 and 3 from a before/after comparison to a cross-sectional one:
 confirmed signatories versus non-confirmed-signatories, current policy
-content, with the causal downgrade stated plainly. Document sampling and
-coding for the pivoted design starts next.
+content, with the causal downgrade stated plainly.
+
+**5 Aug 2026 · First pilot tranche, Objectives 2 and 3.** Coded a small
+pilot (4 confirmed signatories, 4 comparison councils) against 9 of the 12
+framework items. The headline numbers ran opposite to what a Declaration
+effect would predict, comparison group higher than signatories, but heavy
+reliance on search-engine summaries in place of several primary documents
+that could not be fetched (PDF size limits, 403s, a JavaScript-only page)
+makes that very plausibly an access artifact rather than a real finding.
+Flagged for the next session: fetch primary documents directly before
+scaling the sample.
