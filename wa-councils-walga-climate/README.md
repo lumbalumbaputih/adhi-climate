@@ -1,11 +1,15 @@
 # WA Councils' Climate Policy-Making After the WALGA Declaration
 
-**Status: Objective 1 done (first pass); paused for confirmation before
-Objectives 2 and 3 start.** The systematic literature review is written up
-below and in `slr/`. No council document has been gathered or coded yet.
-This file will become the full plain-English findings write-up once
-Objectives 2 and 3 are complete. Project scope, method and constraints live
-in [`EXECUTION_PROMPT.md`](EXECUTION_PROMPT.md).
+**Status: Objective 1 done; design pivoted; document sampling for
+Objectives 2 and 3 starting.** The systematic literature review is written
+up below and in `slr/`. Step 4 (rebuilding the signatory sample) found that
+signing dates are almost never publicly available, so the design pivoted
+from a before/after comparison to a cross-sectional one: confirmed
+signatories versus non-confirmed-signatories, current policy content. See
+"The design pivot" below. This file will become the full plain-English
+findings write-up once Objectives 2 and 3's document sample is coded.
+Project scope, method and constraints live in
+[`EXECUTION_PROMPT.md`](EXECUTION_PROMPT.md).
 
 ## In one paragraph
 
@@ -48,20 +52,42 @@ parts of those frameworks plus one item specific to this project, that
 catches any source conflating the Declaration with the 2018 Policy
 Statement, the same error this project's own framing corrected.
 
+## The design pivot
+
+Objectives 2 and 3 were originally a within-council before/after
+comparison plus a same-period comparison group, both keyed to each
+council's confirmed signing date. Rebuilding the signatory sample
+(`data/signatory-sample.csv`, `data/signatory-search-log.md`) across
+roughly 18 WA councils found that signatory status is usually confirmable
+from a council's own page, but a signing date almost never is: of six
+confirmed signatories found, only one (Shire of Harvey) had even a
+medium-confidence date, and no confirmed non-signatory was found at all.
+That is too thin a sample for a before/after design.
+
+Ris confirmed a pivot on 5 August 2026: keep the comparison structure, drop
+the before/after claim. Objectives 2 and 3 now compare confirmed
+signatories' and non-confirmed-signatories' **current** planning documents
+against the same 12-item coding framework. This is a real downgrade in
+what the design can show, an association between signatory status and
+policy content, not that signing caused any difference, and the write-up
+says so plainly rather than letting the comparison read as causal. It also
+mirrors the closest precedent in the literature review: Hicks, Davidson,
+Lau et al. (2025) compare declared against non-declared Victorian
+councils' current policy text, not a before/after pair.
+
 ## Scope
 
-Objectives 1 to 3 (this literature review plus two document-analysis arms:
-within-council before/after, and a cross-council comparison group) are the
-realistic four-month scope. Interviews with council officers (Objective 4)
-are optional, ethics-gated, and treated as a first cut to extend later, not
-a requirement for this phase.
+Objectives 1 to 3 (the literature review plus two document-analysis arms,
+now both cross-sectional: confirmed signatories, and a comparison group
+with no public confirmation of signatory status) are the realistic
+four-month scope. Interviews with council officers (Objective 4) are
+optional, ethics-gated, and treated as a first cut to extend later, not a
+requirement for this phase.
 
 ## What happens next
 
-Per `EXECUTION_PROMPT.md`'s session-start instruction, Objective 2's
-document collection does not start until the included-studies list and the
-adapted coding framework above are confirmed. That confirmation is the next
-step, not yet done.
+Document collection and coding for Objectives 2 and 3, against the pivoted
+design above, per `EXECUTION_PROMPT.md`'s session-start instruction.
 
 ## Files
 
@@ -72,7 +98,9 @@ screened, with a decision and reason for each), `slr/included-studies.csv`
 (the 8 included studies, full citations, population, method and framework),
 `slr/framework-synthesis.md` (what each framework assumes and how it was
 adapted), `coding-framework.md` (the adapted scheme for Objectives 2 and
-3), and `EXECUTION_PROMPT.md` (the full project spec).
+3), `data/signatory-sample.csv` and `data/signatory-search-log.md` (the
+signatory search behind the design pivot), and `EXECUTION_PROMPT.md` (the
+full project spec).
 
 ## Update log
 
@@ -88,3 +116,11 @@ included 8 studies, and wrote the framework synthesis and adapted 12-item
 coding framework for Objectives 2 and 3. No council document sampling or
 coding has started; paused for confirmation as the execution prompt
 instructs.
+
+**5 Aug 2026 · Design pivot.** Ran Step 4 (rebuild the signatory sample)
+across roughly 18 WA councils and found signing dates are almost never
+publicly available, even though signatory status usually is. Pivoted
+Objectives 2 and 3 from a before/after comparison to a cross-sectional one:
+confirmed signatories versus non-confirmed-signatories, current policy
+content, with the causal downgrade stated plainly. Document sampling and
+coding for the pivoted design starts next.
