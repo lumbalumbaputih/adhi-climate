@@ -21,7 +21,7 @@ write-up, honest statistics, and clear charts. Anyone can re-run it from scratch
 | [**wheat-yields**](wheat-yields/): WA Wheat Yields and the Drying Trend (1861–2022) | Financial materiality | Complete |
 | [**bushfire-weather**](bushfire-weather/): Fire Danger Trends in South West WA (FFDI, 1941–2026) | Acute physical risk | Complete |
 | [**high-water**](high-water/): Coastal Flood Hours at Fremantle (1984–2026) | Acute physical risk | Complete |
-| [**wa-councils-walga-climate**](wa-councils-walga-climate/): WA Councils' Climate Policy-Making After the WALGA Declaration | Local government policy research | Scoping |
+| [**wa-councils-walga-climate**](wa-councils-walga-climate/): WA Councils' Climate Policy-Making After the WALGA Declaration | Local government policy research | Literature review done, document analysis pending |
 
 The portfolio site (`index.html`) ties these together: each project card opens
 that project's own page (`projects/<id>.html`) with the headline findings, the
